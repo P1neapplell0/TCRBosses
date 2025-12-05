@@ -1,6 +1,8 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.core_golem;
 
-import com.hm.efn.gameasset.animations.*;
+import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
+import com.hm.efn.gameasset.animations.EFNDualSwordAnimations;
+import com.hm.efn.gameasset.animations.EFNExsiliumgladiusAnimations;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

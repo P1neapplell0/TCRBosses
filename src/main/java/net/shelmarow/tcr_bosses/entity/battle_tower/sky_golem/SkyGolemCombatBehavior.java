@@ -1,30 +1,23 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
-import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
-import com.hm.efn.gameasset.animations.*;
-import net.minecraft.core.BlockPos;
+import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
+import com.hm.efn.gameasset.animations.EFNShortSwordAnimations;
+import com.hm.efn.gameasset.animations.EFNSwordAnimations;
+import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.HitEvent;
-import net.shelmarow.combat_evolution.ai.TimeEvent;
 import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import net.shelmarow.tcr_bosses.entity.battle_tower.land_golem.LandGolemPatch;
 import net.shelmarow.tcr_bosses.gameassets.TCRAnimations;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
@@ -32,7 +25,6 @@ import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
 
-import java.util.List;
 import java.util.Set;
 
 public class SkyGolemCombatBehavior {

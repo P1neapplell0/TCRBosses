@@ -1,12 +1,10 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.core_golem;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.BTCoreGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.gameasset.animations.EFNDualSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
-import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
@@ -18,7 +16,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -28,7 +25,6 @@ import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
 import net.shelmarow.combat_evolution.iml.ILivingEntityData;
-import net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem.NetherGolemCombatBehavior;
 import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;

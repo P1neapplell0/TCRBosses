@@ -1,20 +1,16 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.ocean_golem;
 
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
-import com.p1nero.p1nero_ec.utils.ScyllaEffectInvoker;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.level.Level;
@@ -26,16 +22,12 @@ import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import net.shelmarow.nightfall_invade.entity.spear_knight.ai.ArteriusAI;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 
 import java.util.Set;
-
-import static net.shelmarow.nightfall_invade.entity.spear_knight.ai.ArteriusAI.spawnEightDirectionJets;
 
 public class OceanGolemCombatBehavior {
 

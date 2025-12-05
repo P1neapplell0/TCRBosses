@@ -1,7 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem;
 
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
-import com.hm.efn.gameasset.animations.EFNShortSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import com.hm.efn.registries.EFNMobEffectRegistry;
@@ -15,19 +14,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
-import net.shelmarow.combat_evolution.ai.HitEvent;
 import net.shelmarow.combat_evolution.ai.TimeEvent;
 import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import yesman.epicfight.gameasset.Animations;
-import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
-import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
-
-import java.util.Set;
 
 public class NetherGolemCombatBehavior {
 

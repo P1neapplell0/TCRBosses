@@ -1,6 +1,5 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
-import com.brass_amber.ba_bt.BABTMain;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
