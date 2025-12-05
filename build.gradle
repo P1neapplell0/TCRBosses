@@ -1,0 +1,168 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
+        }
+        gameTestServer {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        data {
+            workingDirectory project.file('run-data')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+     flatDir {
+         dir 'libs'
+     }
+}
+
+mixin {
+    add sourceSets.main, "tcr_bosses.refmap.json"
+    config "tcr_bosses.mixins.json"
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    implementation fg.deobf('libs:oculus:1.8.0')
+    implementation fg.deobf('libs:embeddium:0.3.31')
+
+    implementation fg.deobf('libs:ba_bt:3.0.0')
+
+    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7129220-sources-7129223")
+
+    implementation fg.deobf('libs:betterlockon:1.0.6')
+
+    implementation fg.deobf('libs:p1nero_ec:20.12.0.3')
+
+    implementation fg.deobf('libs:CombatEvolution:1.0.4.1')
+    implementation fg.deobf('libs:nightfall_invade:1.1.2')
+
+    implementation fg.deobf("libs:Nightfall:2.3.6")
+    implementation fg.deobf('libs:epic_fight_avalon:20.12.4')
+    implementation fg.deobf("libs:invincible:20.13.6.3")
+
+    implementation fg.deobf('libs:cataclysm:3.16')
+    implementation fg.deobf('libs:lionfishapi:2.4')
+    implementation fg.deobf('libs:curios:5.14.1')
+
+    implementation fg.deobf("curse.maven:call-from-the-depths-1013658:7097966")
+    implementation fg.deobf("curse.maven:aether-255308:6134920")
+    implementation fg.deobf("curse.maven:aether-lost-content-318602:4927038")
+    implementation fg.deobf("curse.maven:structure-gel-api-378802:5278429")
+
+    implementation fg.deobf('libs:architectury:9.2.14')
+    implementation fg.deobf('libs:clothConfig:11.1.136')
+    implementation fg.deobf('libs:epicKnights:9.31')
+
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+
+
+    implementation 'org.spongepowered:mixin:0.8.5'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    testAnnotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+
+    finalizedBy 'reobfJar'
+}
+
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

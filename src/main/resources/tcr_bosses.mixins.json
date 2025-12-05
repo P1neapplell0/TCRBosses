@@ -1,0 +1,18 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "net.shelmarow.tcr_bosses.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "tcr_bosses.refmap.json",
+  "mixins": [
+    "BTAbstractGolemAccessor",
+    "BTClientEventMixin",
+    "BTEntityTypeMixin",
+    "BTOceanGolemMixin",
+    "BTSkyGolemMixin",
+    "EFNAnimationsMixin"
+  ],
+  "client": [
+    "AbstractBTGolemRendererMixin"
+  ]
+}
