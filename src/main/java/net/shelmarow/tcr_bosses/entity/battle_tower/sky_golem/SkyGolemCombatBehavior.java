@@ -69,6 +69,28 @@ public class SkyGolemCombatBehavior {
                         )
                 )
 
+                //防御
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(1.0F).weight(1.0F)
+                        .maxCooldown(160)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0.0F, 4.0F)
+                                .guard(60)
+                                .counterAnimation(
+                                        Animations.LONGSWORD_DASH,
+                                        new AnimationParams()
+                                                .transitionTime(0.25F)
+                                                .playSpeed(0.8F)
+                                                .stunType(StunType.LONG)
+                                )
+                                .counterType(CECombatBehaviors.CounterType.RANDOM)
+                                .counterChance(0.3)
+                                .onCounterStart(mobPatch -> {
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                })
+                        )
+                )
 
                 //平a三连
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
@@ -117,7 +139,7 @@ public class SkyGolemCombatBehavior {
                         )
                 )
 
-                //军刀2~4连
+                //军刀5连
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(1.0F).weight(1.0F)
                         .maxCooldown(5)
@@ -176,91 +198,7 @@ public class SkyGolemCombatBehavior {
                         )
                 )
 
-
-                //跑攻
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(100)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(3.0F, 6.0F)
-                                .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH, 0.2F)
-                        )
-                )
-
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(3.0F, 6.0F)
-                                .wander(60,1,0)
-                                .interruptedByTime(0,3)
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,60,4));
-                                })
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0.0F, 3.0F)
-                                        .canInterruptParent(true)
-                                        .animationBehavior(Animations.TACHI_DASH, 0.2F)
-                                )
-                        )
-                )
-
-                //跳攻
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(5)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNSwordAnimations.NF_SWORD_AIRSLASH,
-                                        new AnimationParams()
-                                                .transitionTime(0.2F)
-                                                .impactMultiplier(3F)
-                                                .stunType(StunType.LONG)
-                                )
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                    mobPatch.getOriginal().addDeltaMovement(new Vec3(0F,0.5F,0F));
-                                })
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(1.5F, 6.0F)
-                                        .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH, 0.2F)
-                                )
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0F, 1.5F)
-                                        .animationBehavior(Animations.LONGSWORD_DASH, 0.2F)
-                                )
-                        )
-                )
-
-                //防御
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(160)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .guard(60)
-                                .counterAnimation(
-                                        Animations.LONGSWORD_DASH,
-                                        new AnimationParams()
-                                                .transitionTime(0.25F)
-                                                .playSpeed(0.8F)
-                                                .stunType(StunType.LONG)
-                                )
-                                .counterType(CECombatBehaviors.CounterType.RANDOM)
-                                .counterChance(0.3)
-                                .onCounterStart(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                })
-                        )
-                )
-
-                //空中突袭
+                //空中单次突袭
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(1.0F).weight(8.0F).maxCooldown(200)
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -318,57 +256,17 @@ public class SkyGolemCombatBehavior {
                         )
                 )
 
-
-                //溃防连击
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(12.0F)
-                        .maxCooldown(300)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 3.0F)
-                                .interruptedByLevel(3)
-                                .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(EFNSwordAnimations.NF_SWORD_SKILL_FIRST,new AnimationParams().transitionTime(0.6F).impactMultiplier(2.5F).stunType(StunType.HOLD))
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),100));
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                    mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-                                    if(mobPatch.getTarget() != null) {
-                                        LivingEntity target = mobPatch.getTarget();
-                                        Vec3 pos = target.position();
-                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_GUARD_WARNING.get(),target.getId(),new Vec3(0,1.25,0));
-                                        ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
-                                    }
-                                })
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .canInterruptParent(true)
-                                        .animationBehavior(EFNSwordAnimations.NF_SWORD_SKILL_SECOND, new AnimationParams().stunType(StunType.NEUTRALIZE))
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNSwordAnimations.NF_SWORD_AUTO2, new AnimationParams().transitionTime(0.15F).damageMultiplier(2.0F).impactMultiplier(2.0F).stunType(StunType.LONG))
-                                                .addHitEvent(
-                                                        new HitEvent((mobPatch,target) -> {
-                                                            target.level().playSound(null, target.getX(), target.getY(), target.getZ(), EpicFightSounds.BLADE_RUSH_FINISHER.get(), target.getSoundSource(), 1F, 1F);
-                                                        })
-                                                )
-                                        )
-                                )
-                        )
-                )
-
                 //乱斩
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(2.0F).weight(1.0F)
-                        .maxCooldown(500)
+                        .maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(1.5F, 6.0F)
+                                .withinDistance(1.5F, 4.0F)
                                 .health(0.3F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(EFNShortSwordAnimations.NF_SHORTSWORD_DASH,
                                         new AnimationParams()
                                                 .transitionTime(0.5F)
-                                                .playSpeed(1.25F)
                                                 .damageMultiplier(0.4F)
                                                 .stunType(StunType.LONG)
                                 )
@@ -382,7 +280,6 @@ public class SkyGolemCombatBehavior {
                                         .animationBehavior(EFNShortSwordAnimations.NF_SHORTSWORD_AUTO3,
                                                 new AnimationParams()
                                                         .transitionTime(0.25F)
-                                                        .playSpeed(1.5F)
                                                         .damageMultiplier(0.4F)
                                                         .stunType(StunType.SHORT)
                                         )
@@ -390,8 +287,6 @@ public class SkyGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNShortSwordAnimations.NF_SHORTSWORD_AUTO4,
                                                         new AnimationParams()
-                                                                .transitionTime(0F)
-                                                                .playSpeed(1.5F)
                                                                 .damageMultiplier(0.25F)
                                                                 .stunType(StunType.SHORT)
                                                 )
@@ -399,8 +294,6 @@ public class SkyGolemCombatBehavior {
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .animationBehavior(EFNShortSwordAnimations.NF_SHORTSWORD_AUTO5,
                                                                 new AnimationParams()
-                                                                        .transitionTime(0F)
-                                                                        .playSpeed(1.5F)
                                                                         .damageMultiplier(0.4F)
                                                                         .stunType(StunType.SHORT)
                                                         )
@@ -413,7 +306,7 @@ public class SkyGolemCombatBehavior {
                                                                                 .impactMultiplier(6F)
                                                                                 .armorNegationMultiplier(1F)
                                                                                 .stunType(StunType.KNOCKDOWN)
-                                                                                .damageSource(Set.of(EpicFightDamageTypeTags.UNBLOCKALBE))
+                                                                                .damageSource(Set.of(EpicFightDamageTypeTags.UNBLOCKALBE, EpicFightDamageTypeTags.GUARD_PUNCTURE))
                                                                 )
                                                                 .addExBehavior(mobPatch -> {
                                                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),30));

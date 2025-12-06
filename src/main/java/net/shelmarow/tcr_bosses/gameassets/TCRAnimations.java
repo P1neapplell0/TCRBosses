@@ -1,6 +1,7 @@
 package net.shelmarow.tcr_bosses.gameassets;
 
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -43,10 +44,10 @@ public class TCRAnimations {
         event.newBuilder(TCRBosses.MOD_ID, TCRAnimations::build);
     }
 
+    private static final AnimationProperty.PlaybackSpeedModifier CONST_SPEED = (self, entityPatch, speed, prevElapsedTime, elapsedTime) -> 1F;
+
     public static void build(AnimationManager.AnimationBuilder builder) {
 
-        AnimationProperty.PlaybackSpeedModifier CONST_SPEED =
-                (self, entitypatch, speed, prevElapsedTime, elapsedTime) -> 1F;
 
         Collider EMPTY = new MultiOBBCollider(3, 0D, 0D, 0D, 0.0D, 0.0D, 0D);
         Collider SHIELD = new MultiOBBCollider(3, 0.5D, 1D, 1D, 0.0D, 0.0D, 0D);
@@ -60,32 +61,22 @@ public class TCRAnimations {
                     .addStateRemoveOld(EntityState.TURNING_LOCKED,false)
                     .addState(EntityState.ATTACK_RESULT,damageSource -> damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) ? AttackResult.ResultType.SUCCESS : AttackResult.ResultType.MISSED)
                     .addEvents(
-                            AnimationEvent.InTimeEvent.create(0.3F,(entitypatch, animation, params) -> {
-                                LivingEntity original = entitypatch.getOriginal();
-                                if(original.level() instanceof ClientLevel level) {
-                                    entitypatch.playSound(SoundEvents.FIRECHARGE_USE,0,0);
-                                    level.addAlwaysVisibleParticle(ParticleTypes.CLOUD, original.getX(), original.getY() + 1, original.getZ(), 0, -0.15, 0);
-                                    level.addAlwaysVisibleParticle(ParticleTypes.CLOUD, original.getX() - 0.25, original.getY() + 1, original.getZ(), 0, -0.15, 0);
-                                    level.addAlwaysVisibleParticle(ParticleTypes.CLOUD, original.getX() - 0.25, original.getY() + 1, original.getZ() - 0.25, -0.15, 0, 0);
-                                    level.addAlwaysVisibleParticle(ParticleTypes.CLOUD, original.getX() + 0.25, original.getY() + 1, original.getZ(), 0, -0.15, 0);
-                                    level.addAlwaysVisibleParticle(ParticleTypes.CLOUD, original.getX() + 0.25, original.getY() + 1, original.getZ() + 0.25, -0.15, 0, 0);
-                                }
-
+                            AnimationEvent.InTimeEvent.create(0.5F,(entitypatch, animation, params) -> {
 
                                 List<LivingEntity> entities = entitypatch.getOriginal().level()
                                         .getEntitiesOfClass(LivingEntity.class, entitypatch.getOriginal().getBoundingBox().inflate(12))
                                         .stream().filter(livingEntity -> livingEntity != entitypatch.getOriginal()).toList();
 
                                 for (LivingEntity target : entities) {
-                                    Vec3 pushStrength = target.position().subtract(entitypatch.getOriginal().position()).normalize().scale(target.getRandom().nextFloat() * 2 + 1);
+                                    Vec3 pushStrength = target.position().subtract(entitypatch.getOriginal().position()).normalize().scale(target.getRandom().nextFloat() * 1.25 + 0.75);
                                     target.push(pushStrength.x,0,pushStrength.z);
                                 }
 
-                            }, AnimationEvent.Side.BOTH),
+                            }, AnimationEvent.Side.CLIENT),
                             AnimationEvent.SimpleEvent.create((entitypatch, animation, params) -> {
                                 if(!(entitypatch instanceof PlayerPatch<?>)){
                                     if(entitypatch.getTarget() != null){
-                                        entitypatch.rotateTo(entitypatch.getTarget(), 360,true);
+                                        entitypatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET, entitypatch.getTarget().position());
                                     }
                                 }
                             }, AnimationEvent.Side.BOTH)
@@ -110,7 +101,7 @@ public class TCRAnimations {
                         new AttackAnimation.Phase(0.7F,0.8F,0.7F,0.8F,10F,10F,Armatures.BIPED.get().rootJoint,BODY)
                                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(5.0F))
                                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(3.0F))
-                                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER,EpicFightDamageTypeTags.UNBLOCKALBE,EpicFightDamageTypeTags.BYPASS_DODGE))
+                                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER, EpicFightDamageTypeTags.BYPASS_DODGE))
                                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN))
                         .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLADE_RUSH_FINISHER.get())
                         .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER,CONST_SPEED)

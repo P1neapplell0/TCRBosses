@@ -333,7 +333,7 @@ public class OceanGolemCombatBehavior {
                                     mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
                                 })
                                 .addTimeEvent(
-                                        new TimeEvent(0.5F,mobPatch->{
+                                        new TimeEvent(0.75F,mobPatch->{
                                             Level world = mobPatch.getOriginal().level();
                                             LivingEntity caster = mobPatch.getOriginal();
                                             double spawnX = caster.getX();
@@ -353,7 +353,7 @@ public class OceanGolemCombatBehavior {
                         .priority(2).weight(1).maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 8.0F)
+                                .withinDistance(2.5F, 8.0F)
                                 .health(0.25F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(Animations.TSUNAMI_REINFORCED, new AnimationParams().transitionTime(0.5F)
                                         .damageSource(Set.of(EpicFightDamageTypeTags.GUARD_PUNCTURE,EpicFightDamageTypeTags.UNBLOCKALBE))

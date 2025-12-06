@@ -1,10 +1,10 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
-import com.aetherteam.aether.item.AetherItems;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
+import com.hm.efn.registries.EFNItem;
 import com.legacy.lost_aether.registry.LCItems;
 import com.magistuarmory.item.ModItems;
 import com.mojang.datafixers.util.Pair;
@@ -47,6 +47,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
     public SkyGolemPatch() {
         super(Factions.UNDEAD);
+        staminaRegenDelay = 20;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.LEGS, 0);
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
-        ItemStack weapon = new ItemStack(AetherItems.HOLY_SWORD.get());
+        ItemStack weapon = new ItemStack(EFNItem.NF_SHORT_SWORD.get());
         ItemStack shield = new ItemStack(LCItems.shield_of_emile);
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
         this.original.setItemInHand(InteractionHand.OFF_HAND, shield);
@@ -85,13 +86,13 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 200.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ATTACK_DAMAGE, 1.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 5.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 5.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 450.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 15.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 25.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 40.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 50.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STRIKES.get(), 100.0D);
     }

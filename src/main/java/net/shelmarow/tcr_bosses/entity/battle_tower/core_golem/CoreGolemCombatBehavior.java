@@ -1,19 +1,32 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.core_golem;
 
+import com.brass_amber.ba_bt.entity.hostile.golem.BTCoreGolem;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNDualSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNExsiliumgladiusAnimations;
+import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.TimeEvent;
 import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
+import net.shelmarow.combat_evolution.client.particle.CEParticles;
+import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
+import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
+import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
+
+import java.util.Set;
 
 public class CoreGolemCombatBehavior {
 
@@ -700,6 +713,83 @@ public class CoreGolemCombatBehavior {
                                                         .withinDistance(0.0F, 5.0F)
                                                         .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AAAA,
                                                                 new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+                                        )
+                                )
+                        )
+                )
+
+
+                //狂暴状态下出现猎魂攻击,释放期间施加失明，缓慢，攻速降低，该伤害无法被闪避
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(3).weight(1)
+                        .maxCooldown(600)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0.0F, 5.0F)
+                                .custom(mobPatch -> {
+                                    if(mobPatch.getOriginal() instanceof BTCoreGolem btCoreGolem){
+                                        return btCoreGolem.isEnraged();
+                                    }
+                                    return false;
+                                })
+                                .animationBehavior(EFNSkillAnimations.EXECUTION,
+                                        new AnimationParams().transitionTime(0.25F).playSpeed(0.85F)
+                                                .damageMultiplier(2.5F).impactMultiplier(10).stunType(StunType.LONG)
+                                                .damageSource(Set.of(EpicFightDamageTypeTags.BYPASS_DODGE))
+                                )
+                                .addExBehavior(mobPatch -> {
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 60));
+                                    mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
+
+                                    if(mobPatch.getTarget() != null){
+                                        LivingEntity target = mobPatch.getTarget();
+
+                                        Vec3 pos = target.position();
+                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_DODGE_WARNING.get(),target.getId(),new Vec3(0,1.5,0));
+                                        ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
+
+                                        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS,60));
+                                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,60,5));
+                                        target.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN,60,2));
+                                    }
+                                })
+                                .addTimeEvent(
+                                        new TimeEvent(0.5F,mobPatch -> {
+                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
+                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.25F);
+                                        }),
+                                        new TimeEvent(0.6F,mobPatch -> {
+                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
+                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),1.25F);
+                                        }),
+                                        new TimeEvent(0.9F,mobPatch -> {
+                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
+                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.15F);
+                                        }),
+                                        new TimeEvent(1.0F,mobPatch -> {
+                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
+                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),2.0F);
+                                        }),
+                                        new TimeEvent(1.4F,mobPatch -> {
+                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
+                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.5F);
+                                        })
+                                )
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.45F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.2F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3,0.2F)
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,0.2F)
+                                                        )
                                                 )
                                         )
                                 )

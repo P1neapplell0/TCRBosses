@@ -656,8 +656,9 @@ public class LandGolemCombatBehavior {
                                         new AnimationParams()
                                                 .transitionTime(0.4F)
                                                 .impactMultiplier(10F)
+                                                .playSpeed(0.8F)
                                                 .stunType(StunType.LONG)
-                                                .damageSource(Set.of(EpicFightDamageTypeTags.UNBLOCKALBE))
+                                                .damageSource(Set.of(EpicFightDamageTypeTags.UNBLOCKALBE, EpicFightDamageTypeTags.GUARD_PUNCTURE))
                                 )
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().forceAddEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 60), mobPatch.getOriginal());

@@ -167,7 +167,8 @@ public class NetherGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2,new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2,
+                                                new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
 
                                         //派生1
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -187,7 +188,8 @@ public class NetherGolemCombatBehavior {
                                                 .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B,0F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,new AnimationParams().impactMultiplier(10).stunType(StunType.LONG))
+                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,
+                                                                new AnimationParams().impactMultiplier(10).stunType(StunType.LONG))
                                                         .addExBehavior(mobPatch -> {
                                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
                                                             if(mobPatch.getTarget() != null) {
@@ -201,21 +203,25 @@ public class NetherGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .weight(3)
                                                 .withinDistance(0.0F, 8.0F)
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3,new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3,
+                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 8.0F)
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
+                                                                new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .withinDistance(0.0F, 8.0F)
-                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
+                                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
                                                         )
 
                                                         //派生2
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .withinDistance(0.0F, 8.0F)
-                                                                .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH,new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                                .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH,
+                                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
                                                                 .addExBehavior(mobPatch -> {
                                                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
                                                                 })
@@ -226,12 +232,13 @@ public class NetherGolemCombatBehavior {
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 8.0F)
                                                         .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
-                                                                new AnimationParams().transitionTime(0.35F).playSpeed(2F).impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                                new AnimationParams().transitionTime(0.4F).playSpeed(1.25F)
+                                                                        .impactMultiplier(0.5F).stunType(StunType.SHORT))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .withinDistance(0.0F, 8.0F)
                                                                 .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
-                                                                        new AnimationParams().playSpeed(2F).stunType(StunType.SHORT))
+                                                                        new AnimationParams().playSpeed(1.25F).stunType(StunType.SHORT))
                                                         )
                                                 )
 
@@ -511,22 +518,27 @@ public class NetherGolemCombatBehavior {
                                 })
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO1,0.2F)
+                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO1,0.25F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2, new AnimationParams().playSpeed(1.5F).stunType(StunType.LONG))
+                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2,
+                                                        new AnimationParams().stunType(StunType.LONG))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3, new AnimationParams().playSpeed(1.5F).stunType(StunType.LONG))
+                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3,
+                                                                new AnimationParams().stunType(StunType.LONG))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4, new AnimationParams().playSpeed(1.5F).stunType(StunType.LONG))
+                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
+                                                                        new AnimationParams().stunType(StunType.LONG))
 
                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5, new AnimationParams().playSpeed(1.5F).stunType(StunType.LONG))
+                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
+                                                                                new AnimationParams().stunType(StunType.LONG))
 
                                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH, new AnimationParams().playSpeed(1.5F).stunType(StunType.LONG))
+                                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,
+                                                                                        new AnimationParams().stunType(StunType.LONG))
                                                                                 .addExBehavior(mobPatch -> {
                                                                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
                                                                                     if(mobPatch.getTarget() != null) {
@@ -536,7 +548,8 @@ public class NetherGolemCombatBehavior {
                                                                                 })
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST_END, new AnimationParams().playSpeed(1.5F))
+                                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST_END,
+                                                                                                new AnimationParams().playSpeed(1.15F))
                                                                                         .addExBehavior(mobPatch -> {
                                                                                             if(mobPatch.getOriginal().hasEffect(EFNMobEffectRegistry.BLODDLUST.get())) {
                                                                                                 mobPatch.getOriginal().removeEffect(EFNMobEffectRegistry.BLODDLUST.get());

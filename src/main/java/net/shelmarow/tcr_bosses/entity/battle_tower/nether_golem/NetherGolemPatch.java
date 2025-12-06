@@ -63,14 +63,6 @@ public class NetherGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.CO_TACHI.get());
-        weapon.addAttributeModifier(
-                Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(
-                        UUID.randomUUID(),
-                        "damage",-0.3D,
-                        AttributeModifier.Operation.MULTIPLY_TOTAL
-                ),
-                EquipmentSlot.MAINHAND);
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
 
         modifyLivingMotionByCurrentItem();
@@ -79,7 +71,7 @@ public class NetherGolemPatch extends CEHumanoidPatch {
 
     public static void initAttributes(EntityAttributeModificationEvent event){
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 360.0D);
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 1.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 6.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
