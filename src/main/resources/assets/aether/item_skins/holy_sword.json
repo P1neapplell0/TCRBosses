@@ -1,0 +1,11 @@
+{
+	"trail": {
+		"color": [255, 255, 255],
+		"begin_pos": [0.0, 0.0, -0.0],
+		"end_pos": [0.0, -0.0, -1.4],
+		"lifetime": 4,
+		"interpolations": 3,
+		"texture_path": "aether:textures/holy_sword_trail.png",
+		"particle_type": "efn:bloom_trail"
+	}
+}
