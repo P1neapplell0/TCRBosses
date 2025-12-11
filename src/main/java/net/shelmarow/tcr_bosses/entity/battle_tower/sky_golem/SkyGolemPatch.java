@@ -11,6 +11,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,6 +30,7 @@ import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import yesman.epicfight.api.animation.Animator;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
@@ -73,7 +75,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.LEGS, 0);
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
-        ItemStack weapon = new ItemStack(EFNItem.NF_SHORT_SWORD.get());
+        ItemStack weapon = new ItemStack(EFNItem.SWORD_OF_PIONEER.get());
         ItemStack shield = new ItemStack(LCItems.shield_of_emile);
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
         this.original.setItemInHand(InteractionHand.OFF_HAND, shield);
@@ -90,7 +92,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 15.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 25.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 50.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
@@ -99,7 +101,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
     @Override
     protected void setWeaponMotions() {
-        this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.SWORD,
+        this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, Set.of(
                         Pair.of(LivingMotions.BLOCK, Animations.BIPED_BLOCK),
                         Pair.of(LivingMotions.IDLE, EFNSwordAnimations.NF_SWORD_IDLE),
@@ -108,11 +110,11 @@ public class SkyGolemPatch extends CEHumanoidPatch {
                         Pair.of(LivingMotions.CHASE, EFNSwordAnimations.NF_SWORD_RUN)
                 )));
 
-        this.guardHitMotions.put(CapabilityItem.WeaponCategories.SWORD,
+        this.guardHitMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND,
                         List.of(Animations.BIPED_HIT_SHIELD )));
 
-        this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.SWORD,
+        this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, SkyGolemCombatBehavior.SWORD));
     }
 
@@ -164,9 +166,25 @@ public class SkyGolemPatch extends CEHumanoidPatch {
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
-        if(currentBehavior != null) {
-            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.025F));
+        if(currentBehavior != null && !currentBehavior.getBehaviorName().equals("sheath_attack")) {
+            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.015F));
         }
+    }
+
+    @Override
+    public AttackResult tryHurt(DamageSource damageSource, float amount) {
+        AttackResult result = super.tryHurt(damageSource, amount);
+        if(!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && getEntityState().getLevel() != 3) {
+            CECombatBehaviors.Behavior<?> current = BehaviorUtils.getCurrentBehavior(this);
+            if(current != null) {
+                String name = current.getBehaviorName();
+                if (name != null && name.equals("sheath_attack")) {
+                    playSound(EpicFightSounds.CLASH.get(), 0,0);
+                    return AttackResult.missed(0);
+                }
+            }
+        }
+        return result;
     }
 
 

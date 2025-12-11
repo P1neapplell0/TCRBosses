@@ -2,6 +2,8 @@ package net.shelmarow.tcr_bosses.event;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTOceanGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
+import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -24,6 +26,10 @@ public class EntityEvent {
         }
 
         if(hitEntity instanceof BTNetherGolem && event.getSource().is(DamageTypes.MAGIC) && attacker == null && attacker1 == null){
+            event.setCanceled(true);
+        }
+
+        if(hitEntity instanceof BTSkyGolem && (attacker == null || attacker1 == null || attacker instanceof Lightning_Storm_Entity || attacker1 instanceof Lightning_Storm_Entity)){
             event.setCanceled(true);
         }
     }
