@@ -1,6 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem;
 
-import com.brass_amber.ba_bt.BABTMain;
+import com.brass_amber.ba_bt.BABattleTowers;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -14,11 +14,11 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class NetherGolemRenderer extends HumanoidMobRenderer<BTNetherGolem, HumanoidModel<BTNetherGolem>> {
-    ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(BABTMain.MODID, "textures/entity/golem/nether_golem/nether_golem_dormant.png");
-    ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(BABTMain.MODID, "textures/entity/golem/nether_golem/nether_golem.png");
-    ResourceLocation NORMAL_P1 = ResourceLocation.fromNamespaceAndPath(BABTMain.MODID, "textures/entity/golem/nether_golem/nether_golem_cracked_stage_1.png");
-    ResourceLocation NORMAL_P2 = ResourceLocation.fromNamespaceAndPath(BABTMain.MODID, "textures/entity/golem/nether_golem/nether_golem_cracked_stage_2.png");
-    ResourceLocation NORMAL_P3 = ResourceLocation.fromNamespaceAndPath(BABTMain.MODID, "textures/entity/golem/nether_golem/blaze_metal_golem/blaze_metal_golem.png");
+    ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem_dormant.png");
+    ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem.png");
+    ResourceLocation NORMAL_P1 = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem_cracked_stage_1.png");
+    ResourceLocation NORMAL_P2 = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem_cracked_stage_2.png");
+    ResourceLocation NORMAL_P3 = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/blaze_metal_golem/blaze_metal_golem.png");
 
     public NetherGolemRenderer(EntityRendererProvider.Context context) {
         super(context, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);

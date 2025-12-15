@@ -623,10 +623,10 @@ public class EndGolemCombatBehavior {
                 //地面连段
                 //普攻连段1
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(2).maxCooldown(5)
+                        .priority(1).weight(4).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,3)
+                                .withinDistance(0,4)
                                 .custom(onGround(false))
                                 .animationBehavior(EFNYamatoAnimations.YAMATO_NORMAL_AUTO1, new AnimationParams()
                                         .transitionTime(0.25F).playSpeed(0.5F))
@@ -737,7 +737,7 @@ public class EndGolemCombatBehavior {
 
                 //近距离火山+升空派生
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(2).maxCooldown(100)
+                        .priority(1).weight(1).maxCooldown(100)
 
                         //普通款
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
