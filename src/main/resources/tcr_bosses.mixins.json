@@ -6,6 +6,7 @@
   "refmap": "tcr_bosses.refmap.json",
   "mixins": [
     "BTAbstractGolemAccessor",
+    "BTAbstractGolemMixin",
     "BTClientEventMixin",
     "BTEntityTypeMixin",
     "BTOceanGolemMixin",

@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.TimeEvent;
-import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
@@ -50,6 +50,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -72,6 +83,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -88,6 +110,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -104,6 +137,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -120,6 +164,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -140,6 +195,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -155,6 +221,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -170,6 +247,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -185,6 +273,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -200,6 +299,17 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -215,20 +325,31 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
                                         )
                                 )
                         )
                 )
 
-                //防御
+                //随机游荡+防御
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(5.0F).maxCooldown(200)
+                        .priority(1.5F).weight(1F)
+                        .maxCooldown(100).cooldown(50)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .attackLevel(1,2)
                                 .withinDistance(0.0F, 4F)
-                                .health(0.45F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .guard(60)
+                                .health(0.25F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .guardWithWander(80,0,0.45F)
                                 .counterAnimation(
                                         EFNDualSwordAnimations.NF_DUAL_AUTO4,
                                         new AnimationParams()
@@ -242,15 +363,30 @@ public class CoreGolemCombatBehavior {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
                                 })
                         )
-                )
-
-                //随机游荡
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1).maxCooldown(200)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(5,12)
-                                .interruptedByLevel(0)
+                                .withinDistance(0.0F, 4F)
+                                .health(0.25F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .guardWithWander(80,0,-0.45F)
+                                .counterAnimation(
+                                        EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                        new AnimationParams()
+                                                .transitionTime(0.25F)
+                                                .playSpeed(0.8F)
+                                                .stunType(StunType.LONG)
+                                )
+                                .counterType(CECombatBehaviors.CounterType.END)
+                                .maxGuardHit(3)
+                                .onCounterStart(mobPatch -> {
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                })
+                        )
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0,12)
+                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(2,4)
+                                .stopByStun(5)
                                 .wander(80,0F,0.45F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -274,15 +410,28 @@ public class CoreGolemCombatBehavior {
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .randomChance(0.5F)
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .withinDistance(0.0F, 6.0F)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                                )
+                                                        )
                                                 )
                                         )
                                 )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(5,12)
-                                .interruptedByLevel(0)
-                                .wander(80,0F,-0.45F)
+                                .withinDistance(0,12)
+                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(2,4)
+                                .stopByStun(5)
+                                .wander(80,0F,0.45F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .canInterruptParent(true)
@@ -305,6 +454,17 @@ public class CoreGolemCombatBehavior {
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .randomChance(0.5F)
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .withinDistance(0.0F, 6.0F)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                                )
+                                                        )
                                                 )
                                         )
                                 )
@@ -758,23 +918,23 @@ public class CoreGolemCombatBehavior {
                                 .addTimeEvent(
                                         new TimeEvent(0.5F,mobPatch -> {
                                             ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.25F);
+                                            entityData.combat_evolution$setAttackSpeed(0.25F);
                                         }),
                                         new TimeEvent(0.6F,mobPatch -> {
                                             ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),1.25F);
+                                            entityData.combat_evolution$setAttackSpeed(1.25F);
                                         }),
                                         new TimeEvent(0.9F,mobPatch -> {
                                             ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.15F);
+                                            entityData.combat_evolution$setAttackSpeed(0.15F);
                                         }),
                                         new TimeEvent(1.0F,mobPatch -> {
                                             ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),2.0F);
+                                            entityData.combat_evolution$setAttackSpeed(2.0F);
                                         }),
                                         new TimeEvent(1.4F,mobPatch -> {
                                             ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(mobPatch.getOriginal(),0.5F);
+                                            entityData.combat_evolution$setAttackSpeed(0.5F);
                                         })
                                 )
 

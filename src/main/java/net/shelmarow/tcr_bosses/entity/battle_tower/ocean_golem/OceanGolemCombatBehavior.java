@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.TimeEvent;
-import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
@@ -74,6 +74,39 @@ public class OceanGolemCombatBehavior {
                                 .onCounterStart(mobPatch -> {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
                                 })
+                        )
+                )
+
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(1.5F).weight(1.0F)
+                        .maxCooldown(100).cooldown(100)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0,8)
+                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(3,8)
+                                .stopByStun(5)
+                                .wander(160,0F,0.35F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .attackLevel(1,2).withinDistance(0,4)
+                                        .canInterruptParent(true)
+                                        .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                )
+                        )
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0,8)
+                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(3,8)
+                                .stopByStun(5)
+                                .wander(160,0F,-0.35F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .attackLevel(1,2).withinDistance(0,4)
+                                        .canInterruptParent(true)
+                                        .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                )
                         )
                 )
 
@@ -321,7 +354,7 @@ public class OceanGolemCombatBehavior {
 
                 //强化唤雷
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(10).maxCooldown(400)
+                        .priority(1).weight(10).maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(4.0F, 8.0F)
@@ -353,8 +386,8 @@ public class OceanGolemCombatBehavior {
                         .priority(2).weight(1).maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(2.5F, 8.0F)
-                                .health(0.25F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                .withinDistance(3.5F, 8.0F)
+                                .health(0.35F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(Animations.TSUNAMI_REINFORCED, new AnimationParams().transitionTime(0.5F)
                                         .damageSource(Set.of(EpicFightDamageTypeTags.GUARD_PUNCTURE,EpicFightDamageTypeTags.UNBLOCKALBE))
                                 )

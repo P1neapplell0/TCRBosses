@@ -1,35 +1,30 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.land_golem;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
-import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.hm.efn.gameasset.animations.EFNClawAnimations;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
-import net.shelmarow.combat_evolution.ai.TimeEvent;
-import net.shelmarow.combat_evolution.ai.efcondition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
+import org.jetbrains.annotations.NotNull;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class LandGolemCombatBehavior {
 
@@ -56,16 +51,17 @@ public class LandGolemCombatBehavior {
 
 
 
-                //距离较远时，进入游荡
+                //正常游荡和攻击后进入游荡状态
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(300)
+                        .priority(1.5F).weight(1.0F)
+                        .maxCooldown(100).cooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(6,8)
-                                .interruptedByTime(0,4)
-                                .wander(80,0,0.35F)
-
+                                .withinDistance(0,8)
+                                .health(0.35F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(3,8)
+                                .stopByStun(5)
+                                .wander(160,0,0.35F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .attackLevel(1,2).withinDistance(0,4)
@@ -87,10 +83,11 @@ public class LandGolemCombatBehavior {
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(6,8)
-                                .interruptedByTime(0,4)
-                                .wander(80,0,-0.35F)
-
+                                .withinDistance(0,8)
+                                .health(0.35F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .interruptedByTime(3,8)
+                                .stopByStun(5)
+                                .wander(160,0,0.35F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .attackLevel(1,2).withinDistance(0,4)
@@ -134,6 +131,7 @@ public class LandGolemCombatBehavior {
                                                 .randomChance(0.65F)
                                                 .withinDistance(0.0F, 6.0F)
                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                .addExBehavior(addStunImmunity(40))
                                         )
                                 )
 
@@ -161,6 +159,7 @@ public class LandGolemCombatBehavior {
                                                 })
                                                 .canInterruptParent(true)
                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_SKILL_CLASH_HIT,0.1F)
+                                                .addExBehavior(addStunImmunity(60))
                                         )
                                 )
 
@@ -184,7 +183,7 @@ public class LandGolemCombatBehavior {
                                         .interruptedByLevel(3)
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_AUTO2, 0.1F)
 
-
+                                        //2a后的gp
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .name("GP")
                                                 .canInterruptParent(true)
@@ -209,6 +208,7 @@ public class LandGolemCombatBehavior {
                                                         })
                                                         .canInterruptParent(true)
                                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_SKILL_CLASH_HIT,0.1F)
+                                                        .addExBehavior(addStunImmunity(60))
                                                 )
                                         )
 
@@ -224,6 +224,7 @@ public class LandGolemCombatBehavior {
                                                         .health(0.8F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
                                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                        .addExBehavior(addStunImmunity(40))
                                                 )
                                         )
 
@@ -247,8 +248,10 @@ public class LandGolemCombatBehavior {
                                                 .canInterruptParent(true)
                                                 .randomChance(0.1F)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .interruptedByLevel(3).waitTime(50)
+                                                .interruptedByLevel(3)
+                                                .waitTime(50)
                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_AUTO3, 0.2F)
+                                                .addExBehavior(addStunImmunity(60))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .name("GP")
@@ -274,6 +277,7 @@ public class LandGolemCombatBehavior {
                                                                 })
                                                                 .canInterruptParent(true)
                                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_SKILL_CLASH_HIT,0.1F)
+                                                                .addExBehavior(addStunImmunity(60))
                                                         )
                                                 )
                                         )
@@ -350,6 +354,7 @@ public class LandGolemCombatBehavior {
                                                         })
                                                         .canInterruptParent(true)
                                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_SKILL_CLASH_HIT,0.1F)
+                                                        .addExBehavior(addStunImmunity(60))
                                                 )
                                         )
 
@@ -360,6 +365,7 @@ public class LandGolemCombatBehavior {
                                                 .withinDistance(0.0F, 5.0F)
                                                 .randomChance(0.03F)
                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_AUTO3, 0.0F)
+                                                .addExBehavior(addStunImmunity(40))
                                         )
 
                                         //遭受攻击概率后撤，也可能什么都不做
@@ -380,6 +386,7 @@ public class LandGolemCombatBehavior {
                                                         .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
                                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                        .addExBehavior(addStunImmunity(60))
                                                 )
                                         )
                                 )
@@ -438,7 +445,7 @@ public class LandGolemCombatBehavior {
                                                 .withinDistance(0.0F, 6.0F)
                                                 .animationBehavior(Animations.BIPED_MOB_GREATSWORD, 0.1F)
                                                 .addExBehavior(mobPatch -> {
-                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
                                                 })
                                         )
                                 )
@@ -461,6 +468,7 @@ public class LandGolemCombatBehavior {
                                         .withinDistance(0.0F, 6.0F)
                                         .addCooldown(180)
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_AIRSLASH_NEW,0.2F)
+                                        .addExBehavior(addStunImmunity(60))
                                 )
                         )
                 )
@@ -484,6 +492,7 @@ public class LandGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                        .addExBehavior(addStunImmunity(60))
                                 )
                         )
 
@@ -501,6 +510,7 @@ public class LandGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                        .addExBehavior(addStunImmunity(60))
                                 )
                         )
 
@@ -518,6 +528,7 @@ public class LandGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                        .addExBehavior(addStunImmunity(60))
                                 )
                         )
                 )
@@ -545,6 +556,7 @@ public class LandGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                .addExBehavior(addStunImmunity(60))
                                         )
                                 )
 
@@ -565,6 +577,7 @@ public class LandGolemCombatBehavior {
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 6.0F)
                                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                        .addExBehavior(addStunImmunity(60))
                                                 )
                                         )
 
@@ -585,6 +598,7 @@ public class LandGolemCombatBehavior {
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .withinDistance(0.0F, 6.0F)
                                                                 .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_DASH,0F)
+                                                                .addExBehavior(addStunImmunity(60))
                                                         )
                                                 )
                                         )
@@ -622,6 +636,7 @@ public class LandGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .animationBehavior(EFNGreatSwordAnimations.NG_GREATSWORD_CHARG1MAX_SECOND,0F)
+                                        .addExBehavior(addStunImmunity(60))
                                 )
                         )
                 )
@@ -654,9 +669,9 @@ public class LandGolemCombatBehavior {
                                 .animationBehavior(
                                         EFNClawAnimations.NF_CLAW_BEASTROAR,
                                         new AnimationParams()
-                                                .transitionTime(0.4F)
+                                                .transitionTime(0.5F)
                                                 .impactMultiplier(10F)
-                                                .playSpeed(0.8F)
+                                                .playSpeed(0.65F)
                                                 .stunType(StunType.LONG)
                                                 .damageSource(Set.of(EpicFightDamageTypeTags.UNBLOCKALBE, EpicFightDamageTypeTags.GUARD_PUNCTURE))
                                 )
@@ -671,60 +686,15 @@ public class LandGolemCombatBehavior {
                                         ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
                                     }
                                 })
-                                .addTimeEvent(
-                                        new TimeEvent(0.5F,mobPatch -> {
-                                            doEarthquake(
-                                                    mobPatch.getOriginal().level(),mobPatch.getOriginal(),
-                                                    2F,4,0.0F,0.8F
-                                            );
-                                        })
-                                )
                         )
                 )
         ;
     }
 
-    public static void doEarthquake(Level level, LivingEntity sourceEntity,float spreadArc, int distance,float forwardOffset, float intensity) {
-
-        double baseAngle = Math.toRadians(sourceEntity.yBodyRot);
-        double centerAngle = baseAngle + Math.PI / 2D;
-        double spread = Math.PI * spreadArc;
-        int arcSteps = Mth.ceil(distance * spread);
-
-        int baseY = Mth.floor(sourceEntity.getBoundingBox().minY - 0.5F);
-
-        for (int i = 0; i < arcSteps; i++) {
-            double theta = ((double) i / ((double) arcSteps - 1D) - 0.5D) * spread + centerAngle;
-            double vx = Math.cos(theta);
-            double vz = Math.sin(theta);
-
-            for (int d = 1; d <= distance; d++) {
-                double px = sourceEntity.getX() + vx * d + forwardOffset * Math.cos(Math.toRadians(sourceEntity.yBodyRot + 90F));
-                double pz = sourceEntity.getZ() + vz * d + forwardOffset * Math.sin(Math.toRadians(sourceEntity.yBodyRot + 90F));
-                int hitX = Mth.floor(px);
-                int hitZ = Mth.floor(pz);
-
-                BlockPos pos = new BlockPos(hitX, baseY, hitZ);
-                BlockState block = level.getBlockState(pos);
-
-                if (block.getRenderShape() != RenderShape.MODEL) continue;
-
-                if (!level.isClientSide) {
-                    Cm_Falling_Block_Entity fallingBlock = new Cm_Falling_Block_Entity(
-                            level,
-                            hitX + 0.5D,
-                            baseY + 1.0D,
-                            hitZ + 0.5D,
-                            block,
-                            20
-                    );
-
-                    double upPower = (0.2D + level.getRandom().nextGaussian() * 0.15D) * intensity;
-                    fallingBlock.push(0.0D, upPower, 0.0D);
-                    level.addFreshEntity(fallingBlock);
-                }
-            }
-        }
+    private static @NotNull Consumer<MobPatch<?>> addStunImmunity(int time) {
+        return mobPatch -> {
+            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), time));
+        };
     }
 
 }

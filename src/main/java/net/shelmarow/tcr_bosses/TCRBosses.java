@@ -32,6 +32,7 @@ public class TCRBosses {
         Armatures.registerEntityTypeArmature(BTEntityType.NETHER_GOLEM.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(BTEntityType.CORE_GOLEM.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(BTEntityType.SKY_GOLEM.get(),Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(BTEntityType.END_GOLEM.get(),Armatures.BIPED);
     }
 
 }

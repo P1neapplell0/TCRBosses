@@ -68,4 +68,16 @@ public class BTEntityTypeMixin {
     private static EntityType.Builder<?> reSize5(EntityType.Builder<?> instance, float pWidth, float pHeight){
         return instance.sized(1.0F,2.3F);
     }
+
+    @Redirect(
+            method = "lambda$static$4",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/EntityType$Builder;sized(FF)Lnet/minecraft/world/entity/EntityType$Builder;",
+                    remap = true
+            )
+    )
+    private static EntityType.Builder<?> reSize6(EntityType.Builder<?> instance, float pWidth, float pHeight){
+        return instance.sized(1.0F,2.3F);
+    }
 }

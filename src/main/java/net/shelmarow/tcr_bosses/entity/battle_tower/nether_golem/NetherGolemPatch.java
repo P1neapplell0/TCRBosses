@@ -3,6 +3,8 @@ package net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
+import com.hm.efn.client.sound.EFNSounds;
+import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import com.hm.efn.registries.EFNItem;
@@ -20,17 +22,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.shelmarow.combat_evolution.ai.BehaviorUtils;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
+import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
 import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
 import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
+import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
+import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
@@ -53,8 +58,8 @@ public class NetherGolemPatch extends CEHumanoidPatch {
     public void onAddedToWorld() {
 
         ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina(original, (float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(original, StaminaStatus.COMMON);
+        entityData.combat_evolution$setStamina((float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
+        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
 
         if (original instanceof BTAbstractGolemAccessor accessor) {
             serverBossEvent = accessor.getBossEvent();
@@ -63,15 +68,34 @@ public class NetherGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.CO_TACHI.get());
+        weapon.addAttributeModifier(
+                Attributes.ATTACK_DAMAGE,
+                new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),
+                EquipmentSlot.MAINHAND
+        );
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
 
         modifyLivingMotionByCurrentItem();
     }
 
+    @Override
+    public void playGuardHitAnimation(DamageSource damageSource,boolean canCounter){
+        AnimationManager.AnimationAccessor<? extends StaticAnimation> guardHit;
+        if(canCounter){
+            guardHit = original.tickCount % 2 == 0 ? EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT1 : EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT2;
+            this.playSound(EFNSounds.PARRY.get(),0.5F, 1.0F, 1.0F);
+        }
+        else{
+            guardHit = this.getGuardHitAnimation(damageSource);
+            this.playGuardHitSound();
+        }
+        this.playAnimationSynchronized(guardHit, 0.0F, SPAnimatorControl::new);
+    }
+
 
     public static void initAttributes(EntityAttributeModificationEvent event){
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 360.0D);
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 6.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
@@ -119,7 +143,7 @@ public class NetherGolemPatch extends CEHumanoidPatch {
                 ClientBossData.partialUpdate(serverBossEvent.getId(), data->{
                     data.displayType = Component.literal("nether_golem");
                     data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina(original)/maxStamina);
+                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
                     data.staminaSetTime = Util.getMillis();
                 });
             }

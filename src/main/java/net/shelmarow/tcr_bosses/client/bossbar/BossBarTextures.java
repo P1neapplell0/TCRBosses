@@ -34,5 +34,13 @@ public class BossBarTextures {
         public static final ResourceLocation BOSS_BAR_HEALTH = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/sky_golem/boss_bar_health.png");
         public static final ResourceLocation BOSS_BAR_STAMINA = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/sky_golem/boss_bar_stamina.png");
         public static final ResourceLocation BOSS_BAR_BG = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/sky_golem/boss_bar_bg.png");
+        public static final ResourceLocation BOSS_BAR_BG_BOTTOM = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/sky_golem/boss_bar_bg_bottom.png");
+        public static final ResourceLocation BOSS_BAR_BG_OVERLAY = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/sky_golem/boss_bar_bg_overlay.png");
+    }
+
+    public static class EndGolemTextures {
+        public static final ResourceLocation BOSS_BAR_HEALTH = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/end_golem/boss_bar_health.png");
+        public static final ResourceLocation BOSS_BAR_STAMINA = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/end_golem/boss_bar_stamina.png");
+        public static final ResourceLocation BOSS_BAR_BG = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/gui/boss_bar/end_golem/boss_bar_bg.png");
     }
 }

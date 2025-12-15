@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
 }
@@ -83,19 +83,23 @@ dependencies {
     implementation fg.deobf('libs:embeddium:0.3.31')
 
     implementation fg.deobf('libs:ba_bt:3.0.0')
+    implementation fg.deobf('libs:mobbattle:2.5.3')
+    implementation fg.deobf('libs:better_trident_model:1.0.0')
 
-    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7213635-sources-7213636")
+    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7303229-sources-7303232")
 
-    implementation fg.deobf('libs:betterlockon:1.0.6')
+    implementation fg.deobf('libs:betterlockon:1.1.1')
 
-    implementation fg.deobf('libs:p1nero_ec:20.12.0.3')
+    //implementation fg.deobf('libs:p1nero_ec:20.12.0.3')
 
-    implementation fg.deobf('libs:CombatEvolution:1.0.5.3')
-    implementation fg.deobf('libs:nightfall_invade:1.1.2')
+    implementation fg.deobf('libs:CombatEvolution:1.1.1')
+//    implementation fg.deobf('libs:nightfall_invade:1.1.2')
 
-    implementation fg.deobf("libs:Nightfall:2.3.6")
+    implementation fg.deobf('libs:epicfightx:1.0.0')
+
+    implementation fg.deobf("libs:Nightfall:2.4")
     implementation fg.deobf('libs:epic_fight_avalon:20.12.4')
-    implementation fg.deobf("libs:invincible:20.13.6.3")
+    //implementation fg.deobf("libs:invincible:20.13.6.3")
 
     implementation fg.deobf('libs:cataclysm:3.16')
     implementation fg.deobf('libs:lionfishapi:2.4')

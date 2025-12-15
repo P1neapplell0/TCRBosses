@@ -5,12 +5,15 @@ import com.brass_amber.ba_bt.entity.ai.goal.GolemStompAttackGoal;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
+import com.hm.efn.client.sound.EFNSounds;
 import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
+import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -24,20 +27,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.shelmarow.combat_evolution.ai.BehaviorUtils;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
+import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
 import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
+import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.Animator;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
+import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
@@ -57,14 +63,14 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 280.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 400.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 10.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 10.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.ARMOR_NEGATION.get(), 30.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.ARMOR_NEGATION.get(), 0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 50.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 50.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 30.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.MAX_STRIKES.get(), 100.0D);
     }
@@ -74,8 +80,8 @@ public class LandGolemPatch extends CEHumanoidPatch {
 
         //SB高塔傀儡，让我的耐力不同步，这里需要手动矫正
         ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina(original, (float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(original, StaminaStatus.COMMON);
+        entityData.combat_evolution$setStamina((float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
+        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
 
         if (original instanceof BTAbstractGolemAccessor accessor) {
             serverBossEvent = accessor.getBossEvent();
@@ -86,7 +92,12 @@ public class LandGolemPatch extends CEHumanoidPatch {
             ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
             weapon.addAttributeModifier(
                     Attributes.ATTACK_DAMAGE,
-                    new AttributeModifier("attack_damage", -0.1F, AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),
+                    EquipmentSlot.MAINHAND
+            );
+            weapon.addAttributeModifier(
+                    EpicFightAttributes.ARMOR_NEGATION.get(),
+                    new AttributeModifier("armor_negation", -1F, AttributeModifier.Operation.MULTIPLY_TOTAL),
                     EquipmentSlot.MAINHAND
             );
             this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
@@ -107,7 +118,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
                 ClientBossData.partialUpdate(serverBossEvent.getId(),data->{
                     data.displayType = Component.literal("land_golem");
                     data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina(original)/maxStamina);
+                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
                     data.staminaSetTime = Util.getMillis();
                 });
             }
@@ -118,6 +129,25 @@ public class LandGolemPatch extends CEHumanoidPatch {
                 btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
             }
         }
+    }
+
+    @Override
+    public void playGuardHitAnimation(DamageSource damageSource,boolean canCounter){
+        AnimationManager.AnimationAccessor<? extends StaticAnimation> guardHit;
+        if(canCounter){
+            guardHit = original.tickCount % 2 == 0 ? EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT1 : EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT2;
+            this.playSound(EFNSounds.PARRY.get(),0.5F, 1.0F, 1.0F);
+        }
+        else{
+            guardHit = this.getGuardHitAnimation(damageSource);
+            this.playGuardHitSound();
+        }
+        this.playAnimationSynchronized(guardHit, 0.0F, SPAnimatorControl::new);
+    }
+
+    @Override
+    public float getHurtImpactPercent(DamageSource damageSource) {
+        return 0.5F;
     }
 
     @Override
