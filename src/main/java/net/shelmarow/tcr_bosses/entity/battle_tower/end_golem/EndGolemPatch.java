@@ -8,6 +8,11 @@ import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNYamatoAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import net.kenddie.fantasyarmor.FantasyArmor;
+import net.kenddie.fantasyarmor.item.FAArmorItems;
+import net.kenddie.fantasyarmor.item.armor.FAArmorItem;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSets;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -17,11 +22,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.registries.RegistryObject;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
@@ -43,7 +52,9 @@ import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 public class EndGolemPatch extends CEHumanoidPatch {
 
@@ -82,7 +93,21 @@ public class EndGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.YAMATO_DMC_IN_SHEATH.get());
+
+        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.CHESTPLATE).get());
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+
+        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.LEGGINGS).get());
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+
+
+        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.BOOTS).get());
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
+        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+        this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
         modifyLivingMotionByCurrentItem();
     }
@@ -153,6 +178,10 @@ public class EndGolemPatch extends CEHumanoidPatch {
         super.onDeath(event);
         ClientBossData.removeBoss(serverBossEvent.getId());
         serverBossEvent.setVisible(false);
+    }
+
+    public void setBossBreakPhase(int phase){
+        this.bossBreakPhase = phase;
     }
 
     public int getBossBreakPhase() {

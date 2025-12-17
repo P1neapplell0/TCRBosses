@@ -10,6 +10,8 @@ import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import net.kenddie.fantasyarmor.item.FAArmorItems;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -52,6 +55,7 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class LandGolemPatch extends CEHumanoidPatch {
 
@@ -63,9 +67,9 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 400.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 450.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 10.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 20.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 10.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.ARMOR_NEGATION.get(), 0D);
@@ -87,22 +91,32 @@ public class LandGolemPatch extends CEHumanoidPatch {
             serverBossEvent = accessor.getBossEvent();
         }
 
-        if (this.original.getMainHandItem().isEmpty()) {
-            this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
-            ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
-            weapon.addAttributeModifier(
-                    Attributes.ATTACK_DAMAGE,
-                    new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),
-                    EquipmentSlot.MAINHAND
-            );
-            weapon.addAttributeModifier(
-                    EpicFightAttributes.ARMOR_NEGATION.get(),
-                    new AttributeModifier("armor_negation", -1F, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                    EquipmentSlot.MAINHAND
-            );
-            this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
-            modifyLivingMotionByCurrentItem();
-        }
+        this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
+        this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
+        this.original.setDropChance(EquipmentSlot.HEAD, 0);
+        this.original.setDropChance(EquipmentSlot.CHEST, 0);
+        this.original.setDropChance(EquipmentSlot.LEGS, 0);
+        this.original.setDropChance(EquipmentSlot.FEET, 0);
+
+        ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE,new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
+
+        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.CHESTPLATE).get());
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+
+        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.LEGGINGS).get());
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+
+
+        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.BOOTS).get());
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+
+        this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
+        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+        this.original.setItemSlot(EquipmentSlot.FEET, feet);
+
+        modifyLivingMotionByCurrentItem();
     }
 
     @Override

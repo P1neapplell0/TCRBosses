@@ -9,6 +9,8 @@ import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import net.kenddie.fantasyarmor.item.FAArmorItems;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -16,7 +18,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -43,6 +47,7 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class CoreGolemPatch extends CEHumanoidPatch {
     private ServerBossEvent serverBossEvent;
@@ -65,7 +70,20 @@ public class CoreGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.AETHERIAL_DUSK_DUALSWORD.get());
+
+        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.FLESH_OF_THE_FEASTER).get(ArmorItem.Type.CHESTPLATE).get());
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+
+        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.FLESH_OF_THE_FEASTER).get(ArmorItem.Type.LEGGINGS).get());
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+
+        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.FLESH_OF_THE_FEASTER).get(ArmorItem.Type.BOOTS).get());
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
+        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+        this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
         modifyLivingMotionByCurrentItem();
     }
@@ -86,14 +104,14 @@ public class CoreGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 400.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 500.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.4D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ATTACK_DAMAGE, 5.0D);
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 15.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 20.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 30.0D);
-        event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 55.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 65.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.MAX_STRIKES.get(), 100.0D);
     }

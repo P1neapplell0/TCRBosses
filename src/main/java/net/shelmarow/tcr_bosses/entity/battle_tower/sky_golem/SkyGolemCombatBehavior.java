@@ -105,70 +105,68 @@ public class SkyGolemCombatBehavior {
                 )
 
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.5F).weight(1.0F)
-                        .maxCooldown(100).cooldown(100)
+                        .priority(1F).weight(10F)
+                        .maxCooldown(400).cooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4F)
-                                .health(0.25F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .guardWithWander(80,0,0.5F,true)
-                                .counterAnimation(
-                                        Animations.ENDERMAN_KNEE,
-                                        new AnimationParams()
-                                                .transitionTime(0.25F)
-                                                .playSpeed(1F)
-                                                .stunType(StunType.LONG)
-                                )
-                                .counterType(CECombatBehaviors.CounterType.END)
-                                .maxGuardHit(3)
-                                .onCounterStart(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                })
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4F)
-                                .health(0.25F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .guardWithWander(80,0,-0.5F,true)
-                                .counterAnimation(
-                                        Animations.ENDERMAN_KNEE,
-                                        new AnimationParams()
-                                                .transitionTime(0.25F)
-                                                .playSpeed(1F)
-                                                .stunType(StunType.LONG)
-                                )
-                                .counterType(CECombatBehaviors.CounterType.END)
-                                .maxGuardHit(3)
-                                .onCounterStart(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                })
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,8)
-                                .health(0.1F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .interruptedByTime(2.5F,6F)
-                                .stopByStun(5)
-                                .wander(120,0F,0.35F)
+                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .attackLevel(1,2).withinDistance(0,4)
-                                        .canInterruptParent(true)
-                                        .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                        .guardWithWander(80,0,0.5F,true)
+                                        .counterAnimation(
+                                                Animations.ENDERMAN_KNEE,
+                                                new AnimationParams()
+                                                        .transitionTime(0.25F)
+                                                        .playSpeed(1F)
+                                                        .stunType(StunType.LONG)
+                                        )
+                                        .counterType(CECombatBehaviors.CounterType.END)
+                                        .maxGuardHit(3)
+                                        .onCounterStart(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
                                 )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,8)
-                                .health(0.1F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .interruptedByTime(2.5F,6F)
-                                .stopByStun(5)
-                                .wander(120,0F,-0.35F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .attackLevel(1,2).withinDistance(0,4)
-                                        .canInterruptParent(true)
-                                        .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                        .guardWithWander(80,0,-0.5F,true)
+                                        .counterAnimation(
+                                                Animations.ENDERMAN_KNEE,
+                                                new AnimationParams()
+                                                        .transitionTime(0.25F)
+                                                        .playSpeed(1F)
+                                                        .stunType(StunType.LONG)
+                                        )
+                                        .counterType(CECombatBehaviors.CounterType.END)
+                                        .maxGuardHit(3)
+                                        .onCounterStart(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .interruptedByTime(2.5F,6F)
+                                        .stopByStun(5)
+                                        .wander(120,0F,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .attackLevel(1,2).withinDistance(0,4)
+                                                .canInterruptParent(true)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                        )
+                                )
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .interruptedByTime(2.5F,6F)
+                                        .stopByStun(5)
+                                        .wander(120,0F,-0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .attackLevel(1,2).withinDistance(0,4)
+                                                .canInterruptParent(true)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                        )
                                 )
                         )
                 )

@@ -88,14 +88,15 @@ dependencies {
 
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7303229-sources-7303232")
 
+    implementation fg.deobf('libs:epicfightx:1.0.0')
+
     implementation fg.deobf('libs:betterlockon:1.1.1')
+    implementation fg.deobf('libs:fantasy_armor:1.2')
 
     //implementation fg.deobf('libs:p1nero_ec:20.12.0.3')
 
     implementation fg.deobf('libs:CombatEvolution:1.1.1')
 //    implementation fg.deobf('libs:nightfall_invade:1.1.2')
-
-    implementation fg.deobf('libs:epicfightx:1.0.0')
 
     implementation fg.deobf("libs:Nightfall:2.4")
     implementation fg.deobf('libs:epic_fight_avalon:20.12.4')

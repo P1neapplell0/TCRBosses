@@ -12,6 +12,7 @@ import net.shelmarow.tcr_bosses.entity.battle_tower.end_golem.EndGolemPatch;
 import net.shelmarow.tcr_bosses.entity.battle_tower.land_golem.LandGolemPatch;
 import net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem.NetherGolemPatch;
 import net.shelmarow.tcr_bosses.entity.battle_tower.ocean_golem.OceanGolemPatch;
+import net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem.PSkyGolemRenderer;
 import net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem.SkyGolemPatch;
 import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 import yesman.epicfight.api.client.model.Meshes;
@@ -63,7 +64,7 @@ public class ModEvent {
                         .initLayerLast(event.getContext(), entityType));
 
         event.addPatchedEntityRenderer(BTEntityType.SKY_GOLEM.get(),
-                entityType -> new PHumanoidRenderer<>(Meshes.BIPED_OLD_TEX, event.getContext(), entityType)
+                entityType -> new PSkyGolemRenderer(Meshes.BIPED_OLD_TEX, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
 
         event.addPatchedEntityRenderer(BTEntityType.END_GOLEM.get(),

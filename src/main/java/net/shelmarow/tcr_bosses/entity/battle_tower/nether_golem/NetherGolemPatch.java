@@ -9,6 +9,8 @@ import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import net.kenddie.fantasyarmor.item.FAArmorItems;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -18,6 +20,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -66,14 +69,32 @@ public class NetherGolemPatch extends CEHumanoidPatch {
         }
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
+        this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
+        this.original.setDropChance(EquipmentSlot.HEAD, 0);
+        this.original.setDropChance(EquipmentSlot.CHEST, 0);
+        this.original.setDropChance(EquipmentSlot.LEGS, 0);
+        this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.CO_TACHI.get());
-        weapon.addAttributeModifier(
-                Attributes.ATTACK_DAMAGE,
-                new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),
-                EquipmentSlot.MAINHAND
-        );
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE,new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
+
+        ItemStack head = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.RONIN).get(ArmorItem.Type.HELMET).get());
+        head.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.HEAD);
+
+        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.RONIN).get(ArmorItem.Type.CHESTPLATE).get());
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+
+        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.RONIN).get(ArmorItem.Type.LEGGINGS).get());
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+
+        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.RONIN).get(ArmorItem.Type.BOOTS).get());
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
+        this.original.setItemSlot(EquipmentSlot.HEAD, head);
+        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+        this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
         modifyLivingMotionByCurrentItem();
     }
@@ -94,13 +115,13 @@ public class NetherGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 360.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 480.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR, 15.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR, 20.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 30.0D);
-        event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 50.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 60.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.MAX_STRIKES.get(), 100.0D);
     }

@@ -6,6 +6,7 @@ import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -14,6 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
+import net.shelmarow.combat_evolution.damage_source.CEDamageTypeTags;
 import net.shelmarow.tcr_bosses.TCRBosses;
 import net.shelmarow.tcr_bosses.entity.battle_tower.end_golem.EndGolemPatch;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
@@ -43,16 +45,17 @@ public class EntityEvent {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event){
-        if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
+        if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) || event.getSource().is(CEDamageTypeTags.EXECUTION)) return;
         Entity hitEntity = event.getEntity();
         EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,EndGolemPatch.class);
         if(endGolemPatch != null){
+            float damage = Math.min(event.getAmount(),endGolemPatch.getOriginal().getMaxHealth() * 0.05F);
             if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.COMMON){
                 float damageReduction = 0.15F + 0.3F * endGolemPatch.getBossBreakPhase();
-                event.setAmount(event.getAmount() * damageReduction);
+                event.setAmount(damage * damageReduction);
             }
             else if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.BREAK){
-                event.setAmount(event.getAmount() * 1.5F);
+                event.setAmount(damage * 1.5F);
             }
         }
     }

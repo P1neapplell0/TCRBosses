@@ -1,5 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
+import com.brass_amber.ba_bt.entity.hostile.golem.BTAbstractGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
@@ -8,8 +9,9 @@ import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.legacy.lost_aether.registry.LCItems;
-import com.magistuarmory.item.ModItems;
 import com.mojang.datafixers.util.Pair;
+import net.kenddie.fantasyarmor.item.FAArmorItems;
+import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -18,7 +20,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -47,6 +51,7 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class SkyGolemPatch extends CEHumanoidPatch {
 
@@ -54,7 +59,6 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
     public SkyGolemPatch() {
         super(Factions.UNDEAD);
-        staminaRegenDelay = 40;
     }
 
     @Override
@@ -82,24 +86,34 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
         ItemStack weapon = new ItemStack(EFNItem.SWORD_OF_PIONEER.get());
         ItemStack shield = new ItemStack(LCItems.shield_of_emile);
+
+        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.HERO).get(ArmorItem.Type.CHESTPLATE).get());
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+
+        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.HERO).get(ArmorItem.Type.LEGGINGS).get());
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+
+        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.HERO).get(ArmorItem.Type.BOOTS).get());
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
         this.original.setItemInHand(InteractionHand.OFF_HAND, shield);
-        if (ModItems.WINGED_HUSSAR_CHESTPLATE != null) {
-            this.original.setItemSlot(EquipmentSlot.CHEST, new ItemStack(ModItems.WINGED_HUSSAR_CHESTPLATE.get()));
-        }
+        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+        this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
         modifyLivingMotionByCurrentItem();
     }
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 450.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 500.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 5.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 25.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 25.0D);
-        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 50.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STAMINA.get(), 120.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.STAMINA_REGEN.get(), 1.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), EpicFightAttributes.MAX_STRIKES.get(), 100.0D);
     }
@@ -169,7 +183,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
 
     @Override
-    public void playGuardHitAnimation(DamageSource damageSource,boolean canCounter){
+    public void playGuardHitAnimation(DamageSource damageSource, boolean canCounter){
         AnimationManager.AnimationAccessor<? extends StaticAnimation> guardHit;
         if(canCounter){
             guardHit = original.tickCount % 2 == 0 ? EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT1 : EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT2;
