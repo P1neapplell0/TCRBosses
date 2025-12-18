@@ -9,4 +9,10 @@ public class TCRMeshes {
     public static Meshes.MeshAccessor<SkinnedMesh> WING =
             Meshes.MeshAccessor.create(TCRBosses.MOD_ID, "entity/wing",(jsonModelLoader) -> jsonModelLoader.loadSkinnedMesh(SkinnedMesh::new));
 
+    public static Meshes.MeshAccessor<SkinnedMesh> WING_R =
+            Meshes.MeshAccessor.create(TCRBosses.MOD_ID, "entity/wing_r",(jsonModelLoader) -> jsonModelLoader.loadSkinnedMesh(SkinnedMesh::new));
+
+    public static Meshes.MeshAccessor<SkinnedMesh> WING_L =
+            Meshes.MeshAccessor.create(TCRBosses.MOD_ID, "entity/wing_l",(jsonModelLoader) -> jsonModelLoader.loadSkinnedMesh(SkinnedMesh::new));
+
 }

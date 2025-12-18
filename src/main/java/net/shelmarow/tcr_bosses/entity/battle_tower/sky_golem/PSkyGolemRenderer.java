@@ -1,5 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
+import com.merlin204.avalon.util.AvalonAnimationUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -18,6 +19,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.shelmarow.tcr_bosses.TCRBosses;
 import net.shelmarow.tcr_bosses.gameassets.TCRMeshes;
 import org.joml.Vector4f;
+import yesman.epicfight.api.animation.Pose;
 import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.client.forgeevent.PrepareModelEvent;
 import yesman.epicfight.api.client.model.SkinnedMesh;
@@ -56,7 +58,7 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
         Armature armature = entitypatch.getArmature();
 
         RenderType wingRenderType = RenderType.entityTranslucent(ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID,"textures/entity/golem/sky_golem/wing.png"));
-        SkinnedMesh wingMesh = TCRMeshes.WING.get();
+
 
         poseStack.pushPose();
 
@@ -69,6 +71,7 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
             HumanoidMesh mesh = this.getMeshProvider(entitypatch).get();
             this.prepareModel(mesh, entity, entitypatch, renderer);
 
+
             PrepareModelEvent prepareModelEvent = new PrepareModelEvent(this, mesh, entitypatch, buffer, poseStack, packedLight, partialTicks);
             if (!MinecraftForge.EVENT_BUS.post(prepareModelEvent)) {
                 Vector4f color = new Vector4f(1.0F, 1.0F, 1.0F, isVisibleToPlayer ? 0.15F : 1.0F);
@@ -80,7 +83,24 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
                 entitypatch.getEntityDecorations().modifyLight(lightUv, partialTicks);
                 int modifiedLight = LightTexture.pack(lightUv.x, lightUv.y);
 
-                wingMesh.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(), OverlayTexture.NO_OVERLAY, armature, armature.getPoseMatrices());
+                //挥一次的时间
+                int wingTime = 20;
+                //挥动角度
+                float wingAngle = 15;
+
+                float wingRatio = (entity.tickCount%wingTime+partialTicks)/(float) wingTime;
+
+                Pose poseL = entitypatch.getAnimator().getPose(partialTicks);
+                AvalonAnimationUtils.joinRotationInPose(poseL,entitypatch,"Chest",0,wingAngle*Math.abs(wingRatio-0.5F)*2,0);
+                SkinnedMesh wingMeshL = TCRMeshes.WING_L.get();
+                wingMeshL.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
+                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseL,false));
+
+                Pose poseR = entitypatch.getAnimator().getPose(partialTicks);
+                AvalonAnimationUtils.joinRotationInPose(poseR,entitypatch,"Chest",0,-wingAngle*Math.abs(wingRatio-0.5F)*2,0);
+                SkinnedMesh wingMeshR = TCRMeshes.WING_R.get();
+                wingMeshR.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
+                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseR,false));
 
                 mesh.draw(poseStack, buffer, renderType, modifiedLight, color.x(), color.y(), color.z(), color.w(), this.getOverlayCoord(entity, entitypatch, partialTicks), armature, armature.getPoseMatrices());
                 entitypatch.getEntityDecorations().listDecorationOverlays().forEach((decorationOverlay) -> {
