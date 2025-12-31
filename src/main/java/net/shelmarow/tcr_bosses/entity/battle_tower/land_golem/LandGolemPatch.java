@@ -12,10 +12,6 @@ import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -28,18 +24,12 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
-import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
-import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
-import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import yesman.epicfight.api.animation.AnimationManager;
-import yesman.epicfight.api.animation.Animator;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
@@ -60,7 +50,6 @@ import java.util.UUID;
 public class LandGolemPatch extends CEHumanoidPatch {
 
     private boolean gpSucceed = false;
-    private ServerBossEvent serverBossEvent;
 
     public LandGolemPatch() {
         super(Factions.UNDEAD);
@@ -81,15 +70,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
 
     @Override
     public void onAddedToWorld(){
-
-        //SB高塔傀儡，让我的耐力不同步，这里需要手动矫正
-        ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina((float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
-
-        if (original instanceof BTAbstractGolemAccessor accessor) {
-            serverBossEvent = accessor.getBossEvent();
-        }
+        super.onAddedToWorld();
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
         this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
@@ -123,21 +104,6 @@ public class LandGolemPatch extends CEHumanoidPatch {
     public void tick(LivingEvent.LivingTickEvent event){
         super.tick(event);
 
-        if(serverBossEvent != null){
-            //同步耐力值
-            if(this.original instanceof BTLandGolem entity && entity.isAlive()){
-                double maxStamina = entity.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get());
-                ILivingEntityData entityData = (ILivingEntityData) this;
-
-                ClientBossData.partialUpdate(serverBossEvent.getId(),data->{
-                    data.displayType = Component.literal("land_golem");
-                    data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
-                    data.staminaSetTime = Util.getMillis();
-                });
-            }
-        }
-
         if(original instanceof BTLandGolem btLandGolem){
             if(btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())){
                 btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
@@ -164,12 +130,6 @@ public class LandGolemPatch extends CEHumanoidPatch {
         return 0.5F;
     }
 
-    @Override
-    public void onDeath(LivingDeathEvent event) {
-        super.onDeath(event);
-        ClientBossData.removeBoss(serverBossEvent.getId());
-        serverBossEvent.setVisible(false);
-    }
 
     @Override
     public AttackResult tryHurt(DamageSource damageSource, float amount) {
@@ -203,17 +163,6 @@ public class LandGolemPatch extends CEHumanoidPatch {
         for(WrappedGoal goal : original.targetSelector.getAvailableGoals()){
             goal.start();
         }
-    }
-
-    @Override
-    public void initAnimator(Animator animator) {
-        super.initAnimator(animator);
-        animator.addLivingAnimation(LivingMotions.BLOCK, Animations.GREATSWORD_GUARD);
-        animator.addLivingAnimation(LivingMotions.IDLE, Animations.BIPED_IDLE);
-        animator.addLivingAnimation(LivingMotions.WALK, Animations.BIPED_WALK);
-        animator.addLivingAnimation(LivingMotions.RUN, Animations.BIPED_RUN);
-        animator.addLivingAnimation(LivingMotions.CHASE, Animations.BIPED_RUN);
-        animator.addLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH);
     }
 
     @Override

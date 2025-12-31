@@ -13,14 +13,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
-import net.shelmarow.combat_evolution.ai.TimeEvent;
 import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.event.TimeEvent;
+import net.shelmarow.combat_evolution.ai.params.AnimationParams;
+import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
@@ -916,25 +916,20 @@ public class CoreGolemCombatBehavior {
                                     }
                                 })
                                 .addTimeEvent(
-                                        new TimeEvent(0.5F,mobPatch -> {
-                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(0.25F);
+                                        new TimeEvent(0.5F, mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.25F);
                                         }),
                                         new TimeEvent(0.6F,mobPatch -> {
-                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(1.25F);
+                                            CEPatchUtils.setPlaySpeed(mobPatch,1.25F);
                                         }),
                                         new TimeEvent(0.9F,mobPatch -> {
-                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(0.15F);
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.15F);
                                         }),
                                         new TimeEvent(1.0F,mobPatch -> {
-                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(2.0F);
+                                            CEPatchUtils.setPlaySpeed(mobPatch,2F);
                                         }),
                                         new TimeEvent(1.4F,mobPatch -> {
-                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                            entityData.combat_evolution$setAttackSpeed(0.5F);
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.5F);
                                         })
                                 )
 

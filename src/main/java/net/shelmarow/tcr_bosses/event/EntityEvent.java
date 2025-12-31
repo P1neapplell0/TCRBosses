@@ -6,7 +6,6 @@ import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -23,6 +22,7 @@ import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 
 @Mod.EventBusSubscriber(modid = TCRBosses.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntityEvent {
+
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event){
         if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;

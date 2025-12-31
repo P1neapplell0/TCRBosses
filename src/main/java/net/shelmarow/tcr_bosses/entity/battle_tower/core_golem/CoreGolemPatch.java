@@ -1,6 +1,5 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.core_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTCoreGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -11,9 +10,6 @@ import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,15 +19,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
-import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
-import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
-import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
@@ -50,7 +41,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CoreGolemPatch extends CEHumanoidPatch {
-    private ServerBossEvent serverBossEvent;
 
     public CoreGolemPatch() {
         super(Factions.UNDEAD);
@@ -58,16 +48,14 @@ public class CoreGolemPatch extends CEHumanoidPatch {
 
     @Override
     public void onAddedToWorld() {
-
-        ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina((float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
-
-        if (original instanceof BTAbstractGolemAccessor accessor) {
-            serverBossEvent = accessor.getBossEvent();
-        }
+        super.onAddedToWorld();
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
+        this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
+        this.original.setDropChance(EquipmentSlot.HEAD, 0);
+        this.original.setDropChance(EquipmentSlot.CHEST, 0);
+        this.original.setDropChance(EquipmentSlot.LEGS, 0);
+        this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.AETHERIAL_DUSK_DUALSWORD.get());
 
@@ -143,22 +131,6 @@ public class CoreGolemPatch extends CEHumanoidPatch {
     @Override
     public void tick(LivingEvent.LivingTickEvent event) {
         super.tick(event);
-
-
-        if (serverBossEvent != null) {
-            //同步耐力值
-            if (this.original instanceof BTCoreGolem entity && entity.isAlive()) {
-                double maxStamina = entity.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get());
-                ILivingEntityData entityData = (ILivingEntityData) this;
-
-                ClientBossData.partialUpdate(serverBossEvent.getId(), data->{
-                    data.displayType = Component.literal("core_golem");
-                    data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
-                    data.staminaSetTime = Util.getMillis();
-                });
-            }
-        }
     }
 
     @Override
@@ -171,12 +143,6 @@ public class CoreGolemPatch extends CEHumanoidPatch {
         return this.original.getItemInHand(InteractionHand.MAIN_HAND);
     }
 
-    @Override
-    public void onDeath(LivingDeathEvent event) {
-        super.onDeath(event);
-        ClientBossData.removeBoss(serverBossEvent.getId());
-        serverBossEvent.setVisible(false);
-    }
 
     @Override
     public void playGuardBreakSound(){

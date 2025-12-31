@@ -1,6 +1,5 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.end_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTEndGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.gameasset.EFNWeaponCategories;
@@ -8,14 +7,8 @@ import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNYamatoAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
-import net.kenddie.fantasyarmor.FantasyArmor;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
-import net.kenddie.fantasyarmor.item.armor.FAArmorItem;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
-import net.kenddie.fantasyarmor.item.armor.FAArmorSets;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -26,20 +19,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.registries.RegistryObject;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
-import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
-import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
-import yesman.epicfight.api.animation.Animator;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
 import yesman.epicfight.gameasset.Animations;
@@ -52,13 +38,10 @@ import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 public class EndGolemPatch extends CEHumanoidPatch {
-
-    private ServerBossEvent serverBossEvent;
 
     private int bossBreakPhase = 0;
 
@@ -69,7 +52,6 @@ public class EndGolemPatch extends CEHumanoidPatch {
 
     @Override
     public void onAddedToWorld() {
-
         //重置耐力
         AttributeInstance instance = original.getAttribute(EpicFightAttributes.MAX_STAMINA.get());
         if(instance != null) {
@@ -77,13 +59,7 @@ public class EndGolemPatch extends CEHumanoidPatch {
             instance.setBaseValue(Mth.clamp(maxStamina + 15D * bossBreakPhase,30,90));
         }
 
-        ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina((float) original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
-
-        if (original instanceof BTAbstractGolemAccessor accessor) {
-            serverBossEvent = accessor.getBossEvent();
-        }
+        super.onAddedToWorld();
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
         this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
@@ -151,33 +127,11 @@ public class EndGolemPatch extends CEHumanoidPatch {
     public void tick(LivingEvent.LivingTickEvent event) {
         super.tick(event);
 
-        if (serverBossEvent != null) {
-            //同步耐力值
-            if (this.original instanceof BTEndGolem entity && entity.isAlive()) {
-                double maxStamina = entity.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get());
-                ILivingEntityData entityData = (ILivingEntityData) this;
-
-                ClientBossData.partialUpdate(serverBossEvent.getId(), data->{
-                    data.displayType = Component.literal("end_golem");
-                    data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
-                    data.staminaSetTime = Util.getMillis();
-                });
-            }
-        }
-
         //硬直脱离
         if(!isLogicalClient() && original.isAlive() && this.getEntityState().hurtLevel() > 0 && CEPatchUtils.getStaminaStatus(this) != StaminaStatus.BREAK){
             this.playAnimationSynchronized(EFNDodgeAnimations.YAMATO_STEP_B,0,SPAnimatorControl::new);
             this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1,0,0);
         }
-    }
-
-    @Override
-    public void onDeath(LivingDeathEvent event) {
-        super.onDeath(event);
-        ClientBossData.removeBoss(serverBossEvent.getId());
-        serverBossEvent.setVisible(false);
     }
 
     public void setBossBreakPhase(int phase){

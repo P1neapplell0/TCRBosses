@@ -20,13 +20,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.shelmarow.combat_evolution.ai.*;
+import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.event.HitEvent;
+import net.shelmarow.combat_evolution.ai.event.TimeEvent;
+import net.shelmarow.combat_evolution.ai.params.AnimationParams;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
 import net.shelmarow.tcr_bosses.gameassets.TCRAnimations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -237,7 +240,7 @@ public class SkyGolemCombatBehavior {
 
                 //军刀4连
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(3F).maxCooldown(5)
+                        .priority(1.0F).weight(4F).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.5F)
@@ -304,8 +307,7 @@ public class SkyGolemCombatBehavior {
                                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1F))
                                                         .addTimeEvent(
                                                                 new TimeEvent(0.5F,mobPatch ->{
-                                                                    ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                                                    entityData.combat_evolution$setAttackSpeed(0.03F);
+                                                                    CEPatchUtils.setPlaySpeed(mobPatch,0.03F);
                                                                 })
                                                         )
 
@@ -315,12 +317,8 @@ public class SkyGolemCombatBehavior {
                                                                 .interruptedByTime(0F,5F)
                                                                 .wander(100,0,0)
                                                                 .addExBehavior(mobPatch -> {
-
                                                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 30));
-
-                                                                    ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                                                    entityData.combat_evolution$setCanModifySpeed(true);
-                                                                    entityData.combat_evolution$setAttackSpeed(0.03F);
+                                                                    CEPatchUtils.setPlaySpeed(mobPatch,0.03F);
                                                                 })
 
                                                                 //居合反击
@@ -613,9 +611,8 @@ public class SkyGolemCombatBehavior {
                                                                 .animationBehavior(EFNShortSwordAnimations.NF_SHORTSWORD_AUTO5,
                                                                         new AnimationParams().transitionTime(0.35F).playSpeed(0.4F))
                                                                 .addTimeEvent(
-                                                                        new TimeEvent(0.15F,mobPatch -> {
-                                                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                                                            entityData.combat_evolution$setAttackSpeed(1F);
+                                                                        new TimeEvent(0.15F, mobPatch -> {
+                                                                            CEPatchUtils.setPlaySpeed(mobPatch,1F);
                                                                         })
                                                                 )
                                                         )
@@ -643,8 +640,7 @@ public class SkyGolemCombatBehavior {
                                                                         new AnimationParams().transitionTime(0.35F).playSpeed(0.25F))
                                                                 .addTimeEvent(
                                                                         new TimeEvent(0.15F,mobPatch -> {
-                                                                            ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                                                            entityData.combat_evolution$setAttackSpeed(1.25F);
+                                                                            CEPatchUtils.setPlaySpeed(mobPatch,1.25F);
                                                                         })
                                                                 )
                                                         )
@@ -695,8 +691,7 @@ public class SkyGolemCombatBehavior {
                                                             mobPatch.getOriginal().position().add(0,-0.5,0), 3.5D, false, false,false);
                                                 }),
                                                 new TimeEvent(0.4F,mobPatch -> {
-                                                    ILivingEntityData entityData = (ILivingEntityData) mobPatch;
-                                                    entityData.combat_evolution$setAttackSpeed(0.5F);
+                                                    CEPatchUtils.setPlaySpeed(mobPatch,0.5F);
                                                 })
                                         )
                                 )
@@ -728,7 +723,7 @@ public class SkyGolemCombatBehavior {
 
                 //震飞+空中攻击
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(8.0F).maxCooldown(0)
+                        .priority(1.0F).weight(8.0F).maxCooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0F, 4F)

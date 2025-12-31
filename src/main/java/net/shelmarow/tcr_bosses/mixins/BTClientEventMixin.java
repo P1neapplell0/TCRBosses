@@ -1,7 +1,6 @@
 package net.shelmarow.tcr_bosses.mixins;
 
 import com.brass_amber.ba_bt.client.ClientEvents;
-import com.brass_amber.ba_bt.client.renderer.golem.EndBTGolemRenderer;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.EntityType;

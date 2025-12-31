@@ -1,7 +1,5 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTAbstractGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -12,9 +10,6 @@ import com.legacy.lost_aether.registry.LCItems;
 import com.mojang.datafixers.util.Pair;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -25,17 +20,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
-import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
-import net.shelmarow.combat_evolution.client.bossbar.ClientBossData;
-import net.shelmarow.combat_evolution.iml.ILivingEntityData;
-import net.shelmarow.tcr_bosses.mixins.BTAbstractGolemAccessor;
 import yesman.epicfight.api.animation.AnimationManager;
-import yesman.epicfight.api.animation.Animator;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
@@ -55,8 +43,6 @@ import java.util.UUID;
 
 public class SkyGolemPatch extends CEHumanoidPatch {
 
-    private ServerBossEvent serverBossEvent;
-
     public SkyGolemPatch() {
         super(Factions.UNDEAD);
     }
@@ -68,14 +54,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
     @Override
     public void onAddedToWorld() {
-
-        ILivingEntityData entityData = (ILivingEntityData) this;
-        entityData.combat_evolution$setStamina((float)original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()));
-        entityData.combat_evolution$setStaminaStatus(StaminaStatus.COMMON);
-
-        if (original instanceof BTAbstractGolemAccessor accessor) {
-            serverBossEvent = accessor.getBossEvent();
-        }
+        super.onAddedToWorld();
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
         this.original.setDropChance(EquipmentSlot.OFFHAND, 0);
@@ -137,44 +116,6 @@ public class SkyGolemPatch extends CEHumanoidPatch {
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, SkyGolemCombatBehavior.SWORD));
     }
 
-    @Override
-    public void tick(LivingEvent.LivingTickEvent event) {
-        super.tick(event);
-
-        if (serverBossEvent != null) {
-            //同步耐力值
-            if (this.original instanceof BTSkyGolem entity && entity.isAlive()) {
-                double maxStamina = entity.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get());
-                ILivingEntityData entityData = (ILivingEntityData) this;
-
-                ClientBossData.partialUpdate(serverBossEvent.getId(), data->{
-                    data.displayType = Component.literal("sky_golem");
-                    data.staminaO = ClientBossData.getStaminaProgress(data);
-                    data.stamina = (float) (entityData.combat_evolution$getStamina()/maxStamina);
-                    data.staminaSetTime = Util.getMillis();
-                });
-            }
-        }
-    }
-
-    @Override
-    public void onDeath(LivingDeathEvent event) {
-        super.onDeath(event);
-        ClientBossData.removeBoss(serverBossEvent.getId());
-        serverBossEvent.setVisible(false);
-    }
-
-
-    @Override
-    public void initAnimator(Animator animator) {
-        super.initAnimator(animator);
-        animator.addLivingAnimation(LivingMotions.BLOCK, Animations.SWORD_GUARD);
-        animator.addLivingAnimation(LivingMotions.IDLE, Animations.BIPED_IDLE);
-        animator.addLivingAnimation(LivingMotions.WALK, Animations.BIPED_WALK);
-        animator.addLivingAnimation(LivingMotions.RUN, Animations.BIPED_RUN);
-        animator.addLivingAnimation(LivingMotions.CHASE, Animations.BIPED_RUN);
-        animator.addLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH);
-    }
 
     @Override
     public void playGuardBreakSound(){

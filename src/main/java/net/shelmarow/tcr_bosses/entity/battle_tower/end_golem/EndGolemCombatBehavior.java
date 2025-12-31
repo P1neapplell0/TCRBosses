@@ -11,11 +11,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.shelmarow.combat_evolution.ai.AnimationParams;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
-import net.shelmarow.combat_evolution.ai.HitEvent;
-import net.shelmarow.combat_evolution.ai.TimeEvent;
 import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
+import net.shelmarow.combat_evolution.ai.event.HitEvent;
+import net.shelmarow.combat_evolution.ai.event.TimeEvent;
+import net.shelmarow.combat_evolution.ai.params.AnimationParams;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import org.jetbrains.annotations.NotNull;
 import yesman.epicfight.api.animation.AnimationPlayer;
@@ -115,7 +115,7 @@ public class EndGolemCombatBehavior {
     }
 
     //时间戳事件集
-    private static @NotNull TimeEvent lookAtTarget() {
+    private static TimeEvent lookAtTarget() {
         return new TimeEvent(mobPatch -> {
             if (mobPatch.getTarget() != null) {
                 mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET, mobPatch.getTarget().position());

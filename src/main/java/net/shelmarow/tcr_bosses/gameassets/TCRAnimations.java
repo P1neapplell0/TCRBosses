@@ -1,11 +1,12 @@
 package net.shelmarow.tcr_bosses.gameassets;
 
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,15 +46,14 @@ public class TCRAnimations {
         event.newBuilder(TCRBosses.MOD_ID, TCRAnimations::build);
     }
 
-    private static final AnimationProperty.PlaybackSpeedModifier CONST_SPEED = (self, entityPatch, speed, prevElapsedTime, elapsedTime) -> 1F;
+    private static final AnimationProperty.PlaybackSpeedModifier CONST_SPEED =
+            (self, entityPatch, speed, prevElapsedTime, elapsedTime) -> 1F;
 
     public static void build(AnimationManager.AnimationBuilder builder) {
-
 
         Collider EMPTY = new MultiOBBCollider(3, 0D, 0D, 0D, 0.0D, 0.0D, 0D);
         Collider SHIELD = new MultiOBBCollider(3, 0.5D, 1D, 1D, 0.0D, 0.0D, 0D);
         Collider BODY = new MultiOBBCollider(3, 6D, 0.15D, 6D, 0.0D, 0.0D, 0D);
-
 
         AIR_STRIKE_RISING = builder.nextAccessor("biped/air_strike_rising", accessor->
             new ActionAnimation(0.1F,accessor, Armatures.BIPED)
@@ -65,7 +65,8 @@ public class TCRAnimations {
                             AnimationEvent.InTimeEvent.create(0.5F,(entitypatch, animation, params) -> {
                                 LivingEntity original = entitypatch.getOriginal();
                                 Vec3 pos = original.position();
-                                if(original.level() instanceof ClientLevel level) {
+                                if(entitypatch.isLogicalClient()) {
+                                    Level level = original.level();
                                     entitypatch.playSound(SoundEvents.FIRECHARGE_USE,2.5F,0,0);
                                     spawnSmoke(level,pos.x,pos.y + 1.5,pos.z,30,0.5,0.25,0.2);
                                     spawnSmoke(level,pos.x,pos.y + 2.0,pos.z,30,0.75,0.5,0.4);
@@ -127,11 +128,10 @@ public class TCRAnimations {
         );
     }
 
-    public static void spawnSmoke(ClientLevel level, double x, double y, double z, int count, double radius, double outwardSpeed, double downwardSpeed) {
-        if (level == null) return;
-        if (!level.isClientSide()) return;
+    public static void spawnSmoke(Level level, double x, double y, double z, int count, double radius, double outwardSpeed, double downwardSpeed) {
+        if (level == null || !level.isClientSide()) return;
 
-        final var rand = level.random;
+        RandomSource rand = level.random;
 
         for (int i = 0; i < count; i++) {
             double angle = rand.nextDouble() * Math.PI * 2.0;
@@ -141,7 +141,7 @@ public class TCRAnimations {
             double pz = z + Math.sin(angle) * dist;
             double py = y + (rand.nextDouble() * 0.1 - 0.05);
 
-            double horizontalFactor = (0.3 + rand.nextDouble() * 0.7); // 使得靠近中心的粒子也能有一定水平速度
+            double horizontalFactor = (0.3 + rand.nextDouble() * 0.7);
             double vx = Math.cos(angle) * outwardSpeed * horizontalFactor * (dist / Math.max(radius, 0.0001));
             double vz = Math.sin(angle) * outwardSpeed * horizontalFactor * (dist / Math.max(radius, 0.0001));
             double vy = -Math.abs(downwardSpeed) * (0.6 + rand.nextDouble() * 0.8);
