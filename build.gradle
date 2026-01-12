@@ -109,7 +109,9 @@ dependencies {
 
     implementation fg.deobf('libs:architectury:9.2.14')
     implementation fg.deobf('libs:clothConfig:11.1.136')
-//    implementation fg.deobf('libs:epicKnights:9.31')
+    implementation fg.deobf('libs:epicKnights:9.31')
+
+    implementation fg.deobf('libs:p1nero_ec:20.14.0.4')
 
 
     implementation 'org.spongepowered:mixin:0.8.5'

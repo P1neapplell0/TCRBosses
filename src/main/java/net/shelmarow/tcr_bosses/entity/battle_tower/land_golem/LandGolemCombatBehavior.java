@@ -685,7 +685,7 @@ public class LandGolemCombatBehavior {
                                     if(mobPatch.getTarget() != null) {
                                         LivingEntity target = mobPatch.getTarget();
                                         Vec3 pos = target.position();
-                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_GUARD_WARNING.get(),target.getId(),new Vec3(0,1.5,0));
+                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_GUARD_WARNING.get(),target.getId(), new Vec3(0,1.5,0));
                                         ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
                                     }
                                 })
