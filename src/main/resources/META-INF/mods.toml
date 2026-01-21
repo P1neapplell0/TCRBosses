@@ -31,13 +31,6 @@ ordering="BEFORE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
-modId="magistuarmory"
-mandatory=true
-versionRange = "*"
-ordering="BEFORE"
-side="BOTH"
-
-[[dependencies.${mod_id}]]
 modId="epicfight"
 mandatory=true
 versionRange = "*"
