@@ -26,20 +26,20 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="ba_bt"
 mandatory=true
-versionRange = "[0,)"
+versionRange = "*"
 ordering="BEFORE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="epicfight"
 mandatory=true
-versionRange = "[0,)"
+versionRange = "*"
 ordering="AFTER"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="efn"
 mandatory=true
-versionRange = "[0,)"
+versionRange = "*"
 ordering="AFTER"
 side="BOTH"
