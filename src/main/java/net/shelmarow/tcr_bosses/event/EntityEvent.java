@@ -1,8 +1,9 @@
 package net.shelmarow.tcr_bosses.event;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTOceanGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.CoreGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.NetherGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.tags.DamageTypeTags;
@@ -30,15 +31,15 @@ public class EntityEvent {
         Entity attacker1 = event.getSource().getEntity();
         Entity hitEntity = event.getEntity();
         //免疫海浪的伤害
-        if(hitEntity instanceof BTOceanGolem && attacker instanceof Wave_Entity){
+        if(hitEntity instanceof OceanGolem && attacker instanceof Wave_Entity){
             event.setCanceled(true);
         }
 
-        if(hitEntity instanceof BTNetherGolem && event.getSource().is(DamageTypes.MAGIC) && attacker == null && attacker1 == null){
+        if(hitEntity instanceof CoreGolem && event.getSource().is(DamageTypes.MAGIC) && attacker == null && attacker1 == null){
             event.setCanceled(true);
         }
 
-        if(hitEntity instanceof BTSkyGolem && (attacker == null || attacker1 == null || attacker instanceof Lightning_Storm_Entity || attacker1 instanceof Lightning_Storm_Entity)){
+        if(hitEntity instanceof SkyGolem && (attacker == null || attacker1 == null || attacker instanceof Lightning_Storm_Entity || attacker1 instanceof Lightning_Storm_Entity)){
             event.setCanceled(true);
         }
     }

@@ -1,7 +1,7 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.land_golem;
 
 import com.brass_amber.ba_bt.BABattleTowers;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.LandGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class LandGolemRenderer extends HumanoidMobRenderer<BTLandGolem, HumanoidModel<BTLandGolem>> {
+public class LandGolemRenderer extends HumanoidMobRenderer<LandGolem, HumanoidModel<LandGolem>> {
     ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/land_golem/land_golem_dormant.png");
     ResourceLocation ENRAGED = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/land_golem/land_golem_enraged.png");
     ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/land_golem/land_golem.png");
@@ -24,7 +24,7 @@ public class LandGolemRenderer extends HumanoidMobRenderer<BTLandGolem, Humanoid
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull BTLandGolem pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull LandGolem pEntity) {
         return pEntity.isDormant() ? DORMANT : (pEntity.isEnraged() ? ENRAGED : NORMAL);
     }
 }

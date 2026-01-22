@@ -1,6 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.sky_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,7 +13,7 @@ import net.shelmarow.tcr_bosses.TCRBosses;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class SkyGolemRenderer extends HumanoidMobRenderer<BTSkyGolem, HumanoidModel<BTSkyGolem>> {
+public class SkyGolemRenderer extends HumanoidMobRenderer<SkyGolem, HumanoidModel<SkyGolem>> {
     ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/entity/golem/sky_golem/sky_golem_dormant.png");
     ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(TCRBosses.MOD_ID, "textures/entity/golem/sky_golem/sky_golem.png");
 
@@ -26,7 +26,7 @@ public class SkyGolemRenderer extends HumanoidMobRenderer<BTSkyGolem, HumanoidMo
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull BTSkyGolem pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull SkyGolem pEntity) {
         return pEntity.isDormant() ? DORMANT : NORMAL;
     }
 }

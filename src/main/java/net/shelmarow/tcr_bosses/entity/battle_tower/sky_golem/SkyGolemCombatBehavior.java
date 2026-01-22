@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.asset.AssetAccessor;
+import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.LevelUtil;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
@@ -738,7 +739,7 @@ public class SkyGolemCombatBehavior {
                                     }
                                 })
                                 .addHitEvent(
-                                        new HitEvent((mobPatch, entity) -> {
+                                        new HitEvent(AttackResult.ResultType.SUCCESS,(mobPatch, entity) -> {
                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING,80));
                                             if(entity instanceof LivingEntity livingEntity) {
                                                 livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING,80));

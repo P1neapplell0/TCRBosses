@@ -1,6 +1,6 @@
 package net.shelmarow.tcr_bosses.mixins;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTOceanGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -12,24 +12,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BTOceanGolem.class)
+@Mixin(OceanGolem.class)
 public class BTOceanGolemMixin {
 
     @Redirect(
             method = "<init>",
             at = @At(
                     value = "FIELD",
-                    target = "Lcom/brass_amber/ba_bt/entity/hostile/golem/BTOceanGolem;moveControl:Lnet/minecraft/world/entity/ai/control/MoveControl;",
+                    target = "Lcom/brass_amber/ba_bt/entity/hostile/golem/OceanGolem;moveControl:Lnet/minecraft/world/entity/ai/control/MoveControl;",
                     opcode = Opcodes.PUTFIELD
             )
     )
-    private void redirectMoveControlAssignment(BTOceanGolem instance, MoveControl value) {
+    private void redirectMoveControlAssignment(OceanGolem instance, MoveControl value) {
         instance.moveControl = new MoveControl(instance);
     }
 
     @Inject(method = "createNavigation",at = @At(value = "HEAD"),cancellable = true)
     public void createNavigation(Level level, CallbackInfoReturnable<PathNavigation> cir){
         cir.cancel();
-        cir.setReturnValue(new GroundPathNavigation((BTOceanGolem)(Object)this, level));
+        cir.setReturnValue(new GroundPathNavigation((OceanGolem)(Object)this, level));
     }
 }

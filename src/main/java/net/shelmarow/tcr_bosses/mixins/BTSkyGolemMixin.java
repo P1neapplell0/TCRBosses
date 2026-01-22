@@ -1,7 +1,7 @@
 package net.shelmarow.tcr_bosses.mixins;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTAbstractGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTSkyGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.AbstractGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BTSkyGolem.class)
-public class BTSkyGolemMixin extends BTAbstractGolem {
+@Mixin(SkyGolem.class)
+public class BTSkyGolemMixin extends AbstractGolem {
 
     protected BTSkyGolemMixin(EntityType<? extends Monster> type, Level levelIn, BossEvent.BossBarColor bossBarColor) {
         super(type, levelIn, bossBarColor);
@@ -62,12 +62,17 @@ public class BTSkyGolemMixin extends BTAbstractGolem {
             method = "<init>",
             at = @At(
                     value = "FIELD",
-                    target = "Lcom/brass_amber/ba_bt/entity/hostile/golem/BTSkyGolem;moveControl:Lnet/minecraft/world/entity/ai/control/MoveControl;",
+                    target = "Lcom/brass_amber/ba_bt/entity/hostile/golem/SkyGolem;moveControl:Lnet/minecraft/world/entity/ai/control/MoveControl;",
                     opcode = Opcodes.PUTFIELD
             )
     )
-    private void init(BTSkyGolem instance, MoveControl value){
-        instance.moveControl = new MoveControl((BTSkyGolem) (Object) this);
+    private void init(SkyGolem instance, MoveControl value){
+        instance.moveControl = new MoveControl((SkyGolem) (Object) this);
         entityData.set(DATA_LIVING_ENTITY_FLAGS, (byte)2);
+    }
+
+    @Override
+    protected void addBehaviorGoals() {
+
     }
 }

@@ -1,8 +1,8 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.land_golem;
 
-import com.brass_amber.ba_bt.entity.ai.goal.GolemFireballAttackGoal;
+import com.brass_amber.ba_bt.entity.ai.goal.LandGolemFireballAttackGoal;
 import com.brass_amber.ba_bt.entity.ai.goal.GolemStompAttackGoal;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.LandGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -104,7 +104,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
     public void tick(LivingEvent.LivingTickEvent event){
         super.tick(event);
 
-        if(original instanceof BTLandGolem btLandGolem){
+        if(original instanceof LandGolem btLandGolem){
             if(btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())){
                 btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
             }
@@ -159,7 +159,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
     @Override
     public void initAI() {
         super.initAI();
-        this.getOriginal().goalSelector.removeAllGoals(goal -> goal instanceof GolemStompAttackGoal || goal instanceof GolemFireballAttackGoal);
+        this.getOriginal().goalSelector.removeAllGoals(goal -> goal instanceof GolemStompAttackGoal || goal instanceof LandGolemFireballAttackGoal);
         for(WrappedGoal goal : original.targetSelector.getAvailableGoals()){
             goal.start();
         }

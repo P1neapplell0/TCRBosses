@@ -1,7 +1,7 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.ocean_golem;
 
 import com.brass_amber.ba_bt.BABattleTowers;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTOceanGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class OceanGolemRenderer extends HumanoidMobRenderer<BTOceanGolem, HumanoidModel<BTOceanGolem>> {
+public class OceanGolemRenderer extends HumanoidMobRenderer<OceanGolem, HumanoidModel<OceanGolem>> {
     ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/ocean_golem/ocean_golem_dormant.png");
     ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/ocean_golem/ocean_golem.png");
 
@@ -23,7 +23,7 @@ public class OceanGolemRenderer extends HumanoidMobRenderer<BTOceanGolem, Humano
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull BTOceanGolem pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull OceanGolem pEntity) {
         return pEntity.isDormant() ? DORMANT : NORMAL;
     }
 }

@@ -1,6 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.land_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTLandGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.LandGolem;
 import com.hm.efn.gameasset.animations.EFNClawAnimations;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
@@ -663,7 +663,7 @@ public class LandGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .name("P2")
                                 .custom(mobPatch -> {
-                                    if(mobPatch.getOriginal() instanceof BTLandGolem btLandGolem){
+                                    if(mobPatch.getOriginal() instanceof LandGolem btLandGolem){
                                         return btLandGolem.isEnraged();
                                     }
                                     return false;

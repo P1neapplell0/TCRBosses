@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
-@Mixin(value = BTAbstractGolem.class)
+@Mixin(value = AbstractGolem.class)
 public abstract class BTAbstractGolemMixin {
 
     @Shadow(remap = false)
@@ -31,54 +31,54 @@ public abstract class BTAbstractGolemMixin {
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     private void init(CallbackInfo ci) {
-        BTAbstractGolem abstractGolem = (BTAbstractGolem) (Object) this;
-        if(abstractGolem instanceof BTLandGolem){
+        AbstractGolem abstractGolem = (AbstractGolem) (Object) this;
+        if(abstractGolem instanceof LandGolem){
             tcr_bosses$ceBossEvent.setDisplayType("land_golem");
         }
-        if(abstractGolem instanceof BTOceanGolem){
+        if(abstractGolem instanceof OceanGolem){
             tcr_bosses$ceBossEvent.setDisplayType("ocean_golem");
         }
-        if(abstractGolem instanceof BTNetherGolem){
+        if(abstractGolem instanceof NetherGolem){
             tcr_bosses$ceBossEvent.setDisplayType("nether_golem");
         }
-        if(abstractGolem instanceof BTCoreGolem){
+        if(abstractGolem instanceof CoreGolem){
             tcr_bosses$ceBossEvent.setDisplayType("core_golem");
         }
-        if(abstractGolem instanceof BTSkyGolem){
+        if(abstractGolem instanceof SkyGolem){
             tcr_bosses$ceBossEvent.setDisplayType("sky_golem");
         }
-        if(abstractGolem instanceof BTEndGolem){
+        if(abstractGolem instanceof EndGolem){
             tcr_bosses$ceBossEvent.setDisplayType("end_golem");
         }
     }
 
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void tick(CallbackInfo ci){
-        BTAbstractGolem abstractGolem = (BTAbstractGolem) (Object) this;
+        AbstractGolem abstractGolem = (AbstractGolem) (Object) this;
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
-        if(abstractGolem instanceof BTLandGolem golem){
+        if(abstractGolem instanceof LandGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
-        if(abstractGolem instanceof BTOceanGolem golem){
+        if(abstractGolem instanceof OceanGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
-        if(abstractGolem instanceof BTNetherGolem golem){
+        if(abstractGolem instanceof NetherGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
-        if(abstractGolem instanceof BTCoreGolem golem){
+        if(abstractGolem instanceof CoreGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
-        if(abstractGolem instanceof BTSkyGolem golem){
+        if(abstractGolem instanceof SkyGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
-        if(abstractGolem instanceof BTEndGolem golem){
+        if(abstractGolem instanceof EndGolem golem){
             tCR_Bosses$syncStamina(golem);
         }
     }
 
     @Unique
-    private void tCR_Bosses$syncStamina(BTAbstractGolem golem) {
+    private void tCR_Bosses$syncStamina(AbstractGolem golem) {
         LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(golem, LivingEntityPatch.class);
         if(entityPatch != null){
             tcr_bosses$ceBossEvent.setStaminaStatus(CEPatchUtils.getStaminaStatus(entityPatch));
@@ -122,13 +122,13 @@ public abstract class BTAbstractGolemMixin {
 
     @Inject(method = "getTargetingRange",at = @At(value = "HEAD"),cancellable = true,remap = false)
     public void getTargetingRange(CallbackInfoReturnable<Integer> cir){
-        cir.setReturnValue(((BTAbstractGolem)(Object)this).getAllowedTowerRange() * 2);
+        cir.setReturnValue(((AbstractGolem)(Object)this).getAllowedTowerRange() * 2);
     }
 
     @Inject(method = "resetGolem",at=@At(value = "HEAD"),remap = false)
     public void resetGolem(CallbackInfo ci){
-        BTAbstractGolem btAbstractGolem = (BTAbstractGolem) (Object) this;
-        if (!btAbstractGolem.isDormant() && btAbstractGolem instanceof BTEndGolem endGolem) {
+        AbstractGolem btAbstractGolem = (AbstractGolem) (Object) this;
+        if (!btAbstractGolem.isDormant() && btAbstractGolem instanceof EndGolem endGolem) {
             endGolem.setHealth(endGolem.getMaxHealth());
             EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(endGolem,EndGolemPatch.class);
             if (endGolemPatch != null) {

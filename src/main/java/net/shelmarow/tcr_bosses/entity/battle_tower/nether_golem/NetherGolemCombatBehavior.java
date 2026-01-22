@@ -1,9 +1,10 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem;
 
+import com.brass_amber.ba_bt.entity.hostile.golem.NetherGolem;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
-import com.hm.efn.gameasset.animations.EFNSwordAnimations;
-import com.hm.efn.gameasset.animations.EFNTachiAnimations;
-import com.hm.efn.registries.EFNMobEffectRegistry;
+import com.hm.efn.gameasset.animations.EFNDualSwordAnimations;
+import com.hm.efn.gameasset.animations.EFNExsiliumgladiusAnimations;
+import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -16,146 +17,455 @@ import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.condition.HealthCheck;
 import net.shelmarow.combat_evolution.ai.event.TimeEvent;
 import net.shelmarow.combat_evolution.ai.params.AnimationParams;
+import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
+import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
+
+import java.util.Set;
 
 public class NetherGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> TACHI;
+    public static final CECombatBehaviors.Builder<MobPatch<?>> DUAL_SWORD;
 
     static {
-        TACHI = CECombatBehaviors.builder()
+        DUAL_SWORD = CECombatBehaviors.builder()
 
                 //近距离后撤
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(100)
+                        .priority(1.0F).weight(1.0F).maxCooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 2.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
                 )
 
+                //50%血量以下，出现概率闪避反击
                 //受攻击闪避
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(8.0F)
-                        .maxCooldown(40)
+                        .priority(1.0F).weight(15.0F).maxCooldown(10)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(0.0F, 4.0F)
+                                .attackLevel(1,2)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_L, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_R, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
                 )
 
                 //随机闪避
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(8.0F)
-                        .maxCooldown(200)
+                        .priority(1.0F).weight(5.0F).maxCooldown(200)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_F, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_F, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_L, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_R, 0F)
-                        )
-                )
 
-                //防御
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(200)
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.75F)
+                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
 
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4F)
-                                .health(0.45F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .guard(60)
-                                .counterAnimation(
-                                        EFNTachiAnimations.NF_TACHI_BLOODLUST_END,
-                                        new AnimationParams()
-                                                .transitionTime(0.25F)
-                                                .playSpeed(0.8F)
-                                                .stunType(StunType.LONG)
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.5F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                        )
+                                                )
+                                        )
                                 )
-                                .counterType(CECombatBehaviors.CounterType.END)
-                                .maxGuardHit(3)
-                                .onCounterStart(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                })
                         )
                 )
 
-                //随机游荡
+                //随机游荡+防御
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(1F).weight(10F)
-                        .maxCooldown(300).cooldown(100)
+                        .maxCooldown(400).cooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,8)
-                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
+                                .withinDistance(0.0F, 6F)
+                                .health(0.25F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(2,5)
+                                        .guardWithWander(60,0,0.45F)
+                                        .counterAnimation(
+                                                EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                                new AnimationParams()
+                                                        .transitionTime(0.25F)
+                                                        .playSpeed(0.8F)
+                                                        .stunType(StunType.LONG)
+                                        )
+                                        .counterType(CECombatBehaviors.CounterType.END)
+                                        .maxGuardHit(3)
+                                        .onCounterStart(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .guardWithWander(60,0,-0.45F)
+                                        .counterAnimation(
+                                                EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                                new AnimationParams()
+                                                        .transitionTime(0.25F)
+                                                        .playSpeed(0.8F)
+                                                        .stunType(StunType.LONG)
+                                        )
+                                        .counterType(CECombatBehaviors.CounterType.END)
+                                        .maxGuardHit(3)
+                                        .onCounterStart(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .interruptedByTime(2,4)
                                         .stopByStun(5)
-                                        .wander(100,0F,0.35F)
+                                        .wander(80,0F,0.45F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .attackLevel(1,2)
+                                                .withinDistance(0,4)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B,0F)
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .priority(2)
+                                                .canInterruptParent(true)
+                                                .attackLevel(1,2)
+                                                .withinDistance(0,4)
+                                                .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.75F)
+                                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .randomChance(0.5F)
+                                                                        .withinDistance(0.0F, 6.0F)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                                .withinDistance(0.0F, 6.0F)
+                                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                                        )
+                                                                )
+                                                        )
+                                                )
                                         )
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(2,5)
+                                        .interruptedByTime(2,4)
                                         .stopByStun(5)
-                                        .wander(100,0F,-0.35F)
+                                        .wander(80,0F,0.45F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .attackLevel(1,2)
+                                                .withinDistance(0,4)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B,0F)
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .priority(2)
+                                                .canInterruptParent(true)
+                                                .attackLevel(1,2)
+                                                .withinDistance(0,4)
+                                                .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .randomChance(0.75F)
+                                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .randomChance(0.5F)
+                                                                        .withinDistance(0.0F, 6.0F)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                                .withinDistance(0.0F, 6.0F)
+                                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+                                                                        )
+                                                                )
+                                                        )
+                                                )
                                         )
                                 )
                         )
@@ -166,405 +476,476 @@ public class NetherGolemCombatBehavior {
                         .priority(1.0F).weight(2.0F).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO1,0.2F)
+                                .withinDistance(0.0F, 3.0F)
+                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO1,0.25F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2,
-                                                new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                        .withinDistance(0.0F, 5.0F)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO2, new AnimationParams().stunType(StunType.SHORT))
 
-                                        //派生1
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0F)
+                                                .withinDistance(0.0F, 6.0F)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_DASH,0F)
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .randomChance(0.5F)
-                                                                .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH,0.35F)
-                                                        )
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
                                                 )
                                         )
-                                        //派生1-1
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B,0F)
 
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,
-                                                                new AnimationParams().impactMultiplier(10).stunType(StunType.LONG))
-                                                        .addExBehavior(mobPatch -> {
-                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                                            if(mobPatch.getTarget() != null) {
-                                                                Vec3 motion = mobPatch.getTarget().position().subtract(mobPatch.getOriginal().position());
-                                                                mobPatch.getOriginal().addDeltaMovement(motion.scale(0.08).add(0,0.75,0));
-                                                            }
-                                                        })
-                                                )
-                                        )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .weight(3)
-                                                .withinDistance(0.0F, 8.0F)
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3,
-                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0.0F, 8.0F)
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
-                                                                new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 8.0F)
-                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
-                                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
-                                                        )
-
-                                                        //派生2
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 8.0F)
-                                                                .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH,
-                                                                        new AnimationParams().impactMultiplier(0.5F).stunType(StunType.SHORT))
-                                                                .addExBehavior(mobPatch -> {
-                                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
-                                                                })
-                                                        )
-                                                )
-
-                                                //派生3
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0.0F, 8.0F)
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
-                                                                new AnimationParams().transitionTime(0.4F).playSpeed(1.25F)
-                                                                        .impactMultiplier(0.5F).stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 8.0F)
-                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
-                                                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.15F).stunType(StunType.LONG))
-                                                        )
-                                                )
-
-                                                //派生4
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .weight(2)
-                                                        .withinDistance(0,6)
-                                                        .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST,0.25F)
-                                                        .addExBehavior(mobPatch -> {
-                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                                            mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-
-                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(EFNMobEffectRegistry.BLODDLUST.get(),30));
-                                                        })
-                                                )
-                                        )
-
-                                        //派生5
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .weight(2)
-                                                .withinDistance(0,6)
-                                                .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST,0.25F)
-                                                .addExBehavior(mobPatch -> {
-                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                                    mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-
-                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(EFNMobEffectRegistry.BLODDLUST.get(),30));
-                                                })
-                                        )
-                                )
-                        )
-                )
-
-                //65%血出现额外普攻招式
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(5)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,4)
-                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.TACHI_AUTO1,0.25F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0,8)
-                                        .animationBehavior(Animations.RUSHING_TEMPO1,0.25F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .withinDistance(0,6)
-                                                .animationBehavior(Animations.TACHI_AUTO2,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0,8)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO2,0.25F)
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0,8)
-                                                                .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
 
                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                        .randomChance(0.5F)
-                                                                        .withinDistance(0,8)
-                                                                        .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                                        .withinDistance(0.0F, 6.0F)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
                                                                 )
                                                         )
                                                 )
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0,8)
-                                                        .animationBehavior(Animations.TACHI_AUTO3,0.25F)
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .randomChance(0.5F)
-                                                                .withinDistance(0,8)
-                                                                .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
-                                                        )
-                                                )
                                         )
-                                )
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0,6)
-                                        .animationBehavior(Animations.TACHI_AUTO2,0.25F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .withinDistance(0,8)
-                                                .animationBehavior(Animations.RUSHING_TEMPO2,0.25F)
+                                                .withinDistance(0.0F, 6.0F)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0,8)
-                                                        .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DASH, new AnimationParams().stunType(StunType.LONG))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .randomChance(0.5F)
-                                                                .withinDistance(0,8)
-                                                                .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                                .interruptedByLevel(3)
+                                                                .withinDistance(0.0F, 4.0F)
+                                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                                                        new AnimationParams().transitionTime(0.2F))
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .canInterruptParent(true)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                                                new AnimationParams().transitionTime(0.2F))
+                                                                )
+                                                        )
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
                                                         )
                                                 )
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .withinDistance(0,8)
-                                                .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                .interruptedByLevel(3)
+                                                .withinDistance(0.0F, 4.0F)
+                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                                        new AnimationParams().transitionTime(0.2F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0,8)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                        .canInterruptParent(true)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                                new AnimationParams().transitionTime(0.2F))
                                                 )
                                         )
                                 )
                         )
                 )
 
-
-                //中距离居合
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(200)
+                        .priority(1.0F).weight(2.0F).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(5.5,9)
-                                .animationBehavior(Animations.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
-                        )
-                )
-
-                //中远距离跳劈+跑攻
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(200)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(5,9)
-                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,new AnimationParams().impactMultiplier(3.5F).stunType(StunType.LONG))
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                    if(mobPatch.getTarget() != null) {
-                                        Vec3 motion = mobPatch.getTarget().position().subtract(mobPatch.getOriginal().position());
-                                        mobPatch.getOriginal().addDeltaMovement(motion.scale(0.08).add(0,0.75,0));
-                                    }
-                                })
+                                .interruptedByTime(0.75F,0.85F)
+                                .withinDistance(0.0F, 3.0F)
+                                .animationBehavior(Animations.BIPED_MOB_SWORD_DUAL1,
+                                        new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .animationBehavior(EFNSwordAnimations.NF_SWORD_DASH,0.25F)
+                                        .interruptedByTime(0.95F,1.05F)
+                                        .canInterruptParent(true)
+                                        .withinDistance(0.0F, 5.0F)
+                                        .animationBehavior(Animations.BIPED_MOB_SWORD_DUAL2,
+                                                new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .withinDistance(0.0F, 6.0F)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .withinDistance(0.0F, 6.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                                                        new AnimationParams().transitionTime(0.2F).playSpeed(1.25F).stunType(StunType.LONG))
+                                                        )
+                                                )
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .interruptedByLevel(3)
+                                                .withinDistance(0.0F, 4.0F)
+                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                                        new AnimationParams().transitionTime(0.2F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                                new AnimationParams().transitionTime(0.2F))
+                                                )
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 3.5F)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AIRSLASH,
+                                                        new AnimationParams().transitionTime(0.2F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .withinDistance(0.0F, 4.0F)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                                                new AnimationParams().transitionTime(0.2F).playSpeed(1.25F).stunType(StunType.LONG))
+                                                )
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(Animations.SWORD_DUAL_AUTO2,
+                                                        new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(Animations.SWORD_DUAL_AUTO1,
+                                                                new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .interruptedByLevel(3)
+                                                                .withinDistance(0.0F, 4.0F)
+                                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                                                        new AnimationParams().transitionTime(0.2F))
+
+                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                        .canInterruptParent(true)
+                                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                                                new AnimationParams().transitionTime(0.2F))
+                                                                )
+                                                        )
+
+                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .withinDistance(0.0F, 6.0F)
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,
+                                                                        new AnimationParams().transitionTime(0.2F).playSpeed(1.25F).stunType(StunType.LONG))
+                                                        )
+                                                )
+                                        )
                                 )
                         )
-
                 )
 
-                //技能一文字
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(2.0F)
-                        .maxCooldown(300)
+                        .priority(1.0F).weight(1.0F).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,4)
-                                .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.TACHI_AUTO3,0.4F)
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),100));
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                    mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-                                })
+                                .withinDistance(0.0F, 3.0F)
+                                .animationBehavior(Animations.SWORD_DUAL_AUTO3, new AnimationParams().transitionTime(0.2F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .withinDistance(0,6)
-                                        .animationBehavior(Animations.RUSHING_TEMPO3,0F)
+                                        .interruptedByTime(0.75F,0.85F)
+                                        .withinDistance(0.0F, 4.0F)
+                                        .animationBehavior(Animations.BIPED_MOB_DAGGER_TWOHAND1,
+                                                new AnimationParams().transitionTime(0.25F).stunType(StunType.LONG))
+                                        .addExBehavior(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 40));
+                                        })
                                         .addTimeEvent(
                                                 new TimeEvent(mobPatch -> {
                                                     if(mobPatch.getTarget() != null){
-                                                        mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET,mobPatch.getTarget().position());
+                                                        mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET, mobPatch.getTarget().position());
                                                     }
                                                 })
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .withinDistance(0,6)
-                                                .animationBehavior(Animations.RUSHING_TEMPO3,0F)
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(Animations.BIPED_MOB_DAGGER_TWOHAND2,
+                                                        new AnimationParams().playSpeed(1.25F).stunType(StunType.KNOCKDOWN))
                                                 .addTimeEvent(
                                                         new TimeEvent(mobPatch -> {
                                                             if(mobPatch.getTarget() != null){
-                                                                mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET,mobPatch.getTarget().position());
+                                                                mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET, mobPatch.getTarget().position());
                                                             }
                                                         })
                                                 )
+                                        )
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .interruptedByLevel(3)
+                                                .withinDistance(0.0F, 4.0F)
+                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                                        new AnimationParams().transitionTime(0.2F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .withinDistance(0,6)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO3,new AnimationParams().transitionTime(0.5F).stunType(StunType.LONG))
-                                                        .addTimeEvent(
-                                                                new TimeEvent(0,0.5F,mobPatch -> {
-                                                                    if(mobPatch.getTarget() != null){
-                                                                        mobPatch.getOriginal().lookAt(EntityAnchorArgument.Anchor.FEET,mobPatch.getTarget().position());
-                                                                    }
-                                                                })
-                                                        )
+                                                        .canInterruptParent(true)
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                                new AnimationParams().transitionTime(0.2F))
                                                 )
                                         )
                                 )
                         )
                 )
 
-
-                //溃防连击
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(10.0F)
-                        .maxCooldown(400)
+                        .priority(1.0F).weight(1.0F).maxCooldown(5)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
+                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AIRSLASH,
+                                        new AnimationParams().transitionTime(0.2F))
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .withinDistance(0.0F, 5.0F)
+                                        .animationBehavior(Animations.DANCING_EDGE,
+                                                new AnimationParams().transitionTime(0.2F))
+                                )
+                        )
+                )
+
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(1.0F).weight(1.0F).maxCooldown(100)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .withinDistance(4.0F, 5.5F)
+                                .animationBehavior(Animations.SWORD_DUAL_DASH,
+                                        new AnimationParams().transitionTime(0.2F))
+                        )
+                )
+
+                //75%血量以下出现双刀战技，并能够在普攻连段中派生
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(2.0F).weight(1.0F).maxCooldown(200)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .interruptedByLevel(3)
-                                .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(EFNSwordAnimations.NF_SWORD_SKILL_FIRST,new AnimationParams().transitionTime(0.6F).impactMultiplier(0.25F).stunType(StunType.LONG))
-                                .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),100));
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                    mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-                                    if(mobPatch.getTarget() != null) {
-                                        LivingEntity target = mobPatch.getTarget();
-                                        Vec3 pos = target.position();
-                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_GUARD_WARNING.get(),target.getId(),new Vec3(0,1.25,0));
-                                        ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
-                                    }
-                                })
+                                .withinDistance(0.0F, 4.0F)
+                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
+                                        new AnimationParams().transitionTime(0.2F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .canInterruptParent(true)
-                                        .animationBehavior(EFNSwordAnimations.NF_SWORD_SKILL_SECOND, new AnimationParams().stunType(StunType.NEUTRALIZE))
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
+                                                new AnimationParams().transitionTime(0.2F))
+                                )
+                        )
+                )
+
+                //65%血量以下，出现放逐之刃的普攻连段
+                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
+                        .priority(1.0F).weight(2.0F).maxCooldown(10)
+
+                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
+                                .interruptedByLevel(3)
+                                .withinDistance(0.0F, 3.0F)
+                                .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_A,
+                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                //一段派生
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .interruptedByLevel(3)
+                                        .canInterruptParent(true)
+                                        .withinDistance(0.0F, 5.0F)
+                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AB,
+                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST, new AnimationParams().transitionTime(0.25F).damageMultiplier(2.0F).impactMultiplier(2.0F).stunType(StunType.KNOCKDOWN))
-                                                .addExBehavior(mobPatch -> {
-                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(EFNMobEffectRegistry.BLODDLUST.get(),30));
-                                                })
+                                                .interruptedByLevel(3)
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABA,
+                                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABAA,
+                                                                new AnimationParams().transitionTime(0.25F).playSpeed(1.25F))
+                                                )
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABAB,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+                                        )
+
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .interruptedByLevel(3)
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABB,
+                                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABBA,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_ABBB,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+                                        )
+                                )
+
+                                //二段
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .interruptedByLevel(3)
+                                        .canInterruptParent(true)
+                                        .withinDistance(0.0F, 5.0F)
+                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AA,
+                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                        //二段派生
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .interruptedByLevel(3)
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AAB,
+                                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AABA,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AABB,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+                                        )
+
+                                        //三段
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .interruptedByLevel(3)
+                                                .canInterruptParent(true)
+                                                .withinDistance(0.0F, 5.0F)
+                                                .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AAA,
+                                                        new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+
+                                                //三段派生
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AAAB,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
+
+                                                //四段
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .canInterruptParent(true)
+                                                        .withinDistance(0.0F, 5.0F)
+                                                        .animationBehavior(EFNExsiliumgladiusAnimations.EXSILIUMGLADIUS_AAAA,
+                                                                new AnimationParams().transitionTime(0.1F).playSpeed(1.75F))
+                                                )
                                         )
                                 )
                         )
                 )
 
-                //60%血以下额外出现单发剑气攻击，平a能穿插单次剑气攻击
+
+                //狂暴状态下出现猎魂攻击,释放期间施加失明，缓慢，攻速降低，该伤害无法被闪避
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F)
-                        .maxCooldown(350)
+                        .priority(3).weight(1)
+                        .maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,4)
-                                .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST,0F)
-                                        .addExBehavior(mobPatch -> {
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                            mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
-
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(EFNMobEffectRegistry.BLODDLUST.get(),30));
-                                        })
+                                .withinDistance(0.0F, 5.0F)
+                                .custom(mobPatch -> {
+                                    if(mobPatch.getOriginal() instanceof NetherGolem golem){
+                                        return golem.isEnraged();
+                                    }
+                                    return false;
+                                })
+                                .animationBehavior(EFNSkillAnimations.EXECUTION,
+                                        new AnimationParams().transitionTime(0.25F).playSpeed(0.85F)
+                                                .damageMultiplier(2.5F).impactMultiplier(10).stunType(StunType.LONG)
+                                                .damageSource(Set.of(EpicFightDamageTypeTags.BYPASS_DODGE))
                                 )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .priority(2)
-                                .withinDistance(0,6)
-                                .health(0.4F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST,0.35F)
                                 .addExBehavior(mobPatch -> {
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),200));
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 100));
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 60));
                                     mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
 
-                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(EFNMobEffectRegistry.BLODDLUST.get(),200));
+                                    if(mobPatch.getTarget() != null){
+                                        LivingEntity target = mobPatch.getTarget();
+
+                                        Vec3 pos = target.position();
+                                        ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_DODGE_WARNING.get(),target.getId(),new Vec3(0,1.5,0));
+                                        ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
+
+                                        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS,60));
+                                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,60,5));
+                                        target.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN,60,2));
+                                    }
                                 })
+                                .addTimeEvent(
+                                        new TimeEvent(0.5F, mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.25F);
+                                        }),
+                                        new TimeEvent(0.6F,mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,1.25F);
+                                        }),
+                                        new TimeEvent(0.9F,mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.15F);
+                                        }),
+                                        new TimeEvent(1.0F,mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,2F);
+                                        }),
+                                        new TimeEvent(1.4F,mobPatch -> {
+                                            CEPatchUtils.setPlaySpeed(mobPatch,0.5F);
+                                        })
+                                )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO1,0.25F)
+                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.45F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO2,
-                                                        new AnimationParams().impactMultiplier(0.25F).stunType(StunType.SHORT))
+                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.2F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO3,
-                                                                new AnimationParams().impactMultiplier(0.25F).stunType(StunType.SHORT))
+                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3,0.2F)
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO4,
-                                                                        new AnimationParams().impactMultiplier(0.25F).stunType(StunType.SHORT))
-
-                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_AUTO5,
-                                                                                new AnimationParams().impactMultiplier(0.25F).stunType(StunType.SHORT))
-
-                                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                                .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,
-                                                                                        new AnimationParams().impactMultiplier(0.25F).stunType(StunType.SHORT))
-                                                                                .addExBehavior(mobPatch -> {
-                                                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                                                                    if(mobPatch.getTarget() != null) {
-                                                                                        Vec3 motion = mobPatch.getTarget().position().subtract(mobPatch.getOriginal().position());
-                                                                                        mobPatch.getOriginal().addDeltaMovement(motion.scale(0.08).add(0,0.75,0));
-                                                                                    }
-                                                                                })
-
-                                                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                                        .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST_END,
-                                                                                                new AnimationParams().playSpeed(1.15F))
-                                                                                        .addExBehavior(mobPatch -> {
-                                                                                            if(mobPatch.getOriginal().hasEffect(EFNMobEffectRegistry.BLODDLUST.get())) {
-                                                                                                mobPatch.getOriginal().removeEffect(EFNMobEffectRegistry.BLODDLUST.get());
-                                                                                            }
-                                                                                        })
-                                                                                )
-                                                                        )
-                                                                )
+                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,0.2F)
                                                         )
                                                 )
-
                                         )
                                 )
                         )

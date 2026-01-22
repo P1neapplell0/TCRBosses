@@ -56,13 +56,6 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-//    maven {
-//        name = 'GeckoLib'
-//        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-//        content {
-//            includeGroup("software.bernie.geckolib")
-//        }
-//    }
     maven {
         url "https://cursemaven.com"
     }
@@ -87,19 +80,21 @@ dependencies {
 
     implementation fg.deobf('libs:geckolib:4.8.2')
 
-    implementation fg.deobf('libs:ba_bt:3.0.1')
+    implementation fg.deobf('libs:ba_bt:3.2.1')
 
     implementation fg.deobf('libs:fantasy_armor:1.2')
 
-    implementation fg.deobf('libs:CombatEvolution:1.1.13')
+    implementation fg.deobf('libs:CombatEvolution:1.1.18')
 
-    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7303229-sources-7303232")
+    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7476040")
     implementation fg.deobf('libs:epicfightx:1.0.0')
+
+    implementation fg.deobf('libs:wom:2.0.13')
 
     implementation fg.deobf("libs:Nightfall:2.4")
     implementation fg.deobf('libs:epic_fight_avalon:20.12.4')
 
-    implementation fg.deobf('libs:cataclysm:3.16')
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:6906993")
     implementation fg.deobf('libs:lionfishapi:2.4')
     implementation fg.deobf('libs:curios:5.14.1')
 

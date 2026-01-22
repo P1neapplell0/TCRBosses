@@ -1,7 +1,7 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.nether_golem;
 
 import com.brass_amber.ba_bt.BABattleTowers;
-import com.brass_amber.ba_bt.entity.hostile.golem.BTNetherGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.NetherGolem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class NetherGolemRenderer extends HumanoidMobRenderer<BTNetherGolem, HumanoidModel<BTNetherGolem>> {
+public class NetherGolemRenderer extends HumanoidMobRenderer<NetherGolem, HumanoidModel<NetherGolem>> {
     ResourceLocation DORMANT = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem_dormant.png");
     ResourceLocation NORMAL = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem.png");
     ResourceLocation NORMAL_P1 = ResourceLocation.fromNamespaceAndPath(BABattleTowers.MOD_ID, "textures/entity/golem/nether_golem/nether_golem_cracked_stage_1.png");
@@ -29,7 +29,7 @@ public class NetherGolemRenderer extends HumanoidMobRenderer<BTNetherGolem, Huma
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull BTNetherGolem pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull NetherGolem pEntity) {
         if(pEntity.isDormant()){
             return DORMANT;
         }

@@ -1,6 +1,6 @@
 package net.shelmarow.tcr_bosses.entity.battle_tower.end_golem;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.BTEndGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.EndGolem;
 import com.hm.efn.client.sound.EFNSounds;
 import com.hm.efn.gameasset.EFNAnimations;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
@@ -624,7 +624,7 @@ public class EndGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .custom(mobPatch -> {
-                                    if(mobPatch.getOriginal() instanceof BTEndGolem btEndGolem){
+                                    if(mobPatch.getOriginal() instanceof EndGolem btEndGolem){
                                         return btEndGolem.isEnraged();
                                     }
                                     return false;
