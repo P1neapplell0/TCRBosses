@@ -1,9 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ancient_remnant;
 
-import com.github.L_Ender.cataclysm.init.ModItems;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -11,7 +9,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
@@ -19,7 +16,6 @@ public class AncientRemnantHumanoid extends BaseBossEntity {
 
     public AncientRemnantHumanoid(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.ANCIENT_SPEAR.get()));
     }
 
     public static AttributeSupplier createAttributes() {

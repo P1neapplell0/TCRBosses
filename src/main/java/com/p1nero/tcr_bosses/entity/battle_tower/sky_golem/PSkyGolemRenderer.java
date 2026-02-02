@@ -17,7 +17,7 @@ import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import com.p1nero.tcr_bosses.TCRBossesMod;
-import com.p1nero.tcr_bosses.gameassets.TCRMeshes;
+import com.p1nero.tcr_bosses.gameassets.TCRBMeshes;
 import org.joml.Vector4f;
 import yesman.epicfight.api.animation.Pose;
 import yesman.epicfight.api.asset.AssetAccessor;
@@ -92,13 +92,13 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
 
                 Pose poseL = entitypatch.getAnimator().getPose(partialTicks);
                 AvalonAnimationUtils.joinRotationInPose(poseL,entitypatch,"Chest",0,wingAngle*Math.abs(wingRatio-0.5F)*2,0);
-                SkinnedMesh wingMeshL = TCRMeshes.WING_L.get();
+                SkinnedMesh wingMeshL = TCRBMeshes.WING_L.get();
                 wingMeshL.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
                         OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseL,false));
 
                 Pose poseR = entitypatch.getAnimator().getPose(partialTicks);
                 AvalonAnimationUtils.joinRotationInPose(poseR,entitypatch,"Chest",0,-wingAngle*Math.abs(wingRatio-0.5F)*2,0);
-                SkinnedMesh wingMeshR = TCRMeshes.WING_R.get();
+                SkinnedMesh wingMeshR = TCRBMeshes.WING_R.get();
                 wingMeshR.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
                         OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseR,false));
 

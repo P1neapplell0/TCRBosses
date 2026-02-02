@@ -1,10 +1,12 @@
 package com.p1nero.tcr_bosses.entity;
 
+import com.ao.tcrmeshes.TCRMeshes;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian.EnderGuardianHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.harbinger.HarbingerHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.netherite.PNetheriteHumanoidRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -121,7 +123,6 @@ public class TCRBossEntities {
         event.registerEntityRenderer(LEVIATHAN_HUMANOID.get(), LeviathanHumanoidRenderer::new);
     }
 
-
     public static void registerArmatures() {
         Armatures.registerEntityTypeArmature(BTEntityType.LAND_GOLEM.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(BTEntityType.OCEAN_GOLEM.get(), Armatures.BIPED);
@@ -144,6 +145,7 @@ public class TCRBossEntities {
     }
 
 
+    @SuppressWarnings("unchecked")
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onPatchedRenderer(PatchedRenderersEvent.Add event) {
@@ -172,7 +174,28 @@ public class TCRBossEntities {
                         .initLayerLast(event.getContext(), entityType));
 
         event.addPatchedEntityRenderer(ANCIENT_REMNANT_HUMANOID.get(),
-                entityType -> new PHumanoidRenderer<>(Meshes.BIPED_OLD_TEX, event.getContext(), entityType)
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.ANCIENT_REMAIN_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(ENDER_GUARDIAN_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.ENDER_GUARDIAN_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(HARBINGER_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.HARBINGER_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(IGNIS_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.IGNIS_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(LEVIATHAN_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.LEVIATHAN_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(MALEDICTUS_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.MALEDICTUS_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(NETHERITE_HUMANOID.get(),
+                entityType -> new PNetheriteHumanoidRenderer(TCRMeshes.NETHERITE_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+        event.addPatchedEntityRenderer(SCYLLA_HUMANOID.get(),
+                entityType -> new PHumanoidRenderer<>(TCRMeshes.SCYLLA_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
     }
 

@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = TCRBossesMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class TCRAnimations {
+public class TCRBAnimations {
 
 
     public static AnimationManager.AnimationAccessor<ActionAnimation> AIR_STRIKE_RISING;
@@ -43,7 +43,7 @@ public class TCRAnimations {
 
     @SubscribeEvent
     public static void registerAnimations(AnimationManager.AnimationRegistryEvent event) {
-        event.newBuilder(TCRBossesMod.MOD_ID, TCRAnimations::build);
+        event.newBuilder(TCRBossesMod.MOD_ID, TCRBAnimations::build);
     }
 
     private static final AnimationProperty.PlaybackSpeedModifier CONST_SPEED =

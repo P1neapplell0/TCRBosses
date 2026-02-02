@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ancient_remnant;
 
+import com.ao.tcrmeshes.TCRMeshes;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,6 +17,6 @@ public class AncientRemnantRenderer extends HumanoidMobRenderer<AncientRemnantHu
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull AncientRemnantHumanoid pEntity) {
-        return ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/ancient_remnant_humanoid.png");
+        return TCRMeshes.ANCIENT_REMAIN_HUMANOID_TEXTURE;
     }
 }

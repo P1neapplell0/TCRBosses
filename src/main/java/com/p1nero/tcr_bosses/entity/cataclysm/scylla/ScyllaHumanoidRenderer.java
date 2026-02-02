@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.scylla;
 
+import com.ao.tcrmeshes.TCRMeshes;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,6 +19,6 @@ public class ScyllaHumanoidRenderer<T extends CEBossEntity> extends HumanoidMobR
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull T pEntity) {
-        return ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/scylla_humanoid.png");
+        return TCRMeshes.SCYLLA_HUMANOID_TEXTURE;
     }
 }

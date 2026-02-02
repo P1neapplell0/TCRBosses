@@ -5,7 +5,7 @@ import yesman.epicfight.api.client.model.Meshes;
 import yesman.epicfight.api.client.model.SkinnedMesh;
 import yesman.epicfight.client.mesh.HumanoidMesh;
 
-public class TCRMeshes {
+public class TCRBMeshes {
 
     public static Meshes.MeshAccessor<SkinnedMesh> WING =
             Meshes.MeshAccessor.create(TCRBossesMod.MOD_ID, "entity/wing",(jsonModelLoader) -> jsonModelLoader.loadSkinnedMesh(SkinnedMesh::new));

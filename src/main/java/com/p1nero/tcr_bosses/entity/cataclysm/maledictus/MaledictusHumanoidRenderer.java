@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.maledictus;
 
+import com.ao.tcrmeshes.TCRMeshes;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,6 +19,6 @@ public class MaledictusHumanoidRenderer<T extends CEBossEntity> extends Humanoid
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull T pEntity) {
-        return ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/maledictus_humanoid.png");
+        return TCRMeshes.MALEDICTUS_HUMANOID_TEXTURE;
     }
 }

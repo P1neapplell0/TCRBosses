@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian;
 
+import com.ao.tcrmeshes.TCRMeshes;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,6 +19,6 @@ public class EnderGuardianHumanoidRenderer<T extends CEBossEntity> extends Human
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull T pEntity) {
-        return ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/ender_guardian_humanoid.png");
+        return TCRMeshes.ENDER_GUARDIAN_HUMANOID_TEXTURE;
     }
 }

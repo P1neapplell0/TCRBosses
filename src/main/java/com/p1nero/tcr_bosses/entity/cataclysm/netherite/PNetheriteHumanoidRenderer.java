@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import com.p1nero.tcr_bosses.client.mesh.NetheriteHumanoidMesh;
-import com.p1nero.tcr_bosses.effect.TCRBossEffects;
 import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.client.model.SkinnedMesh;
 import yesman.epicfight.client.renderer.patched.entity.PHumanoidRenderer;
