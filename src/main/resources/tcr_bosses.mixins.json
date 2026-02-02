@@ -1,18 +1,18 @@
 {
   "required": false,
   "minVersion": "0.8",
-  "package": "net.shelmarow.tcr_bosses.mixins",
+  "package": "net.p1nero.tcr_bosses.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "tcr_bosses.refmap.json",
   "mixins": [
-    "BTAbstractGolemAccessor",
-    "BTAbstractGolemMixin",
-    "BTClientEventMixin",
-    "BTEntityTypeMixin",
-    "BTOceanGolemMixin",
-    "BTSkyGolemMixin"
+    "com.p1nero.tcr_bosses.mixins.BTAbstractGolemAccessor",
+    "com.p1nero.tcr_bosses.mixins.BTAbstractGolemMixin",
+    "com.p1nero.tcr_bosses.mixins.BTClientEventMixin",
+    "com.p1nero.tcr_bosses.mixins.BTEntityTypeMixin",
+    "com.p1nero.tcr_bosses.mixins.BTOceanGolemMixin",
+    "com.p1nero.tcr_bosses.mixins.BTSkyGolemMixin"
   ],
   "client": [
-    "AbstractBTGolemRendererMixin"
+    "com.p1nero.tcr_bosses.mixins.AbstractBTGolemRendererMixin"
   ]
 }

@@ -56,6 +56,13 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+
+    repositories {
+        maven { url = "https://maven.bawnorton.com/releases" }
+
+        // Mirror
+        maven { url = "https://maven.enjarai.dev/mirrors" }
+    }
     maven {
         url "https://cursemaven.com"
     }
@@ -112,6 +119,11 @@ dependencies {
     implementation 'org.spongepowered:mixin:0.8.5'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     testAnnotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
+    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.7-beta.1")) {
+        jarJar.ranged(it, "[0.3.7-beta.1,)")
+    }
 }
 
 tasks.named('processResources', ProcessResources).configure {
