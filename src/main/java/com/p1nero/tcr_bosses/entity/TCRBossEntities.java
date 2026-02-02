@@ -1,6 +1,10 @@
 package com.p1nero.tcr_bosses.entity;
 
 import com.brass_amber.ba_bt.init.BTEntityType;
+import com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian.EnderGuardianHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.harbinger.HarbingerHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -55,7 +59,7 @@ public class TCRBossEntities {
             EntityType.Builder.of(IgnisHumanoid::new, MobCategory.MONSTER).sized(0.6f * 1.6F, 1.8f * 1.6f));
 
     public static final RegistryObject<EntityType<IgnisShieldEntity>> IGNIS_SHIELD = register("ignis_shield",
-            EntityType.Builder.<IgnisShieldEntity>of(IgnisShieldEntity::new, MobCategory.MONSTER).sized(0.01F, 0.01F));
+            EntityType.Builder.<IgnisShieldEntity>of(IgnisShieldEntity::new, MobCategory.MONSTER).sized(1, 1));
 
     public static final RegistryObject<EntityType<NetheriteHumanoid>> NETHERITE_HUMANOID = register("netherite_humanoid",
             EntityType.Builder.of(NetheriteHumanoid::new, MobCategory.MONSTER).sized(0.6f * 2, 1.8f * 2));
@@ -108,9 +112,13 @@ public class TCRBossEntities {
     public static void rendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(MALEDICTUS_HUMANOID.get(), MaledictusHumanoidRenderer::new);
         event.registerEntityRenderer(IGNIS_HUMANOID.get(), IgnisHumanoidRenderer::new);
+        event.registerEntityRenderer(IGNIS_SHIELD.get(), IgnisShieldEntityRenderer::new);
         event.registerEntityRenderer(NETHERITE_HUMANOID.get(), NetheriteHumanoidRenderer::new);
         event.registerEntityRenderer(SCYLLA_HUMANOID.get(), ScyllaHumanoidRenderer::new);
         event.registerEntityRenderer(ANCIENT_REMNANT_HUMANOID.get(), AncientRemnantRenderer::new);
+        event.registerEntityRenderer(ENDER_GUARDIAN_HUMANOID.get(), EnderGuardianHumanoidRenderer::new);
+        event.registerEntityRenderer(HARBINGER_HUMANOID.get(), HarbingerHumanoidRenderer::new);
+        event.registerEntityRenderer(LEVIATHAN_HUMANOID.get(), LeviathanHumanoidRenderer::new);
     }
 
 

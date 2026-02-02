@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield;
 
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -11,9 +12,14 @@ import com.p1nero.tcr_bosses.effect.TCRBossEffects;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.IgnisHumanoid;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
@@ -21,16 +27,18 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
 
     private IgnisHumanoid owner;
 
+    protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public IgnisShieldEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.noPhysics = true;
+        this.setNoGravity(true);
     }
 
     public IgnisShieldEntity(IgnisHumanoid owner) {
         this(TCRBossEntities.IGNIS_SHIELD.get(), owner.level());
-        this.noPhysics = true;
-        this.setNoGravity(true);
         this.owner = owner;
     }
 
@@ -44,6 +52,7 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
                 .build();
     }
 
+    @Nullable
     public IgnisHumanoid getOwner() {
         return owner;
     }
@@ -57,7 +66,7 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
     public void tick() {
         super.tick();
         if(!level().isClientSide) {
-            if(owner == null || owner.isDeadOrDying() || !owner.hasEffect(TCRBossEffects.SHIELD.get())) {
+            if(owner == null || owner.isDeadOrDying() || !owner.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
                 if(this.tickCount > 100) {//生出来看看，不急着杀
                     this.discard();
                 }
@@ -70,8 +79,12 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        //TODO
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, this::deployAnimController));
+    }
+
+    protected <E extends IgnisShieldEntity> PlayState deployAnimController(final AnimationState<E> state) {
+        return state.setAndContinue(IDLE);
     }
 
     @Override

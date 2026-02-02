@@ -4,6 +4,8 @@ import com.github.L_Ender.cataclysm.init.ModSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -35,9 +37,16 @@ public class IgnisHumanoid extends CEBossEntity {
                 .build();
     }
 
+    public boolean hasEffectOfLevel(MobEffect effect, int targetLevel) {
+        if(!this.hasEffect(effect)) {
+            return false;
+        }
+        return this.getEffect(effect).getAmplifier() == targetLevel;
+    }
+
     @Override
     public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
-        if(this.hasEffect(TCRBossEffects.SHIELD.get())) {
+        if(this.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
             //TODO 换盾挡音效
             level().playSound(null, this.getOnPos(), ModSounds.IGNIS_HURT.get(),
                     SoundSource.AMBIENT, 0.7F, 0.5F + level().random.nextFloat() * 0.3F);
@@ -66,7 +75,7 @@ public class IgnisHumanoid extends CEBossEntity {
     public void tick() {
         super.tick();
         if(!level().isClientSide) {
-            if(shield == null && this.hasEffect(TCRBossEffects.SHIELD.get())) {
+            if(shield == null && this.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
                 shield = new IgnisShieldEntity(this);
                 level().addFreshEntity(shield);
             }

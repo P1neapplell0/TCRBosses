@@ -21,6 +21,9 @@ public class IgnisShieldEntityRenderer extends GeoEntityRenderer<IgnisShieldEnti
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(IgnisShieldEntity shieldEntity) {
+        if(shieldEntity.getOwner() == null) {
+            return COMMON;
+        }
         return shieldEntity.getOwner().hasEffect(soulFire) ? SOUL : COMMON;
     }
 }
