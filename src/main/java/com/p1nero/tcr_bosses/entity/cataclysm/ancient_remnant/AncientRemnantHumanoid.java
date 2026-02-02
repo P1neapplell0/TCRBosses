@@ -1,6 +1,8 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ancient_remnant;
 
+import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -30,8 +32,7 @@ public class AncientRemnantHumanoid extends BaseBossEntity {
     }
 
     @Override
-    protected void registerGoals() {
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+    public SoundEvent getBGM() {
+        return ModSounds.REMNANT_MUSIC.get();
     }
 }

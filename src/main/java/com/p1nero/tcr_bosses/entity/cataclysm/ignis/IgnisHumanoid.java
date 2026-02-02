@@ -3,6 +3,7 @@ package com.p1nero.tcr_bosses.entity.cataclysm.ignis;
 import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -46,11 +47,12 @@ public class IgnisHumanoid extends BaseBossEntity {
     @Override
     public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
         if(this.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
-            //TODO 换盾挡音效
-            level().playSound(null, this.getOnPos(), ModSounds.IGNIS_HURT.get(),
+            level().playSound(null, this.getOnPos(), SoundEvents.BLAZE_HURT,
                     SoundSource.AMBIENT, 0.7F, 0.5F + level().random.nextFloat() * 0.3F);
-
-            return false;
+            if(this.shield != null) {
+                this.shield.hurt(pSource, 0);
+            }
+            this.hurtTime = 0;
         }
         return super.hurt(pSource, pAmount);
     }
@@ -78,6 +80,18 @@ public class IgnisHumanoid extends BaseBossEntity {
                 shield = new IgnisShieldEntity(this);
                 level().addFreshEntity(shield);
             }
+            if(shield != null) {
+                shield.moveTo(this.position());
+                shield.setYRot(this.getYRot());
+                shield.setYHeadRot(this.getYRot());
+                shield.setYBodyRot(this.getYRot());
+            }
         }
     }
+
+    @Override
+    public SoundEvent getBGM() {
+        return ModSounds.IGNIS_MUSIC_3.get();
+    }
+
 }

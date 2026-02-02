@@ -1,5 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -17,6 +19,14 @@ public class IgnisShieldEntityRenderer extends GeoEntityRenderer<IgnisShieldEnti
     public IgnisShieldEntityRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, "ignis_shield")));
         soulFire = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse("tcrcore:soul_incinerator"));
+    }
+
+    @Override
+    public void render(IgnisShieldEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        poseStack.pushPose();
+        poseStack.scale(1.6F, 1.6F, 1.6F);
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        poseStack.popPose();
     }
 
     @Override

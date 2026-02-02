@@ -8,7 +8,6 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import com.p1nero.tcr_bosses.effect.TCRBossEffects;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.IgnisHumanoid;
 import org.jetbrains.annotations.NotNull;
@@ -59,7 +58,10 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
 
     @Override
     public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
-        return false;
+        if(pSource.getEntity() instanceof IgnisHumanoid) {
+            return false;
+        }
+        return super.hurt(pSource, 0);
     }
 
     @Override
@@ -67,13 +69,7 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
         super.tick();
         if(!level().isClientSide) {
             if(owner == null || owner.isDeadOrDying() || !owner.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
-                if(this.tickCount > 100) {//生出来看看，不急着杀
-                    this.discard();
-                }
-            }
-            if(owner != null) {
-                this.moveTo(owner.position());
-                this.setYRot(owner.getYRot());
+                this.discard();
             }
         }
     }

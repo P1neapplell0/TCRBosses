@@ -1,6 +1,8 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.netherite;
 
+import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -24,4 +26,10 @@ public class NetheriteHumanoid extends BaseBossEntity {
                 .add(EpicFightAttributes.STAMINA_REGEN.get(),1.0D)
                 .build();
     }
+
+    @Override
+    public SoundEvent getBGM() {
+        return ModSounds.MONSTROSITY_MUSIC.get();
+    }
+
 }

@@ -132,6 +132,13 @@ public class TCRBossEntities {
         Armatures.registerEntityTypeArmature(BTEntityType.END_GOLEM.get(), Armatures.BIPED);
 
         Armatures.registerEntityTypeArmature(ANCIENT_REMNANT_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(ENDER_GUARDIAN_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(HARBINGER_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(IGNIS_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(LEVIATHAN_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(MALEDICTUS_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(NETHERITE_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(SCYLLA_HUMANOID.get(), Armatures.BIPED);
     }
 
     @SubscribeEvent

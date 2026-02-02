@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ignis;
 
+import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -8,10 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.registries.ForgeRegistries;
 import com.p1nero.tcr_bosses.TCRBossesMod;
-import net.shelmarow.combat_evolution.ai.CEBossEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class IgnisHumanoidRenderer<T extends CEBossEntity> extends HumanoidMobRenderer<T, HumanoidModel<T>> {
+public class IgnisHumanoidRenderer<T extends BaseBossEntity> extends HumanoidMobRenderer<T, HumanoidModel<T>> {
     private final MobEffect soulFire;
     private final ResourceLocation COMMON = ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/ignis_humanoid.png");
     private final ResourceLocation SOUL = ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/ignis_humanoid_soul.png");
