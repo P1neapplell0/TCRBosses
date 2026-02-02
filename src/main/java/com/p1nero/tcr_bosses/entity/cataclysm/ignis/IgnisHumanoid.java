@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ignis;
 
 import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,14 +13,12 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import com.p1nero.tcr_bosses.effect.TCRBossEffects;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntity;
-import net.shelmarow.combat_evolution.ai.CEBossEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-public class IgnisHumanoid extends CEBossEntity {
+public class IgnisHumanoid extends BaseBossEntity {
 
     private IgnisShieldEntity shield;
 

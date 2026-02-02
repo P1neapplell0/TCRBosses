@@ -1,15 +1,15 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.harbinger;
 
+import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import net.shelmarow.combat_evolution.ai.CEBossEntity;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-public class HarbingerHumanoid extends CEBossEntity {
+public class HarbingerHumanoid extends BaseBossEntity {
 
     public HarbingerHumanoid(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

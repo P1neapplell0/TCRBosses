@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ancient_remnant;
 
 import com.github.L_Ender.cataclysm.init.ModItems;
+import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -12,10 +13,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.shelmarow.combat_evolution.ai.CEBossEntity;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-public class AncientRemnantHumanoid extends CEBossEntity {
+public class AncientRemnantHumanoid extends BaseBossEntity {
 
     public AncientRemnantHumanoid(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

@@ -1,15 +1,15 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian;
 
+import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import net.shelmarow.combat_evolution.ai.CEBossEntity;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-public class EnderGuardianHumanoid extends CEBossEntity {
+public class EnderGuardianHumanoid extends BaseBossEntity {
 
     public EnderGuardianHumanoid(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
