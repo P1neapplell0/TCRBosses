@@ -100,8 +100,9 @@ dependencies {
 
     implementation fg.deobf('libs:wom:2.0.13')
 
-    implementation fg.deobf("libs:Nightfall:2.4")
-    implementation fg.deobf('libs:epic_fight_avalon:20.12.4')
+    implementation fg.deobf("curse.maven:epic-fight-invincible-1184379:7389802")
+    implementation fg.deobf("libs:EpicFightNightfall:3.0")
+    implementation fg.deobf("curse.maven:epic-fight-avalon-1268823:7225899")
 
     implementation fg.deobf("curse.maven:lendercataclysm-551586:6906993")
     implementation fg.deobf('libs:lionfishapi:2.4')

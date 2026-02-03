@@ -18,11 +18,13 @@ public class BossMusicPlayer {
             if (music != null) {
                 if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.RECORDS) <= 0) {
                     music = null;
-                } else
-                if (music.boss == entity && entity.distanceTo(player) > dis) {
+                } else if (music.boss == entity && entity.distanceTo(player) > dis) {
                     music.boss = null;
                 } else if (music.boss == null && music.soundEvent == bgm) {
                     music.boss = entity;
+                    //换碟
+                } else if (music.soundEvent != bgm) {
+                    music = new BossMusic(bgm, entity, entity.getRandom(), dis);
                 }
             } else {
                 if (entity.distanceTo(player) <= dis) {

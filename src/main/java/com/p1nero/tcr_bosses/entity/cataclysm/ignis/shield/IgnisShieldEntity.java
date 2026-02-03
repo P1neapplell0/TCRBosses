@@ -1,5 +1,9 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -14,10 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
@@ -27,8 +28,11 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
     private IgnisHumanoid owner;
 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+    protected static final RawAnimation SUMMON = RawAnimation.begin().thenPlay("summon");
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private static final EntityDataAccessor<Boolean> HAS_SOUL = SynchedEntityData.defineId(IgnisShieldEntity.class, EntityDataSerializers.BOOLEAN);
 
     public IgnisShieldEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -51,6 +55,33 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
                 .build();
     }
 
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.getEntityData().define(HAS_SOUL, false);
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.setHasSoul(tag.getBoolean("has_soul"));
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("has_soul", this.hasSoul());
+    }
+
+    public void setHasSoul(boolean hasSoul) {
+        this.entityData.set(HAS_SOUL, hasSoul);
+    }
+
+    public boolean hasSoul() {
+        return this.entityData.get(HAS_SOUL);
+    }
+
     @Nullable
     public IgnisHumanoid getOwner() {
         return owner;
@@ -68,15 +99,24 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
     public void tick() {
         super.tick();
         if(!level().isClientSide) {
+            if(owner != null) {
+                this.setHasSoul(owner.hasSoulEffect());
+            }
             if(owner == null || owner.isDeadOrDying() || !owner.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
                 this.discard();
             }
         }
     }
 
+    public void playSummonAnimation() {
+        this.triggerAnim("Summon", "summon");
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, this::deployAnimController));
+        controllers.add(new AnimationController<>(this, "Summon", 0, state -> PlayState.CONTINUE)
+                .triggerableAnim("summon", SUMMON));
     }
 
     protected <E extends IgnisShieldEntity> PlayState deployAnimController(final AnimationState<E> state) {
