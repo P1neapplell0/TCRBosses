@@ -30,7 +30,7 @@ import yesman.epicfight.client.renderer.patched.entity.PHumanoidRenderer;
 import yesman.epicfight.mixin.client.MixinEntityRenderer;
 import yesman.epicfight.mixin.client.MixinLivingEntityRenderer;
 
-public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolemPatch, HumanoidModel<PathfinderMob>, HumanoidMobRenderer<PathfinderMob, HumanoidModel<PathfinderMob>>, HumanoidMesh>{
+public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolemPatch, HumanoidModel<PathfinderMob>, HumanoidMobRenderer<PathfinderMob, HumanoidModel<PathfinderMob>>, HumanoidMesh> {
 
     public PSkyGolemRenderer(AssetAccessor<HumanoidMesh> mesh, EntityRendererProvider.Context context, EntityType<?> entityType) {
         super(mesh, context, entityType);
@@ -40,15 +40,14 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
     public void render(PathfinderMob entity, SkyGolemPatch entitypatch, HumanoidMobRenderer<PathfinderMob, HumanoidModel<PathfinderMob>> renderer, MultiBufferSource buffer, PoseStack poseStack, int packedLight, float partialTicks) {
         RenderNameTagEvent renderNameplateEvent = new RenderNameTagEvent(entity, entity.getDisplayName(), renderer, poseStack, buffer, packedLight, partialTicks);
         MinecraftForge.EVENT_BUS.post(renderNameplateEvent);
-        MixinEntityRenderer entityRendererAccessor = (MixinEntityRenderer)renderer;
+        MixinEntityRenderer entityRendererAccessor = (MixinEntityRenderer) renderer;
         if ((entityRendererAccessor.invokeShouldShowName(entity) || renderNameplateEvent.getResult() == Event.Result.ALLOW) && renderNameplateEvent.getResult() != Event.Result.DENY) {
             entityRendererAccessor.invokeRenderNameTag(entity, renderNameplateEvent.getContent(), poseStack, buffer, packedLight);
         }
 
 
-
         Minecraft mc = Minecraft.getInstance();
-        MixinLivingEntityRenderer livingEntityRendererAccessor = (MixinLivingEntityRenderer)renderer;
+        MixinLivingEntityRenderer livingEntityRendererAccessor = (MixinLivingEntityRenderer) renderer;
 
         boolean isVisible = livingEntityRendererAccessor.invokeIsBodyVisible(entity);
         boolean isVisibleToPlayer = !isVisible && !entity.isInvisibleTo(mc.player);
@@ -57,7 +56,7 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
         RenderType renderType = livingEntityRendererAccessor.invokeGetRenderType(entity, isVisible, isVisibleToPlayer, isGlowing);
         Armature armature = entitypatch.getArmature();
 
-        RenderType wingRenderType = RenderType.entityTranslucent(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID,"textures/entity/golem/sky_golem/wing.png"));
+        RenderType wingRenderType = RenderType.entityTranslucent(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, "textures/entity/golem/sky_golem/wing.png"));
 
 
         poseStack.pushPose();
@@ -84,23 +83,23 @@ public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolem
                 int modifiedLight = LightTexture.pack(lightUv.x, lightUv.y);
 
                 //挥一次的时间
-                int wingTime = 20;
+                int wingTime = 40;
                 //挥动角度
                 float wingAngle = 15;
 
-                float wingRatio = (entity.tickCount%wingTime+partialTicks)/(float) wingTime;
+                float wingRatio = (entity.tickCount % wingTime + partialTicks) / (float) wingTime;
 
                 Pose poseL = entitypatch.getAnimator().getPose(partialTicks);
-                AvalonAnimationUtils.joinRotationInPose(poseL,entitypatch,"Chest",0,wingAngle*Math.abs(wingRatio-0.5F)*2,0);
+                AvalonAnimationUtils.joinRotationInPose(poseL, entitypatch, "Chest", 0, wingAngle * Math.abs(wingRatio - 0.5F) * 2, 0);
                 SkinnedMesh wingMeshL = TCRBMeshes.WING_L.get();
-                wingMeshL.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
-                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseL,false));
+                wingMeshL.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), color.w(),
+                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseL, false));
 
                 Pose poseR = entitypatch.getAnimator().getPose(partialTicks);
-                AvalonAnimationUtils.joinRotationInPose(poseR,entitypatch,"Chest",0,-wingAngle*Math.abs(wingRatio-0.5F)*2,0);
+                AvalonAnimationUtils.joinRotationInPose(poseR, entitypatch, "Chest", 0, -wingAngle * Math.abs(wingRatio - 0.5F) * 2, 0);
                 SkinnedMesh wingMeshR = TCRBMeshes.WING_R.get();
-                wingMeshR.draw(poseStack,buffer,wingRenderType,modifiedLight, color.x(), color.y(), color.z(), color.w(),
-                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseR,false));
+                wingMeshR.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), color.w(),
+                        OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseR, false));
 
                 mesh.draw(poseStack, buffer, renderType, modifiedLight, color.x(), color.y(), color.z(), color.w(), this.getOverlayCoord(entity, entitypatch, partialTicks), armature, armature.getPoseMatrices());
                 entitypatch.getEntityDecorations().listDecorationOverlays().forEach((decorationOverlay) -> {

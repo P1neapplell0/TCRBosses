@@ -6,7 +6,9 @@ import com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian.EnderGuardianHumanoi
 import com.p1nero.tcr_bosses.entity.cataclysm.harbinger.HarbingerHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.PMaledictusHumanoidGolemRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.PNetheriteHumanoidRenderer;
+import com.p1nero.tcr_bosses.gameassets.TCRBArmatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -136,7 +138,7 @@ public class TCRBossEntities {
         Armatures.registerEntityTypeArmature(HARBINGER_HUMANOID.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(IGNIS_HUMANOID.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(LEVIATHAN_HUMANOID.get(), Armatures.BIPED);
-        Armatures.registerEntityTypeArmature(MALEDICTUS_HUMANOID.get(), Armatures.BIPED);
+        Armatures.registerEntityTypeArmature(MALEDICTUS_HUMANOID.get(), TCRBArmatures.MALEDICTUS_HUMANOID);
         Armatures.registerEntityTypeArmature(NETHERITE_HUMANOID.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(SCYLLA_HUMANOID.get(), Armatures.BIPED);
     }
@@ -196,7 +198,7 @@ public class TCRBossEntities {
                 entityType -> new PHumanoidRenderer<>(TCRMeshes.LEVIATHAN_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
         event.addPatchedEntityRenderer(MALEDICTUS_HUMANOID.get(),
-                entityType -> new PHumanoidRenderer<>(TCRMeshes.MALEDICTUS_HUMANOID, event.getContext(), entityType)
+                entityType -> new PMaledictusHumanoidGolemRenderer(TCRMeshes.MALEDICTUS_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
         event.addPatchedEntityRenderer(NETHERITE_HUMANOID.get(),
                 entityType -> new PNetheriteHumanoidRenderer(TCRMeshes.NETHERITE_HUMANOID, event.getContext(), entityType)
