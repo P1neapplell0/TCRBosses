@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm.leviathan;
 
 import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.hm.efn.registries.EFNMobEffectRegistry;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -30,7 +31,10 @@ public class LeviathanHumanoid extends BaseBossEntity {
 
     @Override
     public SoundEvent getBGM() {
-        return ModSounds.LEVIATHAN_MUSIC.get();
+        if(this.hasEffect(EFNMobEffectRegistry.ATTACK_DAMAGE_INCREASE.get())) {
+            return ModSounds.LEVIATHAN_MUSIC_2.get();
+        }
+        return ModSounds.LEVIATHAN_MUSIC_1.get();
     }
 
 }

@@ -29,7 +29,7 @@ public class EnderGuardianHumanoid extends BaseBossEntity {
 
     @Override
     public SoundEvent getBGM() {
-        return ModSounds.ENDERGUARDIAN_MUSIC_2.get();
+        return ModSounds.ENDERGUARDIAN_MUSIC_DISC.get();
     }
 
 }

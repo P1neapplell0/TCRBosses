@@ -72,16 +72,16 @@ public class TCRBossEntities {
             EntityType.Builder.of(ScyllaHumanoid::new, MobCategory.MONSTER).sized(0.6f * 1.2F, 1.8f * 1.2F));
 
     public static final RegistryObject<EntityType<EnderGuardianHumanoid>> ENDER_GUARDIAN_HUMANOID = register("ender_guardian_humanoid",
-            EntityType.Builder.of(EnderGuardianHumanoid::new, MobCategory.MONSTER).sized(0.6f, 1.8f));
+            EntityType.Builder.of(EnderGuardianHumanoid::new, MobCategory.MONSTER).sized(0.6f * 1.6F, 1.8f * 1.6F));
 
     public static final RegistryObject<EntityType<HarbingerHumanoid>> HARBINGER_HUMANOID = register("harbinger_humanoid",
-            EntityType.Builder.of(HarbingerHumanoid::new, MobCategory.MONSTER).sized(0.6f, 1.8f));
+            EntityType.Builder.of(HarbingerHumanoid::new, MobCategory.MONSTER).sized(0.6f * 1.35F, 1.8f * 1.35F));
 
     public static final RegistryObject<EntityType<LeviathanHumanoid>> LEVIATHAN_HUMANOID = register("leviathan_humanoid",
-            EntityType.Builder.of(LeviathanHumanoid::new, MobCategory.MONSTER).sized(0.6f, 1.8f));
+            EntityType.Builder.of(LeviathanHumanoid::new, MobCategory.MONSTER).sized(0.6f * 2.0F, 1.8f * 2.0F));
 
     public static final RegistryObject<EntityType<AncientRemnantHumanoid>> ANCIENT_REMNANT_HUMANOID = register("ancient_remnant_humanoid",
-            EntityType.Builder.of(AncientRemnantHumanoid::new, MobCategory.MONSTER).sized(1.2f, 2.6f));
+            EntityType.Builder.of(AncientRemnantHumanoid::new, MobCategory.MONSTER).sized(0.6F * 2.0F, 1.8f * 2.0F));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
         return REGISTRY.register(name, () -> entityTypeBuilder.build(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, name).toString()));
