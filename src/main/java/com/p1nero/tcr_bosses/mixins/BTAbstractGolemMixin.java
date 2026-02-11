@@ -58,27 +58,27 @@ public abstract class BTAbstractGolemMixin {
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
         if(abstractGolem instanceof LandGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
         if(abstractGolem instanceof OceanGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
         if(abstractGolem instanceof NetherGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
         if(abstractGolem instanceof CoreGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
         if(abstractGolem instanceof SkyGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
         if(abstractGolem instanceof EndGolem golem){
-            tCR_Bosses$syncStamina(golem);
+            tcr_Bosses$syncStamina(golem);
         }
     }
 
     @Unique
-    private void tCR_Bosses$syncStamina(AbstractGolem golem) {
+    private void tcr_Bosses$syncStamina(AbstractGolem golem) {
         LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(golem, LivingEntityPatch.class);
         if(entityPatch != null){
             tcr_bosses$ceBossEvent.setStaminaStatus(CEPatchUtils.getStaminaStatus(entityPatch));
@@ -115,10 +115,10 @@ public abstract class BTAbstractGolemMixin {
     }
 
 
-    @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
-    public void destroyBlocksNearby(CallbackInfo ci){
-        ci.cancel();
-    }
+//    @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
+//    public void destroyBlocksNearby(CallbackInfo ci){
+//        ci.cancel();
+//    }
 
     @Inject(method = "getTargetingRange",at = @At(value = "HEAD"),cancellable = true,remap = false)
     public void getTargetingRange(CallbackInfoReturnable<Integer> cir){
