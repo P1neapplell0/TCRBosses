@@ -55,10 +55,11 @@ public class LandGolemPatch extends CEHumanoidPatch {
         super(Factions.UNDEAD);
     }
 
-    public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 450.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 20.0D);
+    public static void initAttributes(EntityAttributeModificationEvent event) {
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 250.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 0.5D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_SPEED, 2.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 5.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 10.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.ARMOR_NEGATION.get(), 0D);
@@ -69,7 +70,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     @Override
-    public void onAddedToWorld(){
+    public void onAddedToWorld() {
         super.onAddedToWorld();
 
         this.original.setDropChance(EquipmentSlot.MAINHAND, 0);
@@ -80,17 +81,17 @@ public class LandGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
-        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE,new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage", -3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
 
         ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.CHESTPLATE).get());
-        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
 
         ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.LEGGINGS).get());
-        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
 
 
         ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.BOOTS).get());
-        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
 
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
         this.original.setItemSlot(EquipmentSlot.CHEST, chest);
@@ -101,24 +102,23 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     @Override
-    public void tick(LivingEvent.LivingTickEvent event){
+    public void tick(LivingEvent.LivingTickEvent event) {
         super.tick(event);
 
-        if(original instanceof LandGolem btLandGolem){
-            if(btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())){
+        if (original instanceof LandGolem btLandGolem) {
+            if (btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())) {
                 btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
             }
         }
     }
 
     @Override
-    public void playGuardHitAnimation(DamageSource damageSource,boolean canCounter){
+    public void playGuardHitAnimation(DamageSource damageSource, boolean canCounter) {
         AnimationManager.AnimationAccessor<? extends StaticAnimation> guardHit;
-        if(canCounter){
+        if (canCounter) {
             guardHit = original.tickCount % 2 == 0 ? EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT1 : EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT2;
-            this.playSound(EFNSounds.PARRY.get(),0.5F, 1.0F, 1.0F);
-        }
-        else{
+            this.playSound(EFNSounds.PARRY.get(), 0.5F, 1.0F, 1.0F);
+        } else {
             guardHit = this.getGuardHitAnimation(damageSource);
             this.playGuardHitSound();
         }
@@ -134,13 +134,13 @@ public class LandGolemPatch extends CEHumanoidPatch {
     @Override
     public AttackResult tryHurt(DamageSource damageSource, float amount) {
         AttackResult result = super.tryHurt(damageSource, amount);
-        if(!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && getEntityState().getLevel() >= 0 && getEntityState().getLevel() <= 2) {
+        if (!damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && getEntityState().getLevel() >= 0 && getEntityState().getLevel() <= 2) {
             CECombatBehaviors.Behavior<?> current = BehaviorUtils.getCurrentBehavior(this);
-            if(current != null) {
+            if (current != null) {
                 String name = current.getBehaviorName();
                 if (name != null && name.equals("GP")) {
                     setGpSucceed(true);
-                    playSound(EpicFightSounds.CLASH.get(), 0,0);
+                    playSound(EpicFightSounds.CLASH.get(), 0, 0);
                     return AttackResult.missed(0);
                 }
             }
@@ -160,7 +160,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
     public void initAI() {
         super.initAI();
         this.getOriginal().goalSelector.removeAllGoals(goal -> goal instanceof GolemStompAttackGoal || goal instanceof LandGolemFireballAttackGoal);
-        for(WrappedGoal goal : original.targetSelector.getAvailableGoals()){
+        for (WrappedGoal goal : original.targetSelector.getAvailableGoals()) {
             goal.start();
         }
     }
@@ -187,17 +187,17 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     @Override
-    public void playGuardBreakSound(){
-        this.playSound(EpicFightSounds.NEUTRALIZE_BOSSES.get(), 0F,0F);
+    public void playGuardBreakSound() {
+        this.playSound(EpicFightSounds.NEUTRALIZE_BOSSES.get(), 0F, 0F);
     }
 
 
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
-        if(currentBehavior != null) {
+        if (currentBehavior != null) {
             String name = currentBehavior.getBehaviorName();
-            if(name == null || !name.equals("P2")) {
+            if (name == null || !name.equals("P2")) {
                 dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.025F));
             }
         }
@@ -206,13 +206,13 @@ public class LandGolemPatch extends CEHumanoidPatch {
 
     @Override
     public OpenMatrix4f getModelMatrix(float partialTicks) {
-        float scale = this.original.getScale()*1.25F;
+        float scale = this.original.getScale() * 1.25F;
         return super.getModelMatrix(partialTicks).scale(scale, scale, scale);
     }
 
     @Override
-    public boolean applyStun(StunType stunType, float time){
-        time = Mth.clamp(time,0,0.25F);
+    public boolean applyStun(StunType stunType, float time) {
+        time = Mth.clamp(time, 0, 0.25F);
         return super.applyStun(stunType, time);
     }
 

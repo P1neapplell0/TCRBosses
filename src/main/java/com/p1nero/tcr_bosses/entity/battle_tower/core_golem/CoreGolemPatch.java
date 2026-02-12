@@ -110,9 +110,9 @@ public class CoreGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 480.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 380.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ATTACK_DAMAGE, 2.0D);
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 20.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 5.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 30.0D);

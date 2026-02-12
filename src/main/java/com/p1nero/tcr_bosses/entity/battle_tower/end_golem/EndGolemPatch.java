@@ -89,7 +89,7 @@ public class EndGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.END_GOLEM.get(), Attributes.MAX_HEALTH, 800.0D);
+        event.add(BTEntityType.END_GOLEM.get(), Attributes.MAX_HEALTH, 400.0D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.3D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.ATTACK_DAMAGE, 3.0D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.ARMOR, 30.0D);

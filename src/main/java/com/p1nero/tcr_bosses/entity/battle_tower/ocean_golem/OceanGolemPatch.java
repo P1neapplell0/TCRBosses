@@ -56,18 +56,19 @@ public class OceanGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(Items.TRIDENT);
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage",  -3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
 
         ItemStack head = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.OLD_KNIGHT).get(ArmorItem.Type.HELMET).get());
-        head.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.HEAD);
+        head.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
 
         ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DARK_LORD).get(ArmorItem.Type.CHESTPLATE).get());
-        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);
 
         ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DARK_LORD).get(ArmorItem.Type.LEGGINGS).get());
-        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.LEGS);
 
         ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DARK_LORD).get(ArmorItem.Type.BOOTS).get());
-        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.FEET);
 
         this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
         this.original.setItemSlot(EquipmentSlot.HEAD, head);
@@ -79,11 +80,11 @@ public class OceanGolemPatch extends CEHumanoidPatch {
     }
 
 
-    public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MAX_HEALTH, 450.0D);
+    public static void initAttributes(EntityAttributeModificationEvent event) {
+        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MAX_HEALTH, 250.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.3D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ATTACK_DAMAGE, 1.0D);
-        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ARMOR, 20.0D);
+        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ARMOR, 5.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 25.0D);
@@ -111,13 +112,12 @@ public class OceanGolemPatch extends CEHumanoidPatch {
     }
 
     @Override
-    public void playGuardHitAnimation(DamageSource damageSource,boolean canCounter){
+    public void playGuardHitAnimation(DamageSource damageSource, boolean canCounter) {
         AnimationManager.AnimationAccessor<? extends StaticAnimation> guardHit;
-        if(canCounter){
+        if (canCounter) {
             guardHit = original.tickCount % 2 == 0 ? EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT1 : EFNSkillAnimations.EFN_GUARD_ACTIVE_HIT2;
-            this.playSound(EFNSounds.PARRY.get(),0.5F, 1.0F, 1.0F);
-        }
-        else{
+            this.playSound(EFNSounds.PARRY.get(), 0.5F, 1.0F, 1.0F);
+        } else {
             guardHit = this.getGuardHitAnimation(damageSource);
             this.playGuardHitSound();
         }
@@ -125,15 +125,15 @@ public class OceanGolemPatch extends CEHumanoidPatch {
     }
 
     @Override
-    public void playGuardBreakSound(){
-        this.playSound(EpicFightSounds.NEUTRALIZE_BOSSES.get(), 0F,0F);
+    public void playGuardBreakSound() {
+        this.playSound(EpicFightSounds.NEUTRALIZE_BOSSES.get(), 0F, 0F);
     }
 
 
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
-        if(currentBehavior != null) {
+        if (currentBehavior != null) {
             dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.05F));
         }
     }
@@ -141,13 +141,13 @@ public class OceanGolemPatch extends CEHumanoidPatch {
 
     @Override
     public OpenMatrix4f getModelMatrix(float partialTicks) {
-        float scale = this.original.getScale()*1.25F;
+        float scale = this.original.getScale() * 1.25F;
         return super.getModelMatrix(partialTicks).scale(scale, scale, scale);
     }
 
     @Override
-    public boolean applyStun(StunType stunType, float time){
-        time = Mth.clamp(time,0,0.25F);
+    public boolean applyStun(StunType stunType, float time) {
+        time = Mth.clamp(time, 0, 0.25F);
         return super.applyStun(stunType, time);
     }
 }

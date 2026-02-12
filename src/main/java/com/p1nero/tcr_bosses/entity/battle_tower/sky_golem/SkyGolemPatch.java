@@ -86,7 +86,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 500.0D);
+        event.add(BTEntityType.SKY_GOLEM.get(), Attributes.MAX_HEALTH, 300.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR, 25.0D);
         event.add(BTEntityType.SKY_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
