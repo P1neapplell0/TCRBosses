@@ -81,7 +81,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
-        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage", -3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage", 3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
 
         ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.CHESTPLATE).get());
         chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);

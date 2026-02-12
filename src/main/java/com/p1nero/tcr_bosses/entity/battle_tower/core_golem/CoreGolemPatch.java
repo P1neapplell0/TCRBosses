@@ -61,7 +61,7 @@ public class CoreGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(EFNItem.CO_TACHI.get());
-        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE,new AttributeModifier("attack_damage", 6F, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE,new AttributeModifier("attack_damage", 4F, AttributeModifier.Operation.ADDITION),EquipmentSlot.MAINHAND);
 
         ItemStack head = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.RONIN).get(ArmorItem.Type.HELMET).get());
         head.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.HEAD);

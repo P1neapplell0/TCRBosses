@@ -56,7 +56,7 @@ public class OceanGolemPatch extends CEHumanoidPatch {
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
         ItemStack weapon = new ItemStack(Items.TRIDENT);
-        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage",  -3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+        weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage",  3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
 
         ItemStack head = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.OLD_KNIGHT).get(ArmorItem.Type.HELMET).get());
         head.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.HEAD);
