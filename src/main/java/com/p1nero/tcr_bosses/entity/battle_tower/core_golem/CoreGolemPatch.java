@@ -44,7 +44,6 @@ import java.util.UUID;
 
 public class CoreGolemPatch extends CEHumanoidPatch {
 
-
     public CoreGolemPatch() {
         super(Factions.UNDEAD);
     }

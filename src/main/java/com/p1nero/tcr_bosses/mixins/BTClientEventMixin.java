@@ -30,7 +30,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register1(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register1(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.LAND_GOLEM.get(), LandGolemRenderer::new);
     }
 
@@ -44,7 +44,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register2(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register2(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.OCEAN_GOLEM.get(), OceanGolemRenderer::new);
     }
 
@@ -58,7 +58,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register3(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register3(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.NETHER_GOLEM.get(), NetherGolemRenderer::new);
     }
 
@@ -72,7 +72,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register4(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register4(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.CORE_GOLEM.get(), CoreGolemRenderer::new);
     }
 
@@ -86,7 +86,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register5(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register5(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.END_GOLEM.get(), EndGolemRenderer::new);
     }
 
@@ -100,7 +100,7 @@ public class BTClientEventMixin {
             ),
             remap = false
     )
-    private static void register6(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
+    private static void tcr$register6(EntityRenderersEvent.RegisterRenderers instance, EntityType<?> entityType, EntityRendererProvider<?> entityRendererProvider){
         instance.registerEntityRenderer(BTEntityType.SKY_GOLEM.get(), SkyGolemRenderer::new);
     }
 }

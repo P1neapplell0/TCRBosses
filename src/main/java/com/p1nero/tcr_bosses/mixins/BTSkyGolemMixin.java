@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SkyGolem.class)
-public class BTSkyGolemMixin extends AbstractGolem {
+public abstract class BTSkyGolemMixin extends AbstractGolem {
 
     protected BTSkyGolemMixin(EntityType<? extends Monster> type, Level levelIn, BossEvent.BossBarColor bossBarColor) {
         super(type, levelIn, bossBarColor);
@@ -31,7 +31,7 @@ public class BTSkyGolemMixin extends AbstractGolem {
             cancellable = true,
             remap = false
     )
-    public void addBehaviorGoals(CallbackInfo ci){
+    public void tcr$addBehaviorGoals(CallbackInfo ci){
         ci.cancel();
     }
 
@@ -40,7 +40,7 @@ public class BTSkyGolemMixin extends AbstractGolem {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    public void tick(CallbackInfo ci){
+    public void tcr$tick(CallbackInfo ci){
         ci.cancel();
         super.tick();
     }
@@ -50,7 +50,7 @@ public class BTSkyGolemMixin extends AbstractGolem {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    public void registerGoals(CallbackInfo ci){
+    public void tcr$registerGoals(CallbackInfo ci){
         ci.cancel();
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
@@ -66,13 +66,9 @@ public class BTSkyGolemMixin extends AbstractGolem {
                     opcode = Opcodes.PUTFIELD
             )
     )
-    private void init(SkyGolem instance, MoveControl value){
+    private void tcr$init(SkyGolem instance, MoveControl value){
         instance.moveControl = new MoveControl((SkyGolem) (Object) this);
         entityData.set(DATA_LIVING_ENTITY_FLAGS, (byte)2);
     }
 
-    @Override
-    protected void addBehaviorGoals() {
-
-    }
 }

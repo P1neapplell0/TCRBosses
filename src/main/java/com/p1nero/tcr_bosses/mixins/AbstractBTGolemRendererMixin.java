@@ -22,7 +22,7 @@ public abstract class AbstractBTGolemRendererMixin<E extends AbstractGolem, M ex
             method = "<init>",
             at = @At(value = "TAIL")
     )
-    private void onInit(EntityRendererProvider.Context context, EntityModel<?> model, String golemType, CallbackInfo ci) {
+    private void tcr$onInit(EntityRendererProvider.Context context, EntityModel<?> model, String golemType, CallbackInfo ci) {
         this.addLayer(new ItemInHandLayer<>((AbstractGolemRenderer) (Object) this, context.getItemInHandRenderer()));
     }
 }

@@ -30,7 +30,7 @@ public abstract class BTAbstractGolemMixin {
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    private void init(CallbackInfo ci) {
+    private void tcr$init(CallbackInfo ci) {
         AbstractGolem abstractGolem = (AbstractGolem) (Object) this;
         if(abstractGolem instanceof LandGolem){
             tcr_bosses$ceBossEvent.setDisplayType("land_golem");
@@ -53,7 +53,7 @@ public abstract class BTAbstractGolemMixin {
     }
 
     @Inject(method = "tick", at = @At(value = "HEAD"))
-    private void tick(CallbackInfo ci){
+    private void tcr$tick(CallbackInfo ci){
         AbstractGolem abstractGolem = (AbstractGolem) (Object) this;
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
@@ -89,28 +89,28 @@ public abstract class BTAbstractGolemMixin {
     @Redirect(method = "startSeenByPlayer",
             at= @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerBossEvent;addPlayer(Lnet/minecraft/server/level/ServerPlayer;)V")
     )
-    private void onAddedPlayer(ServerBossEvent serverBossEvent, ServerPlayer serverPlayer) {
+    private void tcr$onAddedPlayer(ServerBossEvent serverBossEvent, ServerPlayer serverPlayer) {
         tcr_bosses$ceBossEvent.addPlayer(serverPlayer);
     }
 
     @Redirect(method = "stopSeenByPlayer",
             at= @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerBossEvent;removePlayer(Lnet/minecraft/server/level/ServerPlayer;)V")
     )
-    private void onRemovePlayer(ServerBossEvent serverBossEvent, ServerPlayer serverPlayer) {
+    private void tcr$onRemovePlayer(ServerBossEvent serverBossEvent, ServerPlayer serverPlayer) {
         tcr_bosses$ceBossEvent.removePlayer(serverPlayer);
     }
 
     @Redirect(method = "setGolemState",
             at= @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerBossEvent;isVisible()Z")
     )
-    private boolean onGetState1(ServerBossEvent instance) {
+    private boolean tcr$onGetState1(ServerBossEvent instance) {
         return tcr_bosses$ceBossEvent.isVisible();
     }
 
     @Redirect(method = "setGolemState",
             at= @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerBossEvent;setVisible(Z)V")
     )
-    private void onGetState2(ServerBossEvent instance, boolean b) {
+    private void tcr$onGetState2(ServerBossEvent instance, boolean b) {
         tcr_bosses$ceBossEvent.setVisible(b);
     }
 
@@ -121,12 +121,12 @@ public abstract class BTAbstractGolemMixin {
 //    }
 
     @Inject(method = "getTargetingRange",at = @At(value = "HEAD"),cancellable = true,remap = false)
-    public void getTargetingRange(CallbackInfoReturnable<Integer> cir){
+    public void tcr$getTargetingRange(CallbackInfoReturnable<Integer> cir){
         cir.setReturnValue(((AbstractGolem)(Object)this).getAllowedTowerRange() * 2);
     }
 
     @Inject(method = "resetGolem",at=@At(value = "HEAD"),remap = false)
-    public void resetGolem(CallbackInfo ci){
+    public void tcr$resetGolem(CallbackInfo ci){
         AbstractGolem btAbstractGolem = (AbstractGolem) (Object) this;
         if (!btAbstractGolem.isDormant() && btAbstractGolem instanceof EndGolem endGolem) {
             endGolem.setHealth(endGolem.getMaxHealth());

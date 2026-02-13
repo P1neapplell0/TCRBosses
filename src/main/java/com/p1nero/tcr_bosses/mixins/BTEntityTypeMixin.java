@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(value = BTEntityType.class,remap = false)
+@Mixin(value = BTEntityType.class, remap = false)
 public class BTEntityTypeMixin {
     @Redirect(
             method = "lambda$static$0",
@@ -16,8 +16,8 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize1(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize1(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 
 
@@ -29,8 +29,8 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize2(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize2(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 
     @Redirect(
@@ -41,8 +41,8 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize3(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize3(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 
     @Redirect(
@@ -53,8 +53,8 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize4(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize4(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 
     @Redirect(
@@ -65,8 +65,8 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize5(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize5(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 
     @Redirect(
@@ -77,7 +77,7 @@ public class BTEntityTypeMixin {
                     remap = true
             )
     )
-    private static EntityType.Builder<?> reSize6(EntityType.Builder<?> instance, float pWidth, float pHeight){
-        return instance.sized(1.0F,2.3F);
+    private static EntityType.Builder<?> tcr$reSize6(EntityType.Builder<?> instance, float pWidth, float pHeight) {
+        return instance.sized(1.0F, 2.3F);
     }
 }
