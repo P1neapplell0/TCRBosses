@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.nether_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.entity.hostile.golem.NetherGolem;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNDualSwordAnimations;
@@ -21,7 +22,6 @@ import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
@@ -566,14 +566,14 @@ public class NetherGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .interruptedByTime(0.75F,0.85F)
                                 .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(Animations.BIPED_MOB_SWORD_DUAL1,
+                                .animationBehavior(AnimationsX.BIPED_MOB_SWORD_DUAL1,
                                         new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(0.95F,1.05F)
                                         .canInterruptParent(true)
                                         .withinDistance(0.0F, 5.0F)
-                                        .animationBehavior(Animations.BIPED_MOB_SWORD_DUAL2,
+                                        .animationBehavior(AnimationsX.BIPED_MOB_SWORD_DUAL2,
                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -622,12 +622,12 @@ public class NetherGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .canInterruptParent(true)
                                                 .withinDistance(0.0F, 5.0F)
-                                                .animationBehavior(Animations.SWORD_DUAL_AUTO2,
+                                                .animationBehavior(AnimationsX.SWORD_DUAL_AUTO2,
                                                         new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 5.0F)
-                                                        .animationBehavior(Animations.SWORD_DUAL_AUTO1,
+                                                        .animationBehavior(AnimationsX.SWORD_DUAL_AUTO1,
                                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -660,12 +660,12 @@ public class NetherGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(Animations.SWORD_DUAL_AUTO3, new AnimationParams().transitionTime(0.2F))
+                                .animationBehavior(AnimationsX.SWORD_DUAL_AUTO3, new AnimationParams().transitionTime(0.2F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(0.75F,0.85F)
                                         .withinDistance(0.0F, 4.0F)
-                                        .animationBehavior(Animations.BIPED_MOB_DAGGER_TWOHAND1,
+                                        .animationBehavior(AnimationsX.BIPED_MOB_DAGGER_TWOHAND1,
                                                 new AnimationParams().transitionTime(0.25F).stunType(StunType.LONG))
                                         .addExBehavior(mobPatch -> {
                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
@@ -682,7 +682,7 @@ public class NetherGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .canInterruptParent(true)
                                                 .withinDistance(0.0F, 5.0F)
-                                                .animationBehavior(Animations.BIPED_MOB_DAGGER_TWOHAND2,
+                                                .animationBehavior(AnimationsX.BIPED_MOB_DAGGER_TWOHAND2,
                                                         new AnimationParams().playSpeed(1.25F).stunType(StunType.KNOCKDOWN))
                                                 .addTimeEvent(
                                                         new TimeEvent(mobPatch -> {
@@ -720,7 +720,7 @@ public class NetherGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 5.0F)
-                                        .animationBehavior(Animations.DANCING_EDGE,
+                                        .animationBehavior(AnimationsX.DANCING_EDGE,
                                                 new AnimationParams().transitionTime(0.2F))
                                 )
                         )
@@ -731,7 +731,7 @@ public class NetherGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(4.0F, 5.5F)
-                                .animationBehavior(Animations.SWORD_DUAL_DASH,
+                                .animationBehavior(AnimationsX.SWORD_DUAL_DASH,
                                         new AnimationParams().transitionTime(0.2F))
                         )
                 )

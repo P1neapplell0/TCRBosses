@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.land_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.entity.ai.goal.LandGolemFireballAttackGoal;
 import com.brass_amber.ba_bt.entity.ai.goal.GolemStompAttackGoal;
 import com.brass_amber.ba_bt.entity.hostile.golem.LandGolem;
@@ -34,7 +35,6 @@ import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -169,7 +169,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
     protected void setWeaponMotions() {
         this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, Set.of(
-                        Pair.of(LivingMotions.BLOCK, Animations.GREATSWORD_GUARD),
+                        Pair.of(LivingMotions.BLOCK, AnimationsX.GREATSWORD_GUARD),
                         Pair.of(LivingMotions.IDLE, EFNGreatSwordAnimations.NG_GREATSWORD_IDLE),
                         Pair.of(LivingMotions.WALK, EFNGreatSwordAnimations.NG_GREATSWOED_WALK),
                         Pair.of(LivingMotions.RUN, EFNGreatSwordAnimations.NG_GREATSWORD_RUN),
@@ -179,7 +179,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND,
                         List.of(
-                                Animations.GREATSWORD_GUARD_HIT
+                                AnimationsX.GREATSWORD_GUARD_HIT
                         )));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,

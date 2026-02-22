@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.end_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.gameasset.EFNWeaponCategories;
@@ -28,7 +29,6 @@ import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -104,7 +104,7 @@ public class EndGolemPatch extends CEHumanoidPatch {
     protected void setWeaponMotions() {
         this.weaponLivingMotions.put(EFNWeaponCategories.EFN_YAMATO,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, Set.of(
-                        Pair.of(LivingMotions.BLOCK, Animations.SWORD_GUARD),
+                        Pair.of(LivingMotions.BLOCK, AnimationsX.SWORD_GUARD),
                         Pair.of(LivingMotions.IDLE, EFNYamatoAnimations.YAMATO_IDLE),
                         Pair.of(LivingMotions.WALK, EFNYamatoAnimations.YAMATO_WALK),
                         Pair.of(LivingMotions.RUN, EFNYamatoAnimations.YAMATO_RUN),
@@ -113,9 +113,9 @@ public class EndGolemPatch extends CEHumanoidPatch {
 
         this.guardHitMotions.put(EFNWeaponCategories.EFN_YAMATO,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, List.of(
-                        Animations.SWORD_GUARD_ACTIVE_HIT1,
-                        Animations.SWORD_GUARD_ACTIVE_HIT2,
-                        Animations.SWORD_GUARD_ACTIVE_HIT3
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT1,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT2,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT3
                 )));
 
         this.weaponAttackMotions.put(EFNWeaponCategories.EFN_YAMATO,

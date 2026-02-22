@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.core_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
@@ -19,7 +20,6 @@ import net.shelmarow.combat_evolution.ai.params.AnimationParams;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.StunType;
 
@@ -288,40 +288,40 @@ public class CoreGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0,4)
                                 .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.TACHI_AUTO1,0.25F)
+                                .animationBehavior(AnimationsX.TACHI_AUTO1,0.25F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0,8)
-                                        .animationBehavior(Animations.RUSHING_TEMPO1,0.25F)
+                                        .animationBehavior(AnimationsX.RUSHING_TEMPO1,0.25F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0,6)
-                                                .animationBehavior(Animations.TACHI_AUTO2,0.25F)
+                                                .animationBehavior(AnimationsX.TACHI_AUTO2,0.25F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0,8)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO2,0.25F)
+                                                        .animationBehavior(AnimationsX.RUSHING_TEMPO2,0.25F)
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .withinDistance(0,8)
-                                                                .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                                .animationBehavior(AnimationsX.TACHI_AUTO3,0.25F)
 
                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                         .randomChance(0.5F)
                                                                         .withinDistance(0,8)
-                                                                        .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                                        .animationBehavior(AnimationsX.RUSHING_TEMPO3,0.25F)
                                                                 )
                                                         )
                                                 )
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0,8)
-                                                        .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                        .animationBehavior(AnimationsX.TACHI_AUTO3,0.25F)
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .randomChance(0.5F)
                                                                 .withinDistance(0,8)
-                                                                .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                                .animationBehavior(AnimationsX.RUSHING_TEMPO3,0.25F)
                                                         )
                                                 )
                                         )
@@ -329,32 +329,32 @@ public class CoreGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0,6)
-                                        .animationBehavior(Animations.TACHI_AUTO2,0.25F)
+                                        .animationBehavior(AnimationsX.TACHI_AUTO2,0.25F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0,8)
-                                                .animationBehavior(Animations.RUSHING_TEMPO2,0.25F)
+                                                .animationBehavior(AnimationsX.RUSHING_TEMPO2,0.25F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0,8)
-                                                        .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                        .animationBehavior(AnimationsX.TACHI_AUTO3,0.25F)
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .randomChance(0.5F)
                                                                 .withinDistance(0,8)
-                                                                .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                                .animationBehavior(AnimationsX.RUSHING_TEMPO3,0.25F)
                                                         )
                                                 )
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0,8)
-                                                .animationBehavior(Animations.TACHI_AUTO3,0.25F)
+                                                .animationBehavior(AnimationsX.TACHI_AUTO3,0.25F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .withinDistance(0,8)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO3,0.25F)
+                                                        .animationBehavior(AnimationsX.RUSHING_TEMPO3,0.25F)
                                                 )
                                         )
                                 )
@@ -369,7 +369,7 @@ public class CoreGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(5.5,9)
-                                .animationBehavior(Animations.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
+                                .animationBehavior(AnimationsX.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
                         )
                 )
 
@@ -404,7 +404,7 @@ public class CoreGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0,4)
                                 .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.TACHI_AUTO3,0.4F)
+                                .animationBehavior(AnimationsX.TACHI_AUTO3,0.4F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),100));
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
@@ -413,7 +413,7 @@ public class CoreGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0,6)
-                                        .animationBehavior(Animations.RUSHING_TEMPO3,0F)
+                                        .animationBehavior(AnimationsX.RUSHING_TEMPO3,0F)
                                         .addTimeEvent(
                                                 new TimeEvent(mobPatch -> {
                                                     if(mobPatch.getTarget() != null){
@@ -424,7 +424,7 @@ public class CoreGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0,6)
-                                                .animationBehavior(Animations.RUSHING_TEMPO3,0F)
+                                                .animationBehavior(AnimationsX.RUSHING_TEMPO3,0F)
                                                 .addTimeEvent(
                                                         new TimeEvent(mobPatch -> {
                                                             if(mobPatch.getTarget() != null){
@@ -435,7 +435,7 @@ public class CoreGolemCombatBehavior {
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0,6)
-                                                        .animationBehavior(Animations.RUSHING_TEMPO3,new AnimationParams().transitionTime(0.5F).stunType(StunType.LONG))
+                                                        .animationBehavior(AnimationsX.RUSHING_TEMPO3,new AnimationParams().transitionTime(0.5F).stunType(StunType.LONG))
                                                         .addTimeEvent(
                                                                 new TimeEvent(0,0.5F,mobPatch -> {
                                                                     if(mobPatch.getTarget() != null){

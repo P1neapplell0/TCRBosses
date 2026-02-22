@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.ocean_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -25,7 +26,6 @@ import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -97,7 +97,7 @@ public class OceanGolemPatch extends CEHumanoidPatch {
     protected void setWeaponMotions() {
         this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, Set.of(
-                        Pair.of(LivingMotions.BLOCK, Animations.SPEAR_GUARD),
+                        Pair.of(LivingMotions.BLOCK, AnimationsX.SPEAR_GUARD),
                         Pair.of(LivingMotions.IDLE, EFNSwordAnimations.NF_SWORD_IDLE),
                         Pair.of(LivingMotions.WALK, EFNSwordAnimations.NF_SWORD_WALK),
                         Pair.of(LivingMotions.RUN, EFNSwordAnimations.NF_SWORD_RUN),
@@ -105,7 +105,7 @@ public class OceanGolemPatch extends CEHumanoidPatch {
                 )));
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
-                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, List.of(Animations.SPEAR_GUARD_HIT)));
+                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, List.of(AnimationsX.SPEAR_GUARD_HIT)));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, OceanGolemCombatBehavior.TRIDENT));

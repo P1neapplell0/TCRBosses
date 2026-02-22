@@ -96,13 +96,13 @@ dependencies {
     implementation fg.deobf("curse.maven:combat-evolution-1377795:7554699")
 
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7476040")
-    implementation fg.deobf('libs:epicfightx:1.0.0')
+    implementation fg.deobf('libs:epicfightx:1.1.0')
 
     implementation fg.deobf('libs:wom:2.0.13')
 
     implementation fg.deobf("curse.maven:epic-fight-invincible-1184379:7389802")
     implementation fg.deobf("libs:EpicFightNightfall:3.0")
-    implementation fg.deobf("curse.maven:epic-fight-avalon-1268823:7225899")
+    implementation fg.deobf("curse.maven:epic-fight-avalon-1268823:7619938")
 
     implementation fg.deobf("curse.maven:lendercataclysm-551586:6906993")
     implementation fg.deobf('libs:lionfishapi:2.4')
@@ -114,7 +114,6 @@ dependencies {
 
     implementation fg.deobf('libs:architectury:9.2.14')
     implementation fg.deobf('libs:clothConfig:11.1.136')
-    implementation fg.deobf('libs:epicKnights:9.31')
 
     implementation fg.deobf('libs:p1nero_ec:20.14.0.4')
 

@@ -1,5 +1,8 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.sky_golem;
 
+import com.aetherteam.aether.block.dungeon.DoorwayBlock;
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
+import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -8,18 +11,24 @@ import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.legacy.lost_aether.registry.LCItems;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.mixins.AbstractGolemInvoker;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
@@ -28,7 +37,6 @@ import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -101,7 +109,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
     protected void setWeaponMotions() {
         this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, Set.of(
-                        Pair.of(LivingMotions.BLOCK, Animations.BIPED_BLOCK),
+                        Pair.of(LivingMotions.BLOCK, AnimationsX.BIPED_BLOCK),
                         Pair.of(LivingMotions.IDLE, EFNSwordAnimations.NF_SWORD_IDLE),
                         Pair.of(LivingMotions.WALK, EFNSwordAnimations.NF_SWORD_WALK),
                         Pair.of(LivingMotions.RUN, EFNSwordAnimations.NF_SWORD_RUN),
@@ -110,7 +118,7 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND,
-                        List.of(Animations.BIPED_HIT_SHIELD )));
+                        List.of(AnimationsX.BIPED_HIT_SHIELD)));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, SkyGolemCombatBehavior.SWORD));
@@ -161,7 +169,6 @@ public class SkyGolemPatch extends CEHumanoidPatch {
         return result;
     }
 
-
     @Override
     public OpenMatrix4f getModelMatrix(float partialTicks) {
         float scale = this.original.getScale()*1.25F;
@@ -172,6 +179,24 @@ public class SkyGolemPatch extends CEHumanoidPatch {
     public boolean applyStun(StunType stunType, float time){
         time = Mth.clamp(time,0,0.1F);
         return super.applyStun(stunType, time);
+    }
+
+    @Override
+    public void onDeath(LivingDeathEvent event) {
+        super.onDeath(event);
+        handleNearByBlock( 20, true);
+    }
+
+    public void handleNearByBlock(int r, boolean invisible) {
+        Level level = this.original.level();
+        SkyGolem skyGolem = ((SkyGolem) this.original);
+        BlockPos center = skyGolem.getEntityData().get(((AbstractGolemInvoker)skyGolem).getSpawnPosKey());
+        for(BlockPos pos : BlockPos.betweenClosed(center.getX() - r, center.getY() -r,  center.getZ() - r,center.getX() + r, center.getY() + r, center.getZ() + r)) {
+            BlockState state = level.getBlockState(pos);
+            if(state.getBlock() instanceof DoorwayBlock) {
+                level.setBlockAndUpdate(pos, state.setValue(DoorwayBlock.INVISIBLE, invisible));
+            }
+        }
     }
 
 }

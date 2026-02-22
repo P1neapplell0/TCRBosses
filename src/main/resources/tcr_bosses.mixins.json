@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "tcr_bosses.refmap.json",
   "mixins": [
+    "AbstractGolemInvoker",
     "BTAbstractGolemAccessor",
     "BTAbstractGolemMixin",
     "BTClientEventMixin",

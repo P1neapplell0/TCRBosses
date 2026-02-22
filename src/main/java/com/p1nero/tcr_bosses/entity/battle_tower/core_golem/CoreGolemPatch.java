@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.core_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.entity.ai.goal.CoreGolemFireballAttackGoal;
 import com.brass_amber.ba_bt.entity.ai.goal.GolemStompAttackGoal;
 import com.brass_amber.ba_bt.init.BTEntityType;
@@ -29,7 +30,6 @@ import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -133,9 +133,9 @@ public class CoreGolemPatch extends CEHumanoidPatch {
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.TACHI,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, List.of(
-                        Animations.SWORD_GUARD_ACTIVE_HIT1,
-                        Animations.SWORD_GUARD_ACTIVE_HIT2,
-                        Animations.SWORD_GUARD_ACTIVE_HIT3
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT1,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT2,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT3
                 )));
 
         this.weaponAttackMotions.put(

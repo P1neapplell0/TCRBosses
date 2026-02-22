@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.sky_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Lightning_Spear_Entity;
 import com.hm.efn.gameasset.animations.*;
@@ -37,7 +38,6 @@ import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.LevelUtil;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
@@ -120,7 +120,7 @@ public class SkyGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .guardWithWander(80,0,0.5F,true)
                                         .counterAnimation(
-                                                Animations.ENDERMAN_KNEE,
+                                                AnimationsX.ENDERMAN_KNEE,
                                                 new AnimationParams()
                                                         .transitionTime(0.25F)
                                                         .playSpeed(1F)
@@ -136,7 +136,7 @@ public class SkyGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .guardWithWander(80,0,-0.5F,true)
                                         .counterAnimation(
-                                                Animations.ENDERMAN_KNEE,
+                                                AnimationsX.ENDERMAN_KNEE,
                                                 new AnimationParams()
                                                         .transitionTime(0.25F)
                                                         .playSpeed(1F)
@@ -185,7 +185,7 @@ public class SkyGolemCombatBehavior {
                                 .attackLevel(1,2)
                                 .guard(60)
                                 .counterAnimation(
-                                        Animations.ENDERMAN_KNEE,
+                                        AnimationsX.ENDERMAN_KNEE,
                                         new AnimationParams()
                                                 .transitionTime(0.25F)
                                                 .playSpeed(1F)
@@ -209,7 +209,7 @@ public class SkyGolemCombatBehavior {
                                 .attackLevel(1,2)
                                 .guard(60)
                                 .counterAnimation(
-                                        Animations.REVELATION_ONEHAND,
+                                        AnimationsX.REVELATION_ONEHAND,
                                         new AnimationParams()
                                                 .transitionTime(0.3F)
                                                 .playSpeed(0.7F)
@@ -229,12 +229,12 @@ public class SkyGolemCombatBehavior {
                                                 LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(target, LivingEntityPatch.class);
                                                 if (entityPatch != null) {
                                                     AssetAccessor<? extends StaticAnimation> tAnimation = Objects.requireNonNull(entityPatch.getAnimator().getPlayerFor(null)).getRealAnimation();
-                                                    return tAnimation == Animations.BIPED_COMMON_NEUTRALIZED || tAnimation == Animations.GREATSWORD_GUARD_BREAK;
+                                                    return tAnimation == AnimationsX.BIPED_COMMON_NEUTRALIZED || tAnimation == AnimationsX.GREATSWORD_GUARD_BREAK;
                                                 }
                                             }
                                             return false;
                                         })
-                                        .animationBehavior(Animations.THE_GUILLOTINE,new AnimationParams().transitionTime(0.25F))
+                                        .animationBehavior(AnimationsX.THE_GUILLOTINE,new AnimationParams().transitionTime(0.25F))
                                 )
                         )
                 )
@@ -304,7 +304,7 @@ public class SkyGolemCombatBehavior {
                                                         .withinDistance(0.0F, 6.0F)
                                                         .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .interruptedByTime(0.5F,0.55F)
-                                                        .animationBehavior(Animations.BATTOJUTSU,
+                                                        .animationBehavior(AnimationsX.BATTOJUTSU,
                                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1F))
                                                         .addTimeEvent(
                                                                 new TimeEvent(0.5F,mobPatch ->{
@@ -335,7 +335,7 @@ public class SkyGolemCombatBehavior {
                                                                             }
                                                                             return false;
                                                                         })
-                                                                        .animationBehavior(Animations.BATTOJUTSU,-0.5F)
+                                                                        .animationBehavior(AnimationsX.BATTOJUTSU,-0.5F)
                                                                         .addExBehavior(mobPatch -> {
                                                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
                                                                             mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
@@ -354,7 +354,7 @@ public class SkyGolemCombatBehavior {
                                                                             }
                                                                             return false;
                                                                         })
-                                                                        .animationBehavior(Animations.BATTOJUTSU_DASH,-0.5F)
+                                                                        .animationBehavior(AnimationsX.BATTOJUTSU_DASH,-0.5F)
                                                                         .addExBehavior(mobPatch -> {
                                                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
                                                                             mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
@@ -374,7 +374,7 @@ public class SkyGolemCombatBehavior {
                                                                             }
                                                                             return false;
                                                                         })
-                                                                        .animationBehavior(Animations.BATTOJUTSU,-0.5F)
+                                                                        .animationBehavior(AnimationsX.BATTOJUTSU,-0.5F)
                                                                         .addExBehavior(mobPatch -> {
                                                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
                                                                             mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
@@ -392,7 +392,7 @@ public class SkyGolemCombatBehavior {
                                                                             }
                                                                             return false;
                                                                         })
-                                                                        .animationBehavior(Animations.BATTOJUTSU_DASH,-0.5F)
+                                                                        .animationBehavior(AnimationsX.BATTOJUTSU_DASH,-0.5F)
                                                                         .addExBehavior(mobPatch -> {
                                                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
                                                                             mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
@@ -478,7 +478,7 @@ public class SkyGolemCombatBehavior {
                                 .interruptedByLevel(3)
                                 .withinDistance(0.0F, 3.5F)
                                 .waitTime(40)
-                                .animationBehavior(Animations.ENDERMAN_KICK_COMBO,
+                                .animationBehavior(AnimationsX.ENDERMAN_KICK_COMBO,
                                         new AnimationParams().transitionTime(0.15F))
                                 .addExBehavior(mobPatch -> {
                                     if(mobPatch.getTarget() != null) {
@@ -510,15 +510,15 @@ public class SkyGolemCombatBehavior {
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.BIPED_STEP_BACKWARD,0F)
+                                                .animationBehavior(AnimationsX.BIPED_STEP_BACKWARD,0F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .animationBehavior(Animations.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
+                                                        .animationBehavior(AnimationsX.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
                                                 )
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .interruptedByTime(1F,1.1F)
-                                                        .animationBehavior(Animations.ENDERMAN_KICK1,
+                                                        .animationBehavior(AnimationsX.ENDERMAN_KICK1,
                                                                 new AnimationParams().transitionTime(0.15F).playSpeed(1.35F))
                                                         .addExBehavior(mobPatch -> {
                                                             mobPatch.getOriginal().setDeltaMovement(mobPatch.getOriginal().getDeltaMovement().add(0,0.75,0));
@@ -526,12 +526,12 @@ public class SkyGolemCombatBehavior {
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .canInterruptParent(true)
-                                                                .animationBehavior(Animations.SWEEPING_EDGE,0.25F)
+                                                                .animationBehavior(AnimationsX.SWEEPING_EDGE,0.25F)
                                                         )
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .canInterruptParent(true)
-                                                                .animationBehavior(Animations.THE_GUILLOTINE,0.25F)
+                                                                .animationBehavior(AnimationsX.THE_GUILLOTINE,0.25F)
                                                         )
                                                 )
                                         )
@@ -548,22 +548,22 @@ public class SkyGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.5F)
                                 .health(0.85F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.LONGSWORD_AUTO1,
+                                .animationBehavior(AnimationsX.LONGSWORD_AUTO1,
                                         new AnimationParams().transitionTime(0.15F).playSpeed(1.25F).impactMultiplier(0.5F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.UCHIGATANA_AUTO2,
+                                        .animationBehavior(AnimationsX.UCHIGATANA_AUTO2,
                                                 new AnimationParams().transitionTime(0.15F).playSpeed(1.25F).impactMultiplier(0.5F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.UCHIGATANA_AUTO3,
+                                                .animationBehavior(AnimationsX.UCHIGATANA_AUTO3,
                                                         new AnimationParams().transitionTime(0.15F).playSpeed(1.25F).impactMultiplier(0.5F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.SWEEPING_EDGE,
+                                                        .animationBehavior(AnimationsX.SWEEPING_EDGE,
                                                                 new AnimationParams().transitionTime(0.15F))
                                                 )
 
@@ -661,7 +661,7 @@ public class SkyGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(4.65F, 16.0F)
                                 .health(0.85F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.BIPED_PHANTOM_ASCENT_BACKWARD,0F)
+                                .animationBehavior(AnimationsX.BIPED_PHANTOM_ASCENT_BACKWARD,0F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().setDeltaMovement(0,0.8,0);
                                 })
@@ -674,7 +674,7 @@ public class SkyGolemCombatBehavior {
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .animationBehavior(Animations.METEOR_SLAM, new AnimationParams()
+                                        .animationBehavior(AnimationsX.METEOR_SLAM, new AnimationParams()
                                                 .playSpeed(0.75F).damageMultiplier(1.5F).impactMultiplier(4))
                                         .addExBehavior(mobPatch -> {
                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));

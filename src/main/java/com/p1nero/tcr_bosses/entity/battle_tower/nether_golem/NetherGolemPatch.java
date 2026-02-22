@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.nether_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -27,7 +28,6 @@ import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -116,9 +116,9 @@ public class NetherGolemPatch extends CEHumanoidPatch {
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.SWORD,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, List.of(
-                        Animations.SWORD_GUARD_ACTIVE_HIT1,
-                        Animations.SWORD_GUARD_ACTIVE_HIT2,
-                        Animations.SWORD_GUARD_ACTIVE_HIT3
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT1,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT2,
+                        AnimationsX.SWORD_GUARD_ACTIVE_HIT3
                 )));
 
         this.weaponAttackMotions.put(

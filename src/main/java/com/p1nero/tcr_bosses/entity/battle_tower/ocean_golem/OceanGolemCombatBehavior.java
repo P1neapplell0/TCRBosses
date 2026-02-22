@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.ocean_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
@@ -23,7 +24,6 @@ import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import org.jetbrains.annotations.Nullable;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 
@@ -44,19 +44,19 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(Animations.BIPED_ROLL_BACKWARD, 0F)
+                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(Animations.BIPED_STEP_LEFT, 0F)
+                                .animationBehavior(AnimationsX.BIPED_STEP_LEFT, 0F)
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(Animations.BIPED_STEP_RIGHT, 0F)
+                                .animationBehavior(AnimationsX.BIPED_STEP_RIGHT, 0F)
                         )
                 )
 
@@ -70,7 +70,7 @@ public class OceanGolemCombatBehavior {
                                 .guard(60)
                                 .counterType(CECombatBehaviors.CounterType.END)
                                 .maxGuardHit(3)
-                                .counterAnimation(Animations.GRASPING_SPIRAL_SECOND,0.35F)
+                                .counterAnimation(AnimationsX.GRASPING_SPIRAL_SECOND,0.35F)
                                 .onCounterStart(mobPatch -> {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
                                 })
@@ -84,7 +84,7 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0,8)
                                 .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .animationBehavior(Animations.BIPED_ROLL_BACKWARD,0)
+                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD,0)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(2.5F,5)
@@ -145,46 +145,46 @@ public class OceanGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(Animations.TRIDENT_AUTO1, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                .animationBehavior(AnimationsX.TRIDENT_AUTO1, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                        .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.TRIDENT_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                        .animationBehavior(AnimationsX.TRIDENT_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.GRASPING_SPIRAL_FIRST, 0.25F)
+                                                .animationBehavior(AnimationsX.GRASPING_SPIRAL_FIRST, 0.25F)
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                                .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.TRIDENT_AUTO3, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                                .animationBehavior(AnimationsX.TRIDENT_AUTO3, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.25F)
+                                                        .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.25F)
                                                 )
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                                        .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                                 )
                                         )
                                 )
@@ -207,13 +207,13 @@ public class OceanGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.GRASPING_SPIRAL_FIRST, 0.25F)
+                                                .animationBehavior(AnimationsX.GRASPING_SPIRAL_FIRST, 0.25F)
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                                .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -224,7 +224,7 @@ public class OceanGolemCombatBehavior {
                                                         .randomChance(0.5F)
                                                         .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.25F)
+                                                        .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.25F)
                                                 )
 
 
@@ -248,55 +248,55 @@ public class OceanGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(Animations.LONGSWORD_AUTO1, 0.2F)
+                                .animationBehavior(AnimationsX.LONGSWORD_AUTO1, 0.2F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.LONGSWORD_AUTO2, 0.2F)
+                                        .animationBehavior(AnimationsX.LONGSWORD_AUTO2, 0.2F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                                .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.GRASPING_SPIRAL_FIRST, 0.25F)
+                                                .animationBehavior(AnimationsX.GRASPING_SPIRAL_FIRST, 0.25F)
                                         )
 
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.25F)
+                                                .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.25F)
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .weight(4)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.LONGSWORD_AUTO3, 0.2F)
+                                                .animationBehavior(AnimationsX.LONGSWORD_AUTO3, 0.2F)
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
+                                                        .animationBehavior(AnimationsX.HEARTPIERCER, new AnimationParams().transitionTime(0.25F).playSpeed(0.75F))
                                                 )
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.25F)
+                                                        .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.25F)
                                                 )
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .randomChance(0.5F)
                                                         .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(Animations.GRASPING_SPIRAL_FIRST, 0.25F)
+                                                        .animationBehavior(AnimationsX.GRASPING_SPIRAL_FIRST, 0.25F)
                                                 )
                                         )
                                 )
@@ -310,7 +310,7 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0F, 4F)
                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.SPEAR_TWOHAND_AIR_SLASH, 0.4F)
+                                .animationBehavior(AnimationsX.SPEAR_TWOHAND_AIR_SLASH, 0.4F)
                                 .addExBehavior(mobPatch->{
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
                                     mobPatch.getOriginal().addDeltaMovement(new Vec3(0F,0.5F,0F));
@@ -318,11 +318,11 @@ public class OceanGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.TRIDENT_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                        .animationBehavior(AnimationsX.TRIDENT_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.TRIDENT_AUTO3, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                                .animationBehavior(AnimationsX.TRIDENT_AUTO3, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
                                         )
                                 )
                         )
@@ -334,11 +334,11 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0F, 4F)
                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.SPEAR_TWOHAND_AUTO1, 0.4F)
+                                .animationBehavior(AnimationsX.SPEAR_TWOHAND_AUTO1, 0.4F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F)
-                                        .animationBehavior(Animations.SPEAR_TWOHAND_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
+                                        .animationBehavior(AnimationsX.SPEAR_TWOHAND_AUTO2, new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .withinDistance(0.0F, 6.0F)
@@ -361,7 +361,7 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(4.0F, 8.0F)
                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.5F)
+                                .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.5F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().forceAddEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 60), mobPatch.getOriginal());
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 40));
@@ -390,7 +390,7 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(3.5F, 8.0F)
                                 .health(0.35F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(Animations.TSUNAMI_REINFORCED, new AnimationParams().transitionTime(0.5F)
+                                .animationBehavior(AnimationsX.TSUNAMI_REINFORCED, new AnimationParams().transitionTime(0.5F)
                                         .damageSource(Set.of(EpicFightDamageTypeTags.GUARD_PUNCTURE,EpicFightDamageTypeTags.UNBLOCKALBE))
                                 )
                                 .addExBehavior(mobPatch -> {
@@ -414,7 +414,7 @@ public class OceanGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(6.0F, 30.0F)
-                                .animationBehavior(Animations.BIPED_MOB_THROW, 0.2F)
+                                .animationBehavior(AnimationsX.BIPED_MOB_THROW, 0.2F)
                                 .addTimeEvent(
                                         new TimeEvent(mobPatch -> {
                                            if(mobPatch.getTarget() != null){

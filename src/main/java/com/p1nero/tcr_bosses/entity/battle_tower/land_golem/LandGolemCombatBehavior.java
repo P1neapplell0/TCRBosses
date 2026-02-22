@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.land_golem;
 
+import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.entity.hostile.golem.LandGolem;
 import com.hm.efn.gameasset.animations.EFNClawAnimations;
 import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
@@ -18,7 +19,6 @@ import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import org.jetbrains.annotations.NotNull;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
@@ -403,12 +403,12 @@ public class LandGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(Animations.GREATSWORD_AUTO1, 0.25F)
+                                .animationBehavior(AnimationsX.GREATSWORD_AUTO1, 0.25F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 6.0F).waitTime(50)
                                         .interruptedByLevel(3)
-                                        .animationBehavior(Animations.GREATSWORD_AUTO2, 0.1F)
+                                        .animationBehavior(AnimationsX.GREATSWORD_AUTO2, 0.1F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .priority(1.0F).weight(1F)
@@ -446,7 +446,7 @@ public class LandGolemCombatBehavior {
                                                 .priority(1.0F).weight(0.5F)
                                                 .canInterruptParent(true)
                                                 .withinDistance(0.0F, 6.0F)
-                                                .animationBehavior(Animations.BIPED_MOB_GREATSWORD, 0.1F)
+                                                .animationBehavior(AnimationsX.BIPED_MOB_GREATSWORD, 0.1F)
                                                 .addExBehavior(mobPatch -> {
                                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
                                                 })
@@ -463,7 +463,7 @@ public class LandGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .interruptedByLevel(3)
-                                .animationBehavior(Animations.GREATSWORD_DASH, 0.1F)
+                                .animationBehavior(AnimationsX.GREATSWORD_DASH, 0.1F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .canInterruptParent(true)
