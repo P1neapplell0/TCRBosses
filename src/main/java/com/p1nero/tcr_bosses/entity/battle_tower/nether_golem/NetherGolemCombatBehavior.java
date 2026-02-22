@@ -477,6 +477,7 @@ public class NetherGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
+
                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO1,0.25F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()

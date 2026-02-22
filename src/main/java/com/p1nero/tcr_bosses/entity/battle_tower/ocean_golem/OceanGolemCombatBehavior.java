@@ -94,7 +94,7 @@ public class OceanGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .animationBehavior(AnimationsX.BIPED_STEP_BACKWARD, 0F)
                                         )
                                 )
 
@@ -106,7 +106,7 @@ public class OceanGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .animationBehavior(AnimationsX.BIPED_STEP_BACKWARD, 0F)
                                         )
                                 )
                         )
@@ -119,7 +119,7 @@ public class OceanGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                         )
                 )
 
@@ -130,7 +130,7 @@ public class OceanGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 5.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                         )
                 )
 

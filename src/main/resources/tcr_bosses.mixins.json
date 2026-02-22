@@ -11,7 +11,8 @@
     "BTClientEventMixin",
     "BTEntityTypeMixin",
     "BTOceanGolemMixin",
-    "BTSkyGolemMixin"
+    "BTSkyGolemMixin",
+    "EFNAnimationsMixin"
   ],
   "client": [
     "AbstractBTGolemRendererMixin"

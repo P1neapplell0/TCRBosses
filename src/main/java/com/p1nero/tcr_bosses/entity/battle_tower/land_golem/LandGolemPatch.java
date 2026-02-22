@@ -56,9 +56,9 @@ public class LandGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event) {
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 250.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.MAX_HEALTH, 750.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_DAMAGE, 0.5D);
-        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_SPEED, 2.0D);
+        event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ATTACK_SPEED, 0.5D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR, 5.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 10.0D);
         event.add(BTEntityType.LAND_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 2.0D);
@@ -82,6 +82,7 @@ public class LandGolemPatch extends CEHumanoidPatch {
 
         ItemStack weapon = new ItemStack(EFNItem.RUINSGREATSWORD.get());
         weapon.addAttributeModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack_damage", 3F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
+        weapon.addAttributeModifier(Attributes.ATTACK_SPEED, new AttributeModifier("attack_speed", 0.5F, AttributeModifier.Operation.ADDITION), EquipmentSlot.MAINHAND);
 
         ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.DRAGONSLAYER).get(ArmorItem.Type.CHESTPLATE).get());
         chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(), "armor", 0, AttributeModifier.Operation.ADDITION), EquipmentSlot.CHEST);

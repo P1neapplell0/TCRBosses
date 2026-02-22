@@ -37,7 +37,7 @@ public class CoreGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 2.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
                         )
                 )
 
@@ -49,7 +49,7 @@ public class CoreGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
+                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -143,7 +143,7 @@ public class CoreGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
                                         )
                                 )
 
@@ -155,7 +155,7 @@ public class CoreGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B_MOB, 0F)
+                                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
                                         )
                                 )
                         )

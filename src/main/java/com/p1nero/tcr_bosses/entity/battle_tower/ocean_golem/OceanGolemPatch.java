@@ -30,6 +30,7 @@ import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
@@ -81,7 +82,7 @@ public class OceanGolemPatch extends CEHumanoidPatch {
 
 
     public static void initAttributes(EntityAttributeModificationEvent event) {
-        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MAX_HEALTH, 250.0D);
+        event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MAX_HEALTH, 550.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.3D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ATTACK_DAMAGE, 1.0D);
         event.add(BTEntityType.OCEAN_GOLEM.get(), Attributes.ARMOR, 5.0D);
@@ -107,8 +108,11 @@ public class OceanGolemPatch extends CEHumanoidPatch {
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
                 ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, List.of(AnimationsX.SPEAR_GUARD_HIT)));
 
-        this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
-                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, OceanGolemCombatBehavior.TRIDENT));
+    }
+
+    @Override
+    protected CECombatBehaviors.Builder<MobPatch<?>> getCustomWeaponMotionBuilder() {
+        return OceanGolemCombatBehavior.TRIDENT;
     }
 
     @Override
