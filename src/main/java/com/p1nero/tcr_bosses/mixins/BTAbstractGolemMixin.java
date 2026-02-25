@@ -66,24 +66,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         AbstractGolem abstractGolem = (AbstractGolem) (Object) this;
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
-        if (abstractGolem instanceof LandGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
-        if (abstractGolem instanceof OceanGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
-        if (abstractGolem instanceof NetherGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
-        if (abstractGolem instanceof CoreGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
-        if (abstractGolem instanceof SkyGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
-        if (abstractGolem instanceof EndGolem golem) {
-            tcr_Bosses$syncStamina(golem);
-        }
+        tcr_Bosses$syncStamina(abstractGolem);
     }
 
     @Unique
