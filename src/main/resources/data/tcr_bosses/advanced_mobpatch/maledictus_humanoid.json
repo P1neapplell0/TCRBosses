@@ -1,11 +1,11 @@
 {
-    "model": "tcrmeshes:entity/ender_guardian",
-	"armature": "epicfight:entity/biped",
+    "model": "tcrmeshes:entity/maledictus",
+	"armature": "tcr_bosses:entity/maledictus_armature",
     "renderer": "",
     "isHumanoid": true,
     "faction": "undead",
 	"boss_bar": true,
-	"custom_texture": "indestructible:textures/gui/boss_bar.png",
+	"custom_texture": "indestructible:textures/gui/mboss_bar.png",
     "attributes": {
         "impact": 1.5,
         "armor_negation": 1.5,
@@ -31,7 +31,7 @@
     "stun_animations": {
 	    "short": "epicfight:biped/combat/hit_short",
         "long": "epicfight:biped/combat/hit_long",
-        "knockdown": "epicfight:biped/combat/knockdown",
+        "knockdown": "efn:biped/yamato/biped_hitdown_0",
 		"neutralize": "epicfight:biped/skill/guard_break1"
     },
     "humanoid_weapon_motions": [
@@ -164,26 +164,50 @@
        }
     ],
 	"stun_command_list":[
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 92 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 92 true", "stun_type": "long"},
+	
 	    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] run item replace entity @s weapon.mainhand with cataclysm:soul_render", "stun_type": "short"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 2", "stun_type": "short"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 2", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3", "stun_type": "short"},
 		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 4", "stun_type": "short"},
 		
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 2", "stun_type": "long"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 2", "stun_type": "long"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4", "stun_type": "long"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3", "stun_type": "long"},
 		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 4", "stun_type": "long"},
+		
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 89 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 89 true", "stun_type": "long"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 5 2", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 5 4", "stun_type": "short", "execute_at_target": false},
+		
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] minecraft:hunger", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] epicfight:stun_immunity", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn:sin_stun_immunity ", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] minecraft:resistance 5 2 true", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "long"},
 		
 		{"command":"execute as @s at @s run execute as @e[type=efn:summoned_sword_out,distance=..8] at @s run effect clear @a[distance=..6] minecraft:resistance", "stun_type": "short", "execute_at_target": false},
 		
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 3 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 8", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 4", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 4", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 3 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 3 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"wom:satsujin\"}},distance=..9] at @s run effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 12 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 93", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 93", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 5 93", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 5 93", "stun_type": "short", "execute_at_target": false},
 		
 		
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run execute as @a[distance=..5] at @s run epicfight animator play @s efn:biped/yamato/biped_hitback_air", "stun_type": "short", "execute_at_target": false},
@@ -199,8 +223,8 @@
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "long"},
 		
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:resistance 120 2", "stun_type": "short"},
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:resistance 120 3", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:damage_reduction 6000 74", "stun_type": "short"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:damage_reduction 6000 84", "stun_type": "short"},
 		
 		{"command":"execute as @s[nbt={HandItems:[{id:\"cataclysm:soul_render\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] run item replace entity @s weapon.mainhand with cataclysm:the_annihilator", "stun_type": "short"},
 		
@@ -215,15 +239,15 @@
 		{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] set_phase 5", "stun_type": "long"},
 		{"command":"indestructible @s set_phase 5", "stun_type": "knockdown"},
 		{"command":"indestructible @s set_phase 1", "stun_type": "neutralize"},
-		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "stun_type": "neutralize"},
-		{"command":"effect clear @s minecraft:resistance", "stun_type": "neutralize"},
-		{"command":"effect give @s minecraft:resistance 120 2", "stun_type": "neutralize"},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "neutralize"},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "neutralize"},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 120 3", "stun_type": "neutralize"},
+		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "stun_type": "neutralize"},
+		{"command":"effect clear @s efn:damage_reduction", "stun_type": "neutralize"},
+		{"command":"effect give @s efn:damage_reduction 6000 74", "stun_type": "neutralize"},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 6000 84", "stun_type": "neutralize"},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 6000 84", "stun_type": "neutralize"},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..4] at @s run effect give @e[tag=cloiaboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 6000 84", "stun_type": "neutralize"},
 		{"command":"effect give @s minecraft:unluck 15", "stun_type": "neutralize"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s minecraft:unluck", "stun_type": "neutralize"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect give @s minecraft:absorption 10 30", "stun_type": "neutralize"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect give @s minecraft:absorption 12 74", "stun_type": "neutralize"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "neutralize"}
 	],
 
@@ -247,21 +271,21 @@
                             "command_list":[
 							    {"time":0.05, "command":"item replace entity @s armor.head with cataclysm:cursium_helmet", "execute_at_target":false},
 								{"time":0.05, "command":"item replace entity @s armor.chest with cataclysm:cursium_chestplate", "execute_at_target":false},
-								{"time":0.05, "command":"item replace entity @s armor.legs with cataclysm:cursium_leggings", "execute_at_target":false},
 								{"time":0.05, "command":"item replace entity @s armor.feet with cataclysm:cursium_boots", "execute_at_target":false},
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with cataclysm:the_annihilator", "execute_at_target":false},
 								{"time":0.06, "command":"item replace entity @s weapon.offhand with cataclysm:the_annihilator", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.025d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.05d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.3d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:16d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:300d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:2d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:25d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:500d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:8d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:8d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:60d,Name:\"epicfight:weight\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"epicfight:stun_armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:resistance 600 3", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] efn:damage_reduction 6000 84", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:instant_health 7 10", "execute_at_target":false},
 								{"time":0.05, "command":"tag @s[tag=!cloiaboss] add cloiaboss", "execute_at_target":false},
 							    {"time":0.15, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
@@ -285,21 +309,20 @@
                             "command_list":[
 							    {"time":0.05, "command":"item replace entity @s armor.head with cataclysm:cursium_helmet", "execute_at_target":false},
 								{"time":0.05, "command":"item replace entity @s armor.chest with cataclysm:cursium_chestplate", "execute_at_target":false},
-								{"time":0.05, "command":"item replace entity @s armor.legs with cataclysm:cursium_leggings", "execute_at_target":false},
 								{"time":0.05, "command":"item replace entity @s armor.feet with cataclysm:cursium_boots", "execute_at_target":false},
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with cataclysm:soul_render", "execute_at_target":false},
 								{"time":0.06, "command":"item replace entity @s weapon.offhand with cataclysm:the_annihilator", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.025d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.05d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:16d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:300d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:2d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:25d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:440d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:8d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:8d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:60d,Name:\"epicfight:weight\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"epicfight:stun_armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:resistance 600 3", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] efn:damage_reduction 6000 84", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:instant_health 7 10", "execute_at_target":false},
 								{"time":0.05, "command":"tag @s[tag=!cloiaboss] add cloiaboss", "execute_at_target":false},
 							    {"time":0.15, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
@@ -373,7 +396,7 @@
                     "behaviors": [
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max": 14.0}, {"predicate":"indestructible:phase", "min": 0, "max": 1}
+								{"predicate":"within_distance", "min": 2.5, "max": 14.0}, {"predicate":"indestructible:phase", "min": 0, "max": 1}
 							],
 							"set_phase": 3,
 							"end_by_hurt_level": 3, "animation": "efn:biped/ng_greatsword/ng_great_charge1ing_mob", 
@@ -410,7 +433,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/soul_render_skill1", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 1.25, "armor_negation": 1.25
+							    "damage": 1.5, "impact": 1.75, "armor_negation": 1.75
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -451,7 +474,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/soul_render_skill1", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 1.25, "armor_negation": 1.25
+							    "damage": 1.5, "impact": 1.75, "armor_negation": 1.75
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -511,9 +534,9 @@
                             ],
 							"set_phase": 3,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
@@ -555,9 +578,9 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
@@ -603,9 +626,9 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
@@ -630,7 +653,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/ng_greatsword/ng_great_skill_clash_hit", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.5, "armor_negation": 0.5
+							    "damage": 0.9, "impact": 0.5, "armor_negation": 0.5
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -653,9 +676,9 @@
                             ],
 							"set_phase": 1,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
@@ -691,7 +714,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/ng_greatsword/ng_great_charge1max", 
 							"damage_modifier":{
-							    "damage": 0.75, "impact": 2.0, "armor_negation": 2.0
+							    "damage": 0.6, "impact": 2.0, "armor_negation": 2.0
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.3,
@@ -706,9 +729,9 @@
                             ],
 							"set_phase": 4,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
@@ -726,14 +749,14 @@
 							"end_by_hurt_level": 3, "animation": "efn:biped/nf_skill/biped_flashblock3", "convert_time": 0.0,
 							"command_list":[
 							{"time":0.05, "command":"item replace entity @s weapon.mainhand with cataclysm:the_annihilator", "execute_at_target":false},
-							{"time":0.5, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_greatsword' 0.0 1.0", "execute_at_target":false}
+							{"time":0.5, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ]
 						},
 						{
 							"conditions": [
 								{"predicate":"indestructible:phase", "min": 5, "max": 5}
 							],
-							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_greatsword", "convert_time": 0.0
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
                 },
@@ -786,7 +809,7 @@
 							{"time":0.25, "command":"execute as @s[nbt={HandItems:[{id:\"tcrcore:the_incinerator_soul\"}]},distance=..24] at @s run particle minecraft:soul_fire_flame ^0 ^1 ^0.5 0.0 0.0 0.0 0.6 300", "execute_at_target":false},
 							{"time":0.05, "command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]},distance=..24] set_phase 7", "execute_at_target":false},
 							{"time":0.5, "command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]},distance=..24] set_phase 7", "execute_at_target":false},
-							{"time":0.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_greatsword' 0.0 1.0", "execute_at_target":false}
+							{"time":0.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"hit_command_list": [
 							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
@@ -860,7 +883,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/ng_greatsword/ng_great_skill_clash_hit", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.05, "armor_negation": 0.05
+							    "damage": 0.9, "impact": 0.5, "armor_negation": 0.5
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.0,
@@ -886,12 +909,13 @@
                             ],
 							"set_phase": 1,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false}
 							]
@@ -924,7 +948,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/soul_render_skill1", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 1.0, "armor_negation": 1.0
+							    "damage": 1.5, "impact": 1.75, "armor_negation": 1.75
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.2,
@@ -982,9 +1006,9 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"hit_command_list": [
@@ -1063,9 +1087,9 @@
                             ],
 							"set_phase": 20,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
 							"hit_command_list": [
@@ -1089,6 +1113,7 @@
                     "behaviors": [
 						{
                             "conditions": [
+							{"predicate":"indestructible:phase", "min": 0, "max": 12}
                             ],
 							"end_by_hurt_level": 3, "animation": "efn:biped/nf_skill/biped_flashblock1", 
 							"convert_time": 0.15,
@@ -1107,7 +1132,7 @@
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"epicfight:stun_armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:1.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s[tag=!cloiaboss] {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:resistance 600 3", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] efn:damage_reduction 6000 84", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s[tag=!cloiaboss] minecraft:instant_health 7 10", "execute_at_target":false},
 								{"time":0.05, "command":"tag @s[tag=!cloiaboss] add cloiaboss", "execute_at_target":false}
                             ]
@@ -1139,8 +1164,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.15,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0", "execute_at_target":false},
 							{"time":0.05, "command":"effect epicfight:stun_immunity 1 0", "execute_at_target":false},
 							
@@ -1149,8 +1174,8 @@
 							
 							{"time":0.1, "command":"effect give @s minecraft:weakness 1 99", "execute_at_target":false},
 							{"time":0.5, "command":"execute as @s at @s run playsound cataclysm:maledictus_battle_cry hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
-							{"time":0.55, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"cataclysm:ghost_sickness\"}]}] minecraft:instant_health 1 5", "execute_at_target":false},
-							{"time":0.55, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"cataclysm:ghost_sickness\"}]}] cataclysm:ghost_sickness 300 0", "execute_at_target":false},
+							{"time":0.55, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"cataclysm:ghost_sickness\"}]}] minecraft:instant_health 1 6", "execute_at_target":false},
+							{"time":0.55, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"cataclysm:ghost_sickness\"}]}] cataclysm:ghost_sickness 360 0", "execute_at_target":false},
 							{"time":0.95, "command":"effect clear @s minecraft:weakness", "execute_at_target":false}
                             ],
 							"stamina": 15,
@@ -1403,7 +1428,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -1465,7 +1490,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
@@ -1489,7 +1514,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1550,7 +1575,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_ab", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
@@ -1641,7 +1666,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1665,7 +1690,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1698,7 +1723,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_ab", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.2,
@@ -1751,7 +1776,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -1810,8 +1835,8 @@
 							"convert_time": 0.2,
 							"set_phase": 1,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
 							{"time":1.2, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
 							{"time":0.05, "command":"item replace entity @s weapon.mainhand with cataclysm:cursed_bow", "execute_at_target":false},
 							{"time":1.2, "command":"item replace entity @s weapon.mainhand with cataclysm:soul_render", "execute_at_target":false},
@@ -1831,21 +1856,50 @@
                             "conditions": [
 							{"predicate":"within_distance", "min": 8.0, "max":16.0}, {"predicate":"indestructible:phase", "min": 5, "max": 6}, {"predicate":"random_chance", "chance": 0.5}
                             ],
-                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/dagger_dodge_auto1", 
+                            "end_by_hurt_level": 3, "animation": "tcr_bosses:biped/air_strike_rising", 
 							"damage_modifier":{
 							    "damage": 1.2, "impact": 0.3, "armor_negation": 0.3
 							}, 
-							"play_speed": 0.75,
-							"convert_time": 0.2,
+							"play_speed": 1.0,
+							"convert_time": 0.15,
 							"set_phase": 0,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
-							{"time":0.1, "command":"execute as @s at @s run playsound cataclysm:maledictus_mace_swing hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
-							{"time":0.3, "command":"execute as @s at @s run playsound cataclysm:maledictus_mace_swing hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
-							{"time":0.3, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
-							{"time":0.6, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+							{"time":0.6, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.6, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.65, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 0, "max": 0}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "tcr_bosses:biped/air_strike_b", 
+							"damage_modifier":{
+							    "damage": 1.2, "impact": 0.3, "armor_negation": 0.3
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+							"set_phase": 4,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 2 0", "execute_at_target":false},
+							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
+							{"time":0.45, "command":"effect give @s combat_evolution:bypass_dodge_effect 1", "execute_at_target":false},
+							{"time":0.5, "command":"execute as @s at @s run particle epicfight:hit_blunt ^-1.5 ^1 ^0.25 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":0.61, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.63, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.65, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+                            ],
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
                         }
                     ]
                 },
@@ -1868,8 +1922,8 @@
 							"convert_time": 0.2,
 							"set_phase": 1,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
 							{"time":1.2, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
 							{"time":0.05, "command":"item replace entity @s weapon.mainhand with cataclysm:cursed_bow", "execute_at_target":false},
 							{"time":1.2, "command":"item replace entity @s weapon.mainhand with cataclysm:soul_render", "execute_at_target":false},
@@ -1893,8 +1947,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.05,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
 							{"time":0.1, "command":"effect give @s efn:sin_stun_immunity 1 0", "execute_at_target":false},
 							{"time":0.15, "command":"effect epicfight:stun_immunity 1 0", "execute_at_target":false},
 							{"time":0.15, "command":"tag @s[distance=..48] add clotp", "execute_at_target":true},
@@ -1920,8 +1974,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.05,
                             "command_list":[
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}]}] minecraft:resistance 600 3", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
 							{"time":0.1, "command":"effect give @s efn:sin_stun_immunity 1 0", "execute_at_target":false},
 							{"time":0.15, "command":"effect epicfight:stun_immunity 1 0", "execute_at_target":false},
 							{"time":0.15, "command":"tag @s[distance=..48] add clotp", "execute_at_target":true},
@@ -2030,9 +2084,9 @@
                             ],
 							"set_phase": 1,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
@@ -2084,7 +2138,7 @@
 								{"predicate":"indestructible:phase", "min": 10, "max": 10}
 							],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/dagger_auto3",
-							"play_speed": 0.9,
+							"play_speed": 0.8,
 							"convert_time": 0.3,
 							"damage_modifier":{
 							    "damage": 1.0, "impact": 0.1, "armor_negation": 0.1
@@ -2198,7 +2252,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/annihilator_skill1", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.25, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -2274,9 +2328,9 @@
                             ],
 							"set_phase": 6,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
                                 {"command":"indestructible @s set_phase 19", "execute_at_target":false},
 								{"command":"indestructible @s play 'epicfight:biped/combat/hit_short' 0.1 1", "execute_at_target":true},
@@ -2338,9 +2392,9 @@
                             ],
 							"set_phase": 6,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] alexsmobs:exsanguination 16 128", "execute_at_target":true},
-							{"command":"epicfight stamina set @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] 0", "execute_at_target":true},
-							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
                                 {"command":"indestructible @s set_phase 19", "execute_at_target":false},
 								{"command":"indestructible @s play 'epicfight:biped/combat/hit_short' 0.1 1", "execute_at_target":true},
@@ -2381,7 +2435,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/sword_dual_auto3", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.25, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
 							}, 
 							"set_phase": 0,
 							"play_speed": 0.6,
@@ -2408,7 +2462,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/sword_dual_auto3", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.25, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
 							}, 
 							"set_phase": 0,
 							"play_speed": 0.6,
@@ -2446,7 +2500,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -2465,7 +2519,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -2483,7 +2537,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.2, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,

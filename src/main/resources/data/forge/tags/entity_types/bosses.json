@@ -6,6 +6,14 @@
     "ba_bt:core_golem",
     "ba_bt:nether_golem",
     "ba_bt:end_golem",
-    "ba_bt:sky_golem"
+    "ba_bt:sky_golem",
+    "tcr_bosses:maledictus_humanoid",
+    "tcr_bosses:ignis_humanoid",
+    "tcr_bosses:netherite_humanoid",
+    "tcr_bosses:scylla_humanoid",
+    "tcr_bosses:ender_guardian_humanoid",
+    "tcr_bosses:harbinger_humanoid",
+    "tcr_bosses:leviathan_humanoid",
+    "tcr_bosses:ancient_remnant_humanoid"
   ]
 }

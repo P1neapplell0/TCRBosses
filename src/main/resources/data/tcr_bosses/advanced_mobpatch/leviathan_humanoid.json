@@ -1,0 +1,2381 @@
+{
+    "model": "tcrmeshes:entity/ancient_remain",
+	"armature": "epicfight:entity/biped",
+    "renderer": "",
+    "isHumanoid": true,
+    "faction": "wither",
+	"boss_bar": true,
+	"custom_texture": "indestructible:textures/gui/lboss_bar.png",
+    "attributes": {
+        "impact": 5.0,
+        "armor_negation": 5.0,
+        "max_strikes": 4,
+        "chasing_speed": 1.5,
+		"scale": 2.0,
+		"max_stamina": 120,
+		"stamina_regan_multiply": 0.0,
+		"stamina_regan_delay": 100,
+		"has_stun_reduction": false,
+		"stamina_lose_multiply": 0.0,
+		"guard_radius": 0,
+		"attack_radius": 1.5
+    },
+	"default_livingmotions": {
+        "idle": "epicfight:biped/living/idle",
+        "walk": "epicfight:biped/living/walk",
+        "chase": "epicfight:biped/living/walk",
+        "mount": "epicfight:biped/living/mount",
+        "fall": "epicfight:biped/living/fall",
+        "death": "wom:biped/living/biped_blackout"
+	},
+    "stun_animations": {
+	    "short": "epicfightx:biped/combat/hit_short3",
+        "long": "epicfight:biped/combat/hit_long",
+        "knockdown": "epicfight:biped/combat/hit_long",
+		"neutralize": "epicfight:biped/skill/guard_break1"
+    },
+    "humanoid_weapon_motions": [
+        {
+            "weapon_categories": ["fist"],
+            "style":"common",
+            "livingmotions": {
+				"chase": "epicfight:biped/living/run",
+                "walk": "epicfight:biped/living/walk"
+            }
+        },
+		{
+            "weapon_categories": ["sword"],
+            "style":"common",
+            "livingmotions": {
+				"chase": "epicfightx:biped/living/run_greatsword",
+                "walk": "epicfightx:biped/living/walk_greatsword",
+                "idle": "epicfightx:biped/living/hold_spear"
+            }
+        }
+    ],
+    "custom_guard_motion": [
+	    {
+             "weapon_categories": ["pickaxe", "shovel"],
+			 "style": "common",
+             "guard": "indestructible:guard/guard_sword",
+             "stamina_cost_multiply": 0.4,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.4,
+			 "parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+        {
+            "weapon_categories": ["hoe"],
+            "style": "common",
+            "guard": "indestructible:guard/guard_sword",
+            "stamina_cost_multiply": 0.65,
+            "can_block_projectile" : true,
+			"parry_cost_multiply": 0.65,
+			"parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+        {
+            "weapon_categories": ["axe"],
+            "style": "common",
+            "guard": "indestructible:guard/guard_sword",
+            "stamina_cost_multiply": 0.8,
+            "can_block_projectile" : true,
+			"parry_cost_multiply": 0.8,
+			"parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+        {
+            "weapon_categories": ["fist"],
+            "style": "common",
+            "guard": "indestructible:guard/guard_dualsword",
+            "stamina_cost_multiply": 0.1,
+            "can_block_projectile" : true,
+			"parry_cost_multiply": 0.1,
+			"parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+        {
+            "weapon_categories": ["sword"],
+            "style": "two_hand",
+            "guard": "indestructible:guard/guard_dualsword",
+            "stamina_cost_multiply": 0.5,
+            "can_block_projectile" : true,
+			"parry_cost_multiply": 0.5,
+			"parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+		{
+             "weapon_categories": ["sword"],
+			 "style": "common",
+             "guard": "indestructible:guard/guard_sword",
+             "stamina_cost_multiply": 0.8,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.8,
+			 "parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+		{
+             "weapon_categories": ["spear"],
+			 "style": "common",
+             "guard": "indestructible:guard/guard_spear",
+             "stamina_cost_multiply": 0.75,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.4,
+			 "parry_animation": ["epicfight:biped/skill/guard_longsword_hit_active1", "epicfight:biped/skill/guard_longsword_hit_active2"]
+        },
+		{
+             "weapon_categories": ["trident"],
+			 "style": "common",
+             "guard": "indestructible:guard/guard_spear",
+             "stamina_cost_multiply": 0.22,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.22,
+			 "parry_animation": ["epicfight:biped/skill/guard_longsword_hit_active1", "epicfight:biped/skill/guard_longsword_hit_active2"]
+        },
+        {
+             "weapon_categories": ["greatsword"],
+             "style": "common",
+             "guard": "indestructible:guard/guard_greatsword",
+             "stamina_cost_multiply": 0.75,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.4,
+			 "parry_animation": ["epicfight:biped/skill/guard_longsword_hit_active1", "epicfight:biped/skill/guard_longsword_hit_active2"]
+        },
+		{
+             "weapon_categories": ["uchigatana"],
+             "style": "common",
+             "guard": "indestructible:guard/guard_uchigatana",
+             "stamina_cost_multiply": 0.5,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.5,
+			 "parry_animation": ["epicfight:biped/skill/guard_sword_hit_active1", "epicfight:biped/skill/guard_sword_hit_active2"]
+        },
+        {
+             "weapon_categories": ["longsword"],
+             "style": "common",
+             "guard": "indestructible:guard/guard_longsword",
+             "stamina_cost_multiply": 0.2,
+             "can_block_projectile" : true,
+			 "parry_cost_multiply": 0.2,
+			 "parry_animation": ["epicfight:biped/skill/guard_longsword_hit_active1", "epicfight:biped/skill/guard_longsword_hit_active2"]
+        },
+        {
+            "weapon_categories": ["tachi"],
+            "style": "common",
+            "guard": "indestructible:guard/guard_longsword",
+            "stamina_cost_multiply": 0.2,
+            "can_block_projectile" : true,
+			"parry_cost_multiply": 0.2,
+			"parry_animation": ["epicfight:biped/skill/guard_longsword_hit_active1", "epicfight:biped/skill/guard_longsword_hit_active2"]
+       }
+    ],
+	"stun_command_list":[
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "long"},
+	
+	    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run effect give @s efn:sin_stun_immunity 7 0 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 4 0 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 3 0 true", "stun_type": "short"},
+		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run effect give @s efn:sin_stun_immunity 7 0 true", "stun_type": "long"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 4 0 true", "stun_type": "long"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 3 0 true", "stun_type": "long"},
+		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "long"},
+		
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 91 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 91 true", "stun_type": "long"},
+		
+		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}, nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:invincibility 24 0 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}, nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:invincibility 24 0 true", "stun_type": "long"},
+		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}, nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:invincibility 24 0 true", "stun_type": "knockdown"},
+		{"command":"effect give @s efn:invincibility 24 0 true", "stun_type": "neutralize"},
+		
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] minecraft:hunger", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] epicfight:stun_immunity", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn:sin_stun_immunity ", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] minecraft:resistance 5 2 true", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "short"},
+		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "long"},
+		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4 true", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4 true", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4 true", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4 true", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "stun_type": "knockdown", "execute_at_target": false},
+		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 5 2 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 5 4 true", "stun_type": "short", "execute_at_target": false},
+		
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"wom:satsujin\"}},distance=..9] at @s run effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 12 3", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 93 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 0 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
+		
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 94 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 93 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 93 true", "stun_type": "short", "execute_at_target": false},
+		
+		{"command":"execute as @s at @s run execute as @e[type=efn:summoned_sword_out,distance=..8] at @s run effect clear @a[distance=..6] minecraft:resistance", "stun_type": "short", "execute_at_target": false},
+		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run execute as @a[distance=..5] at @s run epicfight animator play @s efn:biped/yamato/biped_hitback_air", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run execute as @a[distance=..5] at @s run epicfight animator play @s efn:biped/yamato/biped_hitback_air", "stun_type": "long", "execute_at_target": false},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:absorption 5 8 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect clear @s efn:yamato_stun", "stun_type": "short"},
+		{"command":"execute as @s[nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}", "stun_type": "short"},
+		{"command":"execute as @s[nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}", "stun_type": "long"},
+		{"command":"execute as @s[nbt={NoAI:1b}] run data merge entity @s {NoAI:0b}", "stun_type": "knockdown"},
+		
+		{"command":"execute as @s[nbt=!{HandItems:[{id:\"cataclysm:tidal_claws\"}]}] run item replace entity @s weapon.mainhand with cataclysm:tidal_claws", "stun_type": "short"},
+		{"command":"execute as @s[nbt={HandItems:[{id:\"cataclysm:tidal_claws\"}]}, tag=!leviathanboss] run item replace entity @s weapon.mainhand with minecraft:air", "stun_type": "short"},
+		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "long"},
+		
+		{"command":"execute as @s at @s run effect give @s efn:damage_reduction 6000 87 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}] at @s run effect give @s minecraft:resistance 6000 0 true", "stun_type": "short"},
+		
+		{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 5", "stun_type": "short"},
+		{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 18", "stun_type": "short"},
+		{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 5", "stun_type": "long"},
+		{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 18", "stun_type": "long"},
+		
+		{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 5", "stun_type": "knockdown"},
+		{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 18", "stun_type": "knockdown"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect give @s minecraft:absorption 16 99 true", "stun_type": "neutralize"}
+	],
+
+    "combat_behavior": [
+	   {
+			"weapon_categories": ["fist", "sowrd"],
+			"style": "common",
+			"behavior_series": [
+				
+				
+				{
+					"weight": 0.1,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 40,
+					"behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max": 14.0}, {"predicate":"random_chance", "chance": 0.3}, {"predicate":"indestructible:phase", "min": 1, "max": 5}
+							],
+							"wander": 60, "inaction_time": 0,	  
+							"x_axis": -0.125, "z_axis": -0.15		
+						}
+                    ]                 
+				},
+				
+				{
+					"weight": 0.1,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 40,
+					"behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max": 14.0}, {"predicate":"random_chance", "chance": 0.3}, {"predicate":"indestructible:phase", "min": 1, "max": 5}
+							],
+							"wander": 60, "inaction_time": 0,	  
+							"x_axis": 0.125, "z_axis": -0.15		
+						}
+                    ]                 
+				},
+				
+				{
+					"weight": 0.1,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 50,
+					"behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max": 12.0}, {"predicate":"random_chance", "chance": 0.03}, {"predicate":"indestructible:phase", "min": 1, "max": 5}
+							],
+							"set_phase": 6,
+							"wander": 60, "inaction_time": 0,	  
+							"x_axis": 0.0, "z_axis": 0.25		
+						}
+                    ]                 
+				},
+				
+				{
+					"weight": 0.1,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 30,
+					"behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 10.0, "max": 32.0}, {"predicate":"random_chance", "chance": 0.6}, {"predicate":"indestructible:phase", "min": 1, "max": 5}
+							],
+							"set_phase": 6,
+							"wander": 60, "inaction_time": 0,	  
+							"x_axis": 0.0, "z_axis": 0.25		
+						}
+                    ]                 
+				},
+				
+				{
+					"weight": 10,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 1}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_left", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -2,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 2
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 8,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_right", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -2,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 3
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 6,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 3, "max": 3}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_left", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -2,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 4
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 4, "max": 4}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_right", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -2,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 5
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 40,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}, {"predicate":"indestructible:knock_down", "invert": false}, {"predicate":"indestructible:guard_break", "invert": false}, {"predicate":"random_chance", "chance": 0.1}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -6,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 6
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 40,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}, {"predicate":"indestructible:knock_down", "invert": false}, {"predicate":"indestructible:guard_break", "invert": false}, {"predicate":"random_chance", "chance": 0.1}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -6,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 6
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -6,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 6
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -6,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 6
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 100,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 9, "max": 9}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/antitheus_lapse", 
+							"play_speed": 0.8,
+							"convert_time": 0.2,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 4 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:weakness 3 99 true", "execute_at_target":false},
+							
+							{"time":1.8, "command":"data merge entity @s {Attributes:[{Base:350d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+							{"time":1.8, "command":"effect give @s minecraft:instant_health 7 10 true", "execute_at_target":false},
+							
+							{"time":1.8, "command":"invincible groundSlam @s 4.0 false true false", "execute_at_target":false},
+							{"time":1.9, "command":"invincible groundSlam @s 5.0 false true false", "execute_at_target":false},
+							
+							{"time":1.8, "command":"data merge entity @s {Attributes:[{Base:150.0d,Name:\"epicfight:staminar\"}]}", "execute_at_target":false},
+							
+							{"time":1.8, "command":"effect give @s minecraft:resistance 6000 0 true", "execute_at_target":false},
+							{"time":1.8, "command":"effect give @s efn:attack_damage_increase 6000 11 true", "execute_at_target":false},
+							{"time":1.8, "command":"effect give @a[distance=..24] minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":1.8, "command":"effect give @s[distance=..24] minecraft:slowness 3 4 true", "execute_at_target":true},
+							{"time":1.8, "command":"summon minecraft:lightning_bolt ~ ~7 ~", "execute_at_target":false},
+                            {"time":1.8, "command":"summon minecraft:lightning_bolt ~ ~-9 ~", "execute_at_target":false}
+                            ],
+							"set_phase": 5
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 5, "max": 5}
+							],
+							"stamina": -180,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]                 
+				},
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 30,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 9.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 6, "max": 6}
+							],
+							"wander": 25, "inaction_time": 1,	  
+							"x_axis": 0.0, "z_axis": -0.1		
+						},
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 6, "max": 6}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/claw_skill2", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathanboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.15, "command":"effect give @s[distance=..32] minecraft:slowness 2 2 true", "execute_at_target":true},
+							{"time":0.35, "command":"effect give @s[distance=..32] minecraft:slowness 3 3 true", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s at @s run playsound cataclysm:leviathan_stun_roar hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},	
+							{"time":0.4, "command":"effect clear @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] cataclysm:abyssal_burn", "execute_at_target":false},
+							{"time":0.8, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},	
+							{"time":0.8, "command":"effect clear @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] cataclysm:abyssal_burn", "execute_at_target":false},
+							{"time":1.2, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},
+							
+							
+							{"time":1.2, "command":"execute at @s run tp @e[type=epicfight:wither_skeleton_minion,distance=..48] ~0 ~-320 ~0", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run summon epicfight:wither_skeleton_minion ^6 ^-0.25 ^1 {CustomName:'[{\"text\":\"leviathanI\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.3, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run summon epicfight:wither_skeleton_minion ^-6 ^-0.25 ^1 {CustomName:'[{\"text\":\"leviathanII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run epicfight animator play @e[type=epicfight:wither_skeleton_minion,limit=1,name=leviathanI,distance=..24] p1nero_ec:skill/claw_skill2", "execute_at_target":false},
+							{"time":0.3, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run epicfight animator play @e[type=epicfight:wither_skeleton_minion,limit=1,name=leviathanII,distance=..24] p1nero_ec:skill/claw_skill2", "execute_at_target":false},
+							
+							{"time":0.1, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.1, "command":"execute as @e[name=leviathanI,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.1, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"execute as @e[name=leviathanII,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.3, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 6,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 3, "max": 3}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 30,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 3.0, "max": 9.5}, {"predicate":"indestructible:phase", "min": 6, "max": 6}, {"predicate":"health", "health": 699, "comparator": "less_absolute"}
+							],
+                            "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/claw_skill3", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathanboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s at @s run playsound cataclysm:leviathan_roar hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":1.2, "command":"execute at @s run tp @e[type=epicfight:wither_skeleton_minion,distance=..48] ~0 ~-320 ~0", "execute_at_target":false},
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanI\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanIII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanIV\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 6,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 6", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 6", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 6, "max": 6}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 25,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.5}, {"predicate":"indestructible:phase", "min": 6, "max": 6}, {"predicate":"health", "health": 699, "comparator": "less_absolute"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/enderblaster_twohand_auto_4", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.75,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 2", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 9,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 4.5, "max": 10.0}, {"predicate":"indestructible:phase", "min": 6, "max": 7}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_1", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 0.15, "armor_negation": 0.15
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 6 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 2", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 0, "max": 2}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
+							],
+							"stamina": -1,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				{
+                    "weight": 9,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 15,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 6, "max": 6}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/nf_claw_n/nf_claw_auto2", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 6 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true},							
+							{"command":"indestructible @s set_phase 2", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 0, "max": 2}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
+							],
+							"stamina": -1,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				{
+                    "weight": 8,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 6, "max": 7}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/nf_claw_n/nf_claw_auto3", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[	
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 6 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 2", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 0, "max": 2}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
+							],
+							"stamina": -1,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+
+				
+				{
+                    "weight": 150,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 10,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 1, "max": 9}, {"predicate":"indestructible:stamina", "stamina": 0.99, "comparator": "greater_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+							"stamina": -4,
+                            "command_list":[
+							{"time":0.05, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 0.0 1", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 2 0 true", "execute_at_target":false},
+							
+							{"time":0.25, "command":"effect give @s efn:claw 6000 0 true", "execute_at_target":false},
+							{"time":0.25, "command":"indestructible @s[distance=..24] play 'epicfightx:biped/living/hold_longsword' 0.1 1", "execute_at_target":false}
+                            ],
+							"set_phase": 11
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 11, "max": 11}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/yamato_judgementcut_end", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": -4.75,
+                            "command_list":[
+                            ],
+							"set_phase": 11
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 11, "max": 11}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/scythe/skill/scythe_scarlet_end", 
+							"damage_modifier":{
+							    "damage": 0.4, "impact": 1.0, "armor_negation": 1.0
+							}, 
+							"play_speed": 1.0,
+							"convert_time": -2.15,
+                            "command_list":[
+							{"time":2.7, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^1.5 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":3.25, "command":"effect clear @s efn:invincibility", "execute_at_target":false},
+							{"time":2.95, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":2.95, "command":"effect give @a[distance=..48] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":2.95, "command":"effect give @a[distance=..48] minecraft:blindness 4 0 true", "execute_at_target":true}
+                            ],
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 24 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 11,
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"effect clear @s efn:invincibility", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}, distance=..24] set_phase 1", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}, distance=..24] play 'epicfight:biped/living/hold_tachi' 0.0 1.0", "is_parry": true, "execute_at_target":false}								
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 11, "max": 11}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 150,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 15,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}, {"predicate":"indestructible:stamina", "stamina": 0.01, "comparator": "less_ratio"}, {"predicate":"health", "health": 349, "comparator": "greater_absolute"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/yamato_judgementcut_end", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 1.0
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.2,
+                            "command_list":[
+							{"time":0.5, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
+							{"time":0.5, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.5, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.5, "command":"effect give @s efn:sin_stun_immunity 7 0 true", "execute_at_target":false},
+							{"time":0.5, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
+							{"time":1.5, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^1.5 0 0 0 0.1 5", "execute_at_target":false},
+							{"time":4.65, "command":"effect clear @a[distance=..48] minecraft:darkness", "execute_at_target":false}
+                            ],
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 32 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 20
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 20, "max": 20}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+					]
+                },
+				
+				{
+                    "weight": 1500,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 15,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}, {"predicate":"indestructible:stamina", "stamina": 0.01, "comparator": "less_ratio"}, {"predicate":"health", "health": 350, "comparator": "less_absolute"}
+							],
+                            "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/claw_skill3", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathanboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s at @s run playsound cataclysm:leviathan_roar hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":1.2, "command":"execute at @s run tp @e[type=epicfight:wither_skeleton_minion,distance=..48] ~0 ~-320 ~0", "execute_at_target":false},
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"effect give @s efn:invincibility 5 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanI\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanIII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanIV\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 20,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 20
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/katana_auto_2", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 0.05, "armor_negation": 0.05
+							}, 
+							"play_speed": 0.75,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":0.6, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+                            ],
+							"set_phase": 20,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/nf_claw_n/nf_claw_auto2", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":0.95, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+                            ],
+							"set_phase": 20,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 9 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true}, 
+							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock2' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/agony_air_attack_3", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 20,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/herrscher_verdammnis", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.8,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 2 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 20,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 20, "max": 20}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/yamato_judgementcut_end", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 1.0
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.2,
+                            "command_list":[
+							{"time":0.5, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
+							{"time":0.5, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.5, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.5, "command":"effect give @s efn:sin_stun_immunity 7 0 true", "execute_at_target":false},
+							{"time":0.5, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
+							{"time":1.5, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^1.5 0 0 0 0.1 5", "execute_at_target":false},
+							{"time":4.65, "command":"effect clear @a[distance=..48] minecraft:darkness", "execute_at_target":false}
+                            ],
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 32 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 20
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 20, "max": 20}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 1000,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 1,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"indestructible:phase", "min": 20, "max": 20}
+							],
+							"set_phase": 20,
+							"stamina": 30,
+							"end_by_hurt_level": 3, "animation": "wom:biped/living/biped_blackout", "convert_time": 0.2,
+							"command_list":[
+							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 87 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 4 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:resistance 3 2 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s efn:invincibility", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s at @s run playsound epicfight:sfx.neutralize_bosses master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":2.25, "command":"indestructible @s[distance=..48] play 'epicfight:biped/living/hold_longsword' 0.25 1.0", "execute_at_target":false}
+                            ]
+						},
+						{
+							"conditions": [
+								{"predicate":"indestructible:phase", "min": 20, "max": 20}
+							],
+							"set_phase": 1,
+							"end_by_hurt_level": 3, "animation": "epicfight:biped/skill/guard_break1", "convert_time": 0.25,
+							"command_list":[
+							{"time":0.05, "command":"effect clear @s minecraft:resistance", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 89 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s epicfight:stun_immunity 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:glowing 36 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:unluck 18", "execute_at_target":false}
+                            ]
+						}
+                    ]
+                },
+				
+
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 6,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+							"stamina": 4,
+                            "command_list":[
+							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 12
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 6,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 11, "max": 11}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+							"stamina": 4,
+                            "command_list":[
+							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 13
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 6,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+							"stamina": 4,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
+							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 12
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 4,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 6,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 11, "max": 11}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+							"stamina": 4,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
+							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+                            ],
+							"set_phase": 13
+                        }
+                    ]                 
+				},
+				
+
+				
+				{
+					"weight": 7,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 17, "max": 17}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": 3,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 5 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 10
+                        },
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 12.5}, {"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate":"random_chance", "chance": 0.4}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 4 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 12
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 3,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 18, "max": 18}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": 5,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 5 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 11
+                        },
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 12.5}, {"predicate":"indestructible:phase", "min": 11, "max": 11}, {"predicate":"random_chance", "chance": 0.4}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 4 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 13
+                        }
+                    ]                 
+				},
+				
+				{
+					"weight": 3,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 1,
+					"behaviors": [
+					    {
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 19, "max": 19}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+							"stamina": -10,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 5 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 10
+                        },
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 12.5}, {"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate":"random_chance", "chance": 0.4}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 4 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.25, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
+							{"time":0.35, "command":"effect give @s minecraft:slowness 3 6 true", "execute_at_target":false}
+                            ],
+							"set_phase": 13
+                        }
+                    ]                 
+				},
+				
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 9.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+							],
+							"wander": 25, "inaction_time": 1,	  
+							"x_axis": 0.0, "z_axis": -0.1		
+						},
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/claw_skill2", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathanboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"effect give @s minecraft:glowing 4 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s at @s run playsound cataclysm:leviathan_stun_roar hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..32] minecraft:slowness 2 2 true", "execute_at_target":true},
+							{"time":0.35, "command":"effect give @s[distance=..32] minecraft:slowness 3 3 true", "execute_at_target":true},
+							{"time":0.4, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},	
+							{"time":0.4, "command":"effect clear @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] cataclysm:abyssal_burn", "execute_at_target":false},
+							{"time":0.8, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},	
+							{"time":0.8, "command":"effect clear @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] cataclysm:abyssal_burn", "execute_at_target":false},
+							{"time":1.2, "command":"effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:abyssal_burn\"}]}, distance=..32] attributeslib:bleeding 3 9 true", "execute_at_target":false},
+							
+							
+							{"time":1.2, "command":"execute at @s run tp @e[type=epicfight:wither_skeleton_minion,distance=..48] ~0 ~-320 ~0", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run summon epicfight:wither_skeleton_minion ^6 ^-0.25 ^1 {CustomName:'[{\"text\":\"leviathanI\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.3, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run summon epicfight:wither_skeleton_minion ^-6 ^-0.25 ^1 {CustomName:'[{\"text\":\"leviathanII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run epicfight animator play @e[type=epicfight:wither_skeleton_minion,limit=1,name=leviathanI,distance=..24] p1nero_ec:skill/claw_skill2", "execute_at_target":false},
+							{"time":0.3, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @s run epicfight animator play @e[type=epicfight:wither_skeleton_minion,limit=1,name=leviathanII,distance=..24] p1nero_ec:skill/claw_skill2", "execute_at_target":false},
+							
+							{"time":0.1, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.1, "command":"execute as @e[name=leviathanI,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.1, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"execute as @e[name=leviathanII,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.3, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 10,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 10", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 10", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 10, "max": 10}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 30,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 3.0, "max": 9.5}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+							],
+                            "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/claw_skill3", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathanboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=leviathantp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s at @s run playsound cataclysm:leviathan_roar hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:glowing 4 0 true", "execute_at_target":false},
+							{"time":1.2, "command":"execute at @s run tp @e[type=epicfight:wither_skeleton_minion,distance=..48] ~0 ~-320 ~0", "execute_at_target":false},
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanI\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~5 ~0 ~-5 {CustomName:'[{\"text\":\"leviathanIII\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] at @e[tag=leviathantp,distance=..10,limit=1] run summon epicfight:wither_skeleton_minion ~-5 ~0 ~5 {CustomName:'[{\"text\":\"leviathanIV\"}]',NoAI:1b,ActiveEffects:[{Id:14,Duration:9999}]}", "execute_at_target":false},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 13,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 10", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 10", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 10, "max": 10}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 13, "max": 13}
+							],
+							"wander": 25, "inaction_time": 1,	  
+							"x_axis": 0.0, "z_axis": -0.1		
+						},
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ~ ~0.05 ~0.0", "execute_at_target":true},
+							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 2 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect clear @s efn:sin_stun_immunity", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s epicfight:stun_immunity 2 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true}
+                            ],
+							"set_phase": 12,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 13", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 13", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/ruine_expiation", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^-1.5 ^3.5 ^1.75 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":0.235, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.24, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+                            ],
+							"set_phase": 17,
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 6 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true}	
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 19, "max": 19}
+							],
+							"stamina": 4,
+							"set_phase": 10,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 16,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 30,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+							],
+							"wander": 25, "inaction_time": 1,	  
+							"x_axis": 0.0, "z_axis": -0.1		
+						},
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-pre", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.8,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.1, "command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}, distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false},
+							{"time":0.05, "command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}, distance=..24] at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}, distance=..24] minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
+							{"time":0.35, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^1 ^2.5 ^1 0 0 0 0.1 3", "execute_at_target":false}
+                            ],
+							"set_phase": 12,
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 6 128", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"epicfight stamina set @s[distance=..24] 0", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] minecraft:haste 1 0 true", "execute_at_target":false}, 
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true}, 							
+							{"command":"effect give @s[distance=..24] cataclysm:stun 3 0 true", "execute_at_target":true},
+							{"command":"indestructible @s set_phase 13", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 13, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-drain", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0 true", "execute_at_target":false}
+                            ],
+							"set_phase": 19,
+							"hit_command_list": [
+							{"command":"effect clear @s[distance=..24] cataclysm:stun", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] attributeslib:bleeding 7 14 true", "execute_at_target":true},							
+							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab-drain_hit' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true}	
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 19, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 12,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 40,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 2.0, "max": 5.5}, {"predicate":"indestructible:phase", "min": 12, "max": 13}, {"predicate":"health", "health": 349, "comparator": "less_absolute"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/napoleon_shoot_3", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 18,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 9 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 25,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.5}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/enderblaster_twohand_auto_4", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.75,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 18,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 15,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 40,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}, {"predicate":"health", "health": 349, "comparator": "less_absolute"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_right", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 14
+                        },
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/agony_air_attack_3", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 15,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 14", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 14", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}, {"predicate":"random_chance", "chance": 0.4}
+							],
+							"set_phase": 14,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 15,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 40,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}, {"predicate":"health", "health": 349, "comparator": "less_absolute"}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfight:biped/skill/step_left", 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 14
+                        },
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/katana_auto_2", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 0.05, "armor_negation": 0.05
+							}, 
+							"play_speed": 0.75,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 15,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}, {"predicate":"random_chance", "chance": 0.4}
+							],
+							"set_phase": 14,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 16,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 1,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 8.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/agony_air_attack_4", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.8,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:jump_boost 3 3 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":0.55, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.55, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.55, "command":"effect clear @s efn:sin_stun_immunity", "execute_at_target":false},
+							{"time":0.55, "command":"effect give @s epicfight:stun_immunity 2 0 true", "execute_at_target":false},
+							{"time":0.55, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
+							{"time":0.6, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
+							{"time":0.825, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^1.0 ^0.5 ^2.0 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":1.025, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":1.04, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+                            ],
+							"set_phase": 17,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 4,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 15,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 1,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 15, "max": 15}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/agony_counter", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.8,
+							"convert_time": 0.2,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 14,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/agony_rising_eagle", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.3, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"effect clear @s efn:sin_stun_immunity", "execute_at_target":false},
+							{"time":0.3, "command":"effect give @s epicfight:stun_immunity 2 0 true", "execute_at_target":false},
+							{"time":0.3, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 14,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "tcr_bosses:biped/air_strike_a", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:jump_boost 3 3 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s combat_evolution:bypass_guard_effect 1 0 true", "execute_at_target":false},
+							{"time":0.1, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^1.0 ^1.5 ^2.0 0 0 0 0.1 2", "execute_at_target":false}
+                            ],
+							"set_phase": 12,
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 6 128", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"epicfight stamina set @s[distance=..24] 0", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] minecraft:haste 1 0 true", "execute_at_target":false}, 
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true}, 							
+							{"command":"effect give @s[distance=..24] cataclysm:stun 3 0 true", "execute_at_target":true},
+							{"command":"indestructible @s set_phase 13", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 13, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-drain", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0 true", "execute_at_target":false}
+                            ],
+							"set_phase": 19,
+							"hit_command_list": [
+							{"command":"effect clear @s[distance=..24] cataclysm:stun", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] attributeslib:bleeding 7 14 true", "execute_at_target":true},							
+							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab-drain_hit' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true}	
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 19, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				
+				{
+                    "weight": 10,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 10,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 5.5}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/staff_auto_1", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 14,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true}
+							]
+                        },
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/staff_auto_2", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 14,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/nf_skill/biped_flashblock2' 0.05 1", "is_parry": true, "execute_at_target":true}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 6,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 6,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/nf_claw_n/nf_claw_auto2", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.3,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 12,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 9 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true}, 
+							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock2' 0.05 1", "is_parry": true, "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] efn:shiver 1 0 true", "is_parry": true, "execute_at_target":true}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 12, "max": 12}
+							],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/nf_claw_n/nf_claw_auto3", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[	
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 17,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 10 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 9,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/napoleon_shoot_1", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.25,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"set_phase": 18,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 9,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 5,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 2.5, "max": 32.0}, {"predicate":"indestructible:phase", "min": 14, "max": 14}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/orbit_attack_3", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.2,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4", "execute_at_target":false}
+                            ],
+							"set_phase": 18,
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 8 0 true", "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 																	
+							{"command":"indestructible @s set_phase 18", "is_parry": true, "execute_at_target":false}
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 17, "max": 19}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						},
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
+							],
+							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 10000,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 120000,
+                    "behaviors": [
+						{
+                            "conditions": [
+                            ],
+							"end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+							"convert_time": 0.0,
+							"stamina": 180,
+							"set_phase": 1,
+                            "command_list":[
+							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with cataclysm:tidal_claws", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.45d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:21d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:700d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:480d,Name:\"epicfight:weight\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:50.0d,Name:\"epicfight:stun_armor\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:5.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
+								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:glowing", "execute_at_target":false},
+								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:darkness", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s efn:invincibility 24 0 true", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 87 true", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s minecraft:instant_health 7 10 true", "execute_at_target":false},
+								{"time":0.05, "command":"tag @s[tag=!leviathanboss] add leviathanboss", "execute_at_target":false}
+                            ]
+                        }
+                    ]
+                }
+			]
+		}
+    ]
+}
