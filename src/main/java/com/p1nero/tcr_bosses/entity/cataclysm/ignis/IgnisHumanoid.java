@@ -55,16 +55,16 @@ public class IgnisHumanoid extends BaseBossEntity {
     }
 
     @Override
-    public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
+    public boolean hurt(@NotNull DamageSource source, float pAmount) {
         if(this.hasEffectOfLevel(MobEffects.DAMAGE_RESISTANCE, 4)) {
             level().playSound(null, this.getOnPos(), SoundEvents.BLAZE_HURT,
                     SoundSource.AMBIENT, 0.7F, 0.5F + level().random.nextFloat() * 0.3F);
             if(this.shield != null) {
-                this.shield.hurt(pSource, 0);
+                this.shield.hurt(source, 0);
             }
             this.hurtTime = 0;
         }
-        return super.hurt(pSource, pAmount);
+        return super.hurt(source, pAmount);
     }
 
     @Override

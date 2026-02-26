@@ -6,8 +6,11 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -69,10 +72,26 @@ public abstract class BaseBossEntity extends PathfinderMob {
     }
 
     @Override
+    public boolean hurt(@NotNull DamageSource source, float pAmount) {
+        if(source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.LAVA)) {
+            return false;
+        }
+        if(source.isIndirect() && source.getEntity() != null && source.getEntity().distanceTo(this) < 3) {
+            return false;
+        }
+        return super.hurt(source, pAmount);
+    }
+
+    @Override
     public void die(@NotNull DamageSource pDamageSource) {
         super.die(pDamageSource);
         if(level().isClientSide) {
             BossMusicPlayer.stopBossMusic(this);
         }
+    }
+
+    @Override
+    protected float getEquipmentDropChance(@NotNull EquipmentSlot pSlot) {
+        return 0;
     }
 }

@@ -111,7 +111,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
      */
     @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
     public void destroyBlocksNearby(CallbackInfo ci){
-        if(this.tickCount > 200) {
+        if(this.tickCount > 100) {
             ci.cancel();
         }
     }
