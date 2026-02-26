@@ -1093,6 +1093,7 @@
 							"command_list":[
 							{"time":0.05, "command":"effect clear @s efn:damage_reduction", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 79 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s epicfight:stun_immunity 60 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 4 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:resistance 3 2 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s efn:invincibility", "execute_at_target":false},
@@ -1109,7 +1110,7 @@
 							"end_by_hurt_level": 3, "animation": "epicfight:biped/skill/guard_break1", "convert_time": 0.25,
 							"command_list":[
 							{"time":0.05, "command":"effect clear @s minecraft:resistance", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s epicfight:stun_immunity 3 0 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s epicfight:stun_immunity 60 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:unluck 16", "execute_at_target":false}
                             ]
