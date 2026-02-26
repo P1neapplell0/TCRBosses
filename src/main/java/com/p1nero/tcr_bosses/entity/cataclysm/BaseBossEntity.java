@@ -73,10 +73,11 @@ public abstract class BaseBossEntity extends PathfinderMob {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float pAmount) {
-        if(source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.LAVA)) {
+        if(source.is(DamageTypeTags.IS_FIRE)) {
+            this.clearFire();
             return false;
         }
-        if(source.isIndirect() && source.getEntity() != null && source.getEntity().distanceTo(this) < 3) {
+        if(source.isIndirect() && source.getEntity() != null && source.getEntity().distanceTo(this) > 5) {
             return false;
         }
         return super.hurt(source, pAmount);
