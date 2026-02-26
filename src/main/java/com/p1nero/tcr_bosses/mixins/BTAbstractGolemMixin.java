@@ -106,11 +106,15 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         tcr_bosses$ceBossEvent.setVisible(b);
     }
 
-
-//    @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
-//    public void destroyBlocksNearby(CallbackInfo ci){
-//        ci.cancel();
-//    }
+    /**
+     * 允许刚出生时破坏
+     */
+    @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
+    public void destroyBlocksNearby(CallbackInfo ci){
+        if(this.tickCount > 200) {
+            ci.cancel();
+        }
+    }
 
     @Inject(method = "getTargetingRange", at = @At(value = "HEAD"), cancellable = true, remap = false)
     public void tcr$getTargetingRange(CallbackInfoReturnable<Integer> cir) {
