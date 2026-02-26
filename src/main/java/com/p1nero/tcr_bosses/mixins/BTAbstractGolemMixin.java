@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.mixins;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
+import com.brass_amber.ba_bt.util.GolemType;
 import com.p1nero.tcr_bosses.entity.battle_tower.sky_golem.SkyGolemPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -31,6 +32,8 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
     @Final
     private ServerBossEvent bossBar;
 
+    @Shadow
+    public GolemType golemType;
     @Unique
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
 
@@ -107,10 +110,13 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
     }
 
     /**
-     * 允许刚出生时破坏
+     * 允许刚出生时破坏，禁止非高塔生的傀儡破坏
      */
     @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
     public void destroyBlocksNearby(CallbackInfo ci){
+        if(this.golemType.equals(GolemType.SKY) || this.golemType.equals(GolemType.NETHER) || this.golemType.equals(GolemType.END)) {
+            ci.cancel();
+        }
         if(this.tickCount > 100) {
             ci.cancel();
         }
