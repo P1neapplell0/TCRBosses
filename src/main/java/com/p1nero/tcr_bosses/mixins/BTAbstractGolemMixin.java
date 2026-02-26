@@ -32,7 +32,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
     @Final
     private ServerBossEvent bossBar;
 
-    @Shadow
+    @Shadow(remap = false)
     public GolemType golemType;
     @Unique
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
