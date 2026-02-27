@@ -164,15 +164,15 @@
        }
     ],
 	"stun_command_list":[
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "short"},
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "long"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 89 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 89 true", "stun_type": "long"},
 	
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3", "stun_type": "short"},
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 4", "stun_type": "short"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 2", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4", "stun_type": "long"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3", "stun_type": "long"},
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 4", "stun_type": "long"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 2", "stun_type": "long"},
 		
 		{"command":"execute as @s at @s run execute as @e[type=efn:summoned_sword_out,distance=..8] at @s run effect clear @a[distance=..6] minecraft:resistance", "stun_type": "short", "execute_at_target": false},
 		
@@ -184,8 +184,8 @@
 		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "long"},
 		
 		
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 87 true", "stun_type": "short"},
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 87true", "stun_type": "long"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 85 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 85 true", "stun_type": "long"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "long", "execute_at_target": false},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "stun_type": "knockdown", "execute_at_target": false},
@@ -199,14 +199,14 @@
 		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 5 4", "stun_type": "short", "execute_at_target": false},
 		
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"wom:satsujin\"}},distance=..9] at @s run effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 12 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 92", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 2", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 92", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 4 92", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 4 92", "stun_type": "short", "execute_at_target": false},		
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 91", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 1", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 91", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 1", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 1", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 1", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 4 91", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=harbingerboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 4 91", "stun_type": "short", "execute_at_target": false},		
 		
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run execute as @a[distance=..5] at @s run epicfight animator play @s efn:biped/yamato/biped_hitback_air", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:yamato_stun\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run execute as @a[distance=..5] at @s run epicfight animator play @s efn:biped/yamato/biped_hitback_air", "stun_type": "long", "execute_at_target": false},
@@ -221,7 +221,7 @@
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "long"},
 		
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:damage_reduction 6000 84", "stun_type": "short"},
+		{"command":"execute as @s at @s run effect give @s efn:damage_reduction 6000 80", "stun_type": "short"},
 		
 		
 		{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] set_phase 4", "stun_type": "short", "execute_at_target": false},
@@ -258,7 +258,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:50.0d,Name:\"epicfight:execution_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:1.35d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:16d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:15d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:550d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:16d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:32d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
@@ -266,7 +266,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.0d,Name:\"epicfight:stun_armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:1.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 84", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 80", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s minecraft:instant_health 7 10", "execute_at_target":false},
 							    {"time":0.3, "command":"indestructible @s play 'epicfightx:biped/living/hold_tachi' 0.0 1.0", "execute_at_target":false}
                             ]
@@ -958,7 +958,7 @@
                     "weight": 100,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 10,
+                    "cooldown": 5,
                     "behaviors": [
 						{
                             "conditions": [
@@ -997,7 +997,7 @@
 							"play_speed": 1.0,
 							"convert_time": 0.15,
                             "command_list":[
-							{"time":0.3, "command":"effect give @s minecraft:slowness 2 5 true", "execute_at_target":false}
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
                             ],
 							"set_phase": 1,
 							"hit_command_list": [
@@ -1234,8 +1234,7 @@
 							{"time":0.25, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
 							{"time":0.25, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":1.15, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":1.375, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":1.4, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":1.3, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
 							{"time":0.15, "command":"effect give @s minecraft:slowness 4 5 true", "execute_at_target":false}
                             ],
 							"set_phase": 0,
@@ -1440,8 +1439,7 @@
 							{"time":0.25, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
 							{"time":0.25, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":1.15, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":1.375, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":1.4, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":1.3, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
 							{"time":0.15, "command":"effect give @s minecraft:slowness 4 5 true", "execute_at_target":false}
                             ],
 							"set_phase": 0,
@@ -1600,8 +1598,7 @@
 							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":0.15, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":0.375, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":0.4, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+							{"time":0.15, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
@@ -1638,8 +1635,7 @@
 							{"time":0.75, "command":"execute as @s[distance=0..5] run effect give @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] minecraft:slowness 3 6 true", "execute_at_target":true},
 							{"time":0.15, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
 							{"time":0.75, "command":"execute as @s at @s run particle epicfight:hit_blunt ^-1.0 ^2.25 ^0.5 0.0 0.0 0.0 0.75 2", "execute_at_target":false},
-							{"time":0.94, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":1.0, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+							{"time":0.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
                             ],
 							"set_phase": 0,
 							"hit_command_list": [

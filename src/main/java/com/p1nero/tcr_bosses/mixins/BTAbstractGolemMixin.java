@@ -117,7 +117,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         if(this.golemType.equals(GolemType.SKY) || this.golemType.equals(GolemType.NETHER) || this.golemType.equals(GolemType.END)) {
             ci.cancel();
         }
-        if(this.tickCount > 100) {
+        if(this.tickCount > 200) {
             ci.cancel();
         }
     }
@@ -138,6 +138,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
                 CEPatchUtils.setStamina(endGolemPatch, Float.MAX_VALUE);
             }
         }
+        this.tickCount = 0;//重置允许破坏的时间
     }
 
     @Inject(method = "setTarget", at = @At("HEAD"))

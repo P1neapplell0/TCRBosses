@@ -168,18 +168,18 @@
 		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "long"},
 	
 	    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run effect give @s efn:sin_stun_immunity 7 0 true", "stun_type": "short"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 4 0 true", "stun_type": "short"},
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 3 0 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 3 0 true", "stun_type": "short"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 2 0 true", "stun_type": "short"},
 		
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run effect give @s efn:sin_stun_immunity 7 0 true", "stun_type": "long"},
-		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 4 0 true", "stun_type": "long"},
-		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 3 0 true", "stun_type": "long"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 3 0 true", "stun_type": "long"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 2 0 true", "stun_type": "long"},
 		
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "long"},
 		
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 91 true", "stun_type": "short"},
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 91 true", "stun_type": "long"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 88 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 1 88 true", "stun_type": "long"},
 		
 		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}, nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:invincibility 24 0 true", "stun_type": "short"},
 		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}, nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:invincibility 24 0 true", "stun_type": "long"},
@@ -206,15 +206,15 @@
 		{"command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 5 4 true", "stun_type": "short", "execute_at_target": false},
 		
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"wom:satsujin\"}},distance=..9] at @s run effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 12 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 93 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 92 true", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 0 true", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..6] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
 		
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 94 true", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 93 true", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 93 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 2 92 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 92 true", "stun_type": "short", "execute_at_target": false},
+		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..9] at @s run effect give @e[tag=leviathanboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 92 true", "stun_type": "short", "execute_at_target": false},
 		
 		{"command":"execute as @s at @s run execute as @e[type=efn:summoned_sword_out,distance=..8] at @s run effect clear @a[distance=..6] minecraft:resistance", "stun_type": "short", "execute_at_target": false},
 		
@@ -232,7 +232,7 @@
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s cataclysm:stun", "stun_type": "long"},
 		
-		{"command":"execute as @s at @s run effect give @s efn:damage_reduction 6000 87 true", "stun_type": "short"},
+		{"command":"execute as @s at @s run effect give @s efn:damage_reduction 6000 84 true", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}] at @s run effect give @s minecraft:resistance 6000 0 true", "stun_type": "short"},
 		
 		{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:claw\"}]}] set_phase 5", "stun_type": "short"},
@@ -1022,7 +1022,11 @@
 							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
 							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							
+							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
                             ],
 							"set_phase": 20
                         },
@@ -1170,7 +1174,7 @@
 							"stamina": 30,
 							"end_by_hurt_level": 3, "animation": "wom:biped/living/biped_blackout", "convert_time": 0.2,
 							"command_list":[
-							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 87 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 84 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 4 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:resistance 3 2 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s efn:invincibility", "execute_at_target":false},
@@ -1187,7 +1191,7 @@
 							"command_list":[
 							{"time":0.05, "command":"effect clear @s minecraft:resistance", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 89 true", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 84 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s epicfight:stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 36 0 true", "execute_at_target":false},
@@ -1219,7 +1223,11 @@
 							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
 							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							
+							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
                             ],
 							"set_phase": 12
                         }
@@ -1246,7 +1254,11 @@
 							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
 							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							
+							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
                             ],
 							"set_phase": 13
                         }
@@ -1275,7 +1287,11 @@
 							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
 							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							
+							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
                             ],
 							"set_phase": 12
                         }
@@ -1304,7 +1320,11 @@
 							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
 							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true}
+							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							
+							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
+							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
                             ],
 							"set_phase": 13
                         }
@@ -1616,8 +1636,7 @@
                             "command_list":[
 							{"time":0.05, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
 							{"time":0.1, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^-1.5 ^3.5 ^1.75 0 0 0 0.1 2", "execute_at_target":false},
-							{"time":0.235, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":0.24, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+							{"time":0.1, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
                             ],
 							"set_phase": 17,
 							"hit_command_list": [
@@ -1667,7 +1686,7 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 12, "max": 13}
                             ],
-                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-pre", 
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab_pre", 
 							"damage_modifier":{
 							    "damage": 1.5, "impact": 1.0, "armor_negation": 0.25
 							}, 
@@ -1699,13 +1718,14 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 13, "max": 13}
                             ],
-                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-drain", 
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab_drain", 
 							"damage_modifier":{
 							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
                             "command_list":[
+							{"time":0.1, "command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab_drain_hit' -0.1 1", "execute_at_target":true},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0 true", "execute_at_target":false}
                             ],
 							"set_phase": 19,
@@ -1713,8 +1733,7 @@
 							{"command":"effect clear @s[distance=..24] cataclysm:stun", "execute_at_target":true},
 							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true},
 							{"command":"effect give @s[distance=..24] attributeslib:bleeding 7 14 true", "execute_at_target":true},							
-							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true},
-							{"command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab-drain_hit' 0.05 1", "execute_at_target":true}
+							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
 							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
@@ -1964,8 +1983,7 @@
 							{"time":0.55, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
 							{"time":0.6, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
 							{"time":0.825, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^1.0 ^0.5 ^2.0 0 0 0 0.1 2", "execute_at_target":false},
-							{"time":1.025, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":1.04, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+							{"time":0.825, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
                             ],
 							"set_phase": 17,
 							"hit_command_list": [
@@ -2087,13 +2105,14 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 13, "max": 13}
                             ],
-                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab-drain", 
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/scythe_skill_01_grab_drain", 
 							"damage_modifier":{
 							    "damage": 1.25, "impact": 1.0, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
                             "command_list":[
+							{"time":0.1, "command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab_drain_hit' -0.1 1", "execute_at_target":true},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 1 0 true", "execute_at_target":false}
                             ],
 							"set_phase": 19,
@@ -2101,8 +2120,7 @@
 							{"command":"effect clear @s[distance=..24] cataclysm:stun", "execute_at_target":true},
 							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 16 0 true", "execute_at_target":true},
 							{"command":"effect give @s[distance=..24] attributeslib:bleeding 7 14 true", "execute_at_target":true},							
-							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true},
-							{"command":"indestructible @s[distance=..24] play 'epicfightx:biped/combat/scythe_skill_01_grab-drain_hit' 0.05 1", "execute_at_target":true}
+							{"command":"epicfight stamina set @s[distance=..24] 1", "execute_at_target":true}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
 							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]}, distance=..24] play 'efn:biped/nf_skill/biped_flashblock1' 0.05 1", "is_parry": true, "execute_at_target":true},
@@ -2356,7 +2374,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:21d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:12d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:700d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
@@ -2368,7 +2386,7 @@
 								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:glowing", "execute_at_target":false},
 								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:darkness", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s efn:invincibility 24 0 true", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 87 true", "execute_at_target":false},
+								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 84 true", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s minecraft:instant_health 7 10 true", "execute_at_target":false},
 								{"time":0.05, "command":"tag @s[tag=!leviathanboss] add leviathanboss", "execute_at_target":false}
                             ]

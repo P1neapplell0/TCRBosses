@@ -2,6 +2,7 @@ package com.p1nero.tcr_bosses.entity.cataclysm;
 
 import com.p1nero.tcr_bosses.client.sound.BossMusicPlayer;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseBossEntity extends PathfinderMob {
@@ -34,6 +36,9 @@ public abstract class BaseBossEntity extends PathfinderMob {
         super.startSeenByPlayer(serverPlayer);
         this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         this.setHealth(this.getMaxHealth());
+        if(!ModList.get().isLoaded("tcrcore")) {
+            serverPlayer.displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
+        }
     }
 
     @Override

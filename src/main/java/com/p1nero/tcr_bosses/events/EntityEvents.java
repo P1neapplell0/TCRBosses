@@ -1,16 +1,19 @@
-package com.p1nero.tcr_bosses.event;
+package com.p1nero.tcr_bosses.events;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.CoreGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
@@ -21,7 +24,7 @@ import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 
 
 @Mod.EventBusSubscriber(modid = TCRBossesMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EntityEvent {
+public class EntityEvents {
 
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event){
@@ -59,4 +62,12 @@ public class EntityEvent {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        if(!ModList.get().isLoaded("tcrcore")) {
+            event.getEntity().displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
+        }
+    }
+
 }
