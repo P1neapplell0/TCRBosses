@@ -33,6 +33,7 @@ public abstract class BaseBossEntity extends PathfinderMob {
     public void startSeenByPlayer(@NotNull ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
         this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        this.setHealth(this.getMaxHealth());
     }
 
     @Override
