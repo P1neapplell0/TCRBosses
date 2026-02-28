@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -89,6 +90,10 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
 
     @Override
     public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
+        if(pSource.is(DamageTypeTags.IS_FIRE)) {
+            this.clearFire();
+            return false;
+        }
         if(pSource.getEntity() instanceof IgnisHumanoid) {
             return false;
         }
