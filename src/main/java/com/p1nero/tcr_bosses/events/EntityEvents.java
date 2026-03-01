@@ -65,7 +65,7 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if(!ModList.get().isLoaded("tcrcore")) {
+        if(!TCRBossesMod.isTcrLoaded()) {
             event.getEntity().displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
         }
     }

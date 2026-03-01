@@ -101,9 +101,20 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
     }
 
     @Override
+    public void setHealth(float pHealth) {
+
+    }
+
+    @Override
+    public void kill() {
+
+    }
+
+    @Override
     public void tick() {
         super.tick();
         if(!level().isClientSide) {
+            clearFire();
             if(owner != null) {
                 this.setHasSoul(owner.hasSoulEffect());
             }

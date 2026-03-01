@@ -1,5 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm;
 
+import com.nameless.indestructible.world.capability.Utils.IAdvancedCapability;
+import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.client.sound.BossMusicPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
+import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 public abstract class BaseBossEntity extends PathfinderMob {
 
@@ -36,7 +40,12 @@ public abstract class BaseBossEntity extends PathfinderMob {
         super.startSeenByPlayer(serverPlayer);
         this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         this.setHealth(this.getMaxHealth());
-        if(!ModList.get().isLoaded("tcrcore")) {
+        EpicFightCapabilities.getUnparameterizedEntityPatch(this, LivingEntityPatch.class).ifPresent(entityPatch -> {
+            if(entityPatch instanceof IAdvancedCapability advancedCapability) {
+                advancedCapability.setPhase(0);
+            }
+        });
+        if(!TCRBossesMod.isTcrLoaded()) {
             serverPlayer.displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
         }
     }
