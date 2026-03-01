@@ -262,12 +262,10 @@
 							    {"time":0.8, "command":"item replace entity @s weapon.mainhand with cataclysm:the_incinerator", "execute_at_target":false},
 								{"time":3.06, "command":"item replace entity @s weapon.mainhand with tcrcore:the_incinerator_soul", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:12d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:10d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:650d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.35d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
-								
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:90.0d,Name:\"epicfight:staminar\"}]}", "execute_at_target":false},
 								
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
@@ -337,6 +335,8 @@
 							{"time":0.75, "command":"execute as @s at @s run particle minecraft:soul_fire_flame ^0.75 ^2.25 ^-0.5 0.0 0.0 0.0 0.25 60", "execute_at_target":false},
 							{"time":0.75, "command":"execute as @s at @s run particle minecraft:soul_fire_flame ^0.75 ^2.25 ^-0.5 0.0 0.0 0.0 0.2 50", "execute_at_target":false},
 							
+							{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:100.0d,Name:\"epicfight:staminar\"}]}", "execute_at_target":false},
+							
 							{"time":0.05, "command":"effect clear @s efn:attack_damage_increase", "execute_at_target":false},
 							
 							{"time":0.65, "command":"data merge entity @s {Attributes:[{Base:550d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
@@ -361,8 +361,8 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"indestructible @s[distance=..24] set_phase 8", "execute_at_target":false},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -476,12 +476,12 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -503,11 +503,11 @@
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] set_phase 2", "is_parry": true, "execute_at_target":false},
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:hunger 32 0 true", "is_parry": true, "execute_at_target":false},
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:haste 32 0 true", "is_parry": true, "execute_at_target":false},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "is_parry": false, "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "is_parry": false, "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "is_parry": false, "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 5 0", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "is_parry": false, "execute_at_target":true},
@@ -873,8 +873,8 @@
                             ],
 							"set_phase": 7,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"indestructible @s[distance=..24] set_phase 7", "execute_at_target":false},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -964,12 +964,12 @@
                             ],
 							"set_phase": 7,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -991,11 +991,11 @@
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:hunger 32 0 true", "is_parry": true, "execute_at_target":false},
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:haste 32 0 true", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] set_phase 2", "is_parry": true, "execute_at_target":false},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "is_parry": false, "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "is_parry": false, "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "is_parry": false, "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 5 0", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "is_parry": false, "execute_at_target":true},
@@ -1177,12 +1177,12 @@
                             ],
 							"set_phase": 2,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -1204,11 +1204,11 @@
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] set_phase 2", "is_parry": true, "execute_at_target":false},
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:hunger 32 0 true", "is_parry": true, "execute_at_target":false},
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:blazing_brand\"}, {Amplifier:7b}]},distance=..24] minecraft:haste 32 0 true", "is_parry": true, "execute_at_target":false},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "is_parry": false, "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "is_parry": false, "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run particle cataclysm:ignis_abyss_explode ~0 ~0 ~0 0.25 0.25 0.25 0.0 1", "is_parry": false, "execute_at_target":true},
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] attributeslib:bleeding 5 29", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] nightfall_invade:soul_of_flame 5 0", "is_parry": false, "execute_at_target":true},
 							{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] epicfight:instability", "is_parry": false, "execute_at_target":true},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "is_parry": false, "execute_at_target":true},
@@ -1362,8 +1362,8 @@
                             ],
 							"set_phase": 14,
 							"hit_command_list": [
-							    {"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 15 128", "execute_at_target":true},
-							    {"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							    {"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							    {"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							    {"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitback_air' 0.05 1", "execute_at_target":true},
 								{"command":"effect give @s minecraft:slow_falling 5 1 true", "execute_at_target":true}
@@ -1965,7 +1965,7 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"within_distance", "min": 4.0, "max": 10.0}, {"predicate":"indestructible:phase", "min": 0, "max": 1}
+							{"predicate":"within_distance", "min": 4.0, "max": 10.0}, {"predicate":"indestructible:phase", "min": 0, "max": 1}, {"predicate":"indestructible:stamina", "stamina": 0.95, "comparator": "less_ratio"}
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/longsword_dash", 
 							"damage_modifier":{
@@ -2020,8 +2020,8 @@
                             ],
 							"set_phase": 1,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"indestructible @s[distance=..24] set_phase 5", "execute_at_target":false},
 							{"command":"effect give @s[distance=..24] combat_evolution:bypass_dodge_effect 5 0 true", "execute_at_target":false},
@@ -2052,7 +2052,7 @@
 							"set_phase": 7,
 							"hit_command_list": [
 							{"command":"indestructible @s set_phase 8", "execute_at_target":false},
-							{"command":"effect give @s[distance=..24] minecraft:absorption 4 1 true", "execute_at_target":true},
+							{"command":"effect give @s[distance=..24] minecraft:absorption 4 2 true", "execute_at_target":true},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:horizontalstop\"}]},distance=..24] play 'combat_evolution:biped/skill/execution/executed_full' -0.8 1", "execute_at_target":true},
 							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:horizontalstop\"}]},distance=..24] play 'efn:biped/yamato/biped_hitback_air' 0.05 1", "execute_at_target":true},
 							{"command":"effect give @s[distance=..24] minecraft:darkness 2 0 true", "execute_at_target":true}
@@ -2234,13 +2234,13 @@
 							{"time":1.5, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_greatsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"hit_command_list": [ 
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-								{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+								{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 								{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 24", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 14 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_soul_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":true},
 								{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
@@ -2313,13 +2313,13 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 24", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 14 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_soul_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 								{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
                             ],
@@ -2369,13 +2369,13 @@
 							{"time":0.75, "command":"effect give @s minecraft:slowness 2 7 true", "execute_at_target":false}
                             ],
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 24", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 14 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_soul_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},distance=..24] at @s run playsound cataclysm:sword_stomp hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":true},
 								{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
@@ -2679,13 +2679,13 @@
 							{"time":1.5, "command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock2' 0.25 1.0", "execute_at_target":false}
                             ],
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 24", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 14 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_soul_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 								{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
                             ],
@@ -2731,8 +2731,8 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"indestructible @s[distance=..24] set_phase 7", "execute_at_target":false},
 							{"command":"effect clear @s[distance=..24] minecraft:fire_resistance", "execute_at_target":true},
@@ -2815,13 +2815,13 @@
                             ],
 							"set_phase": 0,
 							"hit_command_list": [
-							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 12 128", "execute_at_target":true},
-							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -12", "execute_at_target":true},
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							    {"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 24", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 14 0", "execute_at_target":true},
 								{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] at @s run particle cataclysm:ignis_soul_explode ~0 ~1.5 ~0 0.5 0.5 0.5 0.0 5", "execute_at_target":true},
-								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] attributeslib:bleeding 5 29", "execute_at_target":true},
+								{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:instability\"}]},nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]},distance=..24] nightfall_invade:soul_of_flame 19 0", "execute_at_target":true},
 								{"command":"effect clear @s[distance=..24] epicfight:instability", "execute_at_target":true},
 								{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
                             ],
