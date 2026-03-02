@@ -2,7 +2,6 @@ package com.p1nero.tcr_bosses.entity.battle_tower.ocean_golem;
 
 import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
-import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
