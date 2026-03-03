@@ -28,16 +28,19 @@ import net.shelmarow.combat_evolution.ai.event.HitEvent;
 import net.shelmarow.combat_evolution.ai.event.TimeEvent;
 import net.shelmarow.combat_evolution.ai.params.AnimationParams;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.ai.util.CEParticleUtils;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
+import net.shelmarow.combat_evolution.execution.ExecutionHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.LevelUtil;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
@@ -60,7 +63,7 @@ public class SkyGolemCombatBehavior {
                 //近距离后撤
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(1.0F).weight(5.0F)
-                        .maxCooldown(200)
+                        .maxCooldown(400)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 2.0F)
@@ -68,26 +71,10 @@ public class SkyGolemCombatBehavior {
                         )
                 )
 
-                //残血后会更频繁的进行后撤
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(5.0F)
-                        .maxCooldown(100)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B_MOB, 0F)
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
-                        )
-                )
-
                 //受攻击闪避
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(1.0F).weight(10.0F)
-                        .maxCooldown(20)
+                        .maxCooldown(400)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
@@ -208,11 +195,9 @@ public class SkyGolemCombatBehavior {
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .guard(60)
-                                .counterAnimation(
-                                        AnimationsX.REVELATION_ONEHAND,
-                                        new AnimationParams()
-                                                .transitionTime(0.3F)
-                                                .playSpeed(0.7F)
+                                .counterAnimation(AnimationsX.REVELATION_ONEHAND, new AnimationParams()
+                                        .transitionTime(0.3F).playSpeed(0.7F)
+                                        .damageSource(Set.of(EpicFightDamageTypeTags.BYPASS_DODGE))
                                 )
                                 .counterType(CECombatBehaviors.CounterType.END)
                                 .maxGuardHit(3)
@@ -220,6 +205,10 @@ public class SkyGolemCombatBehavior {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
                                     mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
+                                    if(mobPatch.getTarget() != null) {
+                                        LivingEntity target = mobPatch.getTarget();
+                                        CEParticleUtils.spawnWarningParticle(CEParticles.BYPASS_DODGE_WARNING.get(), target, new Vec3(0,1.25,0));
+                                    }
                                 })
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -229,12 +218,16 @@ public class SkyGolemCombatBehavior {
                                                 LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(target, LivingEntityPatch.class);
                                                 if (entityPatch != null) {
                                                     AssetAccessor<? extends StaticAnimation> tAnimation = Objects.requireNonNull(entityPatch.getAnimator().getPlayerFor(null)).getRealAnimation();
-                                                    return tAnimation == AnimationsX.BIPED_COMMON_NEUTRALIZED || tAnimation == AnimationsX.GREATSWORD_GUARD_BREAK;
+                                                    return ExecutionHandler.isTargetGuardBreak(tAnimation, entityPatch);
                                                 }
                                             }
                                             return false;
                                         })
-                                        .animationBehavior(AnimationsX.THE_GUILLOTINE,new AnimationParams().transitionTime(0.25F))
+                                        .customBehavior(mobPatch -> {
+                                            if(mobPatch.getTarget() != null) {
+                                                ExecutionHandler.entityForceExecute(mobPatch.getOriginal(), mobPatch.getTarget(), true);
+                                            }
+                                        })
                                 )
                         )
                 )
@@ -526,7 +519,7 @@ public class SkyGolemCombatBehavior {
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .canInterruptParent(true)
-                                                                .animationBehavior(AnimationsX.SWEEPING_EDGE,0.25F)
+                                                                .animationBehavior(Animations.SWEEPING_EDGE,0.25F)
                                                         )
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -664,6 +657,12 @@ public class SkyGolemCombatBehavior {
                                 .animationBehavior(AnimationsX.BIPED_PHANTOM_ASCENT_BACKWARD,0F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().setDeltaMovement(0,0.8,0);
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
+                                    mobPatch.playSound(SoundEvents.ANVIL_LAND,2, 0, 0);
+                                    if(mobPatch.getTarget() != null) {
+                                        CEParticleUtils.spawnWarningParticle(CEParticles.BYPASS_GUARD_WARNING.get(), mobPatch.getTarget(), new Vec3(0,1.25,0));
+                                    }
                                 })
                                 .addTimeEvent(
                                         new TimeEvent(mobPatch -> {
@@ -675,12 +674,9 @@ public class SkyGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .animationBehavior(AnimationsX.METEOR_SLAM, new AnimationParams()
-                                                .playSpeed(0.75F).damageMultiplier(1.5F).impactMultiplier(4))
-                                        .addExBehavior(mobPatch -> {
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                            mobPatch.playSound(SoundEvents.ANVIL_LAND,2, 0, 0);
-                                        })
+                                                .playSpeed(0.75F).damageMultiplier(1.5F).impactMultiplier(4)
+                                                .damageSource(Set.of(EpicFightDamageTypeTags.GUARD_PUNCTURE))
+                                        )
                                         .addTimeEvent(
                                                 new TimeEvent(0F,0.1F,mobPatch -> {
                                                     if(mobPatch.getTarget() != null){
@@ -708,7 +704,17 @@ public class SkyGolemCombatBehavior {
                                 .withinDistance(4.65F, 16.0F)
                                 .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(EFNSkillAnimations.STOMP,new AnimationParams()
-                                        .transitionTime(0.35F).playSpeed(0.75F))
+                                        .transitionTime(0.35F).playSpeed(0.75F)
+                                        .damageSource(Set.of(EpicFightDamageTypeTags.GUARD_PUNCTURE))
+                                )
+                                .addExBehavior(mobPatch -> {
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
+                                    mobPatch.playSound(SoundEvents.ANVIL_LAND,2, 0, 0);
+                                    if(mobPatch.getTarget() != null) {
+                                        CEParticleUtils.spawnWarningParticle(CEParticles.BYPASS_GUARD_WARNING.get(), mobPatch.getTarget(), new Vec3(0,1.25,0));
+                                    }
+                                })
                                 .addTimeEvent(
                                         new TimeEvent(0.25F,mobPatch -> {
                                             if(mobPatch.getTarget() != null){
@@ -775,6 +781,7 @@ public class SkyGolemCombatBehavior {
                                                 })
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .name("振飞尾端下劈")
                                                         .custom(mobPatch -> mobPatch.getOriginal().hasEffect(MobEffects.SLOW_FALLING))
                                                         .animationBehavior(EFNTachiAnimations.NF_TACHI_AIRSLASH,
                                                                 new AnimationParams().transitionTime(0.1F).damageMultiplier(1.8F).impactMultiplier(5F).stunType(StunType.LONG))

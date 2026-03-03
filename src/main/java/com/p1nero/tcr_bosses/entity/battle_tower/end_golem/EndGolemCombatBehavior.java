@@ -130,7 +130,7 @@ public class EndGolemCombatBehavior {
 
                 //闪避取消后摇
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(8)
+                        .priority(1).weight(8).cooldown(100)
                         .backAfterFinished(false).rootName("dodge_cancel")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -173,7 +173,7 @@ public class EndGolemCombatBehavior {
 
                 //随机闪避
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("random_dodge")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -253,7 +253,7 @@ public class EndGolemCombatBehavior {
 
                 //近距离射空斩
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("upper_slash")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -273,7 +273,7 @@ public class EndGolemCombatBehavior {
 
                 //近距离耀斑
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("flare_cut")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -293,7 +293,7 @@ public class EndGolemCombatBehavior {
 
                 //疾走居合-全局版
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("repaid_slash")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -327,8 +327,9 @@ public class EndGolemCombatBehavior {
                                 )
                         )
                 )
+
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("repaid_slash2")
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -387,7 +388,7 @@ public class EndGolemCombatBehavior {
 
                 //近距离火山
                 .newGlobalBehavior(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(1)
+                        .priority(1).weight(1).cooldown(100)
                         .backAfterFinished(false).rootName("volcano")
 
                         //普通款
@@ -609,7 +610,7 @@ public class EndGolemCombatBehavior {
 
                 //开局次元斩
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(100).weight(1).maxCooldown(9999)
+                        .priority(100).weight(1).maxCooldown(1200)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .health(1F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
@@ -636,7 +637,7 @@ public class EndGolemCombatBehavior {
 
                 //如果玩家停在空中，使用上瞬移攻击或者地升空攻击
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(10)
+                        .priority(1).weight(10).cooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .canInsertGlobalBehavior(true,"air_attack","air_to_ground")
@@ -662,8 +663,8 @@ public class EndGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .stopByStun(5)
-                                        .interruptedByTime(2F,3F)
-                                        .wander(60,0,0.5F)
+                                        .interruptedByTime(4F,5F)
+                                        .wander(100,0,0.5F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .canInsertGlobalBehavior(true,"air_to_ground")
@@ -688,8 +689,8 @@ public class EndGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .stopByStun(5)
-                                        .interruptedByTime(2F,3F)
-                                        .wander(60,0,-0.5F)
+                                        .interruptedByTime(4F,5F)
+                                        .wander(100,0,-0.5F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .canInsertGlobalBehavior(true,"air_to_ground")
@@ -718,7 +719,7 @@ public class EndGolemCombatBehavior {
                 //普攻连段1
                 //可衔接内容：疾走居合，耀斑，射空，次元斩，闪避后摇打断
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(4).maxCooldown(5)
+                        .priority(1).weight(4).maxCooldown(20)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .canInsertGlobalBehavior(true,"judgement_cut","repaid_slash")

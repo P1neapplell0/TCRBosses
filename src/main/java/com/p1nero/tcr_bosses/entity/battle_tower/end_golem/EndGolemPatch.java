@@ -47,7 +47,8 @@ public class EndGolemPatch extends CEHumanoidPatch {
 
     public EndGolemPatch() {
         super(Factions.UNDEAD);
-        breakTime = 15 * 20;
+        this.staminaRegenDelay = 10000;
+        this.breakTime = 15 * 20;
     }
 
     @Override
@@ -89,7 +90,7 @@ public class EndGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.END_GOLEM.get(), Attributes.MAX_HEALTH, 700.0D);
+        event.add(BTEntityType.END_GOLEM.get(), Attributes.MAX_HEALTH, 1000.0D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.3D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.ATTACK_DAMAGE, 3.0D);
         event.add(BTEntityType.END_GOLEM.get(), Attributes.ARMOR, 30.0D);
@@ -168,7 +169,7 @@ public class EndGolemPatch extends CEHumanoidPatch {
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
         if(currentBehavior != null) {
-            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.035F));
+            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.05F));
         }
     }
 

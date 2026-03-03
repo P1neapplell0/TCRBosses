@@ -22,6 +22,7 @@ import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
@@ -155,167 +156,6 @@ public class NetherGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_R, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-                )
-
-                //随机闪避
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(5.0F).maxCooldown(200)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_F, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_F, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .animationBehavior(EFNDodgeAnimations.DODGE_STEP_L, 0F)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .randomChance(0.75F)
-                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_DODGE,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_STORMATK,0.25F)
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .randomChance(0.5F)
-                                                        .withinDistance(0.0F, 6.0F)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO3, new AnimationParams().stunType(StunType.SHORT))
-
-                                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                                .withinDistance(0.0F, 6.0F)
-                                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4, new AnimationParams().stunType(StunType.SHORT))
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_R, 0F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -623,12 +463,12 @@ public class NetherGolemCombatBehavior {
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .canInterruptParent(true)
                                                 .withinDistance(0.0F, 5.0F)
-                                                .animationBehavior(AnimationsX.SWORD_DUAL_AUTO2,
+                                                .animationBehavior(Animations.SWORD_DUAL_AUTO2,
                                                         new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .withinDistance(0.0F, 5.0F)
-                                                        .animationBehavior(AnimationsX.SWORD_DUAL_AUTO1,
+                                                        .animationBehavior(Animations.SWORD_DUAL_AUTO1,
                                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1.25F))
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -646,6 +486,7 @@ public class NetherGolemCombatBehavior {
                                                         )
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                                .name("尾段硬直")
                                                                 .withinDistance(0.0F, 6.0F)
                                                                 .animationBehavior(EFNDualSwordAnimations.NF_DUAL_AUTO4,
                                                                         new AnimationParams().transitionTime(0.2F).playSpeed(1.25F).stunType(StunType.LONG))
@@ -661,17 +502,14 @@ public class NetherGolemCombatBehavior {
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(AnimationsX.SWORD_DUAL_AUTO3, new AnimationParams().transitionTime(0.2F))
+                                .animationBehavior(Animations.SWORD_DUAL_AUTO3, new AnimationParams().transitionTime(0.2F))
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(0.75F,0.85F)
                                         .withinDistance(0.0F, 4.0F)
-                                        .animationBehavior(AnimationsX.BIPED_MOB_DAGGER_TWOHAND1,
-                                                new AnimationParams().transitionTime(0.25F).stunType(StunType.LONG))
-                                        .addExBehavior(mobPatch -> {
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 40));
-                                        })
+                                        .animationBehavior(AnimationsX.BIPED_MOB_DAGGER_TWOHAND1, new AnimationParams()
+                                                .transitionTime(0.25F).playSpeed(0.85F).stunType(StunType.LONG)
+                                        )
                                         .addTimeEvent(
                                                 new TimeEvent(mobPatch -> {
                                                     if(mobPatch.getTarget() != null){
@@ -681,6 +519,7 @@ public class NetherGolemCombatBehavior {
                                         )
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .name("尾段硬直")
                                                 .canInterruptParent(true)
                                                 .withinDistance(0.0F, 5.0F)
                                                 .animationBehavior(AnimationsX.BIPED_MOB_DAGGER_TWOHAND2,
@@ -693,26 +532,12 @@ public class NetherGolemCombatBehavior {
                                                         })
                                                 )
                                         )
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .interruptedByLevel(3)
-                                                .withinDistance(0.0F, 4.0F)
-                                                .health(0.75F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                                .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL,
-                                                        new AnimationParams().transitionTime(0.2F))
-
-                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                        .canInterruptParent(true)
-                                                        .animationBehavior(EFNDualSwordAnimations.NF_DUAL_SKILL_EXTEND,
-                                                                new AnimationParams().transitionTime(0.2F))
-                                                )
-                                        )
                                 )
                         )
                 )
 
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(1.0F).maxCooldown(5)
+                        .priority(1.0F).weight(1.0F).maxCooldown(350)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 3.0F)
@@ -721,7 +546,7 @@ public class NetherGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .withinDistance(0.0F, 5.0F)
-                                        .animationBehavior(AnimationsX.DANCING_EDGE,
+                                        .animationBehavior(Animations.DANCING_EDGE,
                                                 new AnimationParams().transitionTime(0.2F))
                                 )
                         )

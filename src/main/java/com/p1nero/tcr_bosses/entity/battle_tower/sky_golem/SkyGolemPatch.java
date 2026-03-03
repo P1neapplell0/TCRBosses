@@ -32,6 +32,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.gameassets.ShieldCounterAnimations;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
@@ -148,8 +149,13 @@ public class SkyGolemPatch extends CEHumanoidPatch {
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
+        float staminaRatio = 0.015F;
         if(currentBehavior != null && !currentBehavior.getBehaviorName().equals("sheath_attack")) {
-            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.015F));
+            if(currentBehavior.getBehaviorName().equals("振飞尾端下劈")){
+                playAnimationSynchronized(ShieldCounterAnimations.COUNTERED, 0F);
+                staminaRatio = 0.15F;
+            }
+            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * staminaRatio));
         }
     }
 

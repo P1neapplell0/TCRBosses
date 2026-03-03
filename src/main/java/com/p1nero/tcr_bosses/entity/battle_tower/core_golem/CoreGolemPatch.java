@@ -26,6 +26,7 @@ import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.gameassets.ShieldCounterAnimations;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
@@ -152,8 +153,13 @@ public class CoreGolemPatch extends CEHumanoidPatch {
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
+        float ratio = 0.025F;
         if(currentBehavior != null) {
-            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.025F));
+            if(currentBehavior.getBehaviorName().equals("一文字派生尾刀")){
+                playAnimationSynchronized(ShieldCounterAnimations.COUNTERED, 0F);
+                ratio = 0.25F;
+            }
+            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * ratio));
         }
     }
 

@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.events;
 
+import com.brass_amber.ba_bt.entity.hostile.golem.AbstractGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.CoreGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
@@ -7,6 +8,7 @@ import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -50,15 +52,18 @@ public class EntityEvents {
     public static void onLivingDamage(LivingDamageEvent event){
         if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) || event.getSource().is(CEDamageTypeTags.EXECUTION)) return;
         Entity hitEntity = event.getEntity();
+
+        if(hitEntity instanceof AbstractGolem golem){
+            event.setAmount(Math.min(event.getAmount(), golem.getMaxHealth() * 0.045F));
+        }
+
+
         EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,EndGolemPatch.class);
         if(endGolemPatch != null){
             float damage = Math.min(event.getAmount(),endGolemPatch.getOriginal().getMaxHealth() * 0.05F);
             if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.COMMON){
                 float damageReduction = 0.15F + 0.3F * endGolemPatch.getBossBreakPhase();
                 event.setAmount(damage * damageReduction);
-            }
-            else if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.BREAK){
-                event.setAmount(damage * 1.5F);
             }
         }
     }

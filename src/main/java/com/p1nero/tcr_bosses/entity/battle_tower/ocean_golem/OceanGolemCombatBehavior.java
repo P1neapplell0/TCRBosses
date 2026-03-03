@@ -23,6 +23,7 @@ import net.shelmarow.combat_evolution.client.particle.CEParticles;
 import net.shelmarow.combat_evolution.client.particle.follow.CEFollowParticleOptions;
 import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import org.jetbrains.annotations.Nullable;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 
@@ -38,24 +39,12 @@ public class OceanGolemCombatBehavior {
                 //闪避防御动作
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
                         .priority(2).weight(1)
-                        .maxCooldown(100)
+                        .maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .attackLevel(1,2)
-                                .animationBehavior(AnimationsX.BIPED_STEP_LEFT, 0F)
-                        )
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 4.0F)
-                                .attackLevel(1,2)
-                                .animationBehavior(AnimationsX.BIPED_STEP_RIGHT, 0F)
                         )
                 )
 
@@ -77,8 +66,8 @@ public class OceanGolemCombatBehavior {
                 )
 
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1F).weight(10.0F)
-                        .maxCooldown(300).cooldown(100)
+                        .priority(1F).weight(7.0F)
+                        .maxCooldown(600).cooldown(100)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0,8)
@@ -86,50 +75,28 @@ public class OceanGolemCombatBehavior {
                                 .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD,0)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(2.5F,5)
+                                        .interruptedByTime(4F,5F)
                                         .stopByStun(5)
                                         .wander(100,0F,0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(AnimationsX.BIPED_STEP_BACKWARD, 0F)
+                                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                                         )
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(2.5F,5)
+                                        .interruptedByTime(4F,5F)
                                         .stopByStun(5)
                                         .wander(100,0F,-0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
-                                                .animationBehavior(AnimationsX.BIPED_STEP_BACKWARD, 0F)
+                                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                                         )
                                 )
-                        )
-                )
-
-                //主动后撤
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(5)
-                        .maxCooldown(100)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 3.0F)
-                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
-                        )
-                )
-
-                //随机后撤
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(3)
-                        .maxCooldown(100)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0.0F, 5.0F)
-                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
                         )
                 )
 
@@ -360,14 +327,14 @@ public class OceanGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(4.0F, 8.0F)
                                 .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
-                                .animationBehavior(AnimationsX.WRATHFUL_LIGHTING, 0.5F)
+                                .animationBehavior(Animations.WRATHFUL_LIGHTING, 0.75F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().forceAddEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 60), mobPatch.getOriginal());
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 40));
                                     mobPatch.playSound(SoundEvents.ANVIL_LAND, 0, 0);
                                 })
                                 .addTimeEvent(
-                                        new TimeEvent(0.75F,mobPatch->{
+                                        new TimeEvent(0.95F,mobPatch->{
                                             Level world = mobPatch.getOriginal().level();
                                             LivingEntity caster = mobPatch.getOriginal();
                                             double spawnX = caster.getX();

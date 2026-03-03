@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.gameassets.ShieldCounterAnimations;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
@@ -152,7 +153,10 @@ public class NetherGolemPatch extends CEHumanoidPatch {
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
         if(currentBehavior != null) {
-            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.0125F));
+            if(currentBehavior.getBehaviorName().equals("尾段硬直")){
+                playAnimationSynchronized(ShieldCounterAnimations.COUNTERED, 0F);
+            }
+            dealStaminaDamage(null, (float) (original.getAttributeValue(EpicFightAttributes.MAX_STAMINA.get()) * 0.035F));
         }
     }
 

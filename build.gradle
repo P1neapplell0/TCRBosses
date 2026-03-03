@@ -93,7 +93,9 @@ dependencies {
 
     implementation fg.deobf('libs:fantasy_armor:1.2')
 
-    implementation fg.deobf("curse.maven:combat-evolution-1377795:7554699")
+
+    implementation fg.deobf("libs:CombatEvolution:1.1.23")
+    //implementation fg.deobf("curse.maven:combat-evolution-1377795:7554699")
 
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7476040")
     implementation fg.deobf('libs:epicfightx:1.1.0')

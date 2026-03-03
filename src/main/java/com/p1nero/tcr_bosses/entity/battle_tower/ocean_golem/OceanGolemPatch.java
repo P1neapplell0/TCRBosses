@@ -26,6 +26,7 @@ import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -97,7 +98,7 @@ public class OceanGolemPatch extends CEHumanoidPatch {
     @Override
     protected void setWeaponMotions() {
         this.weaponLivingMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
-                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, Set.of(
+                ImmutableMap.of(CapabilityItem.Styles.COMMON, Set.of(
                         Pair.of(LivingMotions.BLOCK, AnimationsX.SPEAR_GUARD),
                         Pair.of(LivingMotions.IDLE, EFNSwordAnimations.NF_SWORD_IDLE),
                         Pair.of(LivingMotions.WALK, EFNSwordAnimations.NF_SWORD_WALK),
@@ -106,7 +107,10 @@ public class OceanGolemPatch extends CEHumanoidPatch {
                 )));
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.TRIDENT,
-                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, List.of(AnimationsX.SPEAR_GUARD_HIT)));
+                ImmutableMap.of(CapabilityItem.Styles.COMMON, List.of(
+                        Animations.LONGSWORD_GUARD_ACTIVE_HIT1,
+                        Animations.LONGSWORD_GUARD_ACTIVE_HIT2
+                )));
 
     }
 
