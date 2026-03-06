@@ -9,7 +9,9 @@
     "BTAbstractGolemAccessor",
     "BTAbstractGolemMixin",
     "BTClientEventMixin",
+    "BTEndGolemMixin",
     "BTEntityTypeMixin",
+    "BTNetherGolemMixin",
     "BTOceanGolemMixin",
     "BTSkyGolemMixin",
     "EFNAnimationsMixin"

@@ -25,13 +25,18 @@ public abstract class BTSkyGolemMixin extends AbstractGolem {
         super(type, levelIn, bossBarColor);
     }
 
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void tcr$init(EntityType type, Level levelIn, CallbackInfo ci) {
+        this.xpReward = 3096;
+    }
+
     @Inject(
             method = "addBehaviorGoals",
             at = @At(value = "HEAD"),
             cancellable = true,
             remap = false
     )
-    public void tcr$addBehaviorGoals(CallbackInfo ci){
+    private void tcr$addBehaviorGoals(CallbackInfo ci){
         ci.cancel();
     }
 
@@ -40,7 +45,7 @@ public abstract class BTSkyGolemMixin extends AbstractGolem {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    public void tcr$tick(CallbackInfo ci){
+    private void tcr$tick(CallbackInfo ci){
         ci.cancel();
         super.tick();
     }
@@ -50,7 +55,7 @@ public abstract class BTSkyGolemMixin extends AbstractGolem {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    public void tcr$registerGoals(CallbackInfo ci){
+    private void tcr$registerGoals(CallbackInfo ci){
         ci.cancel();
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
