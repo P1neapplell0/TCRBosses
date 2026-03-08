@@ -6,6 +6,7 @@ import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -71,7 +72,7 @@ public class EntityEvents {
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if(!TCRBossesMod.isTcrLoaded()) {
-            event.getEntity().displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
+            event.getEntity().displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env").withStyle(ChatFormatting.RED), false);
         }
     }
 

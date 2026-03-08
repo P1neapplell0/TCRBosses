@@ -91,7 +91,7 @@ dependencies {
     implementation fg.deobf('libs:mobbattle:2.5.3')
     implementation fg.deobf('libs:better_trident_model:1.0.0')
 
-    implementation fg.deobf('libs:geckolib:4.8.2')
+    implementation fg.deobf('libs:geckolib:4.8.3')
 
     implementation fg.deobf('libs:ba_bt:3.2.1')
 

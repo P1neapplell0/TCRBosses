@@ -20,7 +20,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
@@ -59,6 +58,8 @@ public class SkyGolemPatch extends CEHumanoidPatch {
     @Override
     public void initAI() {
         super.initAI();
+        this.original.setNoGravity(false);
+        this.original.noPhysics = false;
     }
 
     @Override

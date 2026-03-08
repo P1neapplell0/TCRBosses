@@ -25,11 +25,6 @@ public abstract class BTSkyGolemMixin extends AbstractGolem {
         super(type, levelIn, bossBarColor);
     }
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void tcr$init(EntityType type, Level levelIn, CallbackInfo ci) {
-        this.xpReward = 3096;
-    }
-
     @Inject(
             method = "addBehaviorGoals",
             at = @At(value = "HEAD"),
@@ -47,6 +42,7 @@ public abstract class BTSkyGolemMixin extends AbstractGolem {
     )
     private void tcr$tick(CallbackInfo ci){
         ci.cancel();
+        this.xpReward = 3096;
         super.tick();
     }
 

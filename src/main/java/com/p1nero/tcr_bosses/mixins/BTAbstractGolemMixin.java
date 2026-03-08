@@ -9,6 +9,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
 import net.shelmarow.combat_evolution.bossbar.CEBossEvent;
@@ -34,6 +38,10 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
 
     @Shadow(remap = false)
     public GolemType golemType;
+
+    @Shadow(remap = false)
+    protected abstract void addBehaviorGoals();
+
     @Unique
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
 
@@ -70,6 +78,22 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
         tcr_Bosses$syncStamina(abstractGolem);
+//        TCRBossesMod.LOGGER.info("Goals:");
+//        this.targetSelector.getAvailableGoals().forEach(goal -> {
+//            TCRBossesMod.LOGGER.info(goal.getGoal().getClass().toString());
+//        });
+    }
+
+    /**
+     * 尝试修多人下的bug
+     */
+    @Inject(method = "registerGoals", at = @At("HEAD"), cancellable = true)
+    private void tcr$registerGoals(CallbackInfo ci) {
+        ci.cancel();
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false, false));
+        this.addBehaviorGoals();
     }
 
     @Unique
