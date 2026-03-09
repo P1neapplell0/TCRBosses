@@ -14,7 +14,8 @@
     "BTNetherGolemMixin",
     "BTOceanGolemMixin",
     "BTSkyGolemMixin",
-    "EFNAnimationsMixin"
+    "EFNAnimationsMixin",
+    "GeckoLibModMixin"
   ],
   "client": [
     "AbstractBTGolemRendererMixin"

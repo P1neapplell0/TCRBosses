@@ -78,10 +78,12 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         tcr_bosses$ceBossEvent.setName(bossBar.getName());
         tcr_bosses$ceBossEvent.setProgress(bossBar.getProgress());
         tcr_Bosses$syncStamina(abstractGolem);
-//        TCRBossesMod.LOGGER.info("Goals:");
-//        this.targetSelector.getAvailableGoals().forEach(goal -> {
-//            TCRBossesMod.LOGGER.info(goal.getGoal().getClass().toString());
-//        });
+
+        if(!level().isClientSide()) {
+            if (getTarget() != null && !getTarget().isAlive()) {
+                setTarget(null);
+            }
+        }
     }
 
     /**
