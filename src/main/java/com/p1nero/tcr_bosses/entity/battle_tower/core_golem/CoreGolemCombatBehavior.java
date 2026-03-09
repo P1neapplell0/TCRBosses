@@ -113,7 +113,7 @@ public class CoreGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(4,5)
                                         .stopByStun(5)
-                                        .wander(100,0F,0.35F)
+                                        .wander(60,0F,0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
@@ -125,7 +125,7 @@ public class CoreGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(4,5)
                                         .stopByStun(5)
-                                        .wander(100,0F,-0.35F)
+                                        .wander(60,0F,-0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)

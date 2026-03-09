@@ -848,7 +848,7 @@
 
 				
 				{
-                    "weight": 150,
+                    "weight": 100,
                     "canBeInterrupted": false,
                     "looping": false,
                     "cooldown": 10,
@@ -857,17 +857,24 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 1, "max": 9}, {"predicate":"indestructible:stamina", "stamina": 0.99, "comparator": "greater_ratio"}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.25,
 							"stamina": -4,
                             "command_list":[
+							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
+							
 							{"time":0.05, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 0.0 1", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 2 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s efn:claw 6000 0 true", "execute_at_target":false},
 							
-							{"time":0.25, "command":"effect give @s efn:claw 6000 0 true", "execute_at_target":false},
-							{"time":0.25, "command":"indestructible @s[distance=..24] play 'epicfightx:biped/living/hold_longsword' 0.1 1", "execute_at_target":false}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 11
                         },
@@ -896,7 +903,7 @@
 							"play_speed": 1.0,
 							"convert_time": -2.15,
                             "command_list":[
-							{"time":2.7, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^1.5 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":2.7, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ~ ~2.5 ~ 0 0 0 0.1 2", "execute_at_target":true},
 							{"time":3.25, "command":"effect clear @s efn:invincibility", "execute_at_target":false},
 							{"time":2.95, "command":"effect clear @s minecraft:glowing", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
@@ -1012,21 +1019,17 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 20, "max": 20}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
-							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
-							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
-							
-							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 20
                         },
@@ -1039,7 +1042,7 @@
 							    "damage": 1.5, "impact": 0.05, "armor_negation": 0.05
 							}, 
 							"play_speed": 0.75,
-							"convert_time": 0.25,
+							"convert_time": 0.4,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s efn:invincibility 3 0 true", "execute_at_target":false},
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false},
@@ -1213,21 +1216,17 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.15,
 							"stamina": 4,
                             "command_list":[
-							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
-							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
-							
-							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 12
                         }
@@ -1244,21 +1243,17 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 11, "max": 11}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.15,
 							"stamina": 4,
                             "command_list":[
-							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
-							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
-							
-							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 13
                         }
@@ -1275,23 +1270,19 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 10, "max": 10}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.15,
 							"stamina": 4,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
-							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
-							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
-							
-							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 12
                         }
@@ -1308,23 +1299,19 @@
                             "conditions": [
 							{"predicate":"indestructible:phase", "min": 11, "max": 11}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
                             ],
-                            "end_by_hurt_level": 3, "animation": "wom:biped/skill/mob_ender_obscuris", 
-							"play_speed": 1.0,
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_3", 
+							"play_speed": 0.75,
 							"convert_time": 0.15,
 							"stamina": 4,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] set_phase 9", "execute_at_target":false},
-							{"time":0.2, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.2, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.2, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
-							{"time":0.4, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
-							{"time":0.4, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
-							
-							{"time":0.5, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.5, "command":"execute as @e[tag=leviathantp,limit=1,distance=8..64] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ^ ^2.0 ^0.5", "execute_at_target":true},
-							{"time":0.5, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true}
+							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @s[distance=..48] minecraft:glowing 12 0 true", "execute_at_target":false},
+							{"time":0.15, "command":"effect give @a[distance=..24] minecraft:darkness 16 0 true", "execute_at_target":true},
+							{"time":0.25, "command":"invincible whiteAfterImage @s[distance=..48]", "execute_at_target":false},
+							{"time":0.25, "command":"execute as @s at @s run playsound minecraft:entity.enderman.teleport hostile @a[distance=..24] ~ ~ ~ 1 1.0 1", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s[distance=..48] play 'efn:biped/dodge/hf_murasama_dodge_f_air' 0.1 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 13
                         }
@@ -1602,8 +1589,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.1,
                             "command_list":[
-							{"time":0.05, "command":"tag @s[distance=..48] add leviathantp", "execute_at_target":true},
-							{"time":0.05, "command":"execute as @e[tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ~ ~0.05 ~0.0", "execute_at_target":true},
+							{"time":0.05, "command":"tag @s[type=minecraft:player,distance=..48] add leviathantp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[type=minecraft:player,tag=leviathantp,limit=1,distance=..48] at @s run tp @e[tag=leviathanboss,limit=1,sort=nearest,distance=..48] ~ ~0.05 ~0.0", "execute_at_target":true},
 							{"time":0.05, "command":"tag @e[distance=..48] remove leviathantp", "execute_at_target":true},
 							{"time":0.05, "command":"effect give @s minecraft:speed 1 2 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
@@ -1635,8 +1622,8 @@
 							"convert_time": 0.25,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":0.1, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^-1.5 ^3.5 ^1.75 0 0 0 0.1 2", "execute_at_target":false},
-							{"time":0.1, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
+							{"time":0.05, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^-1.5 ^3.5 ^1.75 0 0 0 0.1 2", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true}
                             ],
 							"set_phase": 17,
 							"hit_command_list": [
@@ -1789,6 +1776,41 @@
 								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
 							],
 							"stamina": 3,
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
+						}
+                    ]
+                },
+				
+				{
+                    "weight": 3,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 10,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 6.0, "max": 10.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "wom:biped/combat/moonless_auto_1", 
+							"damage_modifier":{
+							    "damage": 1.25, "impact": 0.15, "armor_negation": 0.15
+							}, 
+							"play_speed": 0.9,
+							"convert_time": 0.45,
+                            "command_list":[
+							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
+                            ],
+							"hit_command_list": [
+							{"command":"effect give @s[distance=..24] cataclysm:abyssal_fear 6 0 true", "execute_at_target":true},
+							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitdown_air' 0.05 1", "execute_at_target":true}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 																
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 12, "max": 13}
+							],
 							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
@@ -2151,8 +2173,8 @@
 							"damage_modifier":{
 							    "damage": 1.0, "impact": 1.0, "armor_negation": 0.25
 							}, 
-							"play_speed": 1.0,
-							"convert_time": 0.25,
+							"play_speed": 0.9,
+							"convert_time": 0.3,
                             "command_list":[
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 4 true", "execute_at_target":false}
                             ],
@@ -2356,7 +2378,7 @@
                 },
 				
 				{
-                    "weight": 10000,
+                    "weight": 1000000,
                     "canBeInterrupted": false,
                     "looping": false,
                     "cooldown": 120000,
@@ -2374,7 +2396,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:3.0d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:12d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:10d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:700d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
@@ -2383,6 +2405,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:5.0d,Name:\"minecraft:generic.knockback_resistance\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:2d,Name:\"forge:step_height_addition\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"effect clear @s[distance=..48] efn:claw", "execute_at_target":false},
+								{"time":0.05, "command":"effect clear @s[distance=..48] efn:attack_damage_increase", "execute_at_target":false},
 								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:glowing", "execute_at_target":false},
 								{"time":0.05, "command":"effect clear @a[distance=..48] minecraft:darkness", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s efn:invincibility 24 0 true", "execute_at_target":false},
