@@ -1421,7 +1421,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -1483,7 +1483,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
@@ -1507,7 +1507,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1568,7 +1568,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_ab", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
@@ -1659,7 +1659,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1683,7 +1683,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -1716,7 +1716,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_ab", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.2,
@@ -1735,7 +1735,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aba", 
 							"damage_modifier":{
-							    "damage": 1.8, "impact": 0.25, "armor_negation": 0.25
+							    "damage": 1.8, "impact": 0.25, "armor_negation": 0.1255
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.1,
@@ -1769,7 +1769,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -2237,7 +2237,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/annihilator_skill1", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.455, "armor_negation": 0.1255
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
@@ -2293,7 +2293,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_abb", 
 							"damage_modifier":{
-							    "damage": 2.0, "impact": 0.75, "armor_negation": 0.75
+							    "damage": 2.0, "impact": 0.45, "armor_negation": 0.75
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.3,
@@ -2418,7 +2418,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/sword_dual_auto3", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.455, "armor_negation": 0.1255
 							}, 
 							"set_phase": 0,
 							"play_speed": 0.6,
@@ -2445,7 +2445,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/sword_dual_auto3", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.755, "armor_negation": 0.25
+							    "damage": 1.2, "impact": 0.455, "armor_negation": 0.1255
 							}, 
 							"set_phase": 0,
 							"play_speed": 0.6,
@@ -2483,7 +2483,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_airatk", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -2502,7 +2502,7 @@
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/exsiliumgladius_reborn/exsiliumgladius_aa", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.15,
@@ -2520,7 +2520,7 @@
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/mob_sword_dual2", 
 							"damage_modifier":{
-							    "damage": 1.2, "impact": 0.75, "armor_negation": 0.2
+							    "damage": 1.2, "impact": 0.45, "armor_negation": 0.125
 							}, 
 							"play_speed": 1.0,
 							"convert_time": 0.25,
