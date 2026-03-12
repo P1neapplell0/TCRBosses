@@ -534,7 +534,7 @@
 							"convert_time": 0.2,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.3, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false}
                             ],
 							"set_phase": 6,
@@ -824,7 +824,7 @@
 							"convert_time": 0.1,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:invincibility 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"tag @s[distance=..48] add hartp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=harbingerboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=hartp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -883,7 +883,7 @@
 							"convert_time": 0.1,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:invincibility 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"tag @s[distance=..48] add hartp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=harbingerboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=hartp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -1065,7 +1065,7 @@
 							"convert_time": 0.25,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.3, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false}
                             ],
 							"set_phase": 6,
@@ -1587,7 +1587,7 @@
 							"convert_time": 0.25,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
-							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 84", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s[distance=..24] efn:verticalstop", "execute_at_target":false},
 							{"time":0.15, "command":"execute as @s[distance=4..32] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 1", "execute_at_target":true},
 							{"time":0.15, "command":"execute as @s[distance=4..32] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
@@ -1798,7 +1798,7 @@
 							{"time":0.06, "command":"effect give @s minecraft:unluck 16 0 true", "execute_at_target":false},
 							{"time":0.06, "command":"effect give @s epicfight:stun_immunity 5 0 true", "execute_at_target":false},
 							{"time":0.06, "command":"effect give @s efn:sin_stun_immunity 5 0 true", "execute_at_target":false},
-							{"time":0.06, "command":"effect give @s efn:damage_reduction 6000 84 true", "execute_at_target":false},
+							{"time":0.06, "command":"effect give @s efn:damage_reduction 6000 80", "execute_at_target":false},
 							{"time":0.06, "command":"effect clear @s[distance=..48] efn:verticalstop", "execute_at_target":true},
 							{"time":0.06, "command":"effect clear @s[distance=..48] efn:horizontalstop", "execute_at_target":true},
 							{"time":0.06, "command":"effect clear @s[distance=..48] minecraft:slowness", "execute_at_target":true},
