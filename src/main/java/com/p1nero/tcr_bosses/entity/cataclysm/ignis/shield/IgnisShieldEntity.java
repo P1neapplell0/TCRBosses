@@ -41,6 +41,14 @@ public class IgnisShieldEntity extends PathfinderMob implements GeoEntity {
         this.setNoGravity(true);
     }
 
+    /**
+     * 防止被锁定
+     */
+    @Override
+    public boolean isPickable() {
+        return false;
+    }
+
     public IgnisShieldEntity(IgnisHumanoid owner) {
         this(TCRBossEntities.IGNIS_SHIELD.get(), owner.level());
         this.owner = owner;
