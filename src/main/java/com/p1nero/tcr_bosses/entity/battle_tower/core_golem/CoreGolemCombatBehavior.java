@@ -61,18 +61,42 @@ public class CoreGolemCombatBehavior {
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_ROLL_B, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.5F)
+                                        .animationBehavior(AnimationsX.BATTOJUTSU, 0F)
+                                        .addExBehavior(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_L, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.5F)
+                                        .animationBehavior(AnimationsX.BATTOJUTSU, 0F)
+                                        .addExBehavior(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
                                 .attackLevel(1,2)
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_R, 0F)
+
+                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                        .randomChance(0.5F)
+                                        .animationBehavior(AnimationsX.BATTOJUTSU, 0F)
+                                        .addExBehavior(mobPatch -> {
+                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                        })
+                                )
                         )
                 )
 
@@ -111,26 +135,40 @@ public class CoreGolemCombatBehavior {
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B,0)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(4,5)
+                                        .interruptedByTime(1,2)
                                         .stopByStun(5)
-                                        .wander(60,0F,0.35F)
+                                        .wander(40,0F,0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
                                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .animationBehavior(AnimationsX.BATTOJUTSU_DASH, 0F)
+                                                        .addExBehavior(mobPatch -> {
+                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                                        })
+                                                )
                                         )
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(4,5)
+                                        .interruptedByTime(1,2)
                                         .stopByStun(5)
-                                        .wander(60,0F,-0.35F)
+                                        .wander(40,0F,-0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
                                                 .canInterruptParent(true)
                                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
+
+                                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                        .animationBehavior(AnimationsX.BATTOJUTSU_DASH, 0F)
+                                                        .addExBehavior(mobPatch -> {
+                                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                                        })
+                                                )
                                         )
                                 )
                         )
@@ -345,6 +383,9 @@ public class CoreGolemCombatBehavior {
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(5.5,9)
                                 .animationBehavior(AnimationsX.BATTOJUTSU_DASH,new AnimationParams().playSpeed(0.65F))
+                                .addExBehavior(mobPatch -> {
+                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),40));
+                                })
                         )
                 )
 
@@ -447,6 +488,9 @@ public class CoreGolemCombatBehavior {
                                                                 .phaseContain(1)
                                                                 .animationBehavior(AnimationsX.BATTOJUTSU_DASH, 0F)
                                                                 .setPhase(0)
+                                                                .addExBehavior(mobPatch -> {
+                                                                    mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
+                                                                })
 
                                                         )
 
@@ -516,9 +560,9 @@ public class CoreGolemCombatBehavior {
                         )
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .priority(2)
+                                .priority(3)
                                 .withinDistance(0,6)
-                                .health(0.4F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                .health(0.45F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(EFNTachiAnimations.NF_TACHI_BLOODLUST,0.35F)
                                 .addExBehavior(mobPatch -> {
                                     mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),200));

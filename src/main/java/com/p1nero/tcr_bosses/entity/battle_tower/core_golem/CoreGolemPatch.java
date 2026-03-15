@@ -16,6 +16,7 @@ import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -23,9 +24,11 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import net.shelmarow.combat_evolution.gameassets.ShieldCounterAnimations;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
@@ -37,6 +40,7 @@ import yesman.epicfight.world.capabilities.entitypatch.Factions;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.damagesource.StunType;
+import yesman.epicfight.world.effect.EpicFightMobEffects;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
@@ -45,8 +49,35 @@ import java.util.UUID;
 
 public class CoreGolemPatch extends CEHumanoidPatch {
 
+    private int stunTimer = 0;
+    private int stunCount = 0;
+
     public CoreGolemPatch() {
         super(Factions.UNDEAD);
+    }
+
+
+    public void tick(LivingEvent.LivingTickEvent event) {
+        super.tick(event);
+
+        if(stunCount > 0){
+            if(stunTimer > 0){
+                stunTimer--;
+            }
+            else {
+                stunTimer = 60;
+                stunCount--;
+            }
+        }
+
+        if (getEntityState().getLevel() == 3){
+            original.addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 10 , 0));
+        }
+    }
+
+    public void addStunCount(){
+        stunTimer = 60;
+        stunCount++;
     }
 
     @Override
@@ -109,9 +140,9 @@ public class CoreGolemPatch extends CEHumanoidPatch {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 580.0D);
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ATTACK_DAMAGE, 3.0D);
-        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 5.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.MAX_HEALTH, 620.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ATTACK_DAMAGE, 4.0D);
+        event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR, 20.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
         event.add(BTEntityType.CORE_GOLEM.get(), EpicFightAttributes.STUN_ARMOR.get(), 30.0D);
@@ -152,6 +183,7 @@ public class CoreGolemPatch extends CEHumanoidPatch {
 
     @Override
     public void onAttackParried(DamageSource damageSource, LivingEntityPatch<?> blocker) {
+        super.onAttackParried(damageSource, blocker);
         CECombatBehaviors.Behavior<?> currentBehavior = BehaviorUtils.getCurrentBehavior(this);
         float ratio = 0.025F;
         if(currentBehavior != null) {
@@ -172,6 +204,15 @@ public class CoreGolemPatch extends CEHumanoidPatch {
     @Override
     public boolean applyStun(StunType stunType, float time){
         time = Mth.clamp(time,0,0.25F);
-        return super.applyStun(stunType, time);
+        boolean applied = super.applyStun(stunType, time);
+
+        if(applied){
+            addStunCount();
+            if (stunCount >= 2){
+                original.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 80, 10, false, true));
+            }
+        }
+
+        return applied;
     }
 }

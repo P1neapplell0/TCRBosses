@@ -19,6 +19,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,9 +29,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
+import net.shelmarow.combat_evolution.effect.CEMobEffects;
 import net.shelmarow.combat_evolution.gameassets.ShieldCounterAnimations;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
@@ -43,6 +46,7 @@ import yesman.epicfight.world.capabilities.entitypatch.Factions;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.damagesource.StunType;
+import yesman.epicfight.world.effect.EpicFightMobEffects;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 import java.util.List;
@@ -50,6 +54,34 @@ import java.util.Set;
 import java.util.UUID;
 
 public class SkyGolemPatch extends CEHumanoidPatch {
+
+    private int stunTimer = 0;
+    private int stunCount = 0;
+
+
+    public void addStunCount(){
+        stunTimer = 60;
+        stunCount++;
+    }
+
+    @Override
+    public void tick(LivingEvent.LivingTickEvent event) {
+        super.tick(event);
+
+        if(stunCount > 0){
+            if(stunTimer > 0){
+                stunTimer--;
+            }
+            else {
+                stunTimer = 60;
+                stunCount--;
+            }
+        }
+
+        if (getEntityState().getLevel() == 3){
+            original.addEffect(new MobEffectInstance(EpicFightMobEffects.STUN_IMMUNITY.get(), 10 , 0));
+        }
+    }
 
     public SkyGolemPatch() {
         super(Factions.UNDEAD);
@@ -185,8 +217,17 @@ public class SkyGolemPatch extends CEHumanoidPatch {
 
     @Override
     public boolean applyStun(StunType stunType, float time){
-        time = Mth.clamp(time,0,0.1F);
-        return super.applyStun(stunType, time);
+        time = Mth.clamp(time,0,0.25F);
+        boolean applied = super.applyStun(stunType, time);
+
+        if(applied){
+            addStunCount();
+            if (stunCount >= 2){
+                original.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 80, 10, false, true));
+            }
+        }
+
+        return applied;
     }
 
     @Override

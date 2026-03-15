@@ -1,9 +1,6 @@
 package com.p1nero.tcr_bosses.events;
 
-import com.brass_amber.ba_bt.entity.hostile.golem.AbstractGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.CoreGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
-import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
+import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import net.minecraft.ChatFormatting;
@@ -12,6 +9,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -51,11 +49,36 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event){
-        if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) || event.getSource().is(CEDamageTypeTags.EXECUTION)) return;
         Entity hitEntity = event.getEntity();
 
+        if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
+
+        //限制处决伤害，防止残血伤害爆炸
+        if(event.getSource().is(CEDamageTypeTags.EXECUTION) && hitEntity instanceof LivingEntity livingEntity){
+            event.setAmount(Math.min(event.getAmount(), livingEntity.getMaxHealth() * 0.15F));
+            return;
+        }
+
         if(hitEntity instanceof AbstractGolem golem){
-            event.setAmount(Math.min(event.getAmount(), golem.getMaxHealth() * 0.045F));
+            float percent = 0.045F;
+            float reduce = 1F;
+            if(hitEntity instanceof NetherGolem){
+                percent = 0.038F;
+                reduce = 0.9F;
+            }
+            if(hitEntity instanceof CoreGolem){
+                percent = 0.035F;
+                reduce = 0.8F;
+            }
+            if(hitEntity instanceof SkyGolem){
+                percent = 0.032F;
+                reduce = 0.7F;
+            }
+            if(hitEntity instanceof EndGolem){
+                percent = 0.030F;
+                reduce = 0.65F;
+            }
+            event.setAmount(Math.min(event.getAmount() * reduce, golem.getMaxHealth() * percent));
         }
 
 

@@ -105,7 +105,7 @@ public class SkyGolemCombatBehavior {
                                 .animationBehavior(EFNDodgeAnimations.DODGE_STEP_B, 0F)
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .guardWithWander(80,0,0.5F,true)
+                                        .guardWithWander(60,0,0.5F,true)
                                         .counterAnimation(
                                                 AnimationsX.ENDERMAN_KNEE,
                                                 new AnimationParams()
@@ -121,7 +121,7 @@ public class SkyGolemCombatBehavior {
                                 )
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .guardWithWander(80,0,-0.5F,true)
+                                        .guardWithWander(60,0,-0.5F,true)
                                         .counterAnimation(
                                                 AnimationsX.ENDERMAN_KNEE,
                                                 new AnimationParams()
@@ -139,7 +139,7 @@ public class SkyGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(2.5F,6F)
                                         .stopByStun(5)
-                                        .wander(120,0F,0.35F)
+                                        .wander(40,0F,0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
@@ -151,7 +151,7 @@ public class SkyGolemCombatBehavior {
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .interruptedByTime(2.5F,6F)
                                         .stopByStun(5)
-                                        .wander(120,0F,-0.35F)
+                                        .wander(40,0F,-0.35F)
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .attackLevel(1,2).withinDistance(0,4)
@@ -278,6 +278,7 @@ public class SkyGolemCombatBehavior {
 
                                         //跳劈+跑攻/居合(需要变速)派生
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .weight(3F)
                                                 .withinDistance(0.0F, 4.0F)
                                                 .animationBehavior(EFNSwordAnimations.NF_SWORD_AIRSLASH,0.25F)
                                                 .addExBehavior(mobPatch -> {
@@ -295,7 +296,7 @@ public class SkyGolemCombatBehavior {
                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                         .weight(4F)
                                                         .withinDistance(0.0F, 6.0F)
-                                                        .health(0.5F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
+                                                        .health(0.85F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                                         .interruptedByTime(0.5F,0.55F)
                                                         .animationBehavior(AnimationsX.BATTOJUTSU,
                                                                 new AnimationParams().transitionTime(0.2F).playSpeed(1F))
@@ -648,7 +649,7 @@ public class SkyGolemCombatBehavior {
 
                 //远距离追击
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(5.0F)
+                        .priority(1.0F).weight(8.0F)
                         .maxCooldown(200)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -697,11 +698,11 @@ public class SkyGolemCombatBehavior {
 
                 //踩地板+雷电
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1).weight(15)
+                        .priority(1).weight(15F)
                         .maxCooldown(400)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(4.65F, 16.0F)
+                                .withinDistance(2.5F, 16.0F)
                                 .health(0.65F, HealthCheck.Comparator.LESS_RATIO_CONTAIN)
                                 .animationBehavior(EFNSkillAnimations.STOMP,new AnimationParams()
                                         .transitionTime(0.35F).playSpeed(0.75F)
@@ -730,7 +731,7 @@ public class SkyGolemCombatBehavior {
 
                 //震飞+空中攻击
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(8.0F).maxCooldown(100)
+                        .priority(1.0F).weight(15.0F).maxCooldown(300)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0F, 4F)
@@ -809,7 +810,7 @@ public class SkyGolemCombatBehavior {
 
                 //乱斩
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(15.0F)
+                        .priority(1.5F).weight(15.0F)
                         .maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
@@ -885,7 +886,7 @@ public class SkyGolemCombatBehavior {
 
                 //空中单次突袭
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(8.0F).maxCooldown(300)
+                        .priority(1.0F).weight(15.0F).maxCooldown(400)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .withinDistance(0.0F, 4.0F)
@@ -929,8 +930,8 @@ public class SkyGolemCombatBehavior {
 
                 //多段空中突袭
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1.0F).weight(6.0F)
-                        .maxCooldown(400)
+                        .priority(2.0F).weight(6.0F)
+                        .maxCooldown(600)
 
                         .addFirstBehavior(CECombatBehaviors.Behavior.builder()
                                 .name("起飞1")

@@ -65,42 +65,6 @@ public class OceanGolemCombatBehavior {
                         )
                 )
 
-                .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()
-                        .priority(1F).weight(7.0F)
-                        .maxCooldown(600).cooldown(100)
-
-                        .addFirstBehavior(CECombatBehaviors.Behavior.builder()
-                                .withinDistance(0,8)
-                                .health(0.15F, HealthCheck.Comparator.GREATER_RATIO_CONTAIN)
-                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD,0)
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(4F,5F)
-                                        .stopByStun(5)
-                                        .wander(100,0F,0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .attackLevel(1,2).withinDistance(0,4)
-                                                .canInterruptParent(true)
-                                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
-                                        )
-                                )
-
-                                .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .interruptedByTime(4F,5F)
-                                        .stopByStun(5)
-                                        .wander(100,0F,-0.35F)
-
-                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                                .attackLevel(1,2).withinDistance(0,4)
-                                                .canInterruptParent(true)
-                                                .animationBehavior(AnimationsX.BIPED_ROLL_BACKWARD, 0F)
-                                        )
-                                )
-                        )
-                )
-
-
 
                 //75%血之后出现两种战技，普攻能够穿插战技使用
                 //50%血之后新增一种战技，唤雷额外出现差分攻击
