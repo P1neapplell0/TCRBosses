@@ -38,13 +38,15 @@ public abstract class BaseBossEntity extends PathfinderMob {
     @Override
     public void startSeenByPlayer(@NotNull ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
-        this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-        this.setHealth(this.getMaxHealth());
-        EpicFightCapabilities.getUnparameterizedEntityPatch(this, LivingEntityPatch.class).ifPresent(entityPatch -> {
-            if(entityPatch instanceof IAdvancedCapability advancedCapability) {
-                advancedCapability.setPhase(0);
-            }
-        });
+        if(serverPlayer.serverLevel().players().size() <= 1) {
+            this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            this.setHealth(this.getMaxHealth());
+            EpicFightCapabilities.getUnparameterizedEntityPatch(this, LivingEntityPatch.class).ifPresent(entityPatch -> {
+                if(entityPatch instanceof IAdvancedCapability advancedCapability) {
+                    advancedCapability.setPhase(0);
+                }
+            });
+        }
         if(!TCRBossesMod.isTcrLoaded()) {
             serverPlayer.displayClientMessage(Component.translatable("info.tcrbosses.not_tcr_env"), false);
         }
