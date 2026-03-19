@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.end_golem;
 
 import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
+import com.brass_amber.ba_bt.entity.hostile.golem.EndGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.gameasset.EFNWeaponCategories;
@@ -41,7 +42,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class EndGolemPatch extends CEHumanoidPatch {
+public class EndGolemPatch extends CEHumanoidPatch<EndGolem> {
 
     private int bossBreakPhase = 0;
 

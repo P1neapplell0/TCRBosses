@@ -51,15 +51,16 @@ public class EntityEvents {
     public static void onLivingDamage(LivingDamageEvent event){
         Entity hitEntity = event.getEntity();
 
-        if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
-
-        //限制处决伤害，防止残血伤害爆炸
-        if(event.getSource().is(CEDamageTypeTags.EXECUTION) && hitEntity instanceof LivingEntity livingEntity){
-            event.setAmount(Math.min(event.getAmount(), livingEntity.getMaxHealth() * 0.15F));
-            return;
-        }
-
         if(hitEntity instanceof AbstractGolem golem){
+
+            if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
+
+            //限制处决伤害，防止残血伤害爆炸
+            if(event.getSource().is(CEDamageTypeTags.EXECUTION)) {
+                event.setAmount(Math.min(event.getAmount(), golem.getMaxHealth() * 0.15F));
+                return;
+            }
+
             float percent = 0.045F;
             float reduce = 1F;
             if(hitEntity instanceof NetherGolem){

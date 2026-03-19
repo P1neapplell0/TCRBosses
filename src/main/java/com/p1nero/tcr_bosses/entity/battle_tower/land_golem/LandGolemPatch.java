@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class LandGolemPatch extends CEHumanoidPatch {
+public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
 
     private boolean gpSucceed = false;
 
@@ -105,11 +105,9 @@ public class LandGolemPatch extends CEHumanoidPatch {
     @Override
     public void tick(LivingEvent.LivingTickEvent event) {
         super.tick(event);
-
-        if (original instanceof LandGolem btLandGolem) {
-            if (btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())) {
-                btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
-            }
+        LandGolem btLandGolem = original;
+        if (btLandGolem.isEnraged() && !btLandGolem.hasEffect(CEMobEffects.FULL_STUN_IMMUNITY.get())) {
+            btLandGolem.addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(), 100, 0));
         }
     }
 

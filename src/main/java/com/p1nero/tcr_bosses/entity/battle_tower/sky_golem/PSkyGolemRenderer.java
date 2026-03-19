@@ -1,5 +1,6 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.sky_golem;
 
+import com.brass_amber.ba_bt.entity.hostile.golem.SkyGolem;
 import com.merlin204.avalon.util.AvalonAnimationUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -30,14 +31,14 @@ import yesman.epicfight.client.renderer.patched.entity.PHumanoidRenderer;
 import yesman.epicfight.mixin.client.MixinEntityRenderer;
 import yesman.epicfight.mixin.client.MixinLivingEntityRenderer;
 
-public class PSkyGolemRenderer extends PHumanoidRenderer<PathfinderMob, SkyGolemPatch, HumanoidModel<PathfinderMob>, HumanoidMobRenderer<PathfinderMob, HumanoidModel<PathfinderMob>>, HumanoidMesh> {
+public class PSkyGolemRenderer extends PHumanoidRenderer<SkyGolem, SkyGolemPatch, HumanoidModel<SkyGolem>, HumanoidMobRenderer<SkyGolem, HumanoidModel<SkyGolem>>, HumanoidMesh> {
 
     public PSkyGolemRenderer(AssetAccessor<HumanoidMesh> mesh, EntityRendererProvider.Context context, EntityType<?> entityType) {
         super(mesh, context, entityType);
     }
 
     @Override
-    public void render(PathfinderMob entity, SkyGolemPatch entitypatch, HumanoidMobRenderer<PathfinderMob, HumanoidModel<PathfinderMob>> renderer, MultiBufferSource buffer, PoseStack poseStack, int packedLight, float partialTicks) {
+    public void render(SkyGolem entity, SkyGolemPatch entitypatch, HumanoidMobRenderer<SkyGolem, HumanoidModel<SkyGolem>> renderer, MultiBufferSource buffer, PoseStack poseStack, int packedLight, float partialTicks) {
         RenderNameTagEvent renderNameplateEvent = new RenderNameTagEvent(entity, entity.getDisplayName(), renderer, poseStack, buffer, packedLight, partialTicks);
         MinecraftForge.EVENT_BUS.post(renderNameplateEvent);
         MixinEntityRenderer entityRendererAccessor = (MixinEntityRenderer) renderer;

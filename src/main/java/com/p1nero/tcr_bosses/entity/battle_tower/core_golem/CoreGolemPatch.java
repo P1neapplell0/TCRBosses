@@ -3,6 +3,7 @@ package com.p1nero.tcr_bosses.entity.battle_tower.core_golem;
 import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
 import com.brass_amber.ba_bt.entity.ai.goal.CoreGolemFireballAttackGoal;
 import com.brass_amber.ba_bt.entity.ai.goal.GolemStompAttackGoal;
+import com.brass_amber.ba_bt.entity.hostile.golem.CoreGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -47,7 +48,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class CoreGolemPatch extends CEHumanoidPatch {
+public class CoreGolemPatch extends CEHumanoidPatch<CoreGolem> {
 
     private int stunTimer = 0;
     private int stunCount = 0;

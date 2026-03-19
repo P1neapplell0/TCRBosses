@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.battle_tower.ocean_golem;
 
 import com.asanginxst.epicfightx.gameassets.animations.AnimationsX;
+import com.brass_amber.ba_bt.entity.hostile.golem.OceanGolem;
 import com.brass_amber.ba_bt.init.BTEntityType;
 import com.google.common.collect.ImmutableMap;
 import com.hm.efn.client.sound.EFNSounds;
@@ -40,7 +41,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class OceanGolemPatch extends CEHumanoidPatch {
+public class OceanGolemPatch extends CEHumanoidPatch<OceanGolem> {
 
     public OceanGolemPatch() {
         super(Factions.UNDEAD);

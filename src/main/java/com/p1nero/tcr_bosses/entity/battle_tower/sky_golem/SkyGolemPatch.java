@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class SkyGolemPatch extends CEHumanoidPatch {
+public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
 
     private int stunTimer = 0;
     private int stunCount = 0;
