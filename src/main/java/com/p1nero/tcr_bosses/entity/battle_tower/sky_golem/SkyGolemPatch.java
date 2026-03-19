@@ -238,7 +238,7 @@ public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
 
     public void handleNearByBlock(int r, boolean invisible) {
         Level level = this.original.level();
-        SkyGolem skyGolem = ((SkyGolem) this.original);
+        SkyGolem skyGolem = this.original;
         BlockPos center = skyGolem.getEntityData().get(((AbstractGolemInvoker)skyGolem).getSpawnPosKey());
         for(BlockPos pos : BlockPos.betweenClosed(center.getX() - r, center.getY() -r,  center.getZ() - r,center.getX() + r, center.getY() + r, center.getZ() + r)) {
             BlockState state = level.getBlockState(pos);
