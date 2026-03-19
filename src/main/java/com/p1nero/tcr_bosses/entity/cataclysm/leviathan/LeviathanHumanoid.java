@@ -43,6 +43,14 @@ public class LeviathanHumanoid extends BaseBossEntity {
     }
 
     @Override
+    public boolean hurt(@NotNull DamageSource source, float pAmount) {
+        if(this.getPhase() < 2 && pAmount > this.getHealth()) {
+            return false;
+        }
+        return super.hurt(source, pAmount);
+    }
+
+    @Override
     public void die(@NotNull DamageSource pDamageSource) {
         if(this.getPhase() < 2) {
             return;
