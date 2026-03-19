@@ -274,7 +274,44 @@
 				
 				
 				
-				
+				{
+                    "weight": 999999,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 12000,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 0, "max": 3}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/combat/trident_twohand_auto1", 
+							"damage_modifier":{
+							    "damage": 1.5, "impact": 2.0, "armor_negation": 2.0
+							}, 
+							"stamina": 180,
+							"play_speed": 0.75,
+							"convert_time": 0.8,
+                            "command_list":[
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:shiver 5 4", "execute_at_target": false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run execute as @a[distance=..6] at @s run effect give @s efn:falchion_vulnerability 5 4", "execute_at_target": false},
+							{"time":0.05, "command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:shiver\"}]},distance=..8] at @s run effect clear @s efn:shiver", "execute_at_target": false},
+							{"time":0.05, "command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=ancientboss,limit=1,sort=nearest,distance=..6] minecraft:regeneration 5 2", "execute_at_target": false},
+							{"time":0.05, "command":"execute as @a[nbt={ActiveEffects:[{ \"forge:id\": \"efn:falchion_bless\"}]},distance=..8] at @s run effect give @e[tag=ancientboss,limit=1,sort=nearest,distance=..6] minecraft:strength 5 4", "execute_at_target": false},
+							
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] minecraft:instant_health 7 10", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:damage_reduction\"}]}] efn:damage_reduction 600 99", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] set_phase 2", "execute_at_target":false},
+							{"time":0.05, "command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]}] set_phase 6", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] minecraft:haste 30 0", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] minecraft:hunger 30 0", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							]
+                        }
+                    ]
+                },
 
 				
 				{
