@@ -9,12 +9,14 @@ import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.entity.cataclysm.BaseBossEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import yesman.epicfight.main.EpicFightSharedConstants;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
@@ -38,6 +40,14 @@ public class LeviathanHumanoid extends BaseBossEntity {
                 .add(EpicFightAttributes.MAX_STAMINA.get(),15.0D)
                 .add(EpicFightAttributes.STAMINA_REGEN.get(),1.0D)
                 .build();
+    }
+
+    @Override
+    public void die(@NotNull DamageSource pDamageSource) {
+        if(this.getPhase() < 2) {
+            return;
+        }
+        super.die(pDamageSource);
     }
 
     @Override

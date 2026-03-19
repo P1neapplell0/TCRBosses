@@ -84,6 +84,14 @@ public class IgnisHumanoid extends BaseBossEntity {
     }
 
     @Override
+    public void die(@NotNull DamageSource pDamageSource) {
+        if(this.getPhase() < 3) {
+            return;
+        }
+        super.die(pDamageSource);
+    }
+
+    @Override
     protected @Nullable SoundEvent getAmbientSound() {
         return ModSounds.IGNIS_AMBIENT.get();
     }
