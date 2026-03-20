@@ -106,7 +106,7 @@ public class NetherGolemPatch extends CEHumanoidPatch<NetherGolem> {
         this.original.setItemSlot(EquipmentSlot.LEGS, legs);
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
     @Override

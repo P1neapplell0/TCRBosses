@@ -87,7 +87,7 @@ public class EndGolemPatch extends CEHumanoidPatch<EndGolem> {
         this.original.setItemSlot(EquipmentSlot.LEGS, legs);
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){

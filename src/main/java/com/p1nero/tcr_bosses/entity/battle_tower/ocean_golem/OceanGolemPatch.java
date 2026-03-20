@@ -79,7 +79,7 @@ public class OceanGolemPatch extends CEHumanoidPatch<OceanGolem> {
         this.original.setItemSlot(EquipmentSlot.LEGS, legs);
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
 

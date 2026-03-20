@@ -97,7 +97,7 @@ dependencies {
 
     implementation fg.deobf('libs:fantasy_armor:1.2')
 
-    implementation fg.deobf("libs:CombatEvolution:2.1.0")
+    implementation fg.deobf("libs:CombatEvolution:2.1.1")
     implementation fg.deobf("libs:packetfixer:3.1.4")
 
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7476040")

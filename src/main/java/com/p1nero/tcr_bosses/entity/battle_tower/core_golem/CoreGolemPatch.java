@@ -113,7 +113,7 @@ public class CoreGolemPatch extends CEHumanoidPatch<CoreGolem> {
         this.original.setItemSlot(EquipmentSlot.LEGS, legs);
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
 

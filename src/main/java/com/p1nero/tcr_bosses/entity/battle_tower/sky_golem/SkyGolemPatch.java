@@ -124,7 +124,7 @@ public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
 

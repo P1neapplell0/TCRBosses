@@ -99,7 +99,7 @@ public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
         this.original.setItemSlot(EquipmentSlot.LEGS, legs);
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
-        modifyLivingMotionByCurrentItem();
+        modifyLivingMotionByCurrentItem(true);
     }
 
     @Override
