@@ -23,7 +23,7 @@
 	"default_livingmotions": {
         "idle": "epicfight:biped/living/idle",
         "walk": "epicfight:biped/living/walk",
-        "chase": "epicfight:biped/living/run",
+        "chase": "epicfightx:biped/living/run",
         "mount": "epicfight:biped/living/mount",
         "fall": "epicfight:biped/living/fall",
         "death": "efn:biped/yamato/biped_hitup_3"
@@ -280,6 +280,67 @@
 			"style": "common",
 			"behavior_series": [
 			
+			{
+                    "weight": 9999999,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 12000,
+                    "behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"indestructible:phase", "min": 0, "max": 0}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/hf_murasama/skill/hf_murasama_y", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 0.5, "armor_negation": 0.1
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.2,
+							"stamina": 180,
+                            "command_list":[
+							{"time":0.05, "command":"item replace entity @s weapon.mainhand with efn:hf_murasama", "execute_at_target":false},
+							{"time":0.15, "command":"execute as @s[distance=4..48] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 1", "execute_at_target":true},
+							{"time":0.15, "command":"execute as @s[distance=4..48] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
+							{"time":0.3, "command":"effect give @s minecraft:slowness 2 5 true", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true}						
+							]
+                        },
+						{
+							"conditions": [
+								{"predicate":"within_distance", "min": 0.0, "max":48.0}, {"predicate":"indestructible:phase", "min": 1, "max": 1}
+							],
+							"end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_tachi", "convert_time": 0.0
+						},
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 48.0}, {"predicate":"indestructible:phase", "min": 1, "max": 1}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/hf_murasama/skill/hf_murasama_y_charge", 
+							"damage_modifier":{
+							    "damage": 1.0, "impact": 0.5, "armor_negation": 0.1
+							}, 
+							"play_speed": 1.0,
+							"convert_time": 0.15,
+                            "command_list":[
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
+                            ],
+							"set_phase": 1,
+							"hit_command_list": [
+							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] alexsmobs:exsanguination 3 128", "execute_at_target":true},
+							{"command":"epicfight stamina add @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] -6", "execute_at_target":true},
+							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
+							{"command":"effect clear @s[distance=..24] minecraft:unluck", "execute_at_target":false}
+                            ],
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},
+							{"command":"effect give @s[distance=..48] minecraft:unluck 1 0 true", "is_parry": true, "execute_at_target":false},
+							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock2' 0.0 1.0", "is_parry": true, "execute_at_target":true}						
+							]
+                        }
+                    ]
+            },
 			
 			{
 				    "weight": 1,
@@ -446,8 +507,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.35,
                             "command_list":[
-							{"time":0.45, "command":"execute as @s[distance=4..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 6", "execute_at_target":true},
-							{"time":0.45, "command":"execute as @s[distance=4..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
+							{"time":0.45, "command":"execute as @s[distance=3..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 6", "execute_at_target":true},
+							{"time":0.45, "command":"execute as @s[distance=3..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
 							{"time":0.6, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
 							{"time":0.7, "command":"indestructible @s play 'epicfightx:biped/living/hold_tachi' 0.0 1.0", "execute_at_target":false}
                             ],
@@ -475,8 +536,8 @@
 							"play_speed": 1.0,
 							"convert_time": 0.35,
                             "command_list":[
-							{"time":0.45, "command":"execute as @s[distance=4..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 6", "execute_at_target":true},
-							{"time":0.45, "command":"execute as @s[distance=4..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
+							{"time":0.45, "command":"execute as @s[distance=3..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] set_phase 6", "execute_at_target":true},
+							{"time":0.45, "command":"execute as @s[distance=3..7] run indestructible @e[tag=harbingerboss,sort=nearest,limit=1,distance=..48] play 'epicfightx:biped/living/hold_tachi' 0.1 1", "execute_at_target":true},
 							{"time":0.6, "command":"effect give @s minecraft:slowness 2 7", "execute_at_target":false},
 							{"time":0.7, "command":"indestructible @s play 'epicfightx:biped/living/hold_tachi' 0.0 1.0", "execute_at_target":false}
                             ],
@@ -962,7 +1023,7 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 8.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
+							{"predicate":"within_distance", "min": 0.0, "max": 12.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/hf_murasama/skill/hf_murasama_y", 
 							"damage_modifier":{
@@ -1867,7 +1928,7 @@
 
 				
 				{
-                    "weight": 300,
+                    "weight": 250,
                     "canBeInterrupted": false,
                     "looping": false,
                     "cooldown": 5,
