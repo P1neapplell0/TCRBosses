@@ -89,7 +89,6 @@ dependencies {
     implementation fg.deobf('libs:oculus:1.8.0')
     implementation fg.deobf('libs:embeddium:0.3.31')
     implementation fg.deobf('libs:mobbattle:2.5.3')
-    implementation fg.deobf('libs:nightfall_invade:1.2.0')
     implementation fg.deobf('libs:better_trident_model:1.0.0')
 
     implementation fg.deobf('libs:geckolib:4.8.3')

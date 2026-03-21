@@ -2,10 +2,13 @@ package com.p1nero.tcr_bosses.mixins;
 
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.brass_amber.ba_bt.util.GolemType;
+import com.p1nero.tcr_bosses.client.sound.BossMusicPlayer;
 import com.p1nero.tcr_bosses.entity.battle_tower.sky_golem.SkyGolemPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.Music;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -41,6 +44,12 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
 
     @Shadow(remap = false)
     protected abstract void addBehaviorGoals();
+
+    @Shadow(remap = false)
+    public Music BOSS_MUSIC;
+
+    @Shadow(remap = false)
+    public abstract boolean isAwake();
 
     @Unique
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
@@ -83,6 +92,24 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
             if (getTarget() != null && !getTarget().isAlive()) {
                 setTarget(null);
             }
+        }
+    }
+
+    /**
+     * 换自己的bgm管理
+     */
+    @Inject(method = "clientTick", at = @At("HEAD"), cancellable = true, remap = false)
+    private void tcr$clientTick(CallbackInfo ci) {
+        ci.cancel();
+        if(this.isAwake()) {
+            BossMusicPlayer.playBossMusic(this, this.BOSS_MUSIC.getEvent().get(), 32);
+        }
+    }
+
+    @Inject(method = "die", at = @At("HEAD"))
+    private void tr$die(DamageSource source, CallbackInfo ci) {
+        if(level().isClientSide) {
+            BossMusicPlayer.stopBossMusic(this);
         }
     }
 
