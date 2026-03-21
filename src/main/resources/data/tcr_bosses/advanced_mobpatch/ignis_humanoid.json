@@ -599,7 +599,7 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"indestructible:phase", "min": 0, "max": 6}, {"predicate":"health", "health": 0.6, "comparator": "less_ratio"}
+							{"predicate":"indestructible:phase", "min": 0, "max": 1}, {"predicate":"health", "health": 0.6, "comparator": "less_ratio"}
                             ],
 							"set_phase": 18,
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_greatsword"
@@ -801,7 +801,7 @@
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 1 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
-							{"time":2.75, "command":"combat_evolution particle @s[distance=12..48] 0 2 0 bypass_dodge", "execute_at_target":true},
+							{"time":2.75, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 5 0 true", "execute_at_target":false},
@@ -813,8 +813,8 @@
 							{"time":0.6, "command":"execute as @s at @s run particle epicfight:hit_blunt ^-1.0 ^3.5 ^0.25 0 0 0 0.1 2", "execute_at_target":false},
 							{"time":3.25, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ~0 ~2.5 ~0 0.1 0.75 0.1 0.1 6", "execute_at_target":true},
 							{"time":3.3, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":0.6, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":3.25, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.6, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":3.25, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
 							{"time":2.1, "command":"execute as @s[distance=5..8] run indestructible @e[tag=ignisboss,sort=nearest,limit=1,distance=..48] play 'epicfight:biped/living/hold_longsword' 0.1 1", "execute_at_target":true}
                             ],
 							"set_phase": 2,
@@ -899,7 +899,7 @@
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 1 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
-							{"time":2.75, "command":"combat_evolution particle @s[distance=12..48] 0 2 0 bypass_dodge", "execute_at_target":true},
+							{"time":2.75, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 5 0 true", "execute_at_target":false},
@@ -911,8 +911,8 @@
 							{"time":0.6, "command":"execute as @s at @s run particle epicfight:hit_blunt ^-1.0 ^3.5 ^0.25 0 0 0 0.1 2", "execute_at_target":false},
 							{"time":3.25, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ~0 ~2.5 ~0 0.1 0.75 0.1 0.1 6", "execute_at_target":true},
 							{"time":3.3, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":0.6, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":3.25, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.6, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":3.25, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
 							{"time":2.1, "command":"execute as @s[distance=5..8] run indestructible @e[tag=ignisboss,sort=nearest,limit=1,distance=..48] play 'epicfight:biped/living/hold_longsword' 0.1 1", "execute_at_target":true}
                             ],
 							"hit_command_list": [
@@ -1632,7 +1632,7 @@
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_guard", "execute_at_target":true},
 							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 1 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
-							{"time":2.75, "command":"combat_evolution particle @s[distance=12..48] 0 2 0 bypass_dodge", "execute_at_target":true},
+							{"time":2.75, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
 							{"time":2.75, "command":"effect give @s minecraft:glowing 1 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 2 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 5 0 true", "execute_at_target":false},
@@ -1644,8 +1644,8 @@
 							{"time":0.6, "command":"execute as @s at @s run particle epicfight:hit_blunt ^-1.0 ^3.5 ^0.25 0 0 0 0.1 2", "execute_at_target":false},
 							{"time":3.25, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ~0 ~2.5 ~0 0.1 0.75 0.1 0.1 6", "execute_at_target":true},
 							{"time":3.3, "command":"effect give @s combat_evolution:bypass_dodge_effect 1 0 true", "execute_at_target":false},
-							{"time":0.6, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
-							{"time":3.25, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.6, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":3.25, "command":"indestructible @s[tag=!ignisboss,distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
 							{"time":2.1, "command":"execute as @s[distance=5..8] run indestructible @e[tag=ignisboss,sort=nearest,limit=1,distance=..48] play 'epicfight:biped/living/hold_longsword' 0.1 1", "execute_at_target":true}
                             ],
 							"set_phase": 2,
@@ -2313,7 +2313,7 @@
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"tag @s[distance=..48] add ignistp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=ignisboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=ignistp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -2345,7 +2345,7 @@
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"tag @s[distance=..48] add ignistp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=ignisboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=ignistp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -2377,7 +2377,7 @@
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"tag @s[distance=..48] add ignistp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=ignisboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=ignistp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -2408,7 +2408,7 @@
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"tag @s[distance=..48] add ignistp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=ignisboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=ignistp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -2429,7 +2429,7 @@
                     "weight": 5,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 25,
+                    "cooldown": 30,
                     "behaviors": [
 						{
                             "conditions": [
@@ -2440,7 +2440,7 @@
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
 							{"time":0.05, "command":"tag @s[distance=..48] add ignistp", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @e[tag=ignisboss,limit=1,distance=..48] at @s facing entity @s feet run tp @s ~ ~ ~ facing entity @e[tag=ignistp,sort=nearest,limit=1,distance=..48]", "execute_at_target":false},
@@ -2465,15 +2465,16 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"within_distance", "min": 24.0, "max": 48.0}, {"predicate":"indestructible:phase", "min": 7, "max": 7}
+							{"predicate":"within_distance", "min": 18.0, "max": 48.0}, {"predicate":"indestructible:phase", "min": 7, "max": 7}
                             ],
-                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_f", 
 							"damage_modifier":{
 							    "damage": 1.25, "impact": 0.25, "armor_negation": 0.25
 							}, 
 							"play_speed": 1.0,
-							"convert_time": 0.2,
+							"convert_time": 0.15,
                             "command_list":[
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 2 true", "execute_at_target":false},
 							{"time":0.3, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_greatsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 10
