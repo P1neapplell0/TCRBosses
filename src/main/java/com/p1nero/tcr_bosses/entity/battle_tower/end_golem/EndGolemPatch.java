@@ -121,7 +121,7 @@ public class EndGolemPatch extends CEHumanoidPatch<EndGolem> {
                 )));
 
         this.weaponAttackMotions.put(EFNWeaponCategories.EFN_YAMATO,
-                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, EndGolemCombatBehavior.YAMATO));
+                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, EndGolemCombatBehavior.YAMATO.get()));
     }
 
 

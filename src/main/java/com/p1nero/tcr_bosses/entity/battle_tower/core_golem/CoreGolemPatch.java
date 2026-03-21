@@ -172,7 +172,7 @@ public class CoreGolemPatch extends CEHumanoidPatch<CoreGolem> {
 
         this.weaponAttackMotions.put(
                 CapabilityItem.WeaponCategories.TACHI,
-                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, CoreGolemCombatBehavior.TACHI)
+                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, CoreGolemCombatBehavior.TACHI.get())
         );
     }
 

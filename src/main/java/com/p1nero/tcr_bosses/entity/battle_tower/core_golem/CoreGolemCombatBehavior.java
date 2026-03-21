@@ -33,13 +33,14 @@ import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class CoreGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> TACHI;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> TACHI;
 
     static {
-        TACHI = CECombatBehaviors.builder()
+        TACHI = ()-> CECombatBehaviors.builder()
 
                 //近距离后撤
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()

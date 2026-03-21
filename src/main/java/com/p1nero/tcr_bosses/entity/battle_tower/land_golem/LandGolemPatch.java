@@ -182,7 +182,7 @@ public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
                         )));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,
-                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, LandGolemCombatBehavior.GREATSWORD));
+                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, LandGolemCombatBehavior.GREATSWORD.get()));
     }
 
     @Override

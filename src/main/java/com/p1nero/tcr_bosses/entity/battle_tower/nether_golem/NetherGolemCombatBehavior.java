@@ -28,13 +28,14 @@ import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.StunType;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class NetherGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> DUAL_SWORD;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> DUAL_SWORD;
 
     static {
-        DUAL_SWORD = CECombatBehaviors.builder()
+        DUAL_SWORD = ()-> CECombatBehaviors.builder()
 
                 //近距离后撤
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()

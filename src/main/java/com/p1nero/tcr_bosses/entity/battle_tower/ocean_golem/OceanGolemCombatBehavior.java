@@ -28,13 +28,14 @@ import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class OceanGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> TRIDENT;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> TRIDENT;
 
     static {
-        TRIDENT = CECombatBehaviors.builder()
+        TRIDENT = ()-> CECombatBehaviors.builder()
 
                 //闪避防御动作
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()

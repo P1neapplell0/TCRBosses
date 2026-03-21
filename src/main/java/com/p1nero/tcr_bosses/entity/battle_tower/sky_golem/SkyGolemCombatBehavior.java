@@ -52,13 +52,14 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class SkyGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> SWORD;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> SWORD;
 
     static {
-        SWORD = CECombatBehaviors.builder()
+        SWORD = ()-> CECombatBehaviors.builder()
 
                 //近距离后撤
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()

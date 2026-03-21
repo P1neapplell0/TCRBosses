@@ -25,13 +25,14 @@ import yesman.epicfight.world.damagesource.StunType;
 
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class LandGolemCombatBehavior {
 
-    public static final CECombatBehaviors.Builder<MobPatch<?>> GREATSWORD;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> GREATSWORD;
 
     static {
-        GREATSWORD = CECombatBehaviors.builder()
+        GREATSWORD = ()-> CECombatBehaviors.builder()
 
                 //距离较远时会尝试翻滚拉近，距离较近时会尝试拉远
                 .newBehaviorRoot(CECombatBehaviors.BehaviorRoot.builder()

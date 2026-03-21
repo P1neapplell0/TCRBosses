@@ -156,7 +156,7 @@ public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
                         List.of(AnimationsX.BIPED_HIT_SHIELD)));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.UCHIGATANA,
-                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, SkyGolemCombatBehavior.SWORD));
+                ImmutableMap.of(CapabilityItem.Styles.ONE_HAND, SkyGolemCombatBehavior.SWORD.get()));
     }
 
 

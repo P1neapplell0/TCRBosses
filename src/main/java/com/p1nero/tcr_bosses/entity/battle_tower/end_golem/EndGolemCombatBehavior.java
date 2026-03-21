@@ -26,9 +26,10 @@ import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class EndGolemCombatBehavior {
-    public static final CECombatBehaviors.Builder<MobPatch<?>> YAMATO;
+    public static final Supplier<CECombatBehaviors.Builder<MobPatch<?>>> YAMATO;
 
     /*
     战斗流程循环：
@@ -124,7 +125,7 @@ public class EndGolemCombatBehavior {
     }
 
     static {
-        YAMATO = new CECombatBehaviors.Builder<>()
+        YAMATO = ()-> new CECombatBehaviors.Builder<>()
 
                 /*---------------全局行为序列--------------------------------------------------------------------------------------------------------------------------------------*/
 

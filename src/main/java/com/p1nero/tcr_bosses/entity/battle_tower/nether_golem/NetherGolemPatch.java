@@ -156,7 +156,7 @@ public class NetherGolemPatch extends CEHumanoidPatch<NetherGolem> {
 
         this.weaponAttackMotions.put(
                 CapabilityItem.WeaponCategories.SWORD,
-                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, NetherGolemCombatBehavior.DUAL_SWORD)
+                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, NetherGolemCombatBehavior.DUAL_SWORD.get())
         );
     }
 

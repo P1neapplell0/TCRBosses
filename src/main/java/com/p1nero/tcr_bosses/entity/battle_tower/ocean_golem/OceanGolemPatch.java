@@ -117,7 +117,7 @@ public class OceanGolemPatch extends CEHumanoidPatch<OceanGolem> {
 
     @Override
     protected CECombatBehaviors.Builder<MobPatch<?>> getCustomWeaponMotionBuilder() {
-        return OceanGolemCombatBehavior.TRIDENT;
+        return OceanGolemCombatBehavior.TRIDENT.get();
     }
 
     @Override
