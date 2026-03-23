@@ -270,8 +270,8 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.3d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.04d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:15d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:550d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:9d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:500d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:16d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:32d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:8d,Name:\"epicfight:weight\"}]}", "execute_at_target":false},
@@ -312,6 +312,29 @@
 			"style": "common",
 			"behavior_series": [
 			
+			{
+					"weight": 999999,
+					"canBeInterrupted": false,
+					"looping": false,
+					"cooldown": 120000,
+					"behaviors": [
+						{
+                            "conditions": [
+							{"predicate":"within_distance", "min": 0.0, "max": 6.0}, {"predicate":"indestructible:phase", "min": 5, "max": 5}
+                            ],
+                            "end_by_hurt_level": 3, "animation": "efn:biped/dodge/dmcyamato_dodge_b", 
+							"play_speed": 1.0,
+							"convert_time": 0.1,
+                            "command_list":[
+							{"time":0.05, "command":"item replace entity @s weapon.mainhand with cataclysm:ceraunus", "execute_at_target":false},
+							{"time":0.3, "command":"indestructible @s play 'epicfightx:biped/living/hold_greatsword' 0.0 1.0", "execute_at_target":false}
+                            ],
+							"set_phase": 6,
+							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							]
+                        }
+                    ]                 
+			},
 			
 			{
 				    "weight": 1,

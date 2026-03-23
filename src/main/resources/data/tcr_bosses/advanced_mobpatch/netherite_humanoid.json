@@ -256,8 +256,8 @@
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with cataclysm:infernal_forge", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.45d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:24d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:640d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:8d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:600d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:20d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:80d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:480d,Name:\"epicfight:weight\"}]}", "execute_at_target":false},
@@ -344,7 +344,7 @@
                         },
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 320, "comparator": "less_absolute"}, {"predicate":"random_chance", "chance": 0.6}
+								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 0.5, "comparator": "less_ratio"}, {"predicate":"random_chance", "chance": 0.6}
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/greatsword_auto1", 
 							"damage_modifier":{
@@ -397,7 +397,7 @@
                         },
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 320, "comparator": "less_absolute"}, {"predicate":"random_chance", "chance": 0.6}
+								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 0.5, "comparator": "less_ratio"}, {"predicate":"random_chance", "chance": 0.6}
 							],
                             "end_by_hurt_level": 3, "animation": "epicfight:biped/combat/greatsword_auto1", 
 							"damage_modifier":{
@@ -449,7 +449,7 @@
                         },
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 320, "comparator": "less_absolute"}, {"predicate":"random_chance", "chance": 0.6}
+								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 0.5, "comparator": "less_ratio"}, {"predicate":"random_chance", "chance": 0.6}
 							],
                             "end_by_hurt_level": 3, "animation": "epicfightx:biped/living/hold_greatsword"
 						}
@@ -494,7 +494,7 @@
                         },
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 320, "comparator": "less_absolute"}, {"predicate":"random_chance", "chance": 0.6}
+								{"predicate":"within_distance", "min": 0.0, "max":9.0}, {"predicate":"indestructible:phase", "min": 1, "max": 6}, {"predicate":"health", "health": 0.5, "comparator": "less_ratio"}, {"predicate":"random_chance", "chance": 0.6}
 							],
                             "end_by_hurt_level": 3, "animation": "p1nero_ec:skill/infernal_auto3", 
 							"damage_modifier":{
@@ -952,7 +952,7 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"indestructible:phase", "min": 6, "max": 6}, {"predicate":"health", "health": 320, "comparator": "less_absolute"}
+							{"predicate":"indestructible:phase", "min": 6, "max": 6}, {"predicate":"health", "health": 0.5, "comparator": "less_ratio"}
                             ],
                             "end_by_hurt_level": 3, "animation": "wom:biped/skill/torment_berserk_convert", 
 							"damage_modifier":{

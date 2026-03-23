@@ -326,7 +326,7 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 1}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 1}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_l", 
 							"play_speed": 1.0,
@@ -349,12 +349,12 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_r", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -2,
+							"stamina": -3,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
@@ -372,12 +372,12 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 3, "max": 3}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 3, "max": 3}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_l", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -2,
+							"stamina": -4,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
@@ -395,12 +395,12 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 4, "max": 4}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 4, "max": 4}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_r", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -2,
+							"stamina": -5,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.15, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
@@ -423,7 +423,7 @@
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -6,
+							"stamina": -7,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
@@ -446,7 +446,7 @@
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -6,
+							"stamina": -7,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
@@ -466,12 +466,12 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}, {"predicate": "health", "health": 0.5, "comparator": "greater_ratio"}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -6,
+							"stamina": -7,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false}
@@ -489,12 +489,12 @@
 					"behaviors": [
 					    {
                             "conditions": [
-							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 1, "max": 2}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
+							{"predicate":"within_distance", "min": 0.0, "max": 5.0}, {"predicate":"indestructible:phase", "min": 1, "max": 5}, {"predicate":"indestructible:attack_level", "min": 2, "max": 2}, {"predicate": "health", "health": 0.501, "comparator": "less_ratio"}
                             ],
                             "end_by_hurt_level": 3, "animation": "efn:biped/dodge_mob/step_b", 
 							"play_speed": 1.0,
 							"convert_time": 0.05,
-							"stamina": -6,
+							"stamina": -7,
                             "command_list":[
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:glowing\"}]}] efn:invincibility 24 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, distance=..24] efn:invincibility 3 0 true", "execute_at_target":false},
@@ -707,7 +707,7 @@
 							"conditions": [
 								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 18, "max": 18}
 							],
-							"stamina": 3,
+							"stamina": -4,
 							"end_by_hurt_level": 3, "animation": "epicfight:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
@@ -751,7 +751,7 @@
 							"conditions": [
 								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
 							],
-							"stamina": -1,
+							"stamina": -3,
 							"end_by_hurt_level": 3, "animation": "epicfight:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
@@ -796,7 +796,7 @@
 							"conditions": [
 								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
 							],
-							"stamina": -1,
+							"stamina": -3,
 							"end_by_hurt_level": 3, "animation": "epicfight:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
@@ -839,7 +839,7 @@
 							"conditions": [
 								{"predicate":"within_distance", "min": 0.0, "max":32.0}, {"predicate":"indestructible:phase", "min": 2, "max": 2}
 							],
-							"stamina": -1,
+							"stamina": -3,
 							"end_by_hurt_level": 3, "animation": "epicfight:biped/living/hold_longsword", "convert_time": 0.0
 						}
                     ]
@@ -2393,10 +2393,9 @@
                             "command_list":[
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with cataclysm:tidal_claws", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.45d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.75d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.75d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.5d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.5d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:8d,Name:\"minecraft:generic.attack_damage\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:700d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0d,Name:\"minecraft:generic.armor_toughness\"}]}", "execute_at_target":false},
