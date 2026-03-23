@@ -285,6 +285,14 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
             maxDistanceFromSpawn = 13;
         }
 
+        if(((Object)this instanceof NetherGolem)) {
+            maxDistanceFromSpawn = 48;
+        }
+
+        if(((Object)this instanceof EndGolem)) {
+            maxDistanceFromSpawn = 64;
+        }
+
         maxDistanceFromSpawn *= maxDistanceFromSpawn;
         BlockPos spawnPos = this.getSpawnPos();
         boolean shouldReset = false;
