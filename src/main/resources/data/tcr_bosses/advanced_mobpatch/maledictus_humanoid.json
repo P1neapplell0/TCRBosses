@@ -415,7 +415,7 @@
 							{"time":0.4, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 6,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
 						}
                     ]
@@ -455,7 +455,7 @@
 							{"time":1.2, "command":"item replace entity @s weapon.mainhand with cataclysm:the_annihilator", "execute_at_target":false}
                             ],
 							"set_phase": 4,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -494,7 +494,7 @@
 							{"time":1.35, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 0,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -540,7 +540,7 @@
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -586,7 +586,7 @@
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -635,7 +635,7 @@
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false}
@@ -686,7 +686,7 @@
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},
 							{"command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false}
@@ -767,7 +767,7 @@
 							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
                             ],
 							"set_phase": 0,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}					
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}					
 							]
                         }
                     ]
@@ -796,7 +796,7 @@
 							{"time":0.8, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 8,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},  									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true},  									
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock2' 0.0 1.0", "is_parry": true, "execute_at_target":true}
 							]
                         }
@@ -825,7 +825,7 @@
 							{"time":0.75, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 8,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},  									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true},  									
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true}
 							]
                         },
@@ -863,7 +863,7 @@
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}},type=minecraft:player, distance=..24] minecraft:resistance", "execute_at_target":true}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false}
@@ -916,7 +916,7 @@
 							{"time":1.35, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 10,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -959,7 +959,7 @@
 							{"time":2.1, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 6,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
 						},
 						{
@@ -1033,7 +1033,7 @@
                     "weight": 100000,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 0,
+                    "cooldown": 10,
                     "behaviors": [
 						{
 							"conditions": [
@@ -1056,7 +1056,7 @@
 							
 							{"time":0.1, "command":"effect give @s minecraft:weakness 1 99", "execute_at_target":false},
 							{"time":0.5, "command":"execute as @s at @s run playsound cataclysm:maledictus_battle_cry hostile @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
-							{"time":0.5, "command":"effect give @s minecraft:instant_health 1 1", "execute_at_target":false},
+							{"time":0.5, "command":"effect give @s minecraft:instant_health 1 2", "execute_at_target":false},
 							{"time":0.6, "command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] minecraft:instant_health 1 2", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:resistance 1 3", "execute_at_target":false},
 							{"time":0.55, "command":"effect give @s minecraft:strength 7 0", "execute_at_target":false},
@@ -1067,7 +1067,7 @@
                             ],
 							"stamina": 16,
 							"set_phase": 6,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -1243,7 +1243,7 @@
 							{"time":0.5, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 1,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1262,7 +1262,7 @@
 							{"time":0.75, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 1,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1325,7 +1325,7 @@
 							{"time":0.85, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1386,7 +1386,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 2,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1410,7 +1410,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 3,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1472,7 +1472,7 @@
 							{"time":0.7, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 3,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1490,7 +1490,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 4,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s set_phase 5", "is_parry": true, "execute_at_target":false}
 							]
                         },
@@ -1562,7 +1562,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 2,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1586,7 +1586,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 3,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1620,7 +1620,7 @@
 							{"time":0.7, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 3,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1638,7 +1638,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s set_phase 5", "is_parry": true, "execute_at_target":false}
 							]
                         },
@@ -1673,7 +1673,7 @@
 							{"time":0.85, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -1783,7 +1783,7 @@
 							{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:resistance\"}, {Amplifier:5b}]},type=minecraft:player,distance=..24] minecraft:resistance", "execute_at_target":true},
 							{"command":"indestructible @s[distance=..24] play 'efn:biped/yamato/biped_hitup_3' 0.05 1", "execute_at_target":true}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}
 							]
                         }
                     ]
@@ -1898,7 +1898,7 @@
 							{"time":1.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
 						}
                     ]
@@ -1940,7 +1940,7 @@
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
 						},
 						{
@@ -1976,7 +1976,7 @@
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/yamato/biped_hitup_3' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s set_phase 1", "execute_at_target": false}
                             ],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
@@ -2062,7 +2062,7 @@
 							{"time":0.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 7,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true},  									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true},  									
 								{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true}
 							]
                         }
@@ -2169,7 +2169,7 @@
 							{"time":0.3, "command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 6,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]                 
@@ -2214,7 +2214,7 @@
 								{"command":"indestructible @s play 'epicfight:biped/combat/hit_short' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
 							],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s[distance=..48] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},
 							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false},
@@ -2277,7 +2277,7 @@
 								{"command":"indestructible @s play 'epicfight:biped/combat/hit_short' 0.1 1", "execute_at_target":true},
 								{"command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
 							],
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true}, 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true}, 									
 							{"command":"indestructible @s set_phase 19", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "is_parry": true, "execute_at_target":false},
 							{"command":"indestructible @s set_phase 19", "is_parry": false, "execute_at_target":false},
@@ -2387,7 +2387,7 @@
 							{"time":0.75, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -2405,7 +2405,7 @@
 							{"time":0.3, "command":"effect give @s minecraft:slowness 3 7", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         },
 						{
@@ -2424,7 +2424,7 @@
 							{"time":0.85, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"set_phase": 5,
-							"blocked_command_list":[ {"command":"effect give @s[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..24] attributeslib:bleeding 2 24", "is_parry": false, "execute_at_target":true} 									
+							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 12", "is_parry": false, "execute_at_target":true} 									
 							]
                         }
                     ]
