@@ -212,6 +212,7 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
 
     /**
      * 允许刚出生时破坏，禁止非高塔生的傀儡破坏
+     * 卡墙也允许破坏
      */
     @Inject(method = "destroyBlocksNearby",at = @At(value = "HEAD"),cancellable = true,remap = false)
     public void destroyBlocksNearby(CallbackInfo ci){
@@ -221,7 +222,9 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
 //        if(this.tickCount > 200) {
 //            ci.cancel();
 //        }
-        ci.cancel();
+        if(!this.isInWall()) {
+            ci.cancel();
+        }
     }
 
     @Inject(method = "getTargetingRange", at = @At(value = "HEAD"), cancellable = true, remap = false)
