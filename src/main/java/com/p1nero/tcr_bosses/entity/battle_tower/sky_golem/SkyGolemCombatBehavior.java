@@ -1406,7 +1406,7 @@ public class SkyGolemCombatBehavior {
         if (world == null) {
             return null;
         } else {
-            Lightning_Spear_Entity spear = new Lightning_Spear_Entity(caster, direction, world, damage);
+            Lightning_Spear_Entity spear = new Lightning_Spear_Entity(caster, direction, world, damage, 1.0F);
             spear.setAreaDamage(areaDamage);
             spear.setAreaRadius(areaRadius);
             spear.setPos(x, y, z);

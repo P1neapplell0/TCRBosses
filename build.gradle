@@ -109,7 +109,7 @@ dependencies {
     implementation fg.deobf("libs:Nightfall:3.1.6")
     implementation fg.deobf("libs:invincible:20.14.8.2")
 
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:6906993")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:7821746")
     implementation fg.deobf('libs:lionfishapi:2.4')
     implementation fg.deobf('libs:curios:5.14.1')
 
@@ -120,7 +120,7 @@ dependencies {
     implementation fg.deobf('libs:architectury:9.2.14')
     implementation fg.deobf('libs:clothConfig:11.1.136')
 
-    implementation fg.deobf('libs:p1nero_ec:20.14.0.4')
+    implementation fg.deobf("curse.maven:p1neros-epic-x-cataclysm-1325059:7842335")
 
 
     implementation 'org.spongepowered:mixin:0.8.5'
