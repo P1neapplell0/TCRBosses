@@ -7,6 +7,7 @@ import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
+import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
 import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -90,7 +91,6 @@ public class EntityEvents {
             event.setAmount(Math.min(event.getAmount() * reduce, golem.getMaxHealth() * percent));
         }
 
-
         EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,EndGolemPatch.class);
         if(endGolemPatch != null){
             float damage = Math.min(event.getAmount(),endGolemPatch.getOriginal().getMaxHealth() * 0.05F);
@@ -103,6 +103,9 @@ public class EntityEvents {
 
     @SubscribeEvent
     public static void onLivingJoin(EntityJoinLevelEvent event) {
+        if(event.getEntity() instanceof BaseSmallBossEntity boss) {
+            boss.setInFighting(true);
+        }
         if(!TCRBossesMod.isTcrLoaded()) {
             return;
         }
