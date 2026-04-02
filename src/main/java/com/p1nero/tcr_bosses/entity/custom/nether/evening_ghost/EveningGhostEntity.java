@@ -13,7 +13,7 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 public class EveningGhostEntity extends BaseSmallBossEntity {
 
-    protected EveningGhostEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
+    public EveningGhostEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

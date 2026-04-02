@@ -1,12 +1,14 @@
 package com.p1nero.tcr_bosses.entity.custom.nether.citadel_keeper;
 
 import com.p1nero.tcr_bosses.entity.custom.BaseMobEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 public class CitadelKeeperEntity extends BaseMobEntity {
@@ -24,4 +26,8 @@ public class CitadelKeeperEntity extends BaseMobEntity {
                 .build();
     }
 
+    @Override
+    public @NotNull Component getName() {
+        return Component.translatable("entity.irons_spellbooks.citadel_keeper");
+    }
 }

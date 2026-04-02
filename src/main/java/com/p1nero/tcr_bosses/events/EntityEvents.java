@@ -1,15 +1,23 @@
 package com.p1nero.tcr_bosses.events;
 
+import com.aetherteam.aether.entity.AetherEntityTypes;
+import com.aetherteam.aether.entity.monster.dungeon.boss.SunSpirit;
+import com.aetherteam.aether.entity.monster.dungeon.boss.ValkyrieQueen;
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.p1nero.tcr_bosses.entity.TCRBossEntities;
+import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -90,6 +98,34 @@ public class EntityEvents {
                 float damageReduction = 0.15F + 0.3F * endGolemPatch.getBossBreakPhase();
                 event.setAmount(damage * damageReduction);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingJoin(EntityJoinLevelEvent event) {
+        if(!TCRBossesMod.isTcrLoaded()) {
+            return;
+        }
+        //替换小怪
+        if(event.getEntity() instanceof KeeperEntity keeper) {
+            if(event.getLevel() instanceof ServerLevel serverLevel) {
+                TCRBossEntities.CITADEL_KEEPER.get().spawn(serverLevel, keeper.getOnPos(), MobSpawnType.MOB_SUMMONED);
+            }
+            event.setCanceled(true);
+        }
+        //替换女武神
+        else if(event.getEntity().getType().equals(AetherEntityTypes.VALKYRIE_QUEEN.get())) {
+            if(event.getLevel() instanceof ServerLevel serverLevel) {
+                TCRBossEntities.VALKYRIE.get().spawn(serverLevel, event.getEntity().getOnPos(), MobSpawnType.MOB_SUMMONED);
+            }
+            event.setCanceled(true);
+        }
+        //替换烈阳巨灵
+        if(event.getEntity().getType().equals(AetherEntityTypes.SUN_SPIRIT.get())) {
+            if(event.getLevel() instanceof ServerLevel serverLevel) {
+                TCRBossEntities.GILDED_HUNTER.get().spawn(serverLevel, event.getEntity().getOnPos(), MobSpawnType.MOB_SUMMONED);
+            }
+            event.setCanceled(true);
         }
     }
 

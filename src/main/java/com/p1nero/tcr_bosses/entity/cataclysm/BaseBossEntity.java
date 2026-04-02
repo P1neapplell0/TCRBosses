@@ -11,4 +11,8 @@ public abstract class BaseBossEntity extends BaseSmallBossEntity {
         super(pEntityType, pLevel);
     }
 
+    @Override
+    public boolean isInFighting() {
+        return true;
+    }
 }

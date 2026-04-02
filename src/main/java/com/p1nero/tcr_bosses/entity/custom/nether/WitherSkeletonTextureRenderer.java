@@ -10,10 +10,10 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class NetherSmallBossRenderer<T extends BaseSmallBossEntity> extends HumanoidMobRenderer<T, HumanoidModel<T>> {
+public class WitherSkeletonTextureRenderer<T extends BaseSmallBossEntity> extends HumanoidMobRenderer<T, HumanoidModel<T>> {
     private static final ResourceLocation WITHER_SKELETON_LOCATION = ResourceLocation.parse("textures/entity/skeleton/wither_skeleton.png");
 
-    public NetherSmallBossRenderer(EntityRendererProvider.Context context) {
+    public WitherSkeletonTextureRenderer(EntityRendererProvider.Context context) {
         super(context, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER)), 0.5F);
 
         this.addLayer(new HumanoidArmorLayer<>(this, new SkeletonModel(context.bakeLayer(ModelLayers.WITHER_SKELETON_INNER_ARMOR)), new SkeletonModel(context.bakeLayer(ModelLayers.WITHER_SKELETON_OUTER_ARMOR)), context.getModelManager()));

@@ -1,6 +1,8 @@
-package com.p1nero.tcr_bosses.entity.custom.aether.malenia;
+package com.p1nero.tcr_bosses.entity.custom.aether.valkyrie;
 
-import com.p1nero.tcr_bosses.entity.custom.BaseMobEntity;
+import com.aetherteam.aether.client.AetherSoundEvents;
+import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -9,10 +11,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-public class MaleniaEntity extends BaseMobEntity {
+public class ValkyrieQueenEntity extends BaseSmallBossEntity {
 
-    public MaleniaEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
+    public ValkyrieQueenEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Override
+    public SoundEvent getBGM() {
+        return AetherSoundEvents.MUSIC_BOSS_VALKYRIE_QUEEN.get();
     }
 
     public static AttributeSupplier createAttributes() {

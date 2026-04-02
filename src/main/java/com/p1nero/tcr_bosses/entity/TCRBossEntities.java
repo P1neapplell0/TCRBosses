@@ -8,8 +8,14 @@ import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRend
 import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.PMaledictusHumanoidGolemRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.PNetheriteHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.custom.aether.gilded_hunter.GildedHunterEntity;
+import com.p1nero.tcr_bosses.entity.custom.aether.valkyrie.ValkyrieQueenEntity;
+import com.p1nero.tcr_bosses.entity.custom.aether.valkyrie.ValkyrieQueenRenderer;
+import com.p1nero.tcr_bosses.entity.custom.nether.WitherSkeletonTextureRenderer;
 import com.p1nero.tcr_bosses.entity.custom.nether.citadel_keeper.CitadelKeeperEntity;
 import com.p1nero.tcr_bosses.entity.custom.nether.citadel_keeper.CitadelKeeperRenderer;
+import com.p1nero.tcr_bosses.entity.custom.nether.evening_ghost.EveningGhostEntity;
+import com.p1nero.tcr_bosses.entity.custom.nether.golden_executor.GoldenExecutorEntity;
 import com.p1nero.tcr_bosses.gameassets.TCRBArmatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -88,6 +94,18 @@ public class TCRBossEntities {
     public static final RegistryObject<EntityType<CitadelKeeperEntity>> CITADEL_KEEPER = register("citadel_keeper",
             EntityType.Builder.of(CitadelKeeperEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8f));
 
+    public static final RegistryObject<EntityType<GildedHunterEntity>> GILDED_HUNTER = register("gilded_hunter",
+            EntityType.Builder.of(GildedHunterEntity::new, MobCategory.MONSTER).sized(0.6F * 1.5F, 1.8f * 1.5F));
+
+    public static final RegistryObject<EntityType<ValkyrieQueenEntity>> VALKYRIE = register("valkyrie",
+            EntityType.Builder.of(ValkyrieQueenEntity::new, MobCategory.MONSTER).sized(0.6F * 1.5F, 1.8f * 1.5F));
+
+    public static final RegistryObject<EntityType<EveningGhostEntity>> EVENING_GHOST = register("evening_ghost",
+            EntityType.Builder.of(EveningGhostEntity::new, MobCategory.MONSTER).sized(0.6F * 1.5F, 1.8f * 1.5F));
+
+    public static final RegistryObject<EntityType<GoldenExecutorEntity>> GOLDEN_EXECUTOR = register("golden_executor",
+            EntityType.Builder.of(GoldenExecutorEntity::new, MobCategory.MONSTER).sized(0.6F * 1.5F, 1.8f * 1.5F));
+
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
         return REGISTRY.register(name, () -> entityTypeBuilder.build(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, name).toString()));
     }
@@ -106,6 +124,11 @@ public class TCRBossEntities {
         event.put(LEVIATHAN_HUMANOID.get(), LeviathanHumanoid.createAttributes());
 
         event.put(CITADEL_KEEPER.get(), CitadelKeeperEntity.createAttributes());
+
+        event.put(GILDED_HUNTER.get(), GildedHunterEntity.createAttributes());
+        event.put(VALKYRIE.get(), ValkyrieQueenEntity.createAttributes());
+        event.put(EVENING_GHOST.get(), EveningGhostEntity.createAttributes());
+        event.put(GOLDEN_EXECUTOR.get(), GoldenExecutorEntity.createAttributes());
     }
 
     @SubscribeEvent
@@ -132,6 +155,10 @@ public class TCRBossEntities {
         event.registerEntityRenderer(LEVIATHAN_HUMANOID.get(), LeviathanHumanoidRenderer::new);
 
         event.registerEntityRenderer(CITADEL_KEEPER.get(), CitadelKeeperRenderer::new);
+        event.registerEntityRenderer(GILDED_HUNTER.get(), WitherSkeletonTextureRenderer::new);
+        event.registerEntityRenderer(VALKYRIE.get(), ValkyrieQueenRenderer::new);
+        event.registerEntityRenderer(EVENING_GHOST.get(), WitherSkeletonTextureRenderer::new);
+        event.registerEntityRenderer(GOLDEN_EXECUTOR.get(), WitherSkeletonTextureRenderer::new);
     }
 
     public static void registerArmatures() {
