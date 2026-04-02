@@ -124,9 +124,9 @@ public class NetherGolemPatch extends CEHumanoidPatch<NetherGolem> {
     }
 
     public static void initAttributes(EntityAttributeModificationEvent event){
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 250.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MAX_HEALTH, 320.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.MOVEMENT_SPEED, 0.4D);
-        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 5.0D);
+        event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ATTACK_DAMAGE, 8.0);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR, 20.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), Attributes.ARMOR_TOUGHNESS, 15.0D);
         event.add(BTEntityType.NETHER_GOLEM.get(), EpicFightAttributes.IMPACT.get(), 1D);
