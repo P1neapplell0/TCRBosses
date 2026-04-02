@@ -18,6 +18,7 @@
     "GeckoLibModMixin"
   ],
   "client": [
-    "AbstractBTGolemRendererMixin"
+    "AbstractBTGolemRendererMixin",
+    "ValkyrieRendererMixin"
   ]
 }

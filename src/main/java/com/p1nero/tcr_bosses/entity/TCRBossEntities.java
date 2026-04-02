@@ -8,6 +8,8 @@ import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRend
 import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.PMaledictusHumanoidGolemRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.PNetheriteHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.custom.nether.citadel_keeper.CitadelKeeperEntity;
+import com.p1nero.tcr_bosses.entity.custom.nether.citadel_keeper.CitadelKeeperRenderer;
 import com.p1nero.tcr_bosses.gameassets.TCRBArmatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -83,6 +85,9 @@ public class TCRBossEntities {
     public static final RegistryObject<EntityType<AncientRemnantHumanoid>> ANCIENT_REMNANT_HUMANOID = register("ancient_remnant_humanoid",
             EntityType.Builder.of(AncientRemnantHumanoid::new, MobCategory.MONSTER).sized(0.6F * 2.0F, 1.8f * 2.0F));
 
+    public static final RegistryObject<EntityType<CitadelKeeperEntity>> CITADEL_KEEPER = register("citadel_keeper",
+            EntityType.Builder.of(CitadelKeeperEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8f));
+
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
         return REGISTRY.register(name, () -> entityTypeBuilder.build(ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, name).toString()));
     }
@@ -99,6 +104,8 @@ public class TCRBossEntities {
         event.put(ENDER_GUARDIAN_HUMANOID.get(), EnderGuardianHumanoid.createAttributes());
         event.put(HARBINGER_HUMANOID.get(), HarbingerHumanoid.createAttributes());
         event.put(LEVIATHAN_HUMANOID.get(), LeviathanHumanoid.createAttributes());
+
+        event.put(CITADEL_KEEPER.get(), CitadelKeeperEntity.createAttributes());
     }
 
     @SubscribeEvent
@@ -123,6 +130,8 @@ public class TCRBossEntities {
         event.registerEntityRenderer(ENDER_GUARDIAN_HUMANOID.get(), EnderGuardianHumanoidRenderer::new);
         event.registerEntityRenderer(HARBINGER_HUMANOID.get(), HarbingerHumanoidRenderer::new);
         event.registerEntityRenderer(LEVIATHAN_HUMANOID.get(), LeviathanHumanoidRenderer::new);
+
+        event.registerEntityRenderer(CITADEL_KEEPER.get(), CitadelKeeperRenderer::new);
     }
 
     public static void registerArmatures() {

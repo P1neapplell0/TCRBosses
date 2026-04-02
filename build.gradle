@@ -112,6 +112,8 @@ dependencies {
     implementation fg.deobf("curse.maven:lendercataclysm-551586:7821746")
     implementation fg.deobf('libs:lionfishapi:2.4')
     implementation fg.deobf('libs:curios:5.14.1')
+    implementation fg.deobf("curse.maven:playeranimator-658587:4587214")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:7691158")
 
     implementation fg.deobf("curse.maven:aether-255308:6134920")
     implementation fg.deobf("curse.maven:aether-lost-content-318602:4927038")
