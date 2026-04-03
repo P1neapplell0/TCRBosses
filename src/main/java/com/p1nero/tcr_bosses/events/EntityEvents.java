@@ -9,21 +9,19 @@ import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
 import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
 import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.FireBossEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
 import net.shelmarow.combat_evolution.ai.util.CEPatchUtils;
@@ -112,21 +110,28 @@ public class EntityEvents {
         //替换小怪
         if(event.getEntity() instanceof KeeperEntity keeper) {
             if(event.getLevel() instanceof ServerLevel serverLevel) {
-                TCRBossEntities.CITADEL_KEEPER.get().spawn(serverLevel, keeper.getOnPos(), MobSpawnType.MOB_SUMMONED);
+                TCRBossEntities.CITADEL_KEEPER.get().spawn(serverLevel, keeper.getOnPos().above(), MobSpawnType.MOB_SUMMONED);
+            }
+            event.setCanceled(true);
+        }
+        //替换受火者
+        else if(event.getEntity() instanceof FireBossEntity) {
+            if(event.getLevel() instanceof ServerLevel serverLevel) {
+                TCRBossEntities.GOLDEN_EXECUTOR.get().spawn(serverLevel, event.getEntity().getOnPos().above(), MobSpawnType.MOB_SUMMONED);
             }
             event.setCanceled(true);
         }
         //替换女武神
         else if(event.getEntity().getType().equals(AetherEntityTypes.VALKYRIE_QUEEN.get())) {
             if(event.getLevel() instanceof ServerLevel serverLevel) {
-                TCRBossEntities.VALKYRIE.get().spawn(serverLevel, event.getEntity().getOnPos(), MobSpawnType.MOB_SUMMONED);
+                TCRBossEntities.VALKYRIE.get().spawn(serverLevel, event.getEntity().getOnPos().above(), MobSpawnType.MOB_SUMMONED);
             }
             event.setCanceled(true);
         }
         //替换烈阳巨灵
         if(event.getEntity().getType().equals(AetherEntityTypes.SUN_SPIRIT.get())) {
             if(event.getLevel() instanceof ServerLevel serverLevel) {
-                TCRBossEntities.GILDED_HUNTER.get().spawn(serverLevel, event.getEntity().getOnPos(), MobSpawnType.MOB_SUMMONED);
+                TCRBossEntities.GILDED_HUNTER.get().spawn(serverLevel, event.getEntity().getOnPos().above(), MobSpawnType.MOB_SUMMONED);
             }
             event.setCanceled(true);
         }
