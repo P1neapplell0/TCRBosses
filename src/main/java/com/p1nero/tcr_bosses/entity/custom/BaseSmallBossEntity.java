@@ -161,4 +161,9 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     protected float getEquipmentDropChance(@NotNull EquipmentSlot pSlot) {
         return 0;
     }
+
+    @Override
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return false;
+    }
 }
