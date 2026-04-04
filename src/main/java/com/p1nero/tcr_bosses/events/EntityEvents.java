@@ -121,20 +121,16 @@ public class EntityEvents {
             }
             event.setCanceled(true);
         }
-        //替换女武神
-        else if(event.getEntity().getType().equals(AetherEntityTypes.VALKYRIE_QUEEN.get())) {
-            if(event.getLevel() instanceof ServerLevel serverLevel) {
-                TCRBossEntities.VALKYRIE.get().spawn(serverLevel, event.getEntity().getOnPos().above(), MobSpawnType.MOB_SUMMONED);
-            }
-            event.setCanceled(true);
-        }
-        //替换烈阳巨灵
-        if(event.getEntity().getType().equals(AetherEntityTypes.SUN_SPIRIT.get())) {
-            if(event.getLevel() instanceof ServerLevel serverLevel) {
-                TCRBossEntities.GILDED_HUNTER.get().spawn(serverLevel, event.getEntity().getOnPos().above(), MobSpawnType.MOB_SUMMONED);
-            }
-            event.setCanceled(true);
-        }
+        //替换女武神 //换tick里去，这里去会卡死世界生成，很奇怪。。
+//        else if(event.getEntity().getType().equals(AetherEntityTypes.VALKYRIE_QUEEN.get())) {
+//
+//            event.setCanceled(true);
+//        }
+        //替换烈阳巨灵 //换tick里去，这里去会卡死世界生成，很奇怪。。
+//        if(event.getEntity().getType().equals(AetherEntityTypes.SUN_SPIRIT.get())) {
+//
+//            event.setCanceled(true);
+//        }
     }
 
     @SubscribeEvent

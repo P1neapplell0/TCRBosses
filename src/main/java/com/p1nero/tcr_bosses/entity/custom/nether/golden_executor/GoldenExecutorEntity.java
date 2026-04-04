@@ -8,7 +8,6 @@ import io.redspace.ironsspellbooks.api.util.MusicManager;
 import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.FireBossMusicHandler;
 import io.redspace.ironsspellbooks.network.EntityEventPacket;
 import io.redspace.ironsspellbooks.setup.PacketDistributor;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -54,11 +53,6 @@ public class GoldenExecutorEntity extends BaseSmallBossEntity implements IClient
     public SoundEvent getBGM() {
         //用铁魔法自己的播放器
         return null;
-    }
-
-    @Override
-    public @NotNull Component getName() {
-        return Component.translatable("entity.irons_spellbooks.fire_boss");
     }
 
     @Override

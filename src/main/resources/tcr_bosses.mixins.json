@@ -15,7 +15,9 @@
     "BTOceanGolemMixin",
     "BTSkyGolemMixin",
     "EFNAnimationsMixin",
-    "GeckoLibModMixin"
+    "GeckoLibModMixin",
+    "SunSpiritMixin",
+    "ValkyrieQueenMixin"
   ],
   "client": [
     "AbstractBTGolemRendererMixin",
