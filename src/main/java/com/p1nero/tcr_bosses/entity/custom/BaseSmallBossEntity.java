@@ -139,6 +139,9 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float pAmount) {
+        if(!this.isInFighting()) {
+            return false;
+        }
         if(source.is(DamageTypeTags.IS_FIRE)) {
             this.clearFire();
             return false;
