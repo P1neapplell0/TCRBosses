@@ -150,6 +150,11 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     }
 
     @Override
+    public boolean fireImmune() {
+        return true;
+    }
+
+    @Override
     public void die(@NotNull DamageSource pDamageSource) {
         super.die(pDamageSource);
         if(level().isClientSide) {
