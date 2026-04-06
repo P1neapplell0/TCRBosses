@@ -40,6 +40,7 @@ public class TCRBAnimations {
     public static AnimationManager.AnimationAccessor<ActionAnimation> AIR_STRIKE_RISING;
     public static AnimationManager.AnimationAccessor<AttackAnimation> AIR_STRIKE_A;
     public static AnimationManager.AnimationAccessor<AttackAnimation> AIR_STRIKE_B;
+    public static AnimationManager.AnimationAccessor<AttackAnimation> AIR_STRIKE_C;
 
     @SubscribeEvent
     public static void registerAnimations(AnimationManager.AnimationRegistryEvent event) {
@@ -119,6 +120,24 @@ public class TCRBAnimations {
                                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(5.0F))
                                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(3.0F))
                                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER, EpicFightDamageTypeTags.BYPASS_DODGE))
+                                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN))
+                        .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER,CONST_SPEED)
+                        .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL,true)
+                        .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0,0.8F))
+                        .addEvents(AnimationEvent.InTimeEvent.create(0.8F, Animations.ReusableSources.FRACTURE_GROUND_SIMPLE, AnimationEvent.Side.CLIENT)
+                                .params(new Vec3f(0F, -0.25F, 0F), Armatures.BIPED.get().rootJoint, 6D, 1.0F))
+        );
+
+        AIR_STRIKE_C = builder.nextAccessor("biped/air_strike_c", accessor->
+                new AttackAnimation(0.1F,accessor,Armatures.BIPED,
+                        new AttackAnimation.Phase(0F,0.8F,0.1F,0.7F,0.7F,0.7F,Armatures.BIPED.get().toolL,EMPTY)
+                                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.5F)),
+                        new AttackAnimation.Phase(0.7F,0.8F,0.7F,0.8F,10F,10F,Armatures.BIPED.get().rootJoint,BODY)
+                                .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, EpicFightSounds.WHOOSH_BIG.get())
+                                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLADE_RUSH_FINISHER.get())
+                                .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(5.0F))
+                                .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(3.0F))
+                                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER))
                                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN))
                         .addProperty(AnimationProperty.StaticAnimationProperty.PLAY_SPEED_MODIFIER,CONST_SPEED)
                         .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL,true)

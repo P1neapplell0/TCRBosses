@@ -197,7 +197,7 @@ public class SkyGolemCombatBehavior {
                                 .attackLevel(1,2)
                                 .guard(60)
                                 .counterAnimation(AnimationsX.REVELATION_ONEHAND, new AnimationParams()
-                                        .transitionTime(0.3F).playSpeed(0.7F)
+                                        .transitionTime(0.5F).playSpeed(0.5F)
                                         .damageSource(Set.of(EpicFightDamageTypeTags.BYPASS_DODGE))
                                 )
                                 .counterType(CECombatBehaviors.CounterType.END)
@@ -211,24 +211,28 @@ public class SkyGolemCombatBehavior {
                                         CEParticleUtils.spawnWarningParticle(CEParticles.BYPASS_DODGE_WARNING.get(), target, new Vec3(0,1.25,0));
                                     }
                                 })
-
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
-                                        .custom(mobPatch -> {
-                                            LivingEntity target = mobPatch.getTarget();
-                                            if (target != null) {
-                                                LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(target, LivingEntityPatch.class);
-                                                if (entityPatch != null) {
-                                                    AssetAccessor<? extends StaticAnimation> tAnimation = Objects.requireNonNull(entityPatch.getAnimator().getPlayerFor(null)).getRealAnimation();
-                                                    return ExecutionHandler.isTargetGuardBreak(tAnimation, entityPatch);
-                                                }
-                                            }
-                                            return false;
-                                        })
-                                        .customBehavior(mobPatch -> {
-                                            if(mobPatch.getTarget() != null) {
-                                                ExecutionHandler.entityForceExecute(mobPatch.getOriginal(), mobPatch.getTarget(), true);
-                                            }
-                                        })
+                                        .wander(20,0,0)
+
+                                        .addNextBehavior(CECombatBehaviors.Behavior.builder()
+                                                .custom(mobPatch -> {
+                                                    LivingEntity target = mobPatch.getTarget();
+                                                    if (target != null) {
+                                                        LivingEntityPatch<?> entityPatch = EpicFightCapabilities.getEntityPatch(target, LivingEntityPatch.class);
+                                                        if (entityPatch != null) {
+                                                            AssetAccessor<? extends StaticAnimation> tAnimation = Objects.requireNonNull(entityPatch.getAnimator().getPlayerFor(null)).getRealAnimation();
+                                                            return ExecutionHandler.isTargetGuardBreak(tAnimation, entityPatch);
+                                                        }
+                                                    }
+                                                    return false;
+                                                })
+                                                .customBehavior(mobPatch -> {
+                                                    if(mobPatch.getTarget() != null) {
+                                                        mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100,9));
+                                                        ExecutionHandler.entityForceExecute(mobPatch.getOriginal(), mobPatch.getTarget(), true);
+                                                    }
+                                                })
+                                        )
                                 )
                         )
                 )
@@ -913,17 +917,9 @@ public class SkyGolemCombatBehavior {
 
                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                         .custom(distance2DLess(6))
-                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, 0.35F)
+                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, 0.35F)
                                         .addExBehavior(mobPatch -> {
                                             mobPatch.getOriginal().addEffect(new MobEffectInstance(CEMobEffects.FULL_STUN_IMMUNITY.get(),60));
-                                            mobPatch.getOriginal().addEffect(new MobEffectInstance(MobEffects.GLOWING, 20));
-                                            mobPatch.playSound(SoundEvents.ANVIL_LAND,3,0,0);
-                                            if(mobPatch.getTarget() != null) {
-                                                LivingEntity target = mobPatch.getTarget();
-                                                Vec3 pos = target.position();
-                                                ParticleOptions options = new CEFollowParticleOptions(CEParticles.BYPASS_DODGE_WARNING.get(),target.getId(),new Vec3(0,1.25,0));
-                                                ((ServerLevel)target.level()).sendParticles(options,pos.x, pos.y, pos.z,0,0, 0,0,0);
-                                            }
                                         })
                                 )
                         )
@@ -981,8 +977,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1002,9 +997,8 @@ public class SkyGolemCombatBehavior {
                                                                         .name("突袭1-1-2")
                                                                         .interruptedByLevel(3)
                                                                         .custom(distance2DLess(6))
-                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                                summonAirAttackLighting())
+                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                                        .addExBehavior(summonAirAttackLighting())
 
                                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                 .name("起飞1-1-2-1")
@@ -1013,8 +1007,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1035,9 +1028,8 @@ public class SkyGolemCombatBehavior {
                                                         .name("突袭1-2")
                                                         .interruptedByLevel(3)
                                                         .custom(distance2DLess(6))
-                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                summonAirAttackLighting())
+                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                        .addExBehavior(summonAirAttackLighting())
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                 .name("起飞1-2-1")
@@ -1059,8 +1051,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1080,9 +1071,8 @@ public class SkyGolemCombatBehavior {
                                                                         .name("突袭1-2-2")
                                                                         .interruptedByLevel(3)
                                                                         .custom(distance2DLess(6))
-                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                                summonAirAttackLighting())
+                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                                        .addExBehavior(summonAirAttackLighting())
 
                                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                 .name("起飞1-2-2-1")
@@ -1091,8 +1081,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1116,9 +1105,8 @@ public class SkyGolemCombatBehavior {
                                         .name("突袭2")
                                         .interruptedByLevel(3)
                                         .custom(distance2DLess(6))
-                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                summonAirAttackLighting())
+                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                        .addExBehavior(summonAirAttackLighting())
 
                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                 .name("起飞2-1")
@@ -1153,8 +1141,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1173,9 +1160,8 @@ public class SkyGolemCombatBehavior {
                                                                         .name("突袭2-1-2")
                                                                         .interruptedByLevel(3)
                                                                         .custom(distance2DLess(6))
-                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                                summonAirAttackLighting())
+                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                                        .addExBehavior(summonAirAttackLighting())
 
                                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                 .name("起飞2-1-2-1")
@@ -1184,8 +1170,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1206,9 +1191,8 @@ public class SkyGolemCombatBehavior {
                                                         .name("突袭2-2")
                                                         .interruptedByLevel(3)
                                                         .custom(distance2DLess(6))
-                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                summonAirAttackLighting())
+                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                        .addExBehavior(summonAirAttackLighting())
 
 
                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
@@ -1231,8 +1215,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
@@ -1251,9 +1234,8 @@ public class SkyGolemCombatBehavior {
                                                                         .name("突袭2-2-2")
                                                                         .interruptedByLevel(3)
                                                                         .custom(distance2DLess(6))
-                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().stunType(StunType.LONG))
-                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()),
-                                                                                summonAirAttackLighting())
+                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().stunType(StunType.LONG))
+                                                                        .addExBehavior(summonAirAttackLighting())
 
                                                                         .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                 .name("起飞2-2-2-1")
@@ -1262,8 +1244,7 @@ public class SkyGolemCombatBehavior {
 
                                                                                 .addNextBehavior(CECombatBehaviors.Behavior.builder()
                                                                                         .name("突袭结束")
-                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_B, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
-                                                                                        .addExBehavior(airAttackWarning(CEParticles.BYPASS_DODGE_WARNING.get()))
+                                                                                        .animationBehavior(TCRBAnimations.AIR_STRIKE_C, new AnimationParams().transitionTime(0.35F).playSpeed(1.3F))
                                                                                         .addTimeEvent(
                                                                                                 new TimeEvent(0.5F,mobPatch -> {
                                                                                                     if(mobPatch.getTarget() != null){
