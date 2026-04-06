@@ -1,8 +1,5 @@
 package com.p1nero.tcr_bosses.events;
 
-import com.aetherteam.aether.entity.AetherEntityTypes;
-import com.aetherteam.aether.entity.monster.dungeon.boss.SunSpirit;
-import com.aetherteam.aether.entity.monster.dungeon.boss.ValkyrieQueen;
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
