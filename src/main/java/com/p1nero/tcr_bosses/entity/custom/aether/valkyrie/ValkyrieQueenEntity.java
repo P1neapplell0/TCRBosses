@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.custom.aether.valkyrie;
 
 import com.aetherteam.aether.client.AetherSoundEvents;
+import com.nameless.indestructible.world.capability.Utils.IAdvancedCapability;
 import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,6 +13,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 public class ValkyrieQueenEntity extends BaseSmallBossEntity {
@@ -23,7 +26,13 @@ public class ValkyrieQueenEntity extends BaseSmallBossEntity {
     @Override
     public void tick() {
         super.tick();
-
+        if(!isInFighting()) {
+            EpicFightCapabilities.getUnparameterizedEntityPatch(this, LivingEntityPatch.class).ifPresent(entityPatch -> {
+                if(entityPatch instanceof IAdvancedCapability advancedCapability) {
+                    advancedCapability.setPhase(0);
+                }
+            });
+        }
     }
 
     @Override

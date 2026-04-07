@@ -5,6 +5,7 @@ plugins {
      id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id("me.modmuss50.mod-publish-plugin") version "1.1.0"
 }
 
 version = mod_version
@@ -182,4 +183,30 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+def getFullModVersion() {
+    return "${mod_version}-mc${minecraft_version}-forge"
+}
+
+publishMods {
+    def releaseNotesFile = project.file("RELEASE_NOTES.md")
+    def releaseNotesContent = releaseNotesFile.text
+
+    changelog = """
+|${releaseNotesContent}
+""".stripMargin().trim()
+
+    modLoaders.add("forge")
+    type = STABLE
+    displayName = getFullModVersion()
+    file = tasks.jarJar.archiveFile
+
+    curseforge {
+        accessToken = System.getenv("CURSEFORGE_TOKEN")
+        projectId = "1387898"
+        minecraftVersions.add(minecraft_version)
+        projectSlug = "thecasketofrrveriesbosses"
+    }
+
 }
