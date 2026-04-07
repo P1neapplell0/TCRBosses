@@ -21,6 +21,12 @@ public class ValkyrieQueenEntity extends BaseSmallBossEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+
+    }
+
+    @Override
     public SoundEvent getBGM() {
         return AetherSoundEvents.MUSIC_BOSS_VALKYRIE_QUEEN.get();
     }

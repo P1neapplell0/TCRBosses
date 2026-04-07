@@ -272,13 +272,14 @@
                     "weight": 10,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 5,
+                    "cooldown": 1,
                     "behaviors": [
 						{
                             "conditions": [
+							{"predicate":"indestructible:phase", "min": 1, "max": 20}
                             ],
-							"end_by_hurt_level": 3, "animation": "efn:biped/nf_skill/biped_flashblock1", 
-							"convert_time": 0.15,
+							"end_by_hurt_level": 3, "animation": "efn:biped/nf_skill/biped_flashblock2", 
+							"convert_time": 0.05,
 							"stamina": -180,
                             "command_list":[
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with tcrcore:glacis_jadae", "execute_at_target":false},
