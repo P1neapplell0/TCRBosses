@@ -130,6 +130,9 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
             }
         }
         super.tick();
+        if(!this.isInFighting()) {
+            this.setTarget(null);
+        }
         if(level().isClientSide && this.hasTarget()) {
             BossMusicPlayer.playBossMusic(this, getBGM(), 32);
         } else {

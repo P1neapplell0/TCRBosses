@@ -164,8 +164,10 @@
        }
     ],
 	"stun_command_list":[
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "short"},
-		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] efn:damage_reduction 4 91 true", "stun_type": "long"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] minecraft:resistance 4 2 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] minecraft:resistance 4 2 true", "stun_type": "long"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] irons_spellbooks:oakskin 4 3 true", "stun_type": "short"},
+		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] irons_spellbooks:oakskin 4 3 true", "stun_type": "long"},
 	    {"command":"effect give @s efn:damage_reduction 6000 81 true", "stun_type": "short"},
 		{"command":"effect give @s efn:damage_reduction 6000 81 true", "stun_type": "long"},
 		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}, nbt=!{ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] minecraft:resistance 6000 4 true", "stun_type": "short"},
@@ -191,11 +193,7 @@
 		{"command":"effect clear @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn_enhance:thunder\"}]}] efn_enhance:thunder", "stun_type": "long"},
 
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"wom:satsujin\"}},distance=..9] at @s run effect give @e[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},tag=ignisboss,limit=1,sort=nearest,distance=..6] minecraft:resistance 12 3", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 16 92", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:broadblade\"}},distance=..6] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] minecraft:strength 16 0", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..6] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 92 true", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..6] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 92 true", "stun_type": "short", "execute_at_target": false},
-		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc_in_sheath\"}},distance=..6] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] efn:damage_reduction 3 92 true", "stun_type": "short", "execute_at_target": false},
 		
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:hf_murasama\"}},distance=..9] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
 		{"command":"execute as @a[nbt={SelectedItem:{id:\"efn:yamato_dmc4_in_sheath\"}},distance=..9] at @s run effect give @e[tag=ignisboss,limit=1,sort=nearest,distance=..6] minecraft:strength 8 0 true", "stun_type": "short", "execute_at_target": false},
@@ -228,8 +226,8 @@
 		{"command":"effect give @s epicfight:stun_immunity 48 0 true", "stun_type": "neutralize"},
 		{"command":"effect give @s efn:sin_stun_immunity 10 0 true", "stun_type": "neutralize"},
 		{"command":"effect give @s minecraft:unluck 16 0 true", "stun_type": "neutralize"},
-		{"command":"data merge entity @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}] {Attributes:[{Base:180d,Name:\"minecraft:generic.max_health\"}]}", "stun_type": "neutralize"},
-		{"command":"data merge entity @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_speed_increase\"}]}] {Attributes:[{Base:60d,Name:\"minecraft:generic.max_health\"}]}", "stun_type": "neutralize"},
+		{"command":"data merge entity @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}] {Attributes:[{Base:270d,Name:\"minecraft:generic.max_health\"}]}", "stun_type": "neutralize"},
+		{"command":"data merge entity @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_speed_increase\"}]}] {Attributes:[{Base:50d,Name:\"minecraft:generic.max_health\"}]}", "stun_type": "neutralize"},
 		{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"efn:attack_damage_increase\"}]}] efn:attack_speed_increase 6000 0 true", "stun_type": "neutralize"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect clear @s minecraft:unluck", "stun_type": "neutralize"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"cataclysm:stun\"}]}] at @s run effect give @s minecraft:absorption 15 74 true", "stun_type": "neutralize"},
@@ -261,8 +259,13 @@
 								{"time":4.06, "command":"item replace entity @s armor.feet with cataclysm:ignitium_boots", "execute_at_target":false},
 							    {"time":0.8, "command":"item replace entity @s weapon.mainhand with cataclysm:the_incinerator", "execute_at_target":false},
 								{"time":3.06, "command":"item replace entity @s weapon.mainhand with tcrcore:the_incinerator_soul", "execute_at_target":false},
+								
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.25d,Name:\"irons_spellbooks:spell_resist\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.5d,Name:\"irons_spellbooks:fire_magic_resist\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:-1.0d,Name:\"irons_spellbooks:ice_magic_resist\"}]}", "execute_at_target":false},
+								
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:550d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:560d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 								
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.35d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								
@@ -339,7 +342,7 @@
 							
 							{"time":0.05, "command":"effect clear @s efn:attack_damage_increase", "execute_at_target":false},
 							
-							{"time":0.65, "command":"data merge entity @s {Attributes:[{Base:450d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
+							{"time":0.65, "command":"data merge entity @s {Attributes:[{Base:480d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
 							{"time":0.65, "command":"effect give @s minecraft:instant_health 7 10 true", "execute_at_target":false},
 							
 							{"time":0.55, "command":"invincible groundSlam @s 2.0 false true false", "execute_at_target":false},
