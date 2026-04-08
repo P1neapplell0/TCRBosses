@@ -19,6 +19,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -108,7 +109,11 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false, this::shouldAttack));
+    }
+
+    public boolean shouldAttack(LivingEntity target) {
+        return this.isInFighting();
     }
 
     public abstract SoundEvent getBGM();
@@ -130,9 +135,6 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
             }
         }
         super.tick();
-        if(!this.isInFighting()) {
-            this.setTarget(null);
-        }
         if(level().isClientSide && this.hasTarget()) {
             BossMusicPlayer.playBossMusic(this, getBGM(), 32);
         } else {

@@ -1,25 +1,21 @@
-package com.p1nero.tcr_bosses.entity.cataclysm.maledictus;
+package com.p1nero.tcr_bosses.entity.custom.aether.valkyrie;
 
-import com.ao.tcrmeshes.TCRMeshes;
 import com.merlin204.avalon.util.AvalonAnimationUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.nameless.indestructible.world.capability.AdvancedCustomHumanoidMobPatch;
 import com.p1nero.tcr_bosses.TCRBossesMod;
-import com.p1nero.tcr_bosses.entity.battle_tower.sky_golem.SkyGolemPatch;
 import com.p1nero.tcr_bosses.gameassets.TCRBMeshes;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
@@ -36,9 +32,12 @@ import yesman.epicfight.mixin.client.MixinEntityRenderer;
 import yesman.epicfight.mixin.client.MixinLivingEntityRenderer;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
-public class PMaledictusHumanoidGolemRenderer extends PHumanoidRenderer {
+public class PValkyrieRenderer extends PHumanoidRenderer {
 
-    public PMaledictusHumanoidGolemRenderer(AssetAccessor<HumanoidMesh> mesh, EntityRendererProvider.Context context, EntityType<?> entityType) {
+    public static final ResourceLocation TWO_WING = ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, "textures/entity/two_wing.png");
+    public static final ResourceLocation SIX_WING = ResourceLocation.fromNamespaceAndPath(TCRBossesMod.MOD_ID, "textures/entity/six_wing.png");
+
+    public PValkyrieRenderer(AssetAccessor<HumanoidMesh> mesh, EntityRendererProvider.Context context, EntityType<?> entityType) {
         super(mesh, context, entityType);
     }
 
@@ -62,7 +61,9 @@ public class PMaledictusHumanoidGolemRenderer extends PHumanoidRenderer {
         RenderType renderType = livingEntityRendererAccessor.invokeGetRenderType(entity, isVisible, isVisibleToPlayer, isGlowing);
         Armature armature = entitypatch.getArmature();
 
-        RenderType wingRenderType = RenderType.entityTranslucent(TCRMeshes.MALEDICTUS_HUMANOID_TEXTURE);
+        ResourceLocation texture = entity.hasEffect(MobEffects.CONDUIT_POWER) ? SIX_WING : TWO_WING;
+
+        RenderType wingRenderType = RenderType.entityTranslucent(texture);
 
         poseStack.pushPose();
 
@@ -77,6 +78,7 @@ public class PMaledictusHumanoidGolemRenderer extends PHumanoidRenderer {
 
 
             PrepareModelEvent prepareModelEvent = new PrepareModelEvent(this, mesh, entitypatch, buffer, poseStack, packedLight, partialTicks);
+
             if (!MinecraftForge.EVENT_BUS.post(prepareModelEvent)) {
                 Vector4f color = new Vector4f(1.0F, 1.0F, 1.0F, isVisibleToPlayer ? 0.15F : 1.0F);
                 entitypatch.getEntityDecorations().modifyColor(color, partialTicks);
@@ -97,14 +99,17 @@ public class PMaledictusHumanoidGolemRenderer extends PHumanoidRenderer {
                 Pose poseL = entitypatch.getAnimator().getPose(partialTicks);
                 AvalonAnimationUtils.joinRotationInPose(poseL, entitypatch, "Chest", 0, wingAngle * Math.abs(wingRatio - 0.5F) * 2, 0);
                 SkinnedMesh wingMeshL = TCRBMeshes.M_WING_L.get();
-                wingMeshL.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), 0.5F,
+                poseStack.pushPose();
+                poseStack.translate(0, 0.5, 0.1);
+                wingMeshL.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), color.w(),
                         OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseL, false));
 
                 Pose poseR = entitypatch.getAnimator().getPose(partialTicks);
                 AvalonAnimationUtils.joinRotationInPose(poseR, entitypatch, "Chest", 0, -wingAngle * Math.abs(wingRatio - 0.5F) * 2, 0);
                 SkinnedMesh wingMeshR = TCRBMeshes.M_WING_R.get();
-                wingMeshR.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), 0.5F,
+                wingMeshR.draw(poseStack, buffer, wingRenderType, modifiedLight, color.x(), color.y(), color.z(), color.w(),
                         OverlayTexture.NO_OVERLAY, armature, armature.getPoseAsTransformMatrix(poseR, false));
+                poseStack.popPose();
 
                 mesh.draw(poseStack, buffer, renderType, modifiedLight, color.x(), color.y(), color.z(), color.w(), this.getOverlayCoord(entity, entitypatch, partialTicks), armature, armature.getPoseMatrices());
                 entitypatch.getEntityDecorations().listDecorationOverlays().forEach((decorationOverlay) -> {

@@ -6,9 +6,10 @@ import com.p1nero.tcr_bosses.entity.cataclysm.ender_gardian.EnderGuardianHumanoi
 import com.p1nero.tcr_bosses.entity.cataclysm.harbinger.HarbingerHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.ignis.shield.IgnisShieldEntityRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.leviathan.LeviathanHumanoidRenderer;
-import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.PMaledictusHumanoidGolemRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.PMaledictusHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.PNetheriteHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.custom.aether.gilded_hunter.GildedHunterEntity;
+import com.p1nero.tcr_bosses.entity.custom.aether.valkyrie.PValkyrieRenderer;
 import com.p1nero.tcr_bosses.entity.custom.aether.valkyrie.ValkyrieQueenEntity;
 import com.p1nero.tcr_bosses.entity.custom.aether.valkyrie.ValkyrieQueenRenderer;
 import com.p1nero.tcr_bosses.entity.custom.nether.WitherSkeletonTextureRenderer;
@@ -234,13 +235,17 @@ public class TCRBossEntities {
                 entityType -> new PHumanoidRenderer<>(TCRMeshes.LEVIATHAN_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
         event.addPatchedEntityRenderer(MALEDICTUS_HUMANOID.get(),
-                entityType -> new PMaledictusHumanoidGolemRenderer(TCRMeshes.MALEDICTUS_HUMANOID, event.getContext(), entityType)
+                entityType -> new PMaledictusHumanoidRenderer(TCRMeshes.MALEDICTUS_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
         event.addPatchedEntityRenderer(NETHERITE_HUMANOID.get(),
                 entityType -> new PNetheriteHumanoidRenderer(TCRMeshes.NETHERITE_HUMANOID, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
         event.addPatchedEntityRenderer(SCYLLA_HUMANOID.get(),
                 entityType -> new PHumanoidRenderer<>(TCRMeshes.SCYLLA_HUMANOID, event.getContext(), entityType)
+                        .initLayerLast(event.getContext(), entityType));
+
+        event.addPatchedEntityRenderer(VALKYRIE.get(),
+                entityType -> new PValkyrieRenderer(Meshes.ALEX, event.getContext(), entityType)
                         .initLayerLast(event.getContext(), entityType));
     }
 
