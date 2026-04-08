@@ -1422,7 +1422,6 @@
 							"set_phase": 17,
 							"command_list":[
 							{"time":0.05, "command":"effect give @s[distance=..24] efn:attack_speed_increase 24 0 true", "execute_at_target":false}, 
-							{"time":0.05, "command":"effect give @s minecraft:glowing 32 0", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s[distance=..24] minecraft:conduit_power 6000 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0", "execute_at_target":false},
