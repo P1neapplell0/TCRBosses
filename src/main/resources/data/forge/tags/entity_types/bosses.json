@@ -15,6 +15,10 @@
     "tcr_bosses:ender_guardian_humanoid",
     "tcr_bosses:harbinger_humanoid",
     "tcr_bosses:leviathan_humanoid",
-    "tcr_bosses:ancient_remnant_humanoid"
+    "tcr_bosses:ancient_remnant_humanoid",
+    "tcr_bosses:gilded_hunter",
+    "tcr_bosses:valkyrie",
+    "tcr_bosses:evening_ghost",
+    "tcr_bosses:golden_executor"
   ]
 }

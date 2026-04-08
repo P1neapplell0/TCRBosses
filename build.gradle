@@ -189,24 +189,24 @@ def getFullModVersion() {
     return "${mod_version}-mc${minecraft_version}-forge"
 }
 
-publishMods {
-    def releaseNotesFile = project.file("RELEASE_NOTES.md")
-    def releaseNotesContent = releaseNotesFile.text
-
-    changelog = """
-|${releaseNotesContent}
-""".stripMargin().trim()
-
-    modLoaders.add("forge")
-    type = STABLE
-    displayName = getFullModVersion()
-    file = tasks.jarJar.archiveFile
-
-    curseforge {
-        accessToken = System.getenv("CURSEFORGE_TOKEN")
-        projectId = "1387898"
-        minecraftVersions.add(minecraft_version)
-        projectSlug = "thecasketofrrveriesbosses"
-    }
-
-}
+//publishMods {
+//    def releaseNotesFile = project.file("RELEASE_NOTES.md")
+//    def releaseNotesContent = releaseNotesFile.text
+//
+//    changelog = """
+//|${releaseNotesContent}
+//""".stripMargin().trim()
+//
+//    modLoaders.add("forge")
+//    type = STABLE
+//    displayName = getFullModVersion()
+//    file = tasks.jarJar.archiveFile
+//
+//    curseforge {
+//        accessToken = System.getenv("CURSEFORGE_TOKEN")
+//        projectId = "1387898"
+//        minecraftVersions.add(minecraft_version)
+//        projectSlug = "thecasketofrrveriesbosses"
+//    }
+//
+//}
