@@ -113,7 +113,7 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     }
 
     public boolean shouldAttack(LivingEntity target) {
-        return this.isInFighting();
+        return this.isInFighting() && this.fightDelay == 0;
     }
 
     public abstract SoundEvent getBGM();
@@ -141,11 +141,17 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
             this.setHasTargetSync(this.getTarget() != null);
         }
         if(!level().isClientSide) {
-            if(tickCount % 20 == 0 && this.hasSpawnPos()) {
-                BlockPos spawnPos = this.getSpawnPos();
-                if(!spawnPos.closerThan(this.getOnPos(), this.fieldRadius())) {
-                    this.teleportToSpawnPos();
-                }
+            if(tickCount % 20 == 0) {
+                checkResetPos();
+            }
+        }
+    }
+
+    public void checkResetPos() {
+        if(this.hasSpawnPos()) {
+            BlockPos spawnPos = this.getSpawnPos();
+            if(!spawnPos.closerThan(this.getOnPos(), this.fieldRadius())) {
+                this.teleportToSpawnPos();
             }
         }
     }
