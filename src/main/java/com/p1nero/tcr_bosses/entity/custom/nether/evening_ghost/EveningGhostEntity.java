@@ -38,6 +38,11 @@ public class EveningGhostEntity extends BaseSmallBossEntity {
     }
 
     @Override
+    protected int fieldRadius() {
+        return 13;
+    }
+
+    @Override
     public SoundEvent getBGM() {
         return BTSoundEvents.MUSIC_CORE_GOLEM_FIGHT.get();
     }

@@ -140,6 +140,20 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
         } else {
             this.setHasTargetSync(this.getTarget() != null);
         }
+        if(!level().isClientSide) {
+            if(tickCount % 20 == 0 && this.hasSpawnPos()) {
+                BlockPos spawnPos = this.getSpawnPos();
+                if(!spawnPos.closerThan(this.getOnPos(), this.fieldRadius())) {
+                    this.teleportToSpawnPos();
+                }
+            }
+        }
+    }
+
+    public void teleportToSpawnPos() {
+        if(this.hasSpawnPos()) {
+            this.setPos(this.getSpawnPos().getCenter());
+        }
     }
 
     @Override
@@ -168,6 +182,10 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
         if(level().isClientSide) {
             BossMusicPlayer.stopBossMusic(this);
         }
+    }
+
+    protected int fieldRadius() {
+        return 32;
     }
 
     @Override
