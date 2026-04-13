@@ -43,3 +43,10 @@ mandatory=true
 versionRange = "*"
 ordering="AFTER"
 side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="indestructible"
+mandatory=true
+versionRange = "[20.13.0,)"
+ordering="AFTER"
+side="BOTH"
