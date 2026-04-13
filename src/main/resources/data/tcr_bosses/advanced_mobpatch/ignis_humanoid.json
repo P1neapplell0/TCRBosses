@@ -177,6 +177,10 @@
 		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] efn:sin_stun_immunity 3 0 true", "stun_type": "long"},
 		{"command":"effect give @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] epicfight:stun_immunity 600 0 true", "stun_type": "long"},
 		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4 0 true", "stun_type": "knockdown"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3 0 true", "stun_type": "knockdown"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 2 0 true", "stun_type": "knockdown"},
+		
 		{"command":"effect give @s minecraft:fire_resistance 6000 0 true", "stun_type": "short"},
 		{"command":"effect give @s minecraft:fire_resistance 6000 0 true", "stun_type": "long"},
 		{"command":"effect give @s minecraft:fire_resistance 6000 0 true", "stun_type": "knockdown"},

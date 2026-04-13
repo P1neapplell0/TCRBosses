@@ -2,6 +2,7 @@ package com.p1nero.tcr_bosses.entity.custom;
 
 import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.client.sound.BossMusicPlayer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -120,7 +121,7 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
 
     @Override
     public void tick() {
-        if(!this.isInFighting()) {
+        if(!this.shouldAttack(this.getTarget())) {
             this.setTarget(null);
         }
         if(!level().isClientSide && this.fightDelay > 0) {
@@ -129,7 +130,7 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
             Vec3 center = this.position();
             if(fightDelay % 20 == 0) {
                 this.level().getEntitiesOfClass(ServerPlayer.class, (new AABB(center, center)).inflate(32)).forEach(player -> {
-                    player.displayClientMessage(Component.literal(String.valueOf(fightDelay / 20)), true);
+                    player.displayClientMessage(Component.literal(String.valueOf(fightDelay / 20)).withStyle(ChatFormatting.RED, ChatFormatting.BOLD), true);
                     player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.ANVIL_FALL), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, player.getRandom().nextInt()));
                 });
             }

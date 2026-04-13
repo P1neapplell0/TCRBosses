@@ -179,6 +179,10 @@
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s epicfight:stun_immunity 3 0 true", "stun_type": "long"},
 		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]}] at @s run effect give @s minecraft:hunger 2 0 true", "stun_type": "long"},
 		
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s efn:sin_stun_immunity 4 0 true", "stun_type": "knockdown"},
+		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s epicfight:stun_immunity 3 0 true", "stun_type": "knockdown"},
+		{"command":"execute as @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:hunger\"}]},nbt=!{ActiveEffects:[{ \"forge:id\": \"minecraft:unluck\"}]}] at @s run effect give @s minecraft:hunger 2 0 true", "stun_type": "knockdown"},
+		
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "short"},
 		{"command":"execute as @s[nbt={ActiveEffects:[{ \"forge:id\": \"epicfight:stun_immunity\"}]}] at @s run playsound cataclysm:leviathan_hurt hostile @a[distance=..32] ~ ~ ~ 1 1.0 1", "stun_type": "long"},
 		

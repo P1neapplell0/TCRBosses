@@ -1447,7 +1447,7 @@
                     "behaviors": [
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 5.0, "max": 32.0}, {"predicate": "health", "health": 0.4, "comparator": "less_ratio"}, {"predicate":"indestructible:phase", "min": 8, "max": 10}
+								{"predicate":"within_distance", "min": 5.0, "max": 32.0}, {"predicate": "health", "health": 0.25, "comparator": "less_ratio"}, {"predicate":"indestructible:phase", "min": 8, "max": 10}
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/nf_meen/nf_meen_charge_all_mob", 
 							"damage_modifier":{
@@ -1543,7 +1543,7 @@
                     "behaviors": [
 						{
 							"conditions": [
-								{"predicate":"within_distance", "min": 0.0, "max": 7.5}, {"predicate": "health", "health": 0.75, "comparator": "less_ratio"}, {"predicate":"indestructible:phase", "min": 8, "max": 8}
+								{"predicate":"within_distance", "min": 0.0, "max": 7.5}, {"predicate": "health", "health": 0.55, "comparator": "less_ratio"}, {"predicate":"indestructible:phase", "min": 8, "max": 8}
 							],
                             "end_by_hurt_level": 3, "animation": "efn:biped/sekiro/kusabimaru/ichimonji_1", 
 							"damage_modifier":{

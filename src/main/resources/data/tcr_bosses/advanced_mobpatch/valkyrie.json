@@ -3,7 +3,7 @@
 	"armature": "epicfight:entity/biped",
     "renderer": "",
     "isHumanoid": true,
-    "faction": "undead",
+    "faction": "villager",
 	"boss_bar": true,
 	"custom_texture": "indestructible:textures/gui/sky_boss_bar.png",
     "attributes": {
@@ -276,7 +276,6 @@
                     "behaviors": [
 						{
                             "conditions": [
-							{"predicate":"indestructible:phase", "min": 1, "max": 20}
                             ],
 							"end_by_hurt_level": 3, "animation": "efn:biped/nf_skill/biped_flashblock2", 
 							"convert_time": 0.05,
@@ -290,7 +289,7 @@
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.25d,Name:\"irons_spellbooks:holy_magic_resist\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.5d,Name:\"irons_spellbooks:lightning_magic_resist\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:2.5d,Name:\"irons_spellbooks:lightning_spell_power\"}]}", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:1.5d,Name:\"irons_spellbooks:ice_spell_power\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:2.0d,Name:\"irons_spellbooks:ice_spell_power\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.75d,Name:\"minecraft:generic.movement_speed\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:48d,Name:\"minecraft:generic.follow_range\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:450d,Name:\"minecraft:generic.max_health\"}]}", "execute_at_target":false},
@@ -303,8 +302,7 @@
 								{"time":0.05, "command":"tag @s[tag=!valkyrieboss] add valkyrieboss", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s efn:damage_reduction 6000 64 true", "execute_at_target":false},
 								{"time":0.05, "command":"effect give @s[type=!minecraft:wither_skeleton] minecraft:instant_health 7 10", "execute_at_target":false},
-								{"time":0.05, "command":"effect give @s[type=minecraft:wither_skeleton] minecraft:instant_damage 7 10", "execute_at_target":false},
-							    {"time":0.15, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+								{"time":0.05, "command":"effect give @s[type=minecraft:wither_skeleton] minecraft:instant_damage 7 10", "execute_at_target":false}
                             ]
                         }
                     ]
@@ -317,7 +315,31 @@
 			"behavior_series": [
 			
 
-			
+			{
+                    "weight": 10000.0,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 12000,
+                    "behaviors": [
+						{
+							"conditions": [
+								{"predicate":"indestructible:phase", "min": 0, "max": 6}
+							],
+                            "end_by_hurt_level": 3, "animation": "epicfightx:biped/skill/step_backward_onehand", 
+							"play_speed": 1.0,
+							"convert_time": 0.05,
+                            "command_list":[
+							{"time":0.05, "command":"item replace entity @s[nbt=!{HandItems:[{id:\"tcrcore:glacis_jadae\"}]},distance=..48] weapon.mainhand with tcrcore:glacis_jadae", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s[distance=..24] minecraft:conduit_power", "execute_at_target":false},
+							{"time":0.05, "command":"effect clear @s minecraft:slowness", "execute_at_target":false},
+							{"time":0.05, "command":"effect give @s minecraft:speed 1 3 true", "execute_at_target":false},
+							{"time":0.25, "command":"effect give @s minecraft:slowness 1 5 true", "execute_at_target":false},
+							{"time":0.25, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
+                            ],
+							"set_phase": 4
+                        }
+                    ]
+                },
 			
 			{
 					"weight": 1,
@@ -1426,10 +1448,7 @@
 							{"time":0.05, "command":"execute as @s at @s run playsound minecraft:block.anvil.place master @a[distance=..48] ~ ~ ~ 10 1.0 1", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s minecraft:glowing 1 0", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s efn:sin_stun_immunity 2 0", "execute_at_target":false},
-							{"time":0.05, "command":"combat_evolution particle @s[distance=..48] 0 2 0 bypass_dodge", "execute_at_target":true},
-							{"time":0.45, "command":"effect give @s combat_evolution:bypass_dodge_effect 1", "execute_at_target":false},
-							{"time":0.5, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^0.25 0.1 0.5 0.1 0.1 5", "execute_at_target":true},
-							{"time":0.5, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":true},
+							{"time":0.5, "command":"execute as @s[distance=..48] at @s run particle epicfight:hit_blunt ^0 ^2.5 ^0.25 0.05 0.5 0.5 0.05 5", "execute_at_target":true},
 							{"time":1.25, "command":"indestructible @s[distance=..48] play 'epicfightx:biped/living/hold_longsword' 0.0 1.0", "execute_at_target":false}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 9", "is_parry": false, "execute_at_target":true},
@@ -1443,7 +1462,7 @@
                     "weight": 20,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 15,
+                    "cooldown": 25,
                     "behaviors": [
 						{
 							"conditions": [
@@ -1458,7 +1477,7 @@
 							"command_list":[
 							{"time":0.4, "command":"effect give @s minecraft:weakness 1 99", "execute_at_target":false},
 							{"time":0.4, "command":"execute as @s at @s run particle epicfight:hit_blunt ^0 ^3.5 ^1.0 0 0 0 0.1 2", "execute_at_target":false},
-							{"time":0.6, "command":"cast @s ice_spikes 18", "execute_at_target":false}
+							{"time":0.6, "command":"cast @s ice_spikes 20", "execute_at_target":false}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 9", "is_parry": false, "execute_at_target":true},
 							{"command":"indestructible @s[distance=..16] play 'efn:biped/nf_skill/biped_flashblock3' 0.0 1.0", "is_parry": true, "execute_at_target":true}
@@ -1471,7 +1490,7 @@
                     "weight": 20,
                     "canBeInterrupted": false,
                     "looping": false,
-                    "cooldown": 15,
+                    "cooldown": 25,
                     "behaviors": [
 						{
 							"conditions": [
@@ -1486,7 +1505,7 @@
 							"command_list":[
 							{"time":0.4, "command":"effect give @s minecraft:weakness 1 99", "execute_at_target":false},
 							{"time":0.4, "command":"execute as @s at @s run particle epicfight:hit_blunt ^0 ^3.5 ^1.0 0 0 0 0.1 2", "execute_at_target":false},
-							{"time":0.6, "command":"cast @s ice_spikes 18", "execute_at_target":false}
+							{"time":0.6, "command":"cast @s ice_spikes 20", "execute_at_target":false}
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 9", "is_parry": false, "execute_at_target":true},
 							{"command":"indestructible @s[distance=..16] play 'efn:biped/nf_skill/biped_flashblock3' 0.0 1.0", "is_parry": true, "execute_at_target":true}
@@ -2952,10 +2971,10 @@
                             "command_list":[
 							{"time":0.05, "command":"effect give @s combat_evolution:full_stun_immunity 5 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s irons_spellbooks:oakskin 5 11 true", "execute_at_target":false},
-							{"time":0.05, "command":"tag @s[distance=5..48] add valkyrietp", "execute_at_target":true},
-							{"time":0.05, "command":"execute as @e[tag=valkyrietp,limit=1,distance=5..48] at @s run tp @e[tag=valkyrieboss,limit=1,sort=nearest,distance=..48] ~ ~0.3 ~0", "execute_at_target":true},
+							{"time":0.05, "command":"tag @s[distance=..48] add valkyrietp", "execute_at_target":true},
+							{"time":0.05, "command":"execute as @e[tag=valkyrietp,limit=1,distance=..48] at @s run tp @e[tag=valkyrieboss,limit=1,sort=nearest,distance=..48] ~ ~0.3 ~0", "execute_at_target":true},
 							{"time":0.05, "command":"execute as @s[distance=..48] at @s run tp @s ^ ^0.0 ^-0.95", "execute_at_target":false},
-							{"time":0.05, "command":"tag @e[distance=5..48] remove valkyrietp", "execute_at_target":true},
+							{"time":0.05, "command":"tag @e[distance=..48] remove valkyrietp", "execute_at_target":true},
 							{"time":0.05, "command":"effect give @s[distance=..48] efn:verticalstop 3 0 true", "execute_at_target":false},
 							{"time":0.05, "command":"effect give @s[distance=..48] efn:verticalstop 3 0 true", "execute_at_target":true},
 							
@@ -3026,7 +3045,8 @@
 							"hit_command_list": [
                             ],
 							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 7", "is_parry": false, "execute_at_target":true}, 
-							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"combat_evolution:bypass_guard_effect\"}]},distance=..16] play 'efn:biped/nf_skill/biped_flashblock3' 0.0 1.0", "is_parry": true, "execute_at_target":true},    
+							{"command":"indestructible @s[nbt=!{ActiveEffects:[{ \"forge:id\": \"combat_evolution:bypass_guard_effect\"}]},distance=..16] play 'efn:biped/nf_skill/biped_flashblock1' 0.0 1.0", "is_parry": true, "execute_at_target":true},   
+							{"command":"indestructible @s[nbt={ActiveEffects:[{ \"forge:id\": \"combat_evolution:bypass_guard_effect\"}]},distance=..16] play 'efn:biped/nf_skill/biped_flashblock2' 0.0 1.0", "is_parry": true, "execute_at_target":true},    
 							{"command":"effect give @s[distance=..16] combat_evolution:bypass_guard_effect 1 0 true", "is_parry": true, "execute_at_target":true}, 
 							{"command":"effect give @s[nbt={ActiveEffects:[{ \"forge:id\": \"minecraft:haste\"}]},distance=..24] minecraft:haste 2 0 true", "is_parry": true, "execute_at_target":false} 
 							]
@@ -3104,7 +3124,7 @@
 							
 							{"time":1.8, "command":"execute as @s at @s run particle epicfight:hit_blunt ^0 ^2.5 ^1.0 0 0 0 0.1 2", "execute_at_target":false},
 							
-							{"time":1.95, "command":"effect clear @s[distance=..24] minecraft:conduit_power", "execute_at_target":false},
+							{"time":1.975, "command":"effect clear @s[distance=..24] minecraft:conduit_power", "execute_at_target":false},
 							{"time":2.0, "command":"effect give @s epicfight:stun_immunity 3 0 true", "execute_at_target":false},
 							{"time":2.0, "command":"effect give @s minecraft:unluck 3 0 true", "execute_at_target":false},
 							{"time":2.0, "command":"effect clear @s combat_evolution:full_stun_immunity", "execute_at_target":false},
