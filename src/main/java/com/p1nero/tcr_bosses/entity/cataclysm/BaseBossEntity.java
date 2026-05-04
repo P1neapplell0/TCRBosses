@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses.entity.cataclysm;
 
 import com.nameless.indestructible.world.capability.Utils.IAdvancedCapability;
+import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -21,8 +22,9 @@ public abstract class BaseBossEntity extends BaseSmallBossEntity {
     @Override
     public void startSeenByPlayer(@NotNull ServerPlayer serverPlayer) {
         super.startSeenByPlayer(serverPlayer);
-        if(serverPlayer.serverLevel().players().size() <= 1) {
+        if(serverPlayer.serverLevel().players().isEmpty() && TCRBossesMod.isTcrLoaded()) {
             this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            this.getMainHandItem().setCount(0);
             this.setHealth(this.getMaxHealth());
             EpicFightCapabilities.getUnparameterizedEntityPatch(this, LivingEntityPatch.class).ifPresent(entityPatch -> {
                 if(entityPatch instanceof IAdvancedCapability advancedCapability) {

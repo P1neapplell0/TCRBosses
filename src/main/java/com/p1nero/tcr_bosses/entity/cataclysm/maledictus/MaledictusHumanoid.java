@@ -32,14 +32,11 @@ public class MaledictusHumanoid extends BaseBossEntity {
     }
 
     @Override
-    public boolean hurt(@NotNull DamageSource source, float pAmount) {
-        if(this.shouldNotDie() && pAmount > this.getHealth()) {
-            if(this.getHealth() < this.getMaxHealth() * 0.05) {
-                return false;
-            }
-            return super.hurt(source, pAmount / 2);
+    public void setHealth(float pHealth) {
+        if(pHealth <= 0 && shouldNotDie()) {
+            return;
         }
-        return super.hurt(source, pAmount);
+        super.setHealth(pHealth);
     }
 
     @Override
@@ -50,7 +47,7 @@ public class MaledictusHumanoid extends BaseBossEntity {
         super.die(pDamageSource);
     }
 
-    protected boolean shouldNotDie() {
+    public boolean shouldNotDie() {
         return !this.hasEffect(ModEffect.EFFECTGHOST_SICKNESS.get());
     }
 
