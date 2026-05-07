@@ -248,7 +248,8 @@
 							"stamina": -180,
                             "command_list":[
 							    {"time":0.06, "command":"item replace entity @s weapon.mainhand with tcrcore:ashen_crescent", "execute_at_target":false},
-								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.2d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
+								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.2d,Name:\"attributeslib:life_steal\"}]}", "execute_at_target":false},
+								{"time":6.05, "command":"data merge entity @s {Attributes:[{Base:0.15d,Name:\"attributeslib:overheal\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.15d,Name:\"attributeslib:prot_pierce\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"data merge entity @s {Attributes:[{Base:0.15d,Name:\"attributeslib:prot_shred\"}]}", "execute_at_target":false},
 								{"time":0.05, "command":"item replace entity @s armor.head with fantasy_armor:golden_execution_helmet", "execute_at_target":false},
@@ -567,7 +568,7 @@
                             "command_list":[
 							{"time":0.15, "command":"effect give @s minecraft:weakness 1 99 true", "execute_at_target":false},
 							{"time":0.35, "command":"cast @s heat_surge 1", "execute_at_target":false},
-							{"time":0.6, "command":"cast @s fireball 9", "execute_at_target":false}
+							{"time":0.6, "command":"cast @s fireball 6", "execute_at_target":false}
                             ],
 							"set_phase": 8,
 							"hit_command_list": [
@@ -628,7 +629,7 @@
 							{"time":0.4, "command":"effect give @s minecraft:weakness 1 99 true", "execute_at_target":false},
 							{"time":0.4, "command":"cast @s heat_surge 1", "execute_at_target":false},
 							{"time":1.0, "command":"cast @s raise_hell 1", "execute_at_target":false},
-							{"time":1.0, "command":"cast @s fireball 12", "execute_at_target":false}
+							{"time":1.0, "command":"cast @s fireball 7", "execute_at_target":false}
                             ],
 							"set_phase": 1,
 							"blocked_command_list":[ {"command":"effect give @s[distance=..24] attributeslib:bleeding 2 14", "is_parry": false, "execute_at_target":true}
@@ -1407,7 +1408,7 @@
 							{"time":4.2, "command":"cast @s flaming_barrage 14", "execute_at_target":false},
 							{"time":5.0, "command":"cast @s heat_surge 4", "execute_at_target":false},
 							{"time":5.0, "command":"cast @s raise_hell 1", "execute_at_target":false},
-							{"time":5.0, "command":"cast @s fireball 18", "execute_at_target":false},
+							{"time":5.0, "command":"cast @s fireball 21", "execute_at_target":false},
 							{"time":5.5, "command":"effect clear @s efn:meenlance", "execute_at_target":false},
 							{"time":5.7, "command":"effect clear @s efn:meenlance", "execute_at_target":false},
 							
@@ -1469,7 +1470,7 @@
 							{"time":4.2, "command":"cast @s flaming_barrage 14", "execute_at_target":false},
 							{"time":5.0, "command":"cast @s heat_surge 4", "execute_at_target":false},
 							{"time":5.0, "command":"cast @s raise_hell 8", "execute_at_target":false},
-							{"time":5.0, "command":"cast @s fireball 18", "execute_at_target":false},
+							{"time":5.0, "command":"cast @s fireball 21", "execute_at_target":false},
 							{"time":5.5, "command":"effect clear @s efn:meenlance", "execute_at_target":false},
 							{"time":5.7, "command":"effect clear @s efn:meenlance", "execute_at_target":false},
 							
