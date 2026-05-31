@@ -8,6 +8,7 @@ import com.hm.efn.client.sound.EFNSounds;
 import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.util.Mth;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
@@ -41,10 +43,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class OceanGolemPatch extends CEHumanoidPatch<OceanGolem> {
+public class OceanGolemPatch extends GolemPatch<OceanGolem> {
 
     public OceanGolemPatch() {
         super(Factions.UNDEAD);
+    }
+
+
+    @Override
+    public void onDeath(LivingDeathEvent event) {
+        playAnimationSynchronized(animator.getLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH), 0F);
+        this.currentLivingMotion = LivingMotions.DEATH;
     }
 
     @Override

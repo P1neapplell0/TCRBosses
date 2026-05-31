@@ -11,6 +11,7 @@ import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.legacy.lost_aether.registry.LCItems;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import com.p1nero.tcr_bosses.mixins.AbstractGolemInvoker;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
@@ -40,6 +41,7 @@ import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -53,7 +55,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
+public class SkyGolemPatch extends GolemPatch<SkyGolem> {
 
     private int stunTimer = 0;
     private int stunCount = 0;
@@ -230,8 +232,10 @@ public class SkyGolemPatch extends CEHumanoidPatch<SkyGolem> {
         return applied;
     }
 
+
     @Override
     public void onDeath(LivingDeathEvent event) {
+        playAnimationSynchronized(animator.getLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH), 0F);
         super.onDeath(event);
         handleNearByBlock( 20, true);
     }

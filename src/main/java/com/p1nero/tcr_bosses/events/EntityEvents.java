@@ -3,7 +3,9 @@ package com.p1nero.tcr_bosses.events;
 import com.brass_amber.ba_bt.entity.hostile.golem.*;
 import com.github.L_Ender.cataclysm.entity.effect.Lightning_Storm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.mojang.datafixers.util.Pair;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
+import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import com.p1nero.tcr_bosses.entity.cataclysm.maledictus.MaledictusHumanoid;
 import com.p1nero.tcr_bosses.entity.custom.BaseSmallBossEntity;
 import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
@@ -27,6 +29,8 @@ import net.shelmarow.combat_evolution.damage_source.CEDamageTypeTags;
 import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.entity.battle_tower.end_golem.EndGolemPatch;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+
+import java.util.ArrayList;
 
 
 @Mod.EventBusSubscriber(modid = TCRBossesMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -57,40 +61,47 @@ public class EntityEvents {
         Entity hitEntity = event.getEntity();
 
         if(hitEntity instanceof AbstractGolem golem){
+            if(!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)){
+                //限制处决伤害，防止残血伤害爆炸
+                if(event.getSource().is(CEDamageTypeTags.EXECUTION)) {
+                    event.setAmount(Math.min(event.getAmount(), golem.getMaxHealth() * 0.15F));
+                    return;
+                }
 
-            if(event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
-
-            //限制处决伤害，防止残血伤害爆炸
-            if(event.getSource().is(CEDamageTypeTags.EXECUTION)) {
-                event.setAmount(Math.min(event.getAmount(), golem.getMaxHealth() * 0.15F));
-                return;
+                float percent = 0.045F;
+                float reduce = 1F;
+                if(hitEntity instanceof NetherGolem){
+                    percent = 0.038F;
+                    reduce = 0.9F;
+                }
+                if(hitEntity instanceof CoreGolem){
+                    percent = 0.035F;
+                    reduce = 0.8F;
+                }
+                if(hitEntity instanceof SkyGolem){
+                    percent = 0.032F;
+                    reduce = 0.7F;
+                }
+                if(hitEntity instanceof EndGolem){
+                    percent = 0.030F;
+                    reduce = 0.65F;
+                }
+                event.setAmount(Math.min(event.getAmount() * reduce, golem.getMaxHealth() * percent));
+                EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,EndGolemPatch.class);
+                if(endGolemPatch != null){
+                    float damage = Math.min(event.getAmount(),endGolemPatch.getOriginal().getMaxHealth() * 0.05F);
+                    if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.COMMON){
+                        float damageReduction = 0.15F + 0.3F * endGolemPatch.getBossBreakPhase();
+                        event.setAmount(damage * damageReduction);
+                    }
+                }
             }
 
-            float percent = 0.045F;
-            float reduce = 1F;
-            if(hitEntity instanceof NetherGolem){
-                percent = 0.038F;
-                reduce = 0.9F;
-            }
-            if(hitEntity instanceof CoreGolem){
-                percent = 0.035F;
-                reduce = 0.8F;
-            }
-            if(hitEntity instanceof SkyGolem){
-                percent = 0.032F;
-                reduce = 0.7F;
-            }
-            if(hitEntity instanceof EndGolem){
-                percent = 0.030F;
-                reduce = 0.65F;
-            }
-            event.setAmount(Math.min(event.getAmount() * reduce, golem.getMaxHealth() * percent));
-            EndGolemPatch endGolemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,EndGolemPatch.class);
-            if(endGolemPatch != null){
-                float damage = Math.min(event.getAmount(),endGolemPatch.getOriginal().getMaxHealth() * 0.05F);
-                if(CEPatchUtils.getStaminaStatus(endGolemPatch) == StaminaStatus.COMMON){
-                    float damageReduction = 0.15F + 0.3F * endGolemPatch.getBossBreakPhase();
-                    event.setAmount(damage * damageReduction);
+            GolemPatch<?> golemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,GolemPatch.class);
+            if(golemPatch != null){
+                Entity attacker = event.getSource().getEntity();
+                if(attacker != null){
+                    golemPatch.addHateData(attacker.getUUID(), event.getAmount());
                 }
             }
         }

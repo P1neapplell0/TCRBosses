@@ -11,6 +11,7 @@ import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNSkillAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.tags.DamageTypeTags;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
@@ -35,6 +37,7 @@ import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.AttackResult;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -43,11 +46,9 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
+public class LandGolemPatch extends GolemPatch<LandGolem> {
 
     private boolean gpSucceed = false;
 
@@ -100,6 +101,12 @@ public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
         this.original.setItemSlot(EquipmentSlot.FEET, feet);
 
         modifyLivingMotionByCurrentItem(true);
+    }
+
+    @Override
+    public void onDeath(LivingDeathEvent event) {
+        playAnimationSynchronized(animator.getLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH), 0F);
+        this.currentLivingMotion = LivingMotions.DEATH;
     }
 
     @Override
@@ -176,10 +183,9 @@ public class LandGolemPatch extends CEHumanoidPatch<LandGolem> {
                 )));
 
         this.guardHitMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,
-                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND,
-                        List.of(
-                                AnimationsX.GREATSWORD_GUARD_HIT
-                        )));
+                ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, List.of(
+                        AnimationsX.GREATSWORD_GUARD_HIT
+                )));
 
         this.weaponAttackMotions.put(CapabilityItem.WeaponCategories.GREATSWORD,
                 ImmutableMap.of(CapabilityItem.Styles.TWO_HAND, LandGolemCombatBehavior.GREATSWORD.get()));

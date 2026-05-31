@@ -89,6 +89,18 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
     @Shadow(remap = false)
     public abstract void setGolemState(byte golemStateID);
 
+    @Shadow(remap = false)
+    public abstract void clientTick();
+
+    @Shadow(remap = false)
+    protected abstract void resetGolemTick();
+
+    @Shadow(remap = false)
+    protected abstract void healGolemTick();
+
+    @Shadow(remap = false)
+    protected abstract void wakeUpGolem();
+
     @Unique
     private final CEBossEvent tcr_bosses$ceBossEvent = new CEBossEvent(Component.empty());
 
@@ -133,6 +145,21 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
         }
     }
 
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"), cancellable = true)
+    private void tcr$tickCancel(CallbackInfo ci) {
+        ci.cancel();
+        if(level().isClientSide()) {
+            this.clientTick();
+        }
+        else {
+            if(isDormant() && getTarget() != null){
+                this.wakeUpGolem();
+            }
+            this.resetGolemTick();
+            this.healGolemTick();
+        }
+    }
+
     /**
      * 换自己的bgm管理
      */
@@ -158,8 +185,8 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
     private void tcr$registerGoals(CallbackInfo ci) {
         ci.cancel();
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false, false));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, false, false));
         this.addBehaviorGoals();
     }
 

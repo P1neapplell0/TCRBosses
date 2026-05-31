@@ -89,7 +89,7 @@ dependencies {
     implementation fg.deobf('libs:betterlockon:2.0.3')
     implementation fg.deobf('libs:oculus:1.8.0')
     implementation fg.deobf('libs:embeddium:0.3.31')
-    implementation fg.deobf('libs:mobbattle:2.5.3')
+    //implementation fg.deobf('libs:mobbattle:2.5.3')
     implementation fg.deobf('libs:better_trident_model:1.0.0')
 
     implementation fg.deobf('libs:geckolib:4.8.3')
@@ -98,7 +98,7 @@ dependencies {
 
     implementation fg.deobf('libs:fantasy_armor:1.2')
 
-    implementation fg.deobf("libs:CombatEvolution:2.1.1")
+    implementation fg.deobf("libs:CombatEvolution:2.1.8")
     implementation fg.deobf("libs:packetfixer:3.1.4")
 
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7476040")

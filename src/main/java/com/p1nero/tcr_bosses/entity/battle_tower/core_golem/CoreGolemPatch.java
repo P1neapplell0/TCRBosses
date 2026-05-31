@@ -12,6 +12,7 @@ import com.hm.efn.gameasset.animations.EFNSwordAnimations;
 import com.hm.efn.gameasset.animations.EFNTachiAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
 import net.minecraft.util.Mth;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.shelmarow.combat_evolution.ai.CECombatBehaviors;
 import net.shelmarow.combat_evolution.ai.CEHumanoidPatch;
@@ -35,6 +37,7 @@ import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.network.server.SPAnimatorControl;
 import yesman.epicfight.world.capabilities.entitypatch.Factions;
@@ -48,7 +51,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class CoreGolemPatch extends CEHumanoidPatch<CoreGolem> {
+public class CoreGolemPatch extends GolemPatch<CoreGolem> {
 
     private int stunTimer = 0;
     private int stunCount = 0;
@@ -57,6 +60,11 @@ public class CoreGolemPatch extends CEHumanoidPatch<CoreGolem> {
         super(Factions.UNDEAD);
     }
 
+    @Override
+    public void onDeath(LivingDeathEvent event) {
+        playAnimationSynchronized(animator.getLivingAnimation(LivingMotions.DEATH, Animations.BIPED_DEATH), 0F);
+        this.currentLivingMotion = LivingMotions.DEATH;
+    }
 
     public void tick(LivingEvent.LivingTickEvent event) {
         super.tick(event);
