@@ -77,6 +77,11 @@ public class MobHateTargetGoal extends TargetGoal {
                 .filter(entity -> mobPatch.hasEntityData(entity.getUUID()))
                 .max(Comparator.comparingDouble(entity -> mobPatch.getTotalHate(entity.getUUID())))
                 .orElse(null);
+
+        if(livingEntity == null){
+            livingEntity = this.mob.level().getNearestPlayer(TargetingConditions.forCombat(), this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+        }
+
         if(livingEntity != this.target) {
             this.target = livingEntity;
         }

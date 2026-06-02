@@ -13,10 +13,7 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -158,6 +155,11 @@ public abstract class BTAbstractGolemMixin extends PathfinderMob {
             this.resetGolemTick();
             this.healGolemTick();
         }
+    }
+
+    @Inject(method = "isAlliedTo", at = @At("HEAD"), cancellable = true)
+    private void tcr$isAlliedTo(Entity entityIn, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(super.isAlliedTo(entityIn));
     }
 
     /**
