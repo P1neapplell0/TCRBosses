@@ -9,6 +9,7 @@ import com.hm.efn.gameasset.animations.EFNDodgeAnimations;
 import com.hm.efn.gameasset.animations.EFNYamatoAnimations;
 import com.hm.efn.registries.EFNItem;
 import com.mojang.datafixers.util.Pair;
+import com.p1nero.tcr_bosses.config.TCRBossesConfig;
 import com.p1nero.tcr_bosses.entity.battle_tower.GolemPatch;
 import net.kenddie.fantasyarmor.item.FAArmorItems;
 import net.kenddie.fantasyarmor.item.armor.FAArmorSet;
@@ -79,22 +80,24 @@ public class EndGolemPatch extends GolemPatch<EndGolem> {
         this.original.setDropChance(EquipmentSlot.LEGS, 0);
         this.original.setDropChance(EquipmentSlot.FEET, 0);
 
-        ItemStack weapon = new ItemStack(EFNItem.YAMATO_DMC_IN_SHEATH.get());
+        if (TCRBossesConfig.ENABLE_END_GOLEM_EQUIPMENT.get()) {
+            ItemStack weapon = new ItemStack(EFNItem.YAMATO_DMC_IN_SHEATH.get());
 
-        ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.CHESTPLATE).get());
-        chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
+            ItemStack chest = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.CHESTPLATE).get());
+            chest.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.CHEST);
 
-        ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.LEGGINGS).get());
-        legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
+            ItemStack legs = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.LEGGINGS).get());
+            legs.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.LEGS);
 
 
-        ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.BOOTS).get());
-        feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
+            ItemStack feet = new ItemStack(FAArmorItems.ARMOR_ITEMS.get(FAArmorSet.TWINNED).get(ArmorItem.Type.BOOTS).get());
+            feet.addAttributeModifier(Attributes.ARMOR, new AttributeModifier(UUID.randomUUID(),"armor",0, AttributeModifier.Operation.ADDITION),EquipmentSlot.FEET);
 
-        this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
-        this.original.setItemSlot(EquipmentSlot.CHEST, chest);
-        this.original.setItemSlot(EquipmentSlot.LEGS, legs);
-        this.original.setItemSlot(EquipmentSlot.FEET, feet);
+            this.original.setItemInHand(InteractionHand.MAIN_HAND, weapon);
+            this.original.setItemSlot(EquipmentSlot.CHEST, chest);
+            this.original.setItemSlot(EquipmentSlot.LEGS, legs);
+            this.original.setItemSlot(EquipmentSlot.FEET, feet);
+        }
 
         modifyLivingMotionByCurrentItem(true);
     }

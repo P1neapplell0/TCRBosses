@@ -7,8 +7,11 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import com.p1nero.tcr_bosses.config.TCRBossesConfig;
 import com.p1nero.tcr_bosses.effect.TCRBossEffects;
 import com.p1nero.tcr_bosses.entity.TCRBossEntities;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 @Mod(TCRBossesMod.MOD_ID)
@@ -25,6 +28,8 @@ public class TCRBossesMod {
 
         TCRBossEntities.REGISTRY.register(modEventBus);
         TCRBossEffects.REGISTRY.register(modEventBus);
+
+        context.registerConfig(ModConfig.Type.COMMON, TCRBossesConfig.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event){
@@ -35,6 +40,7 @@ public class TCRBossesMod {
     }
 
     public static boolean isTcrLoaded() {
-        return tcrLoaded;
+//        return tcrLoaded;
+        return true;
     }
 }
