@@ -2,6 +2,8 @@ package com.p1nero.tcr_bosses.entity.custom;
 
 import com.p1nero.tcr_bosses.TCRBossesMod;
 import com.p1nero.tcr_bosses.client.sound.BossMusicPlayer;
+import com.p1nero.tcr_bosses.entity.goal.MobHateTargetGoal;
+import com.p1nero.tcr_bosses.entity.goal.MobHateTracker;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,13 +24,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public abstract class BaseSmallBossEntity extends PathfinderMob {
 
@@ -37,6 +38,7 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     private static final EntityDataAccessor<Boolean> IN_FIGHTING = SynchedEntityData.defineId(BaseSmallBossEntity.class, EntityDataSerializers.BOOLEAN);
 
     private int fightDelay = 0;
+    private final MobHateTracker hateTracker = new MobHateTracker(() -> this.level().getGameTime());
 
     protected BaseSmallBossEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -109,8 +111,12 @@ public abstract class BaseSmallBossEntity extends PathfinderMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false, this::shouldAttack));
+        this.targetSelector.addGoal(0, new MobHateTargetGoal(this, false,
+                uuid -> this.hateTracker.getTotalHate(uuid), this::shouldAttack));
+    }
+
+    public void addHateData(UUID uuid, float damage) {
+        this.hateTracker.addHateData(uuid, damage);
     }
 
     public boolean shouldAttack(LivingEntity target) {

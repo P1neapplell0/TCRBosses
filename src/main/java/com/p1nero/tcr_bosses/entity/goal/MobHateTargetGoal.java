@@ -5,96 +5,141 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.scores.Team;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.function.ToDoubleFunction;
 
 public class MobHateTargetGoal extends TargetGoal {
-    private final GolemPatch<?> mobPatch;
+    private static final int SEARCH_INTERVAL_TICKS = 10;
+    private final ToDoubleFunction<UUID> hateProvider;
+    private final Predicate<LivingEntity> targetPredicate;
+    private final TargetingConditions targetConditions = TargetingConditions.forCombat().ignoreLineOfSight();
     @Nullable protected LivingEntity target;
     private int unseenTicks;
+    private long nextSearchTick;
 
-    public MobHateTargetGoal(GolemPatch<?> mobPatch, Mob pMob, boolean pMustSee) {
-        super(pMob, pMustSee);
-        this.mobPatch = mobPatch;
+    public MobHateTargetGoal(GolemPatch<?> mobPatch, Mob mob, boolean mustSee) {
+        this(mob, mustSee, mobPatch::getTotalHate, entity -> true);
+    }
+
+    public MobHateTargetGoal(Mob mob, boolean mustSee, ToDoubleFunction<UUID> hateProvider,
+                             Predicate<LivingEntity> targetPredicate) {
+        super(mob, mustSee);
+        this.hateProvider = hateProvider;
+        this.targetPredicate = targetPredicate;
+        this.setFlags(EnumSet.of(Flag.TARGET));
     }
 
     @Override
     public boolean canUse() {
+        if (!this.mob.isAlive() || this.mob.level().getGameTime() < this.nextSearchTick) {
+            return false;
+        }
         this.findTarget();
         return this.target != null;
     }
 
     @Override
     public boolean canContinueToUse() {
-        findTarget();
-        LivingEntity livingentity = this.target;
-        if (livingentity == null) {
-            livingentity = this.targetMob;
+        if (!this.mob.isAlive()) {
+            return false;
         }
-
-        if (livingentity == null) {
-            return false;
-        } else if (!this.mob.canAttack(livingentity)) {
-            return false;
+        if (!this.isValidTarget(this.target)) {
+            this.target = null;
+            this.findTarget();
         } else {
-            Team team = this.mob.getTeam();
-            Team team1 = livingentity.getTeam();
-            if (team != null && team1 == team) {
-                return false;
-            } else {
-                double d0 = this.getFollowDistance();
-                if (this.mob.distanceToSqr(livingentity) > d0 * d0) {
-                    return false;
-                } else {
-                    if (this.mustSee) {
-                        if (this.mob.getSensing().hasLineOfSight(livingentity)) {
-                            this.unseenTicks = 0;
-                        } else if (++this.unseenTicks > reducedTickDelay(this.unseenMemoryTicks)) {
-                            return false;
-                        }
-                    }
-
-
-                    this.mob.setTarget(livingentity);
-                    return true;
+            if (this.mustSee) {
+                if (this.mob.getSensing().hasLineOfSight(this.target)) {
+                    this.unseenTicks = 0;
+                } else if (++this.unseenTicks > this.unseenMemoryTicks) {
+                    this.target = null;
+                    this.findTarget();
                 }
             }
+            if (this.mob.level().getGameTime() >= this.nextSearchTick) {
+                this.findTarget();
+            }
         }
+        if (this.target == null) {
+            return false;
+        }
+        this.mob.setTarget(this.target);
+        return true;
     }
 
-    protected AABB getTargetSearchArea(double pTargetDistance) {
-        return this.mob.getBoundingBox().inflate(pTargetDistance, 4.0D, pTargetDistance);
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
+    protected AABB getTargetSearchArea(double targetDistance) {
+        return this.mob.getBoundingBox().inflate(targetDistance);
+    }
+
+    private boolean isValidTarget(@Nullable LivingEntity candidate) {
+        return candidate != null && candidate != this.mob && candidate.isAlive() && !candidate.isRemoved()
+                && candidate.level() == this.mob.level() && !candidate.isSpectator()
+                && (!(candidate instanceof Player player) || !player.isCreative())
+                && this.targetPredicate.test(candidate)
+                && this.canAttack(candidate, this.targetConditions.range(this.getFollowDistance()));
     }
 
     protected void findTarget() {
-        List<LivingEntity> nearbyEntities =
-                this.mob.level().getEntitiesOfClass(LivingEntity.class, getTargetSearchArea(getFollowDistance()));
-        LivingEntity livingEntity = nearbyEntities.stream()
-                .filter(entity -> mobPatch.hasEntityData(entity.getUUID()))
-                .max(Comparator.comparingDouble(entity -> mobPatch.getTotalHate(entity.getUUID())))
-                .orElse(null);
-
-        if(livingEntity == null){
-            livingEntity = this.mob.level().getNearestPlayer(TargetingConditions.forCombat(), this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+        this.nextSearchTick = this.mob.level().getGameTime() + SEARCH_INTERVAL_TICKS;
+        LivingEntity bestTarget = this.isValidTarget(this.target) ? this.target : null;
+        double bestHate = bestTarget == null ? 0.0 : this.hateProvider.applyAsDouble(bestTarget.getUUID());
+        if (!(bestTarget instanceof Player) && bestHate <= 0.0) {
+            bestTarget = null;
         }
-
-        if(livingEntity != this.target) {
-            this.target = livingEntity;
+        double bestDistance = bestTarget == null ? Double.MAX_VALUE : this.mob.distanceToSqr(bestTarget);
+        for (LivingEntity candidate : this.mob.level().getEntitiesOfClass(LivingEntity.class,
+                this.getTargetSearchArea(this.getFollowDistance()), this::isValidTarget)) {
+            if (this.mustSee && candidate != this.target && !this.mob.getSensing().hasLineOfSight(candidate)) {
+                continue;
+            }
+            double hate = this.hateProvider.applyAsDouble(candidate.getUUID());
+            if (hate <= 0.0 && !(candidate instanceof Player)) {
+                continue;
+            }
+            double distance = this.mob.distanceToSqr(candidate);
+            if (bestTarget == null || hate > bestHate
+                    || (hate == bestHate && hate <= 0.0 && distance < bestDistance)) {
+                bestTarget = candidate;
+                bestHate = hate;
+                bestDistance = distance;
+            }
         }
+        this.setTarget(bestTarget);
     }
 
-
+    @Override
     public void start() {
+        if (!this.isValidTarget(this.target)) {
+            this.target = null;
+        }
         this.mob.setTarget(this.target);
+        this.targetMob = this.target;
         super.start();
         this.unseenTicks = 0;
     }
 
-    public void setTarget(@Nullable LivingEntity pTarget) {
-        this.target = pTarget;
+    @Override
+    public void stop() {
+        super.stop();
+        this.target = null;
+        this.unseenTicks = 0;
+    }
+
+    public void setTarget(@Nullable LivingEntity target) {
+        if (this.target != target) {
+            this.unseenTicks = 0;
+        }
+        this.target = target;
+        this.targetMob = target;
     }
 }

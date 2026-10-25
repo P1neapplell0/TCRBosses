@@ -16,11 +16,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.shelmarow.combat_evolution.ai.StaminaStatus;
@@ -96,20 +98,29 @@ public class EntityEvents {
                     }
                 }
             }
-
-            GolemPatch<?> golemPatch = EpicFightCapabilities.getEntityPatch(hitEntity,GolemPatch.class);
-            if(golemPatch != null){
-                Entity attacker = event.getSource().getEntity();
-                if(attacker != null){
-                    golemPatch.addHateData(attacker.getUUID(), event.getAmount());
-                }
-            }
         }
         else if(hitEntity instanceof MaledictusHumanoid maledictusHumanoid) {
             if(maledictusHumanoid.shouldNotDie() && event.getAmount() > maledictusHumanoid.getHealth()) {
                 maledictusHumanoid.setHealth(maledictusHumanoid.getMaxHealth() * 0.01F);
                 event.setAmount(0);
                 event.setCanceled(true);
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onBossHateDamage(LivingDamageEvent event) {
+        if (event.getEntity().level().isClientSide || event.getAmount() <= 0.0F
+                || !(event.getSource().getEntity() instanceof LivingEntity attacker)
+                || !attacker.isAlive() || attacker.isRemoved() || attacker == event.getEntity()) {
+            return;
+        }
+        if (event.getEntity() instanceof BaseSmallBossEntity boss) {
+            boss.addHateData(attacker.getUUID(), event.getAmount());
+        } else {
+            GolemPatch<?> golemPatch = EpicFightCapabilities.getEntityPatch(event.getEntity(), GolemPatch.class);
+            if (golemPatch != null) {
+                golemPatch.addHateData(attacker.getUUID(), event.getAmount());
             }
         }
     }
