@@ -54,6 +54,7 @@ import com.p1nero.tcr_bosses.entity.cataclysm.ancient_remnant.AncientRemnantRend
 import com.p1nero.tcr_bosses.entity.cataclysm.netherite.NetheriteHumanoidRenderer;
 import com.p1nero.tcr_bosses.entity.cataclysm.scylla.ScyllaHumanoid;
 import com.p1nero.tcr_bosses.entity.cataclysm.scylla.ScyllaHumanoidRenderer;
+import com.p1nero.tcr_bosses.entity.cataclysm.stamina.CataclysmBossType;
 import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 import yesman.epicfight.api.client.model.Meshes;
 import yesman.epicfight.api.forgeevent.EntityPatchRegistryEvent;
@@ -169,6 +170,10 @@ public class TCRBossEntities {
         Armatures.registerEntityTypeArmature(BTEntityType.CORE_GOLEM.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(BTEntityType.SKY_GOLEM.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(BTEntityType.END_GOLEM.get(), Armatures.BIPED);
+
+        for (CataclysmBossType boss : CataclysmBossType.values()) {
+            Armatures.registerEntityTypeArmature(boss.entityType(), Armatures.BIPED);
+        }
 
         Armatures.registerEntityTypeArmature(ANCIENT_REMNANT_HUMANOID.get(), Armatures.BIPED);
         Armatures.registerEntityTypeArmature(ENDER_GUARDIAN_HUMANOID.get(), Armatures.BIPED);

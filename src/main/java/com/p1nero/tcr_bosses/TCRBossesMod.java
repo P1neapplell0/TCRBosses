@@ -1,6 +1,7 @@
 package com.p1nero.tcr_bosses;
 
 import com.mojang.logging.LogUtils;
+import com.p1nero.tcr_bosses.config.CataclysmStaminaConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -30,6 +31,7 @@ public class TCRBossesMod {
         TCRBossEffects.REGISTRY.register(modEventBus);
 
         context.registerConfig(ModConfig.Type.COMMON, TCRBossesConfig.SPEC);
+        context.registerConfig(ModConfig.Type.COMMON, CataclysmStaminaConfig.SPEC, "tcr_bosses-cataclysm.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event){
