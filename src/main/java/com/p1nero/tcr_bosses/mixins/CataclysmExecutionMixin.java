@@ -1,6 +1,6 @@
 package com.p1nero.tcr_bosses.mixins;
 
-import com.p1nero.tcr_bosses.entity.cataclysm.stamina.CataclysmStaminaPatch;
+import com.p1nero.tcr_bosses.entity.stamina.NativeBossStaminaPatch;
 import net.shelmarow.combat_evolution.execution.ExecutionHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +15,7 @@ public abstract class CataclysmExecutionMixin {
     @Inject(method = "isTargetGuardBreak", at = @At("HEAD"), cancellable = true)
     private static void tcr_bosses$nativeGuardBreak(AssetAccessor<? extends StaticAnimation> animation,
                                                   LivingEntityPatch<?> target, CallbackInfoReturnable<Boolean> callback) {
-        if (target instanceof CataclysmStaminaPatch patch) {
+        if (target instanceof NativeBossStaminaPatch patch) {
             callback.setReturnValue(patch.isBroken());
         }
     }

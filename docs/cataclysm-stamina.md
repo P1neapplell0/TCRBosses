@@ -3,18 +3,17 @@
 ## 范围与启用
 
 为灾变的八个原版 Boss 添加轻量 Epic Fight Patch，不替换其模型、渲染器或正常战斗 AI，也不修改本模组已有的人形 Boss。
-八个 Boss 的功能开关均默认为 `false`；关闭时保留原有 Patch（如果存在）及 Epic Fight 的全局眩晕规则。
+关闭功能开关时保留原有 Patch（如果存在）及 Epic Fight 的全局眩晕规则。配置合并不改变已有参数的代码默认值；精简示例将全部 Boss 关闭。
 
 模组启动时，Forge 自动生成完整的 COMMON 配置：
 
-- 单人：游戏根目录下的 `config/tcr_bosses-cataclysm.toml`。
-- 专用服务器：服务器根目录下的 `config/tcr_bosses-cataclysm.toml`。
-- 整合包预设：直接将配置放入 `config/tcr_bosses-cataclysm.toml`，所有存档共用。
+- 单人：游戏根目录下的 `config/tcr_bosses-common.toml`。
+- 专用服务器：服务器根目录下的 `config/tcr_bosses-common.toml`。
+- 整合包预设：直接将配置放入 `config/tcr_bosses-common.toml`，所有存档共用。
 
-`examples/tcr_bosses-cataclysm.toml` 提供默认全关的精简模板，缺少的参数由 Forge 自动补齐。
+`examples/tcr_bosses-common.toml` 提供全部 21 个 Boss 全关的精简模板，缺少的参数由 Forge 自动补齐。
 这是 COMMON 配置，不会自动同步至客户端；客户端与服务端请保持配置一致。修改开关或属性后，请重启游戏或服务器，以重新创建实体 Patch。
-如果之前已生成旧版 SERVER 配置，请将 `<存档>/serverconfig/tcr_bosses-cataclysm.toml` 复制到根目录的 `config/tcr_bosses-cataclysm.toml`；旧路径不再读取。
-不要将它与原来的 `config/tcr_bosses-common.toml` 混淆，后者继续管理原有配置。
+所有配置现已合并，原有 `[general]` 分类不变。旧的 `tcr_bosses-cataclysm.toml` 不再读取；请在游戏/服务器关闭时，将其中 `[cataclysm.*]` 各节追加或合并到 `config/tcr_bosses-common.toml`，不要覆盖原有 `[general]` 或重复定义同名节。旧版 SERVER 配置也可按相同方式迁移；没有自动迁移。
 
 例如，只开启焰魔：
 
@@ -51,7 +50,7 @@ executionResistance = 1
 
 | 分类 | 参数 | 含义 |
 | --- | --- | --- |
-| 根节点 | `enabled` | 该 Boss 总开关，默认关闭 |
+| 根节点 | `enabled` | 该 Boss 总开关；精简示例全部关闭 |
 | `stamina` | `hurtImpactMultiplier` | 成功受击后，Epic Fight 冲击力转化为耐力损失的倍率 |
 | `stamina` | `vanillaHitCost` | 非 Epic Fight 攻击的基础耐力损失，也乘以上述倍率 |
 | `stamina` | `attackCost` | 切入新原生动画/招式时消耗的耐力；0 为关闭 |

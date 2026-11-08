@@ -21,6 +21,20 @@
     "CataclysmExecutionMixin",
     "CataclysmIgnisStaminaGuardMixin",
     "CataclysmScyllaStaminaGuardMixin",
+    "stamina.BomdSchedulerAccess",
+    "stamina.BomdStaminaMixin",
+    "stamina.NativeBossActionMixin",
+    "stamina.NativeBossArmatureMixin",
+    "stamina.MowzieBossBarAccessMixin",
+    "stamina.MowzieAnimatedBossStaminaMixin",
+    "stamina.MowzieGeckoBossStaminaMixin",
+    "stamina.MowzieAbilityStaminaMixin",
+    "stamina.BlockFactoryBossBarAccessMixin",
+    "stamina.BlockFactoryLegacyBossStaminaMixin",
+    "stamina.BlockFactoryStateBossStaminaMixin",
+    "stamina.NativeBossAnimationMixin",
+    "stamina.KrakenStaminaMixin",
+    "stamina.KrakenTentacleStaminaMixin",
     "BTNetherGolemMixin",
     "BTOceanGolemMixin",
     "BTSkyGolemMixin",
@@ -30,6 +44,7 @@
     "ValkyrieQueenMixin"
   ],
   "client": [
+    "stamina.NativeBossControllerMixin",
     "AbstractBTGolemRendererMixin",
     "ValkyrieRendererMixin"
   ]

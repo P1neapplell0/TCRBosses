@@ -1,0 +1,69 @@
+# COMMON：放入游戏或服务器根目录 config/tcr_bosses-common.toml，所有存档共用。
+# 精简预设：21 个 Boss 全部关闭；缺少的参数由 Forge 补齐。
+# 客户端与服务端保持一致，修改后重启。已有配置请合并，不要直接覆盖。
+
+[general]
+enableEndGolemEquipment = true
+
+[cataclysm.ender_guardian]
+enabled = false
+
+[cataclysm.netherite_monstrosity]
+enabled = false
+
+[cataclysm.ignis]
+enabled = false
+
+[cataclysm.the_harbinger]
+enabled = false
+
+[cataclysm.the_leviathan]
+enabled = false
+
+[cataclysm.ancient_remnant]
+enabled = false
+
+[cataclysm.maledictus]
+enabled = false
+
+[cataclysm.scylla]
+enabled = false
+
+[bosses_of_mass_destruction.lich]
+enabled = false
+
+[bosses_of_mass_destruction.gauntlet]
+enabled = false
+
+[bosses_of_mass_destruction.obsidilith]
+enabled = false
+
+[bosses_of_mass_destruction.void_blossom]
+enabled = false
+
+[mowziesmobs.ferrous_wroughtnaut]
+enabled = false
+
+[mowziesmobs.frostmaw]
+enabled = false
+
+[mowziesmobs.umvuthi]
+enabled = false
+
+[mowziesmobs.sculptor]
+enabled = false
+
+[block_factorys_bosses.yeti]
+enabled = false
+
+[block_factorys_bosses.infernal_dragon]
+enabled = false
+
+[block_factorys_bosses.underworld_knight]
+enabled = false
+
+[block_factorys_bosses.sandworm]
+enabled = false
+
+[block_factorys_bosses.kraken]
+enabled = false

@@ -10,13 +10,16 @@ import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
 import com.github.L_Ender.lionfishapi.server.animation.IAnimatedEntity;
-import com.p1nero.tcr_bosses.config.CataclysmStaminaConfig;
+import com.p1nero.tcr_bosses.config.TCRBossesConfig;
+import com.p1nero.tcr_bosses.config.BossStaminaConfig;
+import com.p1nero.tcr_bosses.entity.stamina.NativeBossType;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 
 import java.util.function.Supplier;
 
-public enum CataclysmBossType {
+public enum CataclysmBossType implements NativeBossType {
     ENDER_GUARDIAN("ender_guardian", ModEntities.ENDER_GUARDIAN, 0, 0),
     NETHERITE_MONSTROSITY("netherite_monstrosity", ModEntities.NETHERITE_MONSTROSITY, 5, 5),
     IGNIS("ignis", ModEntities.IGNIS, 0, 0),
@@ -46,8 +49,13 @@ public enum CataclysmBossType {
         return entityType.get();
     }
 
-    public CataclysmStaminaConfig.Boss config() {
-        return CataclysmStaminaConfig.BOSSES.get(id);
+    public BossStaminaConfig config() {
+        return TCRBossesConfig.BOSS_STAMINA.get("cataclysm:" + id);
+    }
+
+    @Override
+    public ServerBossEvent bossEvent(Mob entity) {
+        return ((CataclysmBossAccess) entity).tcr_bosses$getHealthBossEvent();
     }
 
     public Object action(Mob entity) {
